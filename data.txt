@@ -363,6 +363,11 @@
     "id": 31,
     "question": "Câu 31: Việc được công nhận trường chất lượng cao có ý nghĩa gì đối với sinh viên?",
     "answer": "Việc được Bộ Giáo dục và Đào tạo công nhận TRƯỜNG CHẤT LƯỢNG CAO cho thấy chương trình đào tạo, đội ngũ giảng viên, cơ sở vật chất và công tác quản lý của Trường đáp ứng các tiêu chuẩn kiểm định chất lượng. Điều này không chỉ đảm bảo môi trường học tập đạt chuẩn mà còn góp phần nâng cao cơ hội việc làm cho sinh viên sau khi tốt nghiệp, vì bằng cấp và chất lượng đào tạo được xã hội và doanh nghiệp tin tưởng."
+  },
+  {
+    "id": 32,
+    "question": "Câu 32: Năm nay (2026) trường có mở thêm ngành học nào mới không?",
+    "answer": "Năm 2026, Trường Cao đẳng Kỹ thuật Cao Thắng mở thêm 5 ngành học mới đáp ứng nhu cầu nhân lực chất lượng cao, bao gồm: Công nghệ kỹ thuật điện và năng lượng tái tạo (60 chỉ tiêu), Công nghệ kỹ thuật bán dẫn và vi mạch (90 chỉ tiêu), Công nghệ kỹ thuật bảo trì thiết bị trong công nghiệp (35 chỉ tiêu), Công nghệ kỹ thuật tự động hóa trong nông nghiệp (60 chỉ tiêu), Công nghệ tài chính và kinh doanh số (85 chỉ tiêu)."
   }
 ]
 
@@ -552,3 +557,147 @@
     "facebook": "fb.caothang.edu.vn"
   }
 }
+
+Thông tin điểm chuẩn ngành Công nghệ Kỹ thuật Điện, Điện tử:
+- Năm 2020: Điểm chuẩn xét học bạ là 23.00, xét điểm thi THPTQG là 25.50, xét điểm thi Đánh giá năng lực (ĐGNL) là 550.
+- Năm 2021: Điểm chuẩn xét học bạ là 23.00, xét điểm thi THPTQG là 24.00, xét điểm thi Đánh giá năng lực (ĐGNL) là 600.
+- Năm 2022: Điểm chuẩn xét học bạ là 23.00, xét điểm thi THPTQG là 23.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2023: Điểm chuẩn xét học bạ là 24.00, xét điểm thi THPTQG là 22.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2024: Điểm chuẩn xét học bạ là 21.50, xét điểm thi THPTQG là 21.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2025: Điểm chuẩn xét học bạ là 22.50, xét điểm thi THPTQG là 24.50, không có dữ liệu điểm xét ĐGNL.
+
+Thông tin điểm chuẩn ngành Công nghệ Kỹ thuật Điện tử - Viễn thông:
+- Năm 2020: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 23.50, xét điểm thi Đánh giá năng lực (ĐGNL) là 500.
+- Năm 2021: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 23.00, xét điểm thi Đánh giá năng lực (ĐGNL) là 500.
+- Năm 2022: Điểm chuẩn xét học bạ là 21.00, xét điểm thi THPTQG là 21.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2023: Điểm chuẩn xét học bạ là 20.50, xét điểm thi THPTQG là 21.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2024: Điểm chuẩn xét học bạ là 20.50, xét điểm thi THPTQG là 20.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2025: Điểm chuẩn xét học bạ là 20.50, xét điểm thi THPTQG là 22.00, không có dữ liệu điểm xét ĐGNL.
+
+Thông tin điểm chuẩn ngành Công nghệ Kỹ thuật Cơ khí:
+- Năm 2020: Điểm chuẩn xét học bạ là 26.50, xét điểm thi THPTQG là 29.00, xét điểm thi Đánh giá năng lực (ĐGNL) là 600.
+- Năm 2021: Điểm chuẩn xét học bạ là 26.50, xét điểm thi THPTQG là 29.00, xét điểm thi Đánh giá năng lực (ĐGNL) là 600.
+- Năm 2022: Điểm chuẩn xét học bạ là 27.00, xét điểm thi THPTQG là 26.50, không có dữ liệu điểm xét ĐGNL.
+- Năm 2023: Điểm chuẩn xét học bạ là 27.50, xét điểm thi THPTQG là 24.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2024: Điểm chuẩn xét học bạ là 24.00, xét điểm thi THPTQG là 24.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2025: Điểm chuẩn xét học bạ là 25.00, xét điểm thi THPTQG là 29.00, không có dữ liệu điểm xét ĐGNL.
+
+Thông tin điểm chuẩn ngành Công nghệ Kỹ thuật Ô tô:
+- Năm 2020: Điểm chuẩn xét học bạ là 30.00, xét điểm thi THPTQG là 31.00, xét điểm thi Đánh giá năng lực (ĐGNL) là 700.
+- Năm 2021: Điểm chuẩn xét học bạ là 30.50, xét điểm thi THPTQG là 32.00, xét điểm thi Đánh giá năng lực (ĐGNL) là 750.
+- Năm 2022: Điểm chuẩn xét học bạ là 31.00, xét điểm thi THPTQG là 31.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2023: Điểm chuẩn xét học bạ là 31.50, xét điểm thi THPTQG là 27.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2024: Điểm chuẩn xét học bạ là 28.00, xét điểm thi THPTQG là 28.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2025: Điểm chuẩn xét học bạ là 30.50, xét điểm thi THPTQG là 29.00, không có dữ liệu điểm xét ĐGNL.
+
+Thông tin điểm chuẩn ngành Công nghệ Thông tin:
+- Năm 2020: Điểm chuẩn xét học bạ là 24.50, xét điểm thi THPTQG là 25.00, xét điểm thi Đánh giá năng lực (ĐGNL) là 550.
+- Năm 2021: Điểm chuẩn xét học bạ là 24.00, xét điểm thi THPTQG là 25.50, xét điểm thi Đánh giá năng lực (ĐGNL) là 600.
+- Năm 2022: Điểm chuẩn xét học bạ là 26.00, xét điểm thi THPTQG là 26.50, không có dữ liệu điểm xét ĐGNL.
+- Năm 2023: Điểm chuẩn xét học bạ là 25.50, xét điểm thi THPTQG là 25.50, không có dữ liệu điểm xét ĐGNL.
+- Năm 2024: Điểm chuẩn xét học bạ là 22.50, xét điểm thi THPTQG là 21.50, không có dữ liệu điểm xét ĐGNL.
+- Năm 2025: Điểm chuẩn xét học bạ là 24.00, xét điểm thi THPTQG là 23.00, không có dữ liệu điểm xét ĐGNL.
+
+Thông tin điểm chuẩn ngành Công nghệ Kỹ thuật Nhiệt (Cơ điện lạnh):
+- Năm 2020: Điểm chuẩn xét học bạ là 24.50, xét điểm thi THPTQG là 27.00, xét điểm thi Đánh giá năng lực (ĐGNL) là 550.
+- Năm 2021: Điểm chuẩn xét học bạ là 24.00, xét điểm thi THPTQG là 25.00, xét điểm thi Đánh giá năng lực (ĐGNL) là 600.
+- Năm 2022: Điểm chuẩn xét học bạ là 23.00, xét điểm thi THPTQG là 23.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2023: Điểm chuẩn xét học bạ là 22.00, xét điểm thi THPTQG là 23.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2024: Điểm chuẩn xét học bạ là 21.00, xét điểm thi THPTQG là 21.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2025: Điểm chuẩn xét học bạ là 22.00, xét điểm thi THPTQG là 21.50, không có dữ liệu điểm xét ĐGNL.
+
+Thông tin điểm chuẩn ngành Công nghệ Kỹ thuật Cơ điện tử:
+- Năm 2020: Điểm chuẩn xét học bạ là 23.50, xét điểm thi THPTQG là 28.50, xét điểm thi Đánh giá năng lực (ĐGNL) là 550.
+- Năm 2021: Điểm chuẩn xét học bạ là 23.00, xét điểm thi THPTQG là 26.00, xét điểm thi Đánh giá năng lực (ĐGNL) là 550.
+- Năm 2022: Điểm chuẩn xét học bạ là 23.00, xét điểm thi THPTQG là 23.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2023: Điểm chuẩn xét học bạ là 23.00, xét điểm thi THPTQG là 23.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2024: Điểm chuẩn xét học bạ là 22.50, xét điểm thi THPTQG là 22.50, không có dữ liệu điểm xét ĐGNL.
+- Năm 2025: Điểm chuẩn xét học bạ là 23.00, xét điểm thi THPTQG là 27.00, không có dữ liệu điểm xét ĐGNL.
+
+Thông tin điểm chuẩn ngành Công nghệ Kỹ thuật Điều khiển và Tự động hóa:
+- Năm 2020: Điểm chuẩn xét học bạ là 24.50, xét điểm thi THPTQG là 28.50, xét điểm thi Đánh giá năng lực (ĐGNL) là 550.
+- Năm 2021: Điểm chuẩn xét học bạ là 24.00, xét điểm thi THPTQG là 29.00, xét điểm thi Đánh giá năng lực (ĐGNL) là 600.
+- Năm 2022: Điểm chuẩn xét học bạ là 25.00, xét điểm thi THPTQG là 25.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2023: Điểm chuẩn xét học bạ là 25.00, xét điểm thi THPTQG là 23.50, không có dữ liệu điểm xét ĐGNL.
+- Năm 2024: Điểm chuẩn xét học bạ là 22.50, xét điểm thi THPTQG là 22.50, không có dữ liệu điểm xét ĐGNL.
+- Năm 2025: Điểm chuẩn xét học bạ là 24.50, xét điểm thi THPTQG là 27.00, không có dữ liệu điểm xét ĐGNL.
+
+Thông tin điểm chuẩn ngành Kế toán tin học (Kế toán doanh nghiệp):
+- Năm 2020: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 22.00, xét điểm thi Đánh giá năng lực (ĐGNL) là 450.
+- Năm 2021: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 20.00, xét điểm thi Đánh giá năng lực (ĐGNL) là 450.
+- Năm 2022: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 20.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2023: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 20.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2024: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 16.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2025: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 16.00, không có dữ liệu điểm xét ĐGNL.
+
+Thông tin điểm chuẩn ngành Cơ khí chế tạo (Cắt gọt kim loại):
+- Năm 2020: Không có dữ liệu điểm chuẩn.
+- Năm 2021: Điểm chuẩn xét học bạ là 22.00, xét điểm thi THPTQG là 21.00, xét điểm thi Đánh giá năng lực (ĐGNL) là 500.
+- Năm 2022: Điểm chuẩn xét học bạ là 22.00, xét điểm thi THPTQG là 22.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2023: Điểm chuẩn xét học bạ là 22.00, xét điểm thi THPTQG là 21.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2024: Điểm chuẩn xét học bạ là 20.50, xét điểm thi THPTQG là 20.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2025: Điểm chuẩn xét học bạ là 21.00, xét điểm thi THPTQG là 21.50, không có dữ liệu điểm xét ĐGNL.
+
+Thông tin điểm chuẩn ngành Sửa chữa cơ khí (Nguội sửa chữa máy công cụ):
+- Năm 2020: Không có dữ liệu điểm chuẩn.
+- Năm 2021: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 20.00, xét điểm thi Đánh giá năng lực (ĐGNL) là 450.
+- Năm 2022: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 20.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2023: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 20.50, không có dữ liệu điểm xét ĐGNL.
+- Năm 2024: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 20.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2025: Điểm chuẩn xét học bạ là 21.00, xét điểm thi THPTQG là 21.50, không có dữ liệu điểm xét ĐGNL.
+
+Thông tin điểm chuẩn ngành Hàn (Công nghệ cao):
+- Năm 2020: Không có dữ liệu điểm chuẩn.
+- Năm 2021: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 20.00, xét điểm thi Đánh giá năng lực (ĐGNL) là 450.
+- Năm 2022: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 20.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2023: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 20.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2024: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 16.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2025: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 20.50, không có dữ liệu điểm xét ĐGNL.
+
+Thông tin điểm chuẩn ngành Kỹ thuật máy lạnh và điều hòa không khí:
+- Năm 2020: Không có dữ liệu điểm chuẩn.
+- Năm 2021: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 20.00, xét điểm thi Đánh giá năng lực (ĐGNL) là 500.
+- Năm 2022: Điểm chuẩn xét học bạ là 20.50, xét điểm thi THPTQG là 20.50, không có dữ liệu điểm xét ĐGNL.
+- Năm 2023: Điểm chuẩn xét học bạ là 20.50, xét điểm thi THPTQG là 20.50, không có dữ liệu điểm xét ĐGNL.
+- Năm 2024: Điểm chuẩn xét học bạ là 20.50, xét điểm thi THPTQG là 20.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2025: Điểm chuẩn xét học bạ là 21.00, xét điểm thi THPTQG là 21.50, không có dữ liệu điểm xét ĐGNL.
+
+Thông tin điểm chuẩn ngành Bảo trì, sửa chữa Ô tô (Công nghệ Ô tô):
+- Năm 2020: Không có dữ liệu điểm chuẩn.
+- Năm 2021: Điểm chuẩn xét học bạ là 25.50, xét điểm thi THPTQG là 29.00, xét điểm thi Đánh giá năng lực (ĐGNL) là 650.
+- Năm 2022: Điểm chuẩn xét học bạ là 26.00, xét điểm thi THPTQG là 29.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2023: Điểm chuẩn xét học bạ là 29.00, xét điểm thi THPTQG là 25.50, không có dữ liệu điểm xét ĐGNL.
+- Năm 2024: Điểm chuẩn xét học bạ là 25.00, xét điểm thi THPTQG là 25.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2025: Điểm chuẩn xét học bạ là 26.50, xét điểm thi THPTQG là 28.00, không có dữ liệu điểm xét ĐGNL.
+
+Thông tin điểm chuẩn ngành Điện công nghiệp:
+- Năm 2020: Không có dữ liệu điểm chuẩn.
+- Năm 2021: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 20.00, xét điểm thi Đánh giá năng lực (ĐGNL) là 450.
+- Năm 2022: Điểm chuẩn xét học bạ là 20.50, xét điểm thi THPTQG là 20.50, không có dữ liệu điểm xét ĐGNL.
+- Năm 2023: Điểm chuẩn xét học bạ là 20.50, xét điểm thi THPTQG là 20.50, không có dữ liệu điểm xét ĐGNL.
+- Năm 2024: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 20.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2025: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 21.50, không có dữ liệu điểm xét ĐGNL.
+
+Thông tin điểm chuẩn ngành Điện tử công nghiệp:
+- Năm 2020: Không có dữ liệu điểm chuẩn.
+- Năm 2021: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 20.00, xét điểm thi Đánh giá năng lực (ĐGNL) là 450.
+- Năm 2022: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 20.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2023: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 20.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2024: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 20.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2025: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 21.00, không có dữ liệu điểm xét ĐGNL.
+
+Thông tin điểm chuẩn ngành Quản trị mạng máy tính:
+- Năm 2020: Không có dữ liệu điểm chuẩn.
+- Năm 2021: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 20.00, xét điểm thi Đánh giá năng lực (ĐGNL) là 450.
+- Năm 2022: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 20.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2023: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 20.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2024: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 20.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2025: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 20.00, không có dữ liệu điểm xét ĐGNL.
+
+Thông tin điểm chuẩn ngành Kỹ thuật sửa chữa, lắp ráp máy tính:
+- Năm 2020: Không có dữ liệu điểm chuẩn.
+- Năm 2021: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 20.00, xét điểm thi Đánh giá năng lực (ĐGNL) là 450.
+- Năm 2022: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 24.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2023: Điểm chuẩn xét học bạ là 21.00, xét điểm thi THPTQG là 24.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2024: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 20.00, không có dữ liệu điểm xét ĐGNL.
+- Năm 2025: Điểm chuẩn xét học bạ là 20.00, xét điểm thi THPTQG là 21.00, không có dữ liệu điểm xét ĐGNL.
