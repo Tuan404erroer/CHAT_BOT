@@ -363,6 +363,11 @@
     "id": 31,
     "question": "Câu 31: Việc được công nhận trường chất lượng cao có ý nghĩa gì đối với sinh viên?",
     "answer": "Việc được Bộ Giáo dục và Đào tạo công nhận TRƯỜNG CHẤT LƯỢNG CAO cho thấy chương trình đào tạo, đội ngũ giảng viên, cơ sở vật chất và công tác quản lý của Trường đáp ứng các tiêu chuẩn kiểm định chất lượng. Điều này không chỉ đảm bảo môi trường học tập đạt chuẩn mà còn góp phần nâng cao cơ hội việc làm cho sinh viên sau khi tốt nghiệp, vì bằng cấp và chất lượng đào tạo được xã hội và doanh nghiệp tin tưởng."
+  },
+  {
+    "id": 32,
+    "question": "Câu 32: Năm nay (2026) trường có mở thêm ngành học nào mới không?",
+    "answer": "Năm 2026, Trường Cao đẳng Kỹ thuật Cao Thắng mở thêm 5 ngành học mới đáp ứng nhu cầu nhân lực chất lượng cao, bao gồm: Công nghệ kỹ thuật điện và năng lượng tái tạo (60 chỉ tiêu), Công nghệ kỹ thuật bán dẫn và vi mạch (90 chỉ tiêu), Công nghệ kỹ thuật bảo trì thiết bị trong công nghiệp (35 chỉ tiêu), Công nghệ kỹ thuật tự động hóa trong nông nghiệp (60 chỉ tiêu), Công nghệ tài chính và kinh doanh số (85 chỉ tiêu)."
   }
 ]
 
