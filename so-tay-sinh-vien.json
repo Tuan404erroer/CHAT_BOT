@@ -1,0 +1,112 @@
+[
+  {
+    "chuyen_muc": "Giới thiệu nhà trường",
+    "tieu_de": "Thông tin chung và Liên hệ",
+    "noi_dung": "- Tên trường: Cao Đẳng Kỹ Thuật Cao Thắng (CĐKTCT) / Cao Thang Technical College (CTTC).\n- Địa chỉ: 65 Huỳnh Thúc Kháng, Phường Sài Gòn, TP.HCM.\n- Điện thoại: (028) 38212868 / 38212360 (Số nội bộ 17 - Phòng Đào tạo).\n- Website: caothang.edu.vn | Email: ktcaothang@caothang.edu.vn.\n- Lãnh đạo: Hiệu trưởng TS. Lê Đình Kha; Phó Hiệu trưởng ThS. Trương Quang Trung, TS. Tống Thanh Nhân.\n- Lịch sử: Thành lập ngày 20/02/1906 (Trường Cơ Khí Á Châu / Trường Bá Nghệ). Là nơi Chủ tịch Hồ Chí Minh (1911) và Chủ tịch Tôn Đức Thắng (1915-1917) từng theo học."
+  },
+  {
+    "chuyen_muc": "Cơ cấu tổ chức",
+    "tieu_de": "Các Phòng ban chức năng",
+    "noi_dung": "- Phòng CTCT-HSSV (Tầng trệt nhà E, Tầng 5 nhà F): Quản lý SV, điểm rèn luyện, khen thưởng/kỷ luật, giấy xác nhận hoãn NVQS, vay vốn, làm thẻ SV.\n- Phòng Đào tạo (Tầng 1 nhà E): Kế hoạch đào tạo, thời khóa biểu, xét lên lớp, xét tốt nghiệp, cấp bằng, chuyển điểm.\n- Phòng HC-QT (Tầng trệt nhà E): Miễn giảm học phí, BHYT, KTX, y tế, an ninh, cơ sở vật chất.\n- Phòng Tài chính - Kế toán (Tầng 1 nhà E): Quản lý thu chi, học phí.\n- Phòng KHCN & HTQT (Tầng 1 nhà E): Quản lý vật tư thực tập, nghiên cứu khoa học, giới thiệu việc làm/thực tập cho SV."
+  },
+  {
+    "chuyen_muc": "Cơ cấu tổ chức",
+    "tieu_de": "Hệ thống Trung tâm và Thư viện",
+    "noi_dung": "- Thư viện (Tầng 3 nhà C): Phục vụ mượn/trả sách, eBooks, máy tính, phòng học nhóm miễn phí.\n- TT Đánh giá Kỹ năng nghề (Nhà A): Tổ chức huấn luyện an toàn LĐ, đánh giá kỹ năng nghề Quốc gia.\n- TT Đào tạo Thường xuyên - Ngắn hạn (Nhà A): Dạy CAD/CAM chuyên ngành, cấp thẻ an toàn LĐ, đào tạo ngắn hạn.\n- TT Ngoại ngữ (Tầng trệt nhà E): Dạy Tiếng Anh, TOEIC, tổ chức thi cấp chứng nhận năng lực Tiếng Anh Bậc 2/6 nội bộ.\n- TT Tin học (Tầng 7 nhà F): Dạy và cấp chứng nhận Ứng dụng CNTT cơ bản, AutoCAD, SolidWorks..."
+  },
+  {
+    "chuyen_muc": "Quy ước mã đào tạo",
+    "tieu_de": "Mã bậc và Mã ngành/nghề",
+    "noi_dung": "- Bậc Cao đẳng (Ngành): Mã 03. Bậc Cao đẳng (Nghề): Mã 04.\n- Một số mã ngành tiêu biểu: Cơ khí (01), Ô tô (02), Điện-Điện tử (03), Nhiệt lạnh (04), Công nghệ Thông tin (06), Cơ điện tử (07), Kế toán (12), Cắt gọt kim loại (61), Sửa chữa cơ khí (62), Hàn (63)."
+  },
+  {
+    "chuyen_muc": "Quy chế đào tạo",
+    "tieu_de": "Thời gian và Kế hoạch đào tạo",
+    "noi_dung": "- 1 Đơn vị học trình (ĐVHT) = 15 tiết lý thuyết / 30-45 tiết thực hành / 45-90 giờ thực tập.\n- Thời gian đào tạo: Cao đẳng 3 năm (tối đa 4.5 năm). Riêng Kế toán doanh nghiệp và Hàn là 2.5 năm (tối đa 4 năm).\n- Học kỳ chính: 2 học kỳ/năm (15 tuần thực học, 2 tuần thi).\n- Học kỳ phụ: Dành cho SV nợ môn (ĐHP < 5.0). Gồm 4 hình thức: Học ghép khóa sau, Học Thứ 7-CN, Học kỳ hè, Học kỳ cuối khóa."
+  },
+  {
+    "chuyen_muc": "Quy chế đào tạo",
+    "tieu_de": "Điều kiện học tiếp, ngừng học và thôi học",
+    "noi_dung": "- Điều kiện học tiếp: Điểm TB năm >= 5.0 VÀ nợ không quá 25 ĐVHT (tính từ đầu khóa).\n- Ngừng học 1 năm: Dành cho SV không đạt điều kiện học tiếp. Trong thời gian này phải học trả nợ môn.\n- Buộc thôi học nếu: ĐTB 1 năm < 3.5; ĐTB 2 năm < 4.0; ĐTB 3 năm < 4.5; hoặc hết thời gian đào tạo tối đa; hoặc vi phạm kỷ luật mức Buộc thôi học."
+  },
+  {
+    "chuyen_muc": "Quy chế đào tạo",
+    "tieu_de": "Đánh giá Điểm học phần (ĐHP)",
+    "noi_dung": "- Điểm Lý thuyết: ĐHP = (4*ĐTBKT + ĐCC + 5*ĐTHP) / 10. Trong đó: Thi chiếm 50%, Kiểm tra 40%, Chuyên cần 10%.\n- Điểm Chuyên cần (ĐCC): Nghỉ 0 tiết = 10đ. Nghỉ > 20% số tiết = 0đ (cấm thi).\n- Điểm Thực hành: Tổng 10đ (Điểm kỹ thuật 6đ + Điểm thành phần 4đ bao gồm: Thao tác 1đ, An toàn 1đ, 5S 1đ, Thời gian 1đ). Nếu ĐHP < 5.0 phải học lại toàn bộ.\n- Vắng thi không phép: Điểm 0 (thi lần 1), được đăng ký thi lần 2. Thi lại phải đóng lệ phí."
+  },
+  {
+    "chuyen_muc": "Quy chế đào tạo",
+    "tieu_de": "Xếp loại và Xét Tốt nghiệp",
+    "noi_dung": "- Điều kiện dự thi TN: ĐTB năm >= 5.0, nợ không quá 20 ĐVHT, không bị kỷ luật.\n- Điều kiện công nhận TN: Tích lũy đủ môn (không môn nào < 5.0), Thi TN/Đồ án >= 5.0, đạt chuẩn Tiếng Anh (Bậc 2/6), Tin học cơ bản và CAD chuyên ngành.\n- Xếp loại TN: Xuất sắc (9-10), Giỏi (8-<9), Khá (7-<8), Trung bình (5-<7).\n- Giảm bậc xếp loại: Giảm 1 bậc nếu số ĐVHT phải thi lại > 10% tổng ĐVHT toàn khóa HOẶC từng bị kỷ luật từ Cảnh cáo trở lên."
+  },
+  {
+    "chuyen_muc": "Quy định học phần",
+    "tieu_de": "Quy định Phân chuyên ngành",
+    "noi_dung": "- Áp dụng cho các ngành có nhiều chuyên ngành (thường vào học kỳ 3 hoặc 5).\n- Căn cứ phân ngành: Chỉ tiêu nhà trường, chế độ ưu tiên, nguyện vọng SV và Điểm trung bình chung học tập (A) của các học kỳ trước. SV đạt điểm chuẩn sẽ vào chuyên ngành mong muốn, còn lại phân bổ vào chuyên ngành khác."
+  },
+  {
+    "chuyen_muc": "Quy định học phần",
+    "tieu_de": "Chuẩn đầu ra Tiếng Anh Bậc 2/6",
+    "noi_dung": "- Đánh giá 4 kỹ năng (Nghe, Nói, Đọc, Viết) do TT Ngoại ngữ tổ chức (Chứng nhận nội bộ).\n- Điều kiện đạt: Tổng điểm >= 20 điểm VÀ không có kỹ năng nào dưới 3 điểm (Thang điểm 10/kỹ năng).\n- Kết quả bảo lưu trong 24 tháng."
+  },
+  {
+    "chuyen_muc": "Quy định học phần",
+    "tieu_de": "Ứng dụng CNTT cơ bản và CAD",
+    "noi_dung": "- Ứng dụng CNTT (5 ĐVHT): Học/Thi tại TT Tin học. Miễn học nếu có chứng chỉ tương đương (ICDL, MOS, IC3 hoặc chứng chỉ ĐH Bách Khoa/KHTN cấp dưới 3 năm).\n- CAD chuyên ngành: SV tự đăng ký học ngoài giờ tại TT Đào tạo Thường xuyên-Ngắn hạn hoặc Bộ môn chuyên trách."
+  },
+  {
+    "chuyen_muc": "Công tác sinh viên",
+    "tieu_de": "Các hành vi bị nghiêm cấm và Kỷ luật",
+    "noi_dung": "- Hành vi cấm: Xúc phạm GV/SV, gian lận thi cử, uống rượu bia/hút thuốc, cờ bạc, ma túy, đăng tải nội dung phản động/đồi trụy lên mạng.\n- Các mức kỷ luật: Khiển trách, Cảnh cáo, Đình chỉ 1 năm, Buộc thôi học.\n- Gian lận thi cử: Thi hộ bị Đình chỉ 1 năm (lần 1), Buộc thôi học (lần 2). Tổ chức thi hộ bị Buộc thôi học ngay lần 1.\n- Nghỉ học không phép: Quá 20 ngày/năm (Cảnh cáo), quá 40 ngày/năm (Buộc thôi học)."
+  },
+  {
+    "chuyen_muc": "Công tác sinh viên",
+    "tieu_de": "Đánh giá Điểm rèn luyện",
+    "noi_dung": "- Điểm tháng: Xếp loại A (50đ), B (40đ), C (30đ), D (20đ). Hạ điểm nếu đi trễ, nghỉ học, làm việc riêng, hút thuốc, sai đồng phục, không đeo thẻ SV.\n- Điểm học kỳ (Thang 100đ): Học tập (30đ), Ý thức chấp hành (50đ), Công tác lớp/Đoàn/Khen thưởng (20đ).\n- Xếp loại rèn luyện: Xuất sắc (90-100), Tốt (80-<90), Khá (70-<80), TB (50-<70), Yếu (<50). Bị Khiển trách thì rèn luyện tối đa loại Khá; Bị Cảnh cáo rèn luyện tối đa loại TB."
+  },
+  {
+    "chuyen_muc": "Chế độ chính sách",
+    "tieu_de": "Học bổng Khuyến khích học tập (KKHT)",
+    "noi_dung": "- Điều kiện xét: Điểm tổng kết HK >= 7.0 (không môn nào < 5.0 ở lần thi 1), Hạnh kiểm loại A, không bị kỷ luật.\n- Điểm xét học bổng (XHB) = Điểm tổng kết + 0.4 (điểm hạnh kiểm).\n- Mức cấp (5 tháng/kỳ): Loại Xuất sắc (XHB >= 9.4) nhận 1.940.000đ/tháng; Giỏi (8.4-9.39) nhận 1.740.000đ/tháng; Khá (7.4-8.39) nhận 1.540.000đ/tháng.\n- Tiền được chuyển vào tài khoản thẻ ATM Agribank chính chủ của SV."
+  },
+  {
+    "chuyen_muc": "Chế độ chính sách",
+    "tieu_de": "Miễn giảm học phí",
+    "noi_dung": "- Miễn 100%: Con liệt sĩ/thương binh, mồ côi, khuyết tật, DTTS hộ nghèo/cận nghèo, dân tộc rất ít người.\n- Giảm 70%: DTTS vùng Đặc biệt khó khăn; Học các ngành/nghề nặng nhọc độc hại (Cơ khí, Ô tô, Điện, Cắt gọt, Nguội, Hàn, Nhiệt lạnh).\n- Giảm 50%: Con công nhân bị tai nạn lao động.\n- SV phải đóng học phí đúng hạn, sau khi duyệt hồ sơ nhà trường sẽ cấp bù chuyển trả lại vào tài khoản Agribank."
+  },
+  {
+    "chuyen_muc": "Chế độ chính sách",
+    "tieu_de": "Chính sách cho Nữ sinh kỹ thuật",
+    "noi_dung": "- Giảm 50% kinh phí đào tạo: Cao đẳng các ngành CNKT Cơ khí, Ô tô, Cơ điện tử, Nhiệt lạnh, Điện-Điện tử, Điều khiển & Tự động hóa, Điện tử-Truyền thông.\n- Giảm 25% kinh phí đào tạo: Cao đẳng các nghề Cắt gọt KL, Sửa chữa cơ khí, Hàn, Ô tô, Máy lạnh, Điện CN, Điện tử CN, Quản trị mạng, Sửa chữa MT.\n- Không giải quyết miễn giảm nếu nữ SV đóng kinh phí trễ hạn."
+  },
+  {
+    "chuyen_muc": "Chế độ chính sách",
+    "tieu_de": "Bảo hiểm Y tế (BHYT)",
+    "noi_dung": "- BHYT là BẮT BUỘC. Đóng 15 tháng (789.750đ) hoặc 12 tháng (631.800đ).\n- Nếu đã có thẻ BHYT diện khác (Hộ nghèo, thân nhân quân đội...) thì kê khai hệ thống, không phải đóng.\n- Kê khai trực tuyến: Trang web Phòng HC-QT -> Chế độ chính sách -> Nhập thông tin BH y tế.\n- Sử dụng: Cài đặt ứng dụng VssID thay cho thẻ giấy để khám chữa bệnh."
+  },
+  {
+    "chuyen_muc": "Nội quy và An toàn",
+    "tieu_de": "Thời gian học tập và Nội quy lớp học",
+    "noi_dung": "- Giờ học Lý thuyết: Sáng (06h30-11h30); Chiều (12h30-17h30); Tối (17h45-21h00).\n- Giờ Thực hành: Ca 1 (06h30-11h00), Ca 2 (11h00-15h30 hoặc 12h30-17h00), Ca 3 (15h30-20h00).\n- Nội quy: Mặc đồng phục, đi giày/dép có quai hậu. Có mặt trước 5 phút. Khi xin nghỉ từ 2 ngày trở lên phải thông qua Phòng CTCT-HSSV."
+  },
+  {
+    "chuyen_muc": "Nội quy và An toàn",
+    "tieu_de": "Nội quy Thực tập xưởng và 5S",
+    "noi_dung": "- Thực tập: Có mặt trước 10 phút, mang bảo hộ lao động. Tuyệt đối không tự ý vận hành máy khi chưa có lệnh. Cấm điện thoại, hút thuốc, ăn uống trong xưởng.\n- 5S Lớp học/Xưởng: Lau bảng, xếp bàn ghế, vứt rác đúng nơi, tắt thiết bị điện khi ra về, sắp xếp dụng cụ đồ nghề đúng vị trí."
+  },
+  {
+    "chuyen_muc": "Nội quy và An toàn",
+    "tieu_de": "An toàn lao động và Chữa cháy",
+    "noi_dung": "- An toàn hóa chất: Đóng nắp cẩn thận, tránh xa nguồn cháy.\n- An toàn thiết bị quay (Tiện, Phay): Phải mang kính bảo hộ, KHÔNG đeo găng tay, không đeo dây chuyền/dây thẻ tên, cột tóc gọn gàng.\n- Xử lý cháy: Hô to \"Cháy\", ngắt điện, dùng bình cứu hỏa (đám cháy nhỏ), gọi Bảo vệ (028.38215250), di tản bằng cầu thang bộ."
+  },
+  {
+    "chuyen_muc": "Thủ tục hành chính",
+    "tieu_de": "Hướng dẫn nộp Học phí",
+    "noi_dung": "- Cách 1: Nộp trực tiếp tại NH Agribank (Cung cấp Mã SV, tên trường CĐ Kỹ Thuật Cao Thắng, thu theo hình thức Bill Payment).\n- Cách 2: Nộp Online qua website tckt.caothang.edu.vn (Sử dụng VNPAY QR, Chuyển khoản, Ví VNPAY).\n- Cách 3: Nộp qua Ví điện tử MOMO."
+  },
+  {
+    "chuyen_muc": "Thủ tục hành chính",
+    "tieu_de": "Xin giấy xác nhận và Làm thẻ Sinh viên",
+    "noi_dung": "- Đăng ký: Trực tuyến tại portal.caothang.edu.vn HOẶC trực tiếp tại Phòng CTCT-HSSV (Lầu 5 nhà F).\n- Lịch tiếp SV: Sáng (09h00-11h00), Chiều (14h00-16h00) vào Thứ 4 và Thứ 6 hàng tuần.\n- Lưu ý: SV phải tự đến nhận, không nhận thay. Bắt buộc mặc đồng phục, đeo thẻ khi đến liên hệ."
+  }
+]

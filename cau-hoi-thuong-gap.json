@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "question": "Câu 1: Năm nay thí sinh muốn đăng ký xét tuyển vào trường thì điều kiện đăng ký như thế nào?",
+    "answer": "Năm 2026, Trường tuyển sinh trình độ Cao đẳng với 23 ngành, nghề đào tạo.\n- Thời gian đào tạo: 3 năm (Riêng Kế toán doanh nghiệp và Hàn: 2.5 năm)\n- Chỉ tiêu: 4.800 (dự kiến)\n- Vùng tuyển sinh: cả nước\n- Phương thức xét tuyển tất cả các ngành nghề:\n   + Học bạ THPT: 4 học kỳ (HK 1, 2 lớp 11; HK 1, 2 lớp 12).\n   + Xét tuyển thẳng.\n   + Kết quả kỳ thi tốt nghiệp THPT năm 2026.\n   + Kết quả kỳ thi Đánh giá năng lực năm 2026 của Đại học Quốc gia Tp.HCM.\n- Tổ hợp môn xét tuyển: Toán + 2 môn (Trong 6 môn sau: Lý, Hóa, Văn, Tiếng Anh, Tin học, Công nghệ) (Tất cả các tổ hợp: Môn Toán hệ số 2)\n- Điểm trúng tuyển: Theo ngành, nghề"
+  },
+  {
+    "id": 2,
+    "question": "Câu 2: Em thấy nhà trường có phương thức xét tuyển thẳng, với phương thức này thì nhà trường dành bao nhiêu chỉ tiêu và khi nào nhận hồ sơ xét tuyển?",
+    "answer": "Đối với xét tuyển thẳng nhà trường dành 10% tổng chỉ tiêu tuyển sinh (tổng chỉ tiêu của trường dự kiến khoảng 4.800)\nThí sinh xét tuyển thẳng cần đạt 1 trong các tiêu chí sau:\n- Thư giới thiệu của Cựu Học sinh – Sinh viên; Giảng viên; Ban cố vấn công nghiệp (IAB) trường Cao đẳng Kỹ thuật Cao Thắng\n- Học sinh giỏi (hoặc mức tốt) năm học lớp 11\n- Học sinh giỏi (hoặc mức tốt) học kỳ 1 lớp 12\n- Học sinh giỏi (hoặc mức tốt) học kỳ 2 lớp 12\n- Đã tốt nghiệp cao đẳng, đại học\nThời gian nộp hồ sơ: từ 01/3/2026 đến khi đủ chỉ tiêu theo ngành, nghề"
+  },
+  {
+    "id": 3,
+    "question": "Câu 3: Điểm từng môn đối với phương thức xét tuyển bằng Học bạ được tính như thế nào?",
+    "answer": "Điểm từng môn trong tổ hợp xét tuyển được tính là điểm trung bình cộng của 4 học kỳ (HK1, HK2 lớp 11; HK1, HK2 lớp 12)\nVí dụ:\nToán = [(Toán HK1 lớp 11) + (Toán HK2 lớp 11) + (Toán HK1 lớp 12) + (Toán HK2 lớp 12)] / 4\nLý = [(Lý HK1 lớp 11) + (Lý HK2 lớp 11) + (Lý HK1 lớp 12) + (Lý HK2 lớp 12)] / 4\nHóa = [(Hóa HK1 lớp 11) + (Hóa HK2 lớp 11) + (Hóa HK1 lớp 12) + (Hóa HK2 lớp 12)] / 4\nVăn = [(Văn HK1 lớp 11) + (Văn HK2 lớp 11) + (Văn HK1 lớp 12) + (Văn HK2 lớp 12)] / 4\nTiếng Anh = [(Tiếng Anh HK1 lớp 11) + (Tiếng Anh HK2 lớp 11) + (Tiếng Anh HK1 lớp 12) + (Tiếng Anh HK2 lớp 12)] / 4\nTin học = [(Tin học HK1 lớp 11) + (Tin học HK2 lớp 11) + (Tin học HK1 lớp 12) + (Tin học HK2 lớp 12)] / 4\nCông nghệ = [(Công nghệ HK1 lớp 11) + (Công nghệ HK2 lớp 11) + (Công nghệ HK1 lớp 12) + (Công nghệ HK2 lớp 12)] / 4"
+  },
+  {
+    "id": 4,
+    "question": "Câu 4: Điểm xét tuyển được tính như thế nào?",
+    "answer": "Điểm xét tuyển được tính như sau:\n   - Điểm xét tuyển = Toán * 2 + 2 môn (Trong 6 môn sau: Lý, Hóa, Văn, Tiếng Anh, Tin học, Công nghệ)"
+  },
+  {
+    "id": 5,
+    "question": "Câu 5: Xét tuyển bằng phương thức học bạ có cần thi tốt nghiệp THPT hay không?",
+    "answer": "Thí sinh trúng tuyển bằng phương thức xét học bạ PHẢI tốt nghiệp THPT (các thí sinh tốt nghiệp THPT năm 2026 có thể bổ sung giấy chứng nhận TN THPT sau)"
+  },
+  {
+    "id": 6,
+    "question": "Câu 6: Xét học bạ thì khoảng bao nhiêu điểm trúng tuyển?",
+    "answer": "Điểm trúng tuyển tùy theo ngành, nghề mà thí sinh đăng ký. Để không bỏ lỡ cơ hội, thí sinh nên nộp hồ sơ xét tuyển vào trường."
+  },
+  {
+    "id": 7,
+    "question": "Câu 7: Thí sinh đăng ký cùng lúc nhiều phương thức xét tuyển được không?",
+    "answer": "Thí sinh có thể đăng ký xét tuyển bằng nhiều phương thức (hiện tại Trường có 4 phương thức xét tuyển, thí sinh đóng lệ phí xét tuyển cho mỗi phương thức đăng ký)"
+  },
+  {
+    "id": 8,
+    "question": "Câu 8: Năm 2026, Trường tuyển bao nhiêu thí sinh dựa vào kết quả kỳ thi đánh giá năng lực của ĐHQG Tp.HCM?",
+    "answer": "Chỉ tiêu của Trường là 4.800 (dự kiến), Trường dành khoảng 5% chỉ tiêu để xét những thí sinh tham dự kỳ thi đánh giá năng lực năm 2026 của ĐH Quốc gia Tp.HCM."
+  },
+  {
+    "id": 9,
+    "question": "Câu 9: Năm 2026, Trường tuyển bao nhiêu thí sinh dựa vào học bạ THPT?",
+    "answer": "Chỉ tiêu của Trường là 4.800 (dự kiến), Trường dành khoảng 60% chỉ tiêu (dự kiến) để xét học bạ THPT – 4 học kỳ (HK1, HK2 lớp 11; HK1,HK2 lớp 12)."
+  },
+  {
+    "id": 10,
+    "question": "Câu 10: Thời gian đăng ký và kết thúc xét tuyển như thế nào?",
+    "answer": "- Thời gian bắt đầu đăng ký xét tuyển từ: 01/01/2026.\n- Hạn cuối đăng ký xét tuyển (dự kiến):\n+ Đối với phương thức xét bằng học bạ THPT: 30/5/2026\n+ Đối với phương thức xét bằng kết quả thi ĐGNL ĐHQG-HCM: 30/6/2026\n+ Đối với phương thức xét bằng kết quả thi THPT năm 2026: 30/7/2026\n+ Đối với phương thức xét tuyển thẳng: Thời gian đăng ký từ: 01/3/2026 đến khi đủ chỉ tiêu theo ngành, nghề\nTất cả thông tin này nhà trường đã đăng trên trang website của trường địa chỉ: www.caothang.edu.vn"
+  },
+  {
+    "id": 11,
+    "question": "Câu 11: Sự khác nhau giữa Các ngành đào tạo và Các nghề đào tạo? Bằng cấp như thế nào?",
+    "answer": "- Thời gian đào tạo các ngành và các nghề là như nhau, cùng 3 năm (riêng ngành Kế toán doanh nghiệp và nghề Hàn là 2.5 năm).\n- Các ngành đào tạo: Chương trình đào tạo lý thuyết gắn liền với thực hành, chú trọng về kỹ năng nghề, khả năng tính toán, thiết kế và giải quyết các vấn đề trong thực tế sản xuất\n- Các nghề đào tạo: Chương trình đào tạo lý thuyết gắn liền với thực hành, chú trọng về kỹ năng nghề và khả năng giải quyết các vấn đề trong thực tế sản xuất.\n- Cơ hội liên thông lên đại học là như nhau.\n- Bằng cấp do Hiệu trưởng trường CĐKT Cao Thắng cấp có giá trị và được xã hội công nhận."
+  },
+  {
+    "id": 12,
+    "question": "Câu 12: Thí sinh muốn đăng ký xét tuyển vào trường thì hồ sơ đăng ký như thế nào?",
+    "answer": "Thí sinh đăng ký xét tuyển theo một trong các cách thức sau:\n+ Đăng ký trực tuyến (Online) website của trường tại địa chỉ: tuyensinh.caothang.edu.vn\n+ Nộp phiếu ĐKXT trực tiếp tại trường: thí sinh điền vào mẫu phiếu đăng ký xét tuyển được phát miễn phí tại trường hoặc tải về tại đây: Phiếu ĐKXT Học bạ, phiếu ĐKXT THPT, phiếu ĐKXT ĐGNL\n+ Nộp phiếu ĐKXT qua đường bưu điện: thí sinh download phiếu đăng ký xét tuyển tại website trường. Sau khi điền đầy đủ thông tin, thí sinh gửi đến Trường Cao đẳng Kỹ thuật Cao Thắng, địa chỉ số 65, Huỳnh Thúc Kháng, Phường Sài Gòn, TP.HCM\n+ Nộp thư giới thiệu (đối với xét tuyển thẳng) và phỏng vấn trực tiếp tại trường hoặc online.\nLưu ý: Thí sinh phải đóng lệ phí xét tuyển (15.000 đồng/nguyện vọng)"
+  },
+  {
+    "id": 13,
+    "question": "Câu 13: Sau khi đăng ký xét tuyển thành công thí sinh nộp lệ phí xét tuyển bằng cách nào?",
+    "answer": "- Thí sinh có thể nộp trực tiếp tại trường; nộp qua đường bưu điện; nộp vào tài khoản của nhà trường hoặc nộp qua ví điện tử MoMo."
+  },
+  {
+    "id": 14,
+    "question": "Câu 14: Thí sinh ở xa có thể nhờ người thân, bạn bè đăng ký xét tuyển dùm được không?",
+    "answer": "- Thí sinh có thể nhờ người thân, bạn bè đăng ký xét tuyển dùm được."
+  },
+  {
+    "id": 15,
+    "question": "Câu 15: Thí sinh có được thay đổi ngành, nghề đã đăng ký không?",
+    "answer": "- Thí sinh được thay đổi ngành, nghề đã đăng ký trước khi hết hạn đăng ký xét tuyển tương ứng với từng phương thức xét (xét bằng học bạ THPT là 30/5/2026; xét bằng kết quả thi ĐGNL ĐHQG-HCM: 30/6/2026; xét bằng kết quả thi THPT 2026 là 30/7/2026)."
+  },
+  {
+    "id": 16,
+    "question": "Câu 16: Khi thí sinh đăng ký xét tuyển thì làm sao thí sinh biết được hồ sơ của mình đã được nhận?",
+    "answer": "+ Nếu đăng ký xét tuyển trực tiếp tại trường, thí sinh sẽ nhận được biên nhận xác nhận trường đã nhận hồ sơ của thí sinh.\n+ Nếu đăng ký trực tuyến trên website, thí sinh sẽ được cấp tài khoản là mã hồ sơ của thí sinh để xác nhận thí sinh đã đăng ký thành công; đồng thời trường gởi tin nhắn xác nhận đến số điện thoại mà thí sinh đã đăng ký.\n+ Nếu đăng ký qua đường bưu điện thì sau khi nhà trường nhập dữ liệu hồ sơ của thí sinh xong, trường sẽ gửi email cung cấp tài khoản cho thí sinh, mã số hồ sơ xác nhận thí sinh đã đăng ký thành công; đồng thời trường cũng sẽ gởi tin nhắn xác nhận đến số điện thoại mà thí sinh đã đăng ký."
+  },
+  {
+    "id": 17,
+    "question": "Câu 17: Thí sinh nộp hồ sơ đăng ký xét tuyển qua đường bưu điện thì thời gian tính như thế nào?",
+    "answer": "- Thời gian đăng ký xét tuyển hợp lệ được tính theo thời gian trên con dấu của bưu điện."
+  },
+  {
+    "id": 18,
+    "question": "Câu 18: Trong trường hợp thí sinh trúng tuyển vào trường nhưng thí sinh không học mà muốn bảo lưu có được không?",
+    "answer": "- Thí sinh muốn bảo lưu thì phải nằm trong những trường hợp được phép bảo lưu theo quy định."
+  },
+  {
+    "id": 19,
+    "question": "Câu 19: Năm nay chỉ tiêu tuyển sinh từng ngành, nghề của nhà trường như thế nào?",
+    "answer": "- Thí sinh truy cập trang web của trường www.caothang.edu.vn để biết thông tin chi tiết."
+  },
+  {
+    "id": 20,
+    "question": "Câu 20: Thí sinh muốn biết các ngành, nghề trong trường được đào tạo như thế nào? Ra trường có xin được việc làm hay không? Làm ở đâu?",
+    "answer": "- Thí sinh có thể truy cập website của trường để tìm hiểu thông tin về các ngành, nghề mà trường đào tạo hoặc có thể liên hệ trực tiếp các thầy cô phụ trách tư vấn về ngành nghề chuyên môn mà trường đã cung cấp số điện thoại tại đây"
+  },
+  {
+    "id": 21,
+    "question": "Câu 21: Khi thí sinh vào học ở trường thì thí sinh có được hoãn nghĩa vụ quân sự không?",
+    "answer": "- Thí sinh được hoãn nghĩa vụ quân sự theo quy định của Nhà nước."
+  },
+  {
+    "id": 22,
+    "question": "Câu 22: Khi thí sinh tốt nghiệp các ngành/nghề đào tạo, có được học liên thông lên các bậc cao hơn không?",
+    "answer": "- Sau khi tốt nghiệp, thí sinh được học liên thông lên trình độ cao hơn ở các trường đại học như: ĐH Bách Khoa TPHCM, ĐH Sư phạm kỹ thuật TPHCM,…"
+  },
+  {
+    "id": 23,
+    "question": "Câu 23: Khi nhập học thí sinh muốn ở ký túc xá của trường có được không?",
+    "answer": "Nhà trường đã có kế hoạch bảo trì, sửa chữa ký túc xá nên chưa thể giải quyết cho sinh viên vào ở trong năm 2026.\nSau khi làm thủ tục nhập học tại trường, các em có nhu cầu về chỗ trọ sẽ được Đoàn thanh niên, Hội sinh viên của Trường hỗ trợ tìm kiếm chỗ trọ.\nNgoài ra, Nhà trường sẽ tạo điều kiện để hỗ trợ sinh viên Cao Thắng có nhu cầu được đăng ký, ở tại ký túc xá của Đại học quốc gia TpHCM."
+  },
+  {
+    "id": 24,
+    "question": "Câu 24: Ký hiệu của trường mình là gì vậy?",
+    "answer": "Ký hiệu trường CĐKT Cao Thắng là: CKC\n(Trường Cao đẳng Kỹ thuật Cao Thắng xét tuyển bằng phần mềm riêng của Trường. Thí sinh muốn đăng ký xét tuyển vào trường phải thực hiện theo hướng dẫn tại website www.caothang.edu.vn)"
+  },
+  {
+    "id": 25,
+    "question": "Câu 25: Đến khi thi tốt nghiệp THPT xong mới nộp hồ sơ vào trường mình như vậy có trễ quá không? hay là em phải đăng ký online sớm để giữ chỗ?",
+    "answer": "- Thời gian đăng ký xét tuyển các ngành, nghề từ ngày 01/01/2026 đến hết ngày 30/5/2026 đối với xét bằng học bạ, hết ngày 30/6/2026 đối với xét bằng kết quả thi đánh giá năng lực của ĐH Quốc gia TP.HCM, hết ngày 30/7/2026 đối với xét bằng kết quả kỳ thi tốt nghiệp THPT năm 2026. Trong thời gian này thí sinh nộp hồ sơ lúc nào cũng được và được xét tuyển bình đẳng.\n- Đối với phương thức xét tuyển thẳng: Thời gian đăng ký từ: 01/3/2026 đến khi đủ chỉ tiêu theo ngành, nghề"
+  },
+  {
+    "id": 26,
+    "question": "Câu 26: Thí sinh muốn biết mình có trúng tuyển các ngành, nghề đào tạo hay không phải làm sao?",
+    "answer": "- Trường dự kiến công bố kết quả trúng tuyển các ngành, nghề đào tạo như sau:\n+ Sau ngày 30/5/2026 đối với xét bằng học bạ\n+ Sau ngày 30/6/2026 đối với xét bằng kết quả thi ĐGNL của ĐH Quốc gia TP.HCM\n+ Sau ngày 30/7/2026 đối với xét kết quả kỳ thi tốt nghiệp THPT năm 2026\nThí sinh theo dõi trên www.caothang.edu.vn\n- Đối với thí sinh trúng tuyển, Nhà trường sẽ gửi tin nhắn SMS và gửi email thông báo cho thí sinh."
+  },
+  {
+    "id": 27,
+    "question": "Câu 27: Thí sinh muốn đăng ký xét tuyển vào trường CĐKT Cao Thắng trước khi biết kết quả thi THPT/Kết quả thi đánh giá năng lực, nhưng khi đăng ký yêu cầu nhập điểm các môn thi THPT?",
+    "answer": "- Thí sinh có thể đăng ký trước và bỏ qua việc nhập điểm thi THPT/điểm thi đánh giá năng lực.\n- Sau khi có kết quả thi, thí sinh đăng nhập vào hệ thống và tiến hành cập nhật điểm."
+  },
+  {
+    "id": 28,
+    "question": "Câu 28: Thí sinh đăng ký online thành công đã được gửi mã hồ sơ nhưng giờ thí sinh quên mã, thí sinh phải làm sao?",
+    "answer": "- Thí sinh vào hộp thư với địa chỉ email của thí sinh đã đăng ký, xem nội dung thư của trường CĐKT Cao Thắng (có mã hồ sơ, CCCD, các nguyện vọng đăng ký)"
+  },
+  {
+    "id": 29,
+    "question": "Câu 29: Thí sinh đăng ký online vào các ngành, nghề đào tạo. Đăng ký thành công, thí sinh còn nhớ mã hồ sơ nhưng quên mật khẩu, thí sinh phải làm sao?",
+    "answer": "- Thí sinh truy cập vào trang http://tuyensinh.caothang.edu.vn/reset.aspx để yêu cầu lấy lại mật khẩu. Nhà trường sẽ gửi lại thông tin qua email của thí sinh."
+  },
+  {
+    "id": 30,
+    "question": "Câu 30: Trường Cao đẳng Kỹ thuật Cao Thắng có phải là trường chất lượng cao không?",
+    "answer": "Theo Quyết định số 209/QĐ-BGDĐT của Bộ Giáo dục và Đào tạo, Trường Cao đẳng Kỹ thuật Cao Thắng được công nhận trường cao đẳng chất lượng cao. Đây là minh chứng cho uy tín, chất lượng đào tạo và năng lực quản lý của nhà trường."
+  },
+  {
+    "id": 31,
+    "question": "Câu 31: Việc được công nhận trường chất lượng cao có ý nghĩa gì đối với sinh viên?",
+    "answer": "Việc được Bộ Giáo dục và Đào tạo công nhận TRƯỜNG CHẤT LƯỢNG CAO cho thấy chương trình đào tạo, đội ngũ giảng viên, cơ sở vật chất và công tác quản lý của Trường đáp ứng các tiêu chuẩn kiểm định chất lượng. Điều này không chỉ đảm bảo môi trường học tập đạt chuẩn mà còn góp phần nâng cao cơ hội việc làm cho sinh viên sau khi tốt nghiệp, vì bằng cấp và chất lượng đào tạo được xã hội và doanh nghiệp tin tưởng."
+  },
+  {
+    "id": 32,
+    "question": "Câu 32: Năm nay (2026) trường có mở thêm ngành học nào mới không?",
+    "answer": "Năm 2026, Trường Cao đẳng Kỹ thuật Cao Thắng mở thêm 5 ngành học mới đáp ứng nhu cầu nhân lực chất lượng cao, bao gồm: Công nghệ kỹ thuật điện và năng lượng tái tạo (60 chỉ tiêu), Công nghệ kỹ thuật bán dẫn và vi mạch (90 chỉ tiêu), Công nghệ kỹ thuật bảo trì thiết bị trong công nghiệp (35 chỉ tiêu), Công nghệ kỹ thuật tự động hóa trong nông nghiệp (60 chỉ tiêu), Công nghệ tài chính và kinh doanh số (85 chỉ tiêu)."
+   }
+]
