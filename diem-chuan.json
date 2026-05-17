@@ -2,199 +2,199 @@
   {
     "nganh": "Công nghệ Kỹ thuật Điện, Điện tử",
     "diem_chuan": {
-      "2020": { "hoc_ba": 23.00, "thptqg": 25.50, "dgnl": 550 },
-      "2021": { "hoc_ba": 23.00, "thptqg": 24.00, "dgnl": 600 },
-      "2022": { "hoc_ba": 23.00, "thptqg": 23.00, "dgnl": null },
-      "2023": { "hoc_ba": 24.00, "thptqg": 22.00, "dgnl": null },
-      "2024": { "hoc_ba": 21.50, "thptqg": 21.00, "dgnl": null },
-      "2025": { "hoc_ba": 22.50, "thptqg": 24.50, "dgnl": null }
+      "2020": { "xet_hoc_ba": 23.00, "thi_thpt_quoc_gia": 25.50, "thi_danh_gia_nang_luc": 550 },
+      "2021": { "xet_hoc_ba": 23.00, "thi_thpt_quoc_gia": 24.00, "thi_danh_gia_nang_luc": 600 },
+      "2022": { "xet_hoc_ba": 23.00, "thi_thpt_quoc_gia": 23.00, "thi_danh_gia_nang_luc": null },
+      "2023": { "xet_hoc_ba": 24.00, "thi_thpt_quoc_gia": 22.00, "thi_danh_gia_nang_luc": null },
+      "2024": { "xet_hoc_ba": 21.50, "thi_thpt_quoc_gia": 21.00, "thi_danh_gia_nang_luc": null },
+      "2025": { "xet_hoc_ba": 22.50, "thi_thpt_quoc_gia": 24.50, "thi_danh_gia_nang_luc": null }
     }
   },
   {
     "nganh": "Công nghệ Kỹ thuật Điện tử - Viễn thông",
     "diem_chuan": {
-      "2020": { "hoc_ba": 20.00, "thptqg": 23.50, "dgnl": 500 },
-      "2021": { "hoc_ba": 20.00, "thptqg": 23.00, "dgnl": 500 },
-      "2022": { "hoc_ba": 21.00, "thptqg": 21.00, "dgnl": null },
-      "2023": { "hoc_ba": 20.50, "thptqg": 21.00, "dgnl": null },
-      "2024": { "hoc_ba": 20.50, "thptqg": 20.00, "dgnl": null },
-      "2025": { "hoc_ba": 20.50, "thptqg": 22.00, "dgnl": null }
+      "2020": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 23.50, "thi_danh_gia_nang_luc": 500 },
+      "2021": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 23.00, "thi_danh_gia_nang_luc": 500 },
+      "2022": { "xet_hoc_ba": 21.00, "thi_thpt_quoc_gia": 21.00, "thi_danh_gia_nang_luc": null },
+      "2023": { "xet_hoc_ba": 20.50, "thi_thpt_quoc_gia": 21.00, "thi_danh_gia_nang_luc": null },
+      "2024": { "xet_hoc_ba": 20.50, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
+      "2025": { "xet_hoc_ba": 20.50, "thi_thpt_quoc_gia": 22.00, "thi_danh_gia_nang_luc": null }
     }
   },
   {
     "nganh": "Công nghệ Kỹ thuật Cơ khí",
     "diem_chuan": {
-      "2020": { "hoc_ba": 26.50, "thptqg": 29.00, "dgnl": 600 },
-      "2021": { "hoc_ba": 26.50, "thptqg": 29.00, "dgnl": 600 },
-      "2022": { "hoc_ba": 27.00, "thptqg": 26.50, "dgnl": null },
-      "2023": { "hoc_ba": 27.50, "thptqg": 24.00, "dgnl": null },
-      "2024": { "hoc_ba": 24.00, "thptqg": 24.00, "dgnl": null },
-      "2025": { "hoc_ba": 25.00, "thptqg": 29.00, "dgnl": null }
+      "2020": { "xet_hoc_ba": 26.50, "thi_thpt_quoc_gia": 29.00, "thi_danh_gia_nang_luc": 600 },
+      "2021": { "xet_hoc_ba": 26.50, "thi_thpt_quoc_gia": 29.00, "thi_danh_gia_nang_luc": 600 },
+      "2022": { "xet_hoc_ba": 27.00, "thi_thpt_quoc_gia": 26.50, "thi_danh_gia_nang_luc": null },
+      "2023": { "xet_hoc_ba": 27.50, "thi_thpt_quoc_gia": 24.00, "thi_danh_gia_nang_luc": null },
+      "2024": { "xet_hoc_ba": 24.00, "thi_thpt_quoc_gia": 24.00, "thi_danh_gia_nang_luc": null },
+      "2025": { "xet_hoc_ba": 25.00, "thi_thpt_quoc_gia": 29.00, "thi_danh_gia_nang_luc": null }
     }
   },
   {
     "nganh": "Công nghệ Kỹ thuật Ô tô",
     "diem_chuan": {
-      "2020": { "hoc_ba": 30.00, "thptqg": 31.00, "dgnl": 700 },
-      "2021": { "hoc_ba": 30.50, "thptqg": 32.00, "dgnl": 750 },
-      "2022": { "hoc_ba": 31.00, "thptqg": 31.00, "dgnl": null },
-      "2023": { "hoc_ba": 31.50, "thptqg": 27.00, "dgnl": null },
-      "2024": { "hoc_ba": 28.00, "thptqg": 28.00, "dgnl": null },
-      "2025": { "hoc_ba": 30.50, "thptqg": 29.00, "dgnl": null }
+      "2020": { "xet_hoc_ba": 30.00, "thi_thpt_quoc_gia": 31.00, "thi_danh_gia_nang_luc": 700 },
+      "2021": { "xet_hoc_ba": 30.50, "thi_thpt_quoc_gia": 32.00, "thi_danh_gia_nang_luc": 750 },
+      "2022": { "xet_hoc_ba": 31.00, "thi_thpt_quoc_gia": 31.00, "thi_danh_gia_nang_luc": null },
+      "2023": { "xet_hoc_ba": 31.50, "thi_thpt_quoc_gia": 27.00, "thi_danh_gia_nang_luc": null },
+      "2024": { "xet_hoc_ba": 28.00, "thi_thpt_quoc_gia": 28.00, "thi_danh_gia_nang_luc": null },
+      "2025": { "xet_hoc_ba": 30.50, "thi_thpt_quoc_gia": 29.00, "thi_danh_gia_nang_luc": null }
     }
   },
   {
     "nganh": "Công nghệ Thông tin",
     "diem_chuan": {
-      "2020": { "hoc_ba": 24.50, "thptqg": 25.00, "dgnl": 550 },
-      "2021": { "hoc_ba": 24.00, "thptqg": 25.50, "dgnl": 600 },
-      "2022": { "hoc_ba": 26.00, "thptqg": 26.50, "dgnl": null },
-      "2023": { "hoc_ba": 25.50, "thptqg": 25.50, "dgnl": null },
-      "2024": { "hoc_ba": 22.50, "thptqg": 21.50, "dgnl": null },
-      "2025": { "hoc_ba": 24.00, "thptqg": 23.00, "dgnl": null }
+      "2020": { "xet_hoc_ba": 24.50, "thi_thpt_quoc_gia": 25.00, "thi_danh_gia_nang_luc": 550 },
+      "2021": { "xet_hoc_ba": 24.00, "thi_thpt_quoc_gia": 25.50, "thi_danh_gia_nang_luc": 600 },
+      "2022": { "xet_hoc_ba": 26.00, "thi_thpt_quoc_gia": 26.50, "thi_danh_gia_nang_luc": null },
+      "2023": { "xet_hoc_ba": 25.50, "thi_thpt_quoc_gia": 25.50, "thi_danh_gia_nang_luc": null },
+      "2024": { "xet_hoc_ba": 22.50, "thi_thpt_quoc_gia": 21.50, "thi_danh_gia_nang_luc": null },
+      "2025": { "xet_hoc_ba": 24.00, "thi_thpt_quoc_gia": 23.00, "thi_danh_gia_nang_luc": null }
     }
   },
   {
     "nganh": "Công nghệ Kỹ thuật Nhiệt (Cơ điện lạnh)",
     "diem_chuan": {
-      "2020": { "hoc_ba": 24.50, "thptqg": 27.00, "dgnl": 550 },
-      "2021": { "hoc_ba": 24.00, "thptqg": 25.00, "dgnl": 600 },
-      "2022": { "hoc_ba": 23.00, "thptqg": 23.00, "dgnl": null },
-      "2023": { "hoc_ba": 22.00, "thptqg": 23.00, "dgnl": null },
-      "2024": { "hoc_ba": 21.00, "thptqg": 21.00, "dgnl": null },
-      "2025": { "hoc_ba": 22.00, "thptqg": 21.50, "dgnl": null }
+      "2020": { "xet_hoc_ba": 24.50, "thi_thpt_quoc_gia": 27.00, "thi_danh_gia_nang_luc": 550 },
+      "2021": { "xet_hoc_ba": 24.00, "thi_thpt_quoc_gia": 25.00, "thi_danh_gia_nang_luc": 600 },
+      "2022": { "xet_hoc_ba": 23.00, "thi_thpt_quoc_gia": 23.00, "thi_danh_gia_nang_luc": null },
+      "2023": { "xet_hoc_ba": 22.00, "thi_thpt_quoc_gia": 23.00, "thi_danh_gia_nang_luc": null },
+      "2024": { "xet_hoc_ba": 21.00, "thi_thpt_quoc_gia": 21.00, "thi_danh_gia_nang_luc": null },
+      "2025": { "xet_hoc_ba": 22.00, "thi_thpt_quoc_gia": 21.50, "thi_danh_gia_nang_luc": null }
     }
   },
   {
     "nganh": "Công nghệ Kỹ thuật Cơ điện tử",
     "diem_chuan": {
-      "2020": { "hoc_ba": 23.50, "thptqg": 28.50, "dgnl": 550 },
-      "2021": { "hoc_ba": 23.00, "thptqg": 26.00, "dgnl": 550 },
-      "2022": { "hoc_ba": 23.00, "thptqg": 23.00, "dgnl": null },
-      "2023": { "hoc_ba": 23.00, "thptqg": 23.00, "dgnl": null },
-      "2024": { "hoc_ba": 22.50, "thptqg": 22.50, "dgnl": null },
-      "2025": { "hoc_ba": 23.00, "thptqg": 27.00, "dgnl": null }
+      "2020": { "xet_hoc_ba": 23.50, "thi_thpt_quoc_gia": 28.50, "thi_danh_gia_nang_luc": 550 },
+      "2021": { "xet_hoc_ba": 23.00, "thi_thpt_quoc_gia": 26.00, "thi_danh_gia_nang_luc": 550 },
+      "2022": { "xet_hoc_ba": 23.00, "thi_thpt_quoc_gia": 23.00, "thi_danh_gia_nang_luc": null },
+      "2023": { "xet_hoc_ba": 23.00, "thi_thpt_quoc_gia": 23.00, "thi_danh_gia_nang_luc": null },
+      "2024": { "xet_hoc_ba": 22.50, "thi_thpt_quoc_gia": 22.50, "thi_danh_gia_nang_luc": null },
+      "2025": { "xet_hoc_ba": 23.00, "thi_thpt_quoc_gia": 27.00, "thi_danh_gia_nang_luc": null }
     }
   },
   {
     "nganh": "Công nghệ Kỹ thuật Điều khiển và Tự động hóa",
     "diem_chuan": {
-      "2020": { "hoc_ba": 24.50, "thptqg": 28.50, "dgnl": 550 },
-      "2021": { "hoc_ba": 24.00, "thptqg": 29.00, "dgnl": 600 },
-      "2022": { "hoc_ba": 25.00, "thptqg": 25.00, "dgnl": null },
-      "2023": { "hoc_ba": 25.00, "thptqg": 23.50, "dgnl": null },
-      "2024": { "hoc_ba": 22.50, "thptqg": 22.50, "dgnl": null },
-      "2025": { "hoc_ba": 24.50, "thptqg": 27.00, "dgnl": null }
+      "2020": { "xet_hoc_ba": 24.50, "thi_thpt_quoc_gia": 28.50, "thi_danh_gia_nang_luc": 550 },
+      "2021": { "xet_hoc_ba": 24.00, "thi_thpt_quoc_gia": 29.00, "thi_danh_gia_nang_luc": 600 },
+      "2022": { "xet_hoc_ba": 25.00, "thi_thpt_quoc_gia": 25.00, "thi_danh_gia_nang_luc": null },
+      "2023": { "xet_hoc_ba": 25.00, "thi_thpt_quoc_gia": 23.50, "thi_danh_gia_nang_luc": null },
+      "2024": { "xet_hoc_ba": 22.50, "thi_thpt_quoc_gia": 22.50, "thi_danh_gia_nang_luc": null },
+      "2025": { "xet_hoc_ba": 24.50, "thi_thpt_quoc_gia": 27.00, "thi_danh_gia_nang_luc": null }
     }
   },
   {
     "nganh": "Kế toán tin học (Kế toán doanh nghiệp)",
     "diem_chuan": {
-      "2020": { "hoc_ba": 20.00, "thptqg": 22.00, "dgnl": 450 },
-      "2021": { "hoc_ba": 20.00, "thptqg": 20.00, "dgnl": 450 },
-      "2022": { "hoc_ba": 20.00, "thptqg": 20.00, "dgnl": null },
-      "2023": { "hoc_ba": 20.00, "thptqg": 20.00, "dgnl": null },
-      "2024": { "hoc_ba": 20.00, "thptqg": 16.00, "dgnl": null },
-      "2025": { "hoc_ba": 20.00, "thptqg": 16.00, "dgnl": null }
+      "2020": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 22.00, "thi_danh_gia_nang_luc": 450 },
+      "2021": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": 450 },
+      "2022": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
+      "2023": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
+      "2024": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 16.00, "thi_danh_gia_nang_luc": null },
+      "2025": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 16.00, "thi_danh_gia_nang_luc": null }
     }
   },
   {
     "nganh": "Cơ khí chế tạo (Cắt gọt kim loại)",
     "diem_chuan": {
-      "2020": { "hoc_ba": null, "thptqg": null, "dgnl": null },
-      "2021": { "hoc_ba": 22.00, "thptqg": 21.00, "dgnl": 500 },
-      "2022": { "hoc_ba": 22.00, "thptqg": 22.00, "dgnl": null },
-      "2023": { "hoc_ba": 22.00, "thptqg": 21.00, "dgnl": null },
-      "2024": { "hoc_ba": 20.50, "thptqg": 20.00, "dgnl": null },
-      "2025": { "hoc_ba": 21.00, "thptqg": 21.50, "dgnl": null }
+      "2020": { "xet_hoc_ba": null, "thi_thpt_quoc_gia": null, "thi_danh_gia_nang_luc": null },
+      "2021": { "xet_hoc_ba": 22.00, "thi_thpt_quoc_gia": 21.00, "thi_danh_gia_nang_luc": 500 },
+      "2022": { "xet_hoc_ba": 22.00, "thi_thpt_quoc_gia": 22.00, "thi_danh_gia_nang_luc": null },
+      "2023": { "xet_hoc_ba": 22.00, "thi_thpt_quoc_gia": 21.00, "thi_danh_gia_nang_luc": null },
+      "2024": { "xet_hoc_ba": 20.50, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
+      "2025": { "xet_hoc_ba": 21.00, "thi_thpt_quoc_gia": 21.50, "thi_danh_gia_nang_luc": null }
     }
   },
   {
     "nganh": "Sửa chữa cơ khí (Nguội sửa chữa máy công cụ)",
     "diem_chuan": {
-      "2020": { "hoc_ba": null, "thptqg": null, "dgnl": null },
-      "2021": { "hoc_ba": 20.00, "thptqg": 20.00, "dgnl": 450 },
-      "2022": { "hoc_ba": 20.00, "thptqg": 20.00, "dgnl": null },
-      "2023": { "hoc_ba": 20.00, "thptqg": 20.50, "dgnl": null },
-      "2024": { "hoc_ba": 20.00, "thptqg": 20.00, "dgnl": null },
-      "2025": { "hoc_ba": 21.00, "thptqg": 21.50, "dgnl": null }
+      "2020": { "xet_hoc_ba": null, "thi_thpt_quoc_gia": null, "thi_danh_gia_nang_luc": null },
+      "2021": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": 450 },
+      "2022": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
+      "2023": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.50, "thi_danh_gia_nang_luc": null },
+      "2024": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
+      "2025": { "xet_hoc_ba": 21.00, "thi_thpt_quoc_gia": 21.50, "thi_danh_gia_nang_luc": null }
     }
   },
   {
     "nganh": "Hàn (Công nghệ cao)",
     "diem_chuan": {
-      "2020": { "hoc_ba": null, "thptqg": null, "dgnl": null },
-      "2021": { "hoc_ba": 20.00, "thptqg": 20.00, "dgnl": 450 },
-      "2022": { "hoc_ba": 20.00, "thptqg": 20.00, "dgnl": null },
-      "2023": { "hoc_ba": 20.00, "thptqg": 20.00, "dgnl": null },
-      "2024": { "hoc_ba": 20.00, "thptqg": 16.00, "dgnl": null },
-      "2025": { "hoc_ba": 20.00, "thptqg": 20.50, "dgnl": null }
+      "2020": { "xet_hoc_ba": null, "thi_thpt_quoc_gia": null, "thi_danh_gia_nang_luc": null },
+      "2021": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": 450 },
+      "2022": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
+      "2023": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
+      "2024": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 16.00, "thi_danh_gia_nang_luc": null },
+      "2025": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.50, "thi_danh_gia_nang_luc": null }
     }
   },
   {
     "nganh": "Kỹ thuật máy lạnh và điều hòa không khí",
     "diem_chuan": {
-      "2020": { "hoc_ba": null, "thptqg": null, "dgnl": null },
-      "2021": { "hoc_ba": 20.00, "thptqg": 20.00, "dgnl": 500 },
-      "2022": { "hoc_ba": 20.50, "thptqg": 20.50, "dgnl": null },
-      "2023": { "hoc_ba": 20.50, "thptqg": 20.50, "dgnl": null },
-      "2024": { "hoc_ba": 20.50, "thptqg": 20.00, "dgnl": null },
-      "2025": { "hoc_ba": 21.00, "thptqg": 21.50, "dgnl": null }
+      "2020": { "xet_hoc_ba": null, "thi_thpt_quoc_gia": null, "thi_danh_gia_nang_luc": null },
+      "2021": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": 500 },
+      "2022": { "xet_hoc_ba": 20.50, "thi_thpt_quoc_gia": 20.50, "thi_danh_gia_nang_luc": null },
+      "2023": { "xet_hoc_ba": 20.50, "thi_thpt_quoc_gia": 20.50, "thi_danh_gia_nang_luc": null },
+      "2024": { "xet_hoc_ba": 20.50, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
+      "2025": { "xet_hoc_ba": 21.00, "thi_thpt_quoc_gia": 21.50, "thi_danh_gia_nang_luc": null }
     }
   },
   {
     "nganh": "Bảo trì, sửa chữa Ô tô (Công nghệ Ô tô)",
     "diem_chuan": {
-      "2020": { "hoc_ba": null, "thptqg": null, "dgnl": null },
-      "2021": { "hoc_ba": 25.50, "thptqg": 29.00, "dgnl": 650 },
-      "2022": { "hoc_ba": 26.00, "thptqg": 29.00, "dgnl": null },
-      "2023": { "hoc_ba": 29.00, "thptqg": 25.50, "dgnl": null },
-      "2024": { "hoc_ba": 25.00, "thptqg": 25.00, "dgnl": null },
-      "2025": { "hoc_ba": 26.50, "thptqg": 28.00, "dgnl": null }
+      "2020": { "xet_hoc_ba": null, "thi_thpt_quoc_gia": null, "thi_danh_gia_nang_luc": null },
+      "2021": { "xet_hoc_ba": 25.50, "thi_thpt_quoc_gia": 29.00, "thi_danh_gia_nang_luc": 650 },
+      "2022": { "xet_hoc_ba": 26.00, "thi_thpt_quoc_gia": 29.00, "thi_danh_gia_nang_luc": null },
+      "2023": { "xet_hoc_ba": 29.00, "thi_thpt_quoc_gia": 25.50, "thi_danh_gia_nang_luc": null },
+      "2024": { "xet_hoc_ba": 25.00, "thi_thpt_quoc_gia": 25.00, "thi_danh_gia_nang_luc": null },
+      "2025": { "xet_hoc_ba": 26.50, "thi_thpt_quoc_gia": 28.00, "thi_danh_gia_nang_luc": null }
     }
   },
   {
     "nganh": "Điện công nghiệp",
     "diem_chuan": {
-      "2020": { "hoc_ba": null, "thptqg": null, "dgnl": null },
-      "2021": { "hoc_ba": 20.00, "thptqg": 20.00, "dgnl": 450 },
-      "2022": { "hoc_ba": 20.50, "thptqg": 20.50, "dgnl": null },
-      "2023": { "hoc_ba": 20.50, "thptqg": 20.50, "dgnl": null },
-      "2024": { "hoc_ba": 20.00, "thptqg": 20.00, "dgnl": null },
-      "2025": { "hoc_ba": 20.00, "thptqg": 21.50, "dgnl": null }
+      "2020": { "xet_hoc_ba": null, "thi_thpt_quoc_gia": null, "thi_danh_gia_nang_luc": null },
+      "2021": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": 450 },
+      "2022": { "xet_hoc_ba": 20.50, "thi_thpt_quoc_gia": 20.50, "thi_danh_gia_nang_luc": null },
+      "2023": { "xet_hoc_ba": 20.50, "thi_thpt_quoc_gia": 20.50, "thi_danh_gia_nang_luc": null },
+      "2024": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
+      "2025": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 21.50, "thi_danh_gia_nang_luc": null }
     }
   },
   {
     "nganh": "Điện tử công nghiệp",
     "diem_chuan": {
-      "2020": { "hoc_ba": null, "thptqg": null, "dgnl": null },
-      "2021": { "hoc_ba": 20.00, "thptqg": 20.00, "dgnl": 450 },
-      "2022": { "hoc_ba": 20.00, "thptqg": 20.00, "dgnl": null },
-      "2023": { "hoc_ba": 20.00, "thptqg": 20.00, "dgnl": null },
-      "2024": { "hoc_ba": 20.00, "thptqg": 20.00, "dgnl": null },
-      "2025": { "hoc_ba": 20.00, "thptqg": 21.00, "dgnl": null }
+      "2020": { "xet_hoc_ba": null, "thi_thpt_quoc_gia": null, "thi_danh_gia_nang_luc": null },
+      "2021": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": 450 },
+      "2022": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
+      "2023": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
+      "2024": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
+      "2025": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 21.00, "thi_danh_gia_nang_luc": null }
     }
   },
   {
     "nganh": "Quản trị mạng máy tính",
     "diem_chuan": {
-      "2020": { "hoc_ba": null, "thptqg": null, "dgnl": null },
-      "2021": { "hoc_ba": 20.00, "thptqg": 20.00, "dgnl": 450 },
-      "2022": { "hoc_ba": 20.00, "thptqg": 20.00, "dgnl": null },
-      "2023": { "hoc_ba": 20.00, "thptqg": 20.00, "dgnl": null },
-      "2024": { "hoc_ba": 20.00, "thptqg": 20.00, "dgnl": null },
-      "2025": { "hoc_ba": 20.00, "thptqg": 20.00, "dgnl": null }
+      "2020": { "xet_hoc_ba": null, "thi_thpt_quoc_gia": null, "thi_danh_gia_nang_luc": null },
+      "2021": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": 450 },
+      "2022": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
+      "2023": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
+      "2024": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
+      "2025": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null }
     }
   },
   {
     "nganh": "Kỹ thuật sửa chữa, lắp ráp máy tính",
     "diem_chuan": {
-      "2020": { "hoc_ba": null, "thptqg": null, "dgnl": null },
-      "2021": { "hoc_ba": 20.00, "thptqg": 20.00, "dgnl": 450 },
-      "2022": { "hoc_ba": 20.00, "thptqg": 24.00, "dgnl": null },
-      "2023": { "hoc_ba": 21.00, "thptqg": 24.00, "dgnl": null },
-      "2024": { "hoc_ba": 20.00, "thptqg": 20.00, "dgnl": null },
-      "2025": { "hoc_ba": 20.00, "thptqg": 21.00, "dgnl": null }
+      "2020": { "xet_hoc_ba": null, "thi_thpt_quoc_gia": null, "thi_danh_gia_nang_luc": null },
+      "2021": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": 450 },
+      "2022": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 24.00, "thi_danh_gia_nang_luc": null },
+      "2023": { "xet_hoc_ba": 21.00, "thi_thpt_quoc_gia": 24.00, "thi_danh_gia_nang_luc": null },
+      "2024": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
+      "2025": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 21.00, "thi_danh_gia_nang_luc": null }
     }
   }
 ]
