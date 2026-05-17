@@ -54,49 +54,150 @@ def setup_rag_system():
     embeddings = HuggingFaceEmbeddings(model_name=model_name)
     llm = ChatGoogleGenerativeAI(model="models/gemini-flash-latest", temperature=0.3)
 
-    # 3. Xử lý dữ liệu từ file data.txt
-    file_path = "data.txt"
-    if not os.path.exists(file_path):
+    # 3. Xử lý dữ liệu từ nhiều file JSON (chỉ trong thư mục gốc)
+    def collect_source_files():
+        candidates = []
+        for entry in os.listdir("."):
+            if entry.lower().endswith(".json") and os.path.isfile(entry):
+                candidates.append(entry)
+        if os.path.isfile("data.txt"):
+            candidates.append("data.txt")
+        return sorted(set(candidates))
+
+    def parse_multiple_json(text):
+        decoder = json.JSONDecoder()
+        index = 0
+        results = []
+        length = len(text)
+        while index < length:
+            while index < length and text[index].isspace():
+                index += 1
+            if index >= length:
+                break
+            try:
+                value, next_index = decoder.raw_decode(text, index)
+            except json.JSONDecodeError:
+                break
+            if isinstance(value, list):
+                results.extend(value)
+            else:
+                results.append(value)
+            index = next_index
+        return results
+
+    def load_json_items(path):
+        try:
+            with open(path, "r", encoding="utf-8") as handle:
+                raw_data = json.load(handle)
+        except json.JSONDecodeError:
+            try:
+                with open(path, "r", encoding="utf-8") as handle:
+                    raw_text = handle.read()
+            except Exception as exc:
+                st.warning(f"Khong doc duoc file {path}: {exc}")
+                return []
+            parsed = parse_multiple_json(raw_text)
+            if parsed:
+                return parsed
+            if raw_text.strip():
+                return [raw_text]
+            return []
+        except Exception as exc:
+            st.warning(f"Khong doc duoc file {path}: {exc}")
+            return []
+        if isinstance(raw_data, list):
+            return raw_data
+        return [raw_data]
+
+    def build_documents(source_files):
+        docs = []
+        for path in source_files:
+            for item in load_json_items(path):
+                if isinstance(item, dict) and any(
+                    key in item
+                    for key in [
+                        "ten_nganh",
+                        "ma_nganh",
+                        "chuyen_nganh",
+                        "muc_tieu_dao_tao",
+                        "chuan_dau_ra",
+                        "vi_tri_viec_lam",
+                    ]
+                ):
+                    content = (
+                        f"ten_nganh: {item.get('ten_nganh', '')}\n"
+                        f"ma_nganh: {item.get('ma_nganh', '')}\n"
+                        f"chuyen_nganh: {item.get('chuyen_nganh', '')}\n"
+                        f"muc_tieu_dao_tao: {item.get('muc_tieu_dao_tao', '')}\n"
+                        f"chuan_dau_ra: {item.get('chuan_dau_ra', '')}\n"
+                        f"vi_tri_viec_lam: {item.get('vi_tri_viec_lam', '')}\n"
+                    )
+                    metadata = {
+                        "id": item.get("id"),
+                        "ten_nganh": item.get("ten_nganh", ""),
+                        "ma_nganh": item.get("ma_nganh", ""),
+                    }
+                else:
+                    if isinstance(item, str):
+                        content = item
+                    else:
+                        content = json.dumps(item, ensure_ascii=False, indent=2)
+                    metadata = {}
+                metadata["source_file"] = path
+                docs.append(Document(page_content=content, metadata=metadata))
+        return docs
+
+    def build_manifest(source_files):
+        manifest = []
+        for path in source_files:
+            try:
+                stat = os.stat(path)
+            except OSError:
+                continue
+            manifest.append(
+                {
+                    "path": path,
+                    "mtime": stat.st_mtime,
+                    "size": stat.st_size,
+                }
+            )
+        return sorted(manifest, key=lambda item: item["path"])
+
+    source_files = collect_source_files()
+    if not source_files:
         return None
-        
+
     persist_directory = "./chroma_db"
-    if os.path.exists(persist_directory):
+    manifest_path = os.path.join(persist_directory, "_sources.json")
+    current_manifest = build_manifest(source_files)
+    use_existing = False
+
+    if os.path.exists(persist_directory) and os.path.exists(manifest_path):
+        try:
+            with open(manifest_path, "r", encoding="utf-8") as handle:
+                saved_manifest = json.load(handle)
+            if saved_manifest == current_manifest:
+                use_existing = True
+        except Exception:
+            use_existing = False
+
+    if use_existing:
         vectorstore = Chroma(
             persist_directory=persist_directory,
             embedding_function=embeddings,
         )
     else:
-        with open(file_path, "r", encoding="utf-8") as handle:
-            raw_data = json.load(handle)
-        if not isinstance(raw_data, list):
-            raw_data = [raw_data]
-        docs = []
-        for item in raw_data:
-            if not isinstance(item, dict):
-                continue
-            content = (
-                f"ten_nganh: {item.get('ten_nganh', '')}\n"
-                f"ma_nganh: {item.get('ma_nganh', '')}\n"
-                f"chuyen_nganh: {item.get('chuyen_nganh', '')}\n"
-                f"muc_tieu_dao_tao: {item.get('muc_tieu_dao_tao', '')}\n"
-                f"chuan_dau_ra: {item.get('chuan_dau_ra', '')}\n"
-                f"vi_tri_viec_lam: {item.get('vi_tri_viec_lam', '')}\n"
-            )
-            docs.append(
-                Document(
-                    page_content=content,
-                    metadata={
-                        "id": item.get("id"),
-                        "ten_nganh": item.get("ten_nganh", ""),
-                        "ma_nganh": item.get("ma_nganh", ""),
-                    },
-                )
-            )
+        docs = build_documents(source_files)
+        if not docs:
+            return None
         vectorstore = Chroma.from_documents(
             documents=docs,
             embedding=embeddings,
             persist_directory=persist_directory,
         )
+        os.makedirs(persist_directory, exist_ok=True)
+        with open(manifest_path, "w", encoding="utf-8") as handle:
+            json.dump(current_manifest, handle, ensure_ascii=False, indent=2)
     
     qa_chain = RetrievalQA.from_chain_type(
         llm=llm,
@@ -111,7 +212,7 @@ def setup_rag_system():
 chain = setup_rag_system()
 
 if chain is None:
-    st.error("❌ Không tìm thấy file data.txt. Vui lòng kiểm tra lại!")
+    st.error("❌ Không tìm thấy file dữ liệu hợp lệ. Vui lòng kiểm tra lại!")
     st.stop()
 
 # --- XỬ LÝ LỊCH SỬ CHAT (Để web giống ChatGPT) ---
