@@ -1,0 +1,61 @@
+[
+  {
+    "chuyen_muc": "Thông tin học phí",
+    "tieu_de": "Học phí dự kiến năm học 2026 - 2027 và lịch sử học phí (Dành cho Tân sinh viên)",
+    "muc_hoc_phi_du_kien_2026_2027": {
+      "nhom_nganh_ky_thuat_cong_nghe": "Khoảng 8.000.000 - 9.000.000 VNĐ / học kỳ",
+      "nhom_nganh_ke_toan_kinh_te": "Khoảng 7.000.000 - 8.000.000 VNĐ / học kỳ",
+      "tong_hoc_phi_trung_binh_nam": "Khoảng 16.000.000 - 18.000.000 VNĐ / năm"
+    },
+    "cac_khoan_chi_phi_phat_sinh_khac": [
+      "Bảo hiểm y tế",
+      "Đồng phục",
+      "Giáo trình",
+      "Phí học thể dục",
+      "Phí học giáo dục quốc phòng",
+      "Đóng quỹ lớp",
+      "Lệ phí đăng kí thi tiếng anh đầu vào",
+    ],
+    "chinh_sach_ho_tro_tai_chinh": [
+      "Giảm 25% – 50% học phí cho thí sinh có điểm đầu vào cao.",
+      "Giảm học phí cho nữ sinh theo học ngành kỹ thuật.",
+      "Hỗ trợ sinh viên thuộc diện chính sách hoặc hoàn cảnh khó khăn."
+    ],
+    "lich_su_hoc_phi_tan_sinh_vien_qua_cac_nam": [
+      {
+        "nam_hoc": "2020 - 2021",
+        "khoi_ky_thuat": "~ 5.700.000 - 5.800.000 VNĐ / học kỳ",
+        "nganh_ke_toan": "~ 4.000.000 VNĐ / học kỳ"
+      },
+      {
+        "nam_hoc": "2021 - 2022",
+        "khoi_ky_thuat": "~ 5.700.000 - 5.800.000 VNĐ / học kỳ",
+        "nganh_ke_toan": "~ 4.000.000 VNĐ / học kỳ"
+      },
+      {
+        "nam_hoc": "2022 - 2023",
+        "khoi_ky_thuat": "~ 6.720.000 VNĐ / học kỳ",
+        "nganh_ke_toan": "~ 5.800.000 VNĐ / học kỳ"
+      },
+      {
+        "nam_hoc": "2023 - 2024",
+        "khoi_ky_thuat": "~ 7.200.000 VNĐ / học kỳ",
+        "nganh_ke_toan": "~ 6.200.000 VNĐ / học kỳ"
+      },
+      {
+        "nam_hoc": "2024 - 2025",
+        "khoi_ky_thuat": "~ 7.700.000 VNĐ / học kỳ",
+        "nganh_ke_toan": "~ 6.700.000 VNĐ / học kỳ"
+      },
+      {
+        "nam_hoc": "2025 - 2026",
+        "khoi_ky_thuat": "~ 7.700.000 VNĐ / học kỳ",
+        "nganh_ke_toan": "~ 6.700.000 VNĐ / học kỳ"
+      }
+    ],
+    "nguyen_tac_thu_hoc_phi": "Thu theo niên khóa (từng học kỳ/năm học), không thu theo số tín chỉ đăng ký."
+    "chinh_sach_ho_tro_tai_chinh": "Tất cả các năm đều có chính sách hỗ trợ tương tự như năm 2026, trừ khi có thông báo mới."
+    "cac_khoan_chi_phi_phat_sinh_khac": "Tất cả các năm đều có các khoản chi phí phát sinh khác ngoài kinh phí đào tạo khi nhập học mà tân sinh viên phải đóng."
+  }
+]
+
