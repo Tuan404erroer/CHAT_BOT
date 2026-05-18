@@ -60,8 +60,6 @@ def setup_rag_system():
         for entry in os.listdir("."):
             if entry.lower().endswith(".json") and os.path.isfile(entry):
                 candidates.append(entry)
-        if os.path.isfile("data.txt"):
-            candidates.append("data.txt")
         return sorted(set(candidates))
 
     def parse_multiple_json(text):
@@ -199,21 +197,34 @@ def setup_rag_system():
         with open(manifest_path, "w", encoding="utf-8") as handle:
             json.dump(current_manifest, handle, ensure_ascii=False, indent=2)
     
-    qa_chain = RetrievalQA.from_chain_type(
+    retriever_all = vectorstore.as_retriever(search_kwargs={"k": 3})
+    retriever_diem_chuan = vectorstore.as_retriever(
+        search_kwargs={"k": 3, "filter": {"source_file": "diem-chuan.json"}}
+    )
+    qa_chain_all = RetrievalQA.from_chain_type(
         llm=llm,
         chain_type="stuff",
-        retriever=vectorstore.as_retriever(search_kwargs={"k": 2}),
+        retriever=retriever_all,
         return_source_documents=True,
         chain_type_kwargs={"prompt": PROMPT},
     )
-    return qa_chain
+    qa_chain_diem_chuan = RetrievalQA.from_chain_type(
+        llm=llm,
+        chain_type="stuff",
+        retriever=retriever_diem_chuan,
+        return_source_documents=True,
+        chain_type_kwargs={"prompt": PROMPT},
+    )
+    return qa_chain_all, qa_chain_diem_chuan
 
 # Gọi hàm khởi tạo
-chain = setup_rag_system()
+chains = setup_rag_system()
 
-if chain is None:
+if chains is None:
     st.error("❌ Không tìm thấy file dữ liệu hợp lệ. Vui lòng kiểm tra lại!")
     st.stop()
+
+qa_chain_all, qa_chain_diem_chuan = chains
 
 # --- XỬ LÝ LỊCH SỬ CHAT (Để web giống ChatGPT) ---
 if "messages" not in st.session_state:
@@ -235,7 +246,11 @@ if prompt := st.chat_input("Bạn muốn hỏi gì về kỳ tuyển sinh năm n
     with st.chat_message("assistant"):
         with st.spinner("AI đang tra cứu tài liệu..."):
             # Thay cho việc chạy terminal, ta gọi chain ở đây
-            response = chain.invoke({"query": prompt})
+            prompt_lower = prompt.lower()
+            if "điểm chuẩn" in prompt_lower or "diem chuan" in prompt_lower:
+                response = qa_chain_diem_chuan.invoke({"query": prompt})
+            else:
+                response = qa_chain_all.invoke({"query": prompt})
             answer = response["result"]
             
             st.markdown(answer)
