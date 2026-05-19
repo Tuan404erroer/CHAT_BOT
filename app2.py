@@ -52,7 +52,7 @@ def setup_rag_system():
     # 2. Khởi tạo Embedding & LLM (Phần này tốn thời gian nên cần cache)
     model_name = "paraphrase-multilingual-MiniLM-L12-v2"
     embeddings = HuggingFaceEmbeddings(model_name=model_name)
-    llm = ChatGoogleGenerativeAI(model="models/gemini-flash-latest", temperature=0.3)
+    llm = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite", temperature=0.3)
 
     # 3. Xử lý dữ liệu từ nhiều file JSON (chỉ trong thư mục gốc)
     def collect_source_files():
@@ -110,6 +110,23 @@ def setup_rag_system():
     def build_documents(source_files):
         docs = []
         for path in source_files:
+            filename = os.path.basename(path)
+            # Đặc biệt xử lý diem-chuan.json
+            if filename == "diem-chuan.json":
+                for item in load_json_items(path):
+                    if isinstance(item, dict) and "nganh" in item and "diem_chuan" in item:
+                        # Format rõ ràng từng ngành
+                        diem_chuan_lines = []
+                        for year, values in item["diem_chuan"].items():
+                            diem_chuan_lines.append(f"  {year}: xet_hoc_ba={values.get('xet_hoc_ba')}, thi_thpt_quoc_gia={values.get('thi_thpt_quoc_gia')}, thi_danh_gia_nang_luc={values.get('thi_danh_gia_nang_luc')}")
+                        content = f"nganh: {item['nganh']}\ndiem_chuan:\n" + "\n".join(diem_chuan_lines)
+                        metadata = {
+                            "nganh": item["nganh"],
+                            "source_file": filename
+                        }
+                        docs.append(Document(page_content=content, metadata=metadata))
+                continue
+            # Xử lý các file khác như cũ, nhưng source_file luôn là tên file
             for item in load_json_items(path):
                 if isinstance(item, dict) and any(
                     key in item
@@ -134,14 +151,14 @@ def setup_rag_system():
                         "id": item.get("id"),
                         "ten_nganh": item.get("ten_nganh", ""),
                         "ma_nganh": item.get("ma_nganh", ""),
+                        "source_file": filename
                     }
                 else:
                     if isinstance(item, str):
                         content = item
                     else:
                         content = json.dumps(item, ensure_ascii=False, indent=2)
-                    metadata = {}
-                metadata["source_file"] = path
+                    metadata = {"source_file": filename}
                 docs.append(Document(page_content=content, metadata=metadata))
         return docs
 
@@ -199,7 +216,7 @@ def setup_rag_system():
     
     retriever_all = vectorstore.as_retriever(search_kwargs={"k": 2})
     retriever_diem_chuan = vectorstore.as_retriever(
-        search_kwargs={"k": 3, "filter": {"source_file": "diem-chuan.json"}}
+        search_kwargs={"k": 10, "filter": {"source_file": "diem-chuan.json"}}
     )
     qa_chain_all = RetrievalQA.from_chain_type(
         llm=llm,
@@ -252,13 +269,19 @@ if prompt := st.chat_input("Bạn muốn hỏi gì về kỳ tuyển sinh năm n
             else:
                 response = qa_chain_all.invoke({"query": prompt})
             answer = response["result"]
-            
+
             st.markdown(answer)
-            
+
             # Hiển thị nguồn (optional - giống như code terminal của bạn)
             with st.expander("Nguồn tài liệu tham khảo"):
                 for doc in response["source_documents"]:
                     st.write(f"- {doc.page_content[:200]}...")
+
+            # DEBUG: Hiển thị metadata và toàn bộ nội dung tài liệu trả về
+            with st.expander("DEBUG"):
+                for doc in response["source_documents"]:
+                    st.write(doc.metadata)
+                    st.write(doc.page_content)
 
     # 3. Lưu lại câu trả lời vào lịch sử
     st.session_state.messages.append({"role": "assistant", "content": answer})
