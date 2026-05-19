@@ -44,20 +44,15 @@ PROMPT = PromptTemplate(
 @st.cache_resource # Quan trọng: Giúp nạp dữ liệu 1 lần duy nhất, cực nhanh
 def setup_rag_system():
     # 1. Cấu hình Key (Nhớ thay Key mới của bạn vào đây)
-    api_key = None
     if "GOOGLE_API_KEY" in st.secrets:
-        api_key = st.secrets["GOOGLE_API_KEY"]
-    if not api_key:
-        api_key = os.getenv("GOOGLE_API_KEY")
-    if not api_key:
-        st.error("Chưa cấu hình GOOGLE_API_KEY trong Secrets hoặc biến môi trường!")
-        st.stop()
-    os.environ["GOOGLE_API_KEY"] = api_key
+        os.environ["GOOGLE_API_KEY"] = st.secrets["GOOGLE_API_KEY"]
+    else:
+        st.error("Chưa cấu hình API Key trong Secrets!")
 
     # 2. Khởi tạo Embedding & LLM (Phần này tốn thời gian nên cần cache)
     model_name = "paraphrase-multilingual-MiniLM-L12-v2"
     embeddings = HuggingFaceEmbeddings(model_name=model_name)
-    llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.3)
+    llm = ChatGoogleGenerativeAI(model="models/gemini-flash-latest", temperature=0.3)
 
     # 3. Xử lý dữ liệu từ nhiều file JSON (chỉ trong thư mục gốc)
     def collect_source_files():
@@ -202,7 +197,7 @@ def setup_rag_system():
         with open(manifest_path, "w", encoding="utf-8") as handle:
             json.dump(current_manifest, handle, ensure_ascii=False, indent=2)
     
-    retriever_all = vectorstore.as_retriever(search_kwargs={"k": 3})
+    retriever_all = vectorstore.as_retriever(search_kwargs={"k": 2})
     retriever_diem_chuan = vectorstore.as_retriever(
         search_kwargs={"k": 3, "filter": {"source_file": "diem-chuan.json"}}
     )
@@ -252,18 +247,11 @@ if prompt := st.chat_input("Bạn muốn hỏi gì về kỳ tuyển sinh năm n
         with st.spinner("AI đang tra cứu tài liệu..."):
             # Thay cho việc chạy terminal, ta gọi chain ở đây
             prompt_lower = prompt.lower()
-            try:
-                if "điểm chuẩn" in prompt_lower or "diem chuan" in prompt_lower:
-                    response = qa_chain_diem_chuan.invoke({"query": prompt})
-                else:
-                    response = qa_chain_all.invoke({"query": prompt})
-                answer = response["result"]
-            except Exception as exc:
-                st.error(
-                    "Loi khi goi LLM. Hay kiem tra GOOGLE_API_KEY va model name."
-                )
-                st.write(f"Chi tiet: {type(exc).__name__}")
-                st.stop()
+            if "điểm chuẩn" in prompt_lower or "diem chuan" in prompt_lower:
+                response = qa_chain_diem_chuan.invoke({"query": prompt})
+            else:
+                response = qa_chain_all.invoke({"query": prompt})
+            answer = response["result"]
             
             st.markdown(answer)
             
