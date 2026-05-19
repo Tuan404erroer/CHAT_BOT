@@ -44,10 +44,15 @@ PROMPT = PromptTemplate(
 @st.cache_resource # Quan trọng: Giúp nạp dữ liệu 1 lần duy nhất, cực nhanh
 def setup_rag_system():
     # 1. Cấu hình Key (Nhớ thay Key mới của bạn vào đây)
+    api_key = None
     if "GOOGLE_API_KEY" in st.secrets:
-        os.environ["GOOGLE_API_KEY"] = st.secrets["GOOGLE_API_KEY"]
-    else:
-        st.error("Chưa cấu hình API Key trong Secrets!")
+        api_key = st.secrets["GOOGLE_API_KEY"]
+    if not api_key:
+        api_key = os.getenv("GOOGLE_API_KEY")
+    if not api_key:
+        st.error("Chưa cấu hình GOOGLE_API_KEY trong Secrets hoặc biến môi trường!")
+        st.stop()
+    os.environ["GOOGLE_API_KEY"] = api_key
 
     # 2. Khởi tạo Embedding & LLM (Phần này tốn thời gian nên cần cache)
     model_name = "paraphrase-multilingual-MiniLM-L12-v2"
@@ -247,11 +252,18 @@ if prompt := st.chat_input("Bạn muốn hỏi gì về kỳ tuyển sinh năm n
         with st.spinner("AI đang tra cứu tài liệu..."):
             # Thay cho việc chạy terminal, ta gọi chain ở đây
             prompt_lower = prompt.lower()
-            if "điểm chuẩn" in prompt_lower or "diem chuan" in prompt_lower:
-                response = qa_chain_diem_chuan.invoke({"query": prompt})
-            else:
-                response = qa_chain_all.invoke({"query": prompt})
-            answer = response["result"]
+            try:
+                if "điểm chuẩn" in prompt_lower or "diem chuan" in prompt_lower:
+                    response = qa_chain_diem_chuan.invoke({"query": prompt})
+                else:
+                    response = qa_chain_all.invoke({"query": prompt})
+                answer = response["result"]
+            except Exception as exc:
+                st.error(
+                    "Loi khi goi LLM. Hay kiem tra GOOGLE_API_KEY va model name."
+                )
+                st.write(f"Chi tiet: {type(exc).__name__}")
+                st.stop()
             
             st.markdown(answer)
             
