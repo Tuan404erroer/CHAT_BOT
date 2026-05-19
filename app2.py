@@ -57,7 +57,7 @@ def setup_rag_system():
     # 2. Khởi tạo Embedding & LLM (Phần này tốn thời gian nên cần cache)
     model_name = "paraphrase-multilingual-MiniLM-L12-v2"
     embeddings = HuggingFaceEmbeddings(model_name=model_name)
-    llm = ChatGoogleGenerativeAI(model="models/gemini-flash-latest", temperature=0.3)
+    llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.3)
 
     # 3. Xử lý dữ liệu từ nhiều file JSON (chỉ trong thư mục gốc)
     def collect_source_files():
