@@ -40,21 +40,18 @@ PROMPT = PromptTemplate(
     input_variables=["context", "question"],
 )
 
-# --- HÀM KHỞI TẠO HỆ THỐNG (Gom từ code cũ của bạn) ---
-@st.cache_resource # Quan trọng: Giúp nạp dữ liệu 1 lần duy nhất, cực nhanh
+# --- HÀM KHỞI TẠO HỆ THỐNG ---
+@st.cache_resource 
 def setup_rag_system():
-    # 1. Cấu hình Key (Nhớ thay Key mới của bạn vào đây)
     if "GOOGLE_API_KEY" in st.secrets:
         os.environ["GOOGLE_API_KEY"] = st.secrets["GOOGLE_API_KEY"]
     else:
         st.error("Chưa cấu hình API Key trong Secrets!")
 
-    # 2. Khởi tạo Embedding & LLM (Phần này tốn thời gian nên cần cache)
     model_name = "paraphrase-multilingual-MiniLM-L12-v2"
     embeddings = HuggingFaceEmbeddings(model_name=model_name)
     llm = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite", temperature=0.3)
 
-    # 3. Xử lý dữ liệu từ nhiều file JSON (chỉ trong thư mục gốc)
     def collect_source_files():
         candidates = []
         for entry in os.listdir("."):
@@ -111,11 +108,9 @@ def setup_rag_system():
         docs = []
         for path in source_files:
             filename = os.path.basename(path)
-            # Đặc biệt xử lý diem-chuan.json
             if filename == "diem-chuan.json":
                 for item in load_json_items(path):
                     if isinstance(item, dict) and "nganh" in item and "diem_chuan" in item:
-                        # Format rõ ràng từng ngành
                         diem_chuan_lines = []
                         for year, values in item["diem_chuan"].items():
                             diem_chuan_lines.append(f"  {year}: xet_hoc_ba={values.get('xet_hoc_ba')}, thi_thpt_quoc_gia={values.get('thi_thpt_quoc_gia')}, thi_danh_gia_nang_luc={values.get('thi_danh_gia_nang_luc')}")
@@ -126,7 +121,6 @@ def setup_rag_system():
                         }
                         docs.append(Document(page_content=content, metadata=metadata))
                 continue
-            # Xử lý các file khác như cũ, nhưng source_file luôn là tên file
             for item in load_json_items(path):
                 if isinstance(item, dict) and any(
                     key in item
@@ -214,7 +208,8 @@ def setup_rag_system():
         with open(manifest_path, "w", encoding="utf-8") as handle:
             json.dump(current_manifest, handle, ensure_ascii=False, indent=2)
     
-    retriever_all = vectorstore.as_retriever(search_kwargs={"k": 2})
+    # ĐÃ SỬA LẦN 2: Tăng k lên 8 để mở rộng vùng tìm kiếm, tránh bị lọt thông tin
+    retriever_all = vectorstore.as_retriever(search_kwargs={"k": 10})
     retriever_diem_chuan = vectorstore.as_retriever(
         search_kwargs={"k": 10, "filter": {"source_file": "diem-chuan.json"}}
     )
@@ -232,7 +227,7 @@ def setup_rag_system():
         return_source_documents=True,
         chain_type_kwargs={"prompt": PROMPT},
     )
-    return qa_chain_all, qa_chain_diem_chuan
+    return qa_chain_all, qa_chain_diem_chuan, llm
 
 # Gọi hàm khởi tạo
 chains = setup_rag_system()
@@ -241,47 +236,61 @@ if chains is None:
     st.error("❌ Không tìm thấy file dữ liệu hợp lệ. Vui lòng kiểm tra lại!")
     st.stop()
 
-qa_chain_all, qa_chain_diem_chuan = chains
+qa_chain_all, qa_chain_diem_chuan, llm = chains
 
-# --- XỬ LÝ LỊCH SỬ CHAT (Để web giống ChatGPT) ---
+# --- XỬ LÝ LỊCH SỬ CHAT ---
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Hiển thị lại các câu chat trước đó
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
 # --- PHẦN NHẬP CÂU HỎI ---
 if prompt := st.chat_input("Bạn muốn hỏi gì về kỳ tuyển sinh năm nay?"):
-    # 1. Hiển thị câu hỏi của bạn
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # 2. Xử lý câu trả lời từ hệ thống RAG
     with st.chat_message("assistant"):
         with st.spinner("AI đang tra cứu tài liệu..."):
-            # Thay cho việc chạy terminal, ta gọi chain ở đây
             prompt_lower = prompt.lower()
+            
             if "điểm chuẩn" in prompt_lower or "diem chuan" in prompt_lower:
                 response = qa_chain_diem_chuan.invoke({"query": prompt})
             else:
-                response = qa_chain_all.invoke({"query": prompt})
+                # ĐÃ SỬA LẦN 2: Prompt xịn hơn, cấm đưa tên trường vào để tránh nhiễu
+                rewrite_prompt = (
+                    f"Bạn là chuyên gia tối ưu từ khóa tìm kiếm cho hệ thống RAG.\n"
+                    f"Nhiệm vụ: Chuyển câu hỏi của người dùng thành 1 câu truy vấn ngắn gọn sát với dữ liệu giáo dục.\n"
+                    f"QUY TẮC QUAN TRỌNG:\n"
+                    f"1. TUYỆT ĐỐI KHÔNG đưa tên trường (VD: Cao Thắng, trường mình, ở đây) vào câu truy vấn vì toàn bộ DB đã mặc định là của trường này. Thêm tên trường sẽ làm nhiễu công cụ tìm kiếm.\n"
+                    f"2. Chuyển các từ đồng nghĩa (VD: 'tốt nghiệp', 'hoàn thành khóa học', 'bao lâu') thành từ khóa chuẩn (VD: 'thời gian đào tạo', 'số năm học').\n"
+                    f"Câu hỏi gốc: {prompt}\n"
+                    f"Câu truy vấn tối ưu (Chỉ trả về câu mới, không giải thích):"
+                )
+                
+                try:
+                    optimized_query = llm.invoke(rewrite_prompt).content.strip()
+                except Exception:
+                    optimized_query = prompt
+                
+                response = qa_chain_all.invoke({"query": optimized_query})
+            
             answer = response["result"]
-
             st.markdown(answer)
 
-            # Hiển thị nguồn (optional - giống như code terminal của bạn)
+            # Hiển thị nguồn
             with st.expander("Nguồn tài liệu tham khảo"):
                 for doc in response["source_documents"]:
                     st.write(f"- {doc.page_content[:200]}...")
 
-            # DEBUG: Hiển thị metadata và toàn bộ nội dung tài liệu trả về
+            # DEBUG
             with st.expander("DEBUG"):
+                if "optimized_query" in locals():
+                    st.info(f"🔑 **Query sau khi tối ưu:** {optimized_query}")
                 for doc in response["source_documents"]:
                     st.write(doc.metadata)
                     st.write(doc.page_content)
 
-    # 3. Lưu lại câu trả lời vào lịch sử
     st.session_state.messages.append({"role": "assistant", "content": answer})
