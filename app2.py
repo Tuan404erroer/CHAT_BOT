@@ -208,7 +208,6 @@ def setup_rag_system():
         with open(manifest_path, "w", encoding="utf-8") as handle:
             json.dump(current_manifest, handle, ensure_ascii=False, indent=2)
     
-    # ĐÃ SỬA LẦN 2: Tăng k lên 8 để mở rộng vùng tìm kiếm, tránh bị lọt thông tin
     retriever_all = vectorstore.as_retriever(search_kwargs={"k": 10})
     retriever_diem_chuan = vectorstore.as_retriever(
         search_kwargs={"k": 10, "filter": {"source_file": "diem-chuan.json"}}
@@ -259,15 +258,18 @@ if prompt := st.chat_input("Bạn muốn hỏi gì về kỳ tuyển sinh năm n
             if "điểm chuẩn" in prompt_lower or "diem chuan" in prompt_lower:
                 response = qa_chain_diem_chuan.invoke({"query": prompt})
             else:
-                # ĐÃ SỬA LẦN 2: Prompt xịn hơn, cấm đưa tên trường vào để tránh nhiễu
+                # BỘ TRÍCH XUẤT Ý ĐỊNH MỚI (INTENT EXTRACTOR)
+                # Dạy AI quy luật tư duy, thay vì học vẹt từng chữ
                 rewrite_prompt = (
-                    f"Bạn là chuyên gia tối ưu từ khóa tìm kiếm cho hệ thống RAG.\n"
-                    f"Nhiệm vụ: Chuyển câu hỏi của người dùng thành 1 câu truy vấn ngắn gọn sát với dữ liệu giáo dục.\n"
-                    f"QUY TẮC QUAN TRỌNG:\n"
-                    f"1. TUYỆT ĐỐI KHÔNG đưa tên trường (VD: Cao Thắng, trường mình, ở đây) vào câu truy vấn vì toàn bộ DB đã mặc định là của trường này. Thêm tên trường sẽ làm nhiễu công cụ tìm kiếm.\n"
-                    f"2. Chuyển các từ đồng nghĩa (VD: 'tốt nghiệp', 'hoàn thành khóa học', 'bao lâu') thành từ khóa chuẩn (VD: 'thời gian đào tạo', 'số năm học').\n"
+                    "Bạn là chuyên gia phân tích ngôn ngữ tự nhiên cho hệ thống hỏi đáp trường đại học/cao đẳng.\n"
+                    "Nhiệm vụ: Tìm ra Ý ĐỊNH THỰC SỰ của câu hỏi và viết lại thành 1 câu truy vấn chứa các 'thuật ngữ giáo dục chuẩn' để tìm kiếm trong cơ sở dữ liệu.\n"
+                    "QUY TẮC:\n"
+                    "1. BỎ QUA TẤT CẢ tên riêng (Cao Thắng, tên trường) và từ giao tiếp (dạ, thưa, cho em hỏi, ạ...).\n"
+                    "2. Khái quát hóa từ vựng (Ví dụ tư duy: Hỏi về tiếng Anh/tin học để ra trường -> 'chuẩn đầu ra'; Hỏi học bao lâu -> 'thời gian đào tạo'; Hỏi ra làm gì -> 'vị trí việc làm'; Hỏi học những gì -> 'chương trình đào tạo').\n"
+                    "3. Giữ lại tên ngành học nếu có trong câu hỏi.\n"
+                    "4. Chỉ trả về duy nhất câu truy vấn được viết lại, không giải thích.\n\n"
                     f"Câu hỏi gốc: {prompt}\n"
-                    f"Câu truy vấn tối ưu (Chỉ trả về câu mới, không giải thích):"
+                    "Câu truy vấn chuẩn:"
                 )
                 
                 try:
@@ -288,7 +290,7 @@ if prompt := st.chat_input("Bạn muốn hỏi gì về kỳ tuyển sinh năm n
             # DEBUG
             with st.expander("DEBUG"):
                 if "optimized_query" in locals():
-                    st.info(f"🔑 **Query sau khi tối ưu:** {optimized_query}")
+                    st.info(f"🔑 **Query sau khi trích xuất ý định:** {optimized_query}")
                 for doc in response["source_documents"]:
                     st.write(doc.metadata)
                     st.write(doc.page_content)
