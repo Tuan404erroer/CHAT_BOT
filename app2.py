@@ -9,39 +9,28 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_classic.chains import RetrievalQA
 from langchain_core.prompts import PromptTemplate
 from langchain_core.documents import Document
-try:
-    from langchain.globals import set_llm_cache
-except Exception:
-    from langchain_core.globals import set_llm_cache
-try:
-    from langchain.cache import SQLiteCache
-except Exception:
-    from langchain_community.cache import SQLiteCache
 
 # --- CẤU HÌNH GIAO DIỆN ---
 st.set_page_config(page_title="Tư Vấn Tuyển Sinh AI", page_icon="🎓")
 st.title("🤖 AI Tư Vấn Tuyển Sinh")
-st.info("Hệ thống RAG đã được tích hợp giao diện Web.")
+st.info("Hệ thống RAG tự động duyệt/quét lại toàn bộ file dữ liệu trực tiếp trên RAM mỗi khi đặt câu hỏi.")
 
-set_llm_cache(SQLiteCache(database_path=".langchain.db"))
-
+# --- PROMPT TỔNG: ĐÃ THÊM LƯU Ý TƯ DUY BẮC CẦU ---
 PROMPT = PromptTemplate(
     template=(
-        "Ban la chuyen gia tu van tuyen sinh. "
-        "Su dung thong tin duoi day de tra loi. "
-        "Neu cau hoi nam trong thong tin duoc cung cap, hay tra loi chi tiet. "
-        "Neu cau hoi la cau hoi chung (tu van nghe nghiep, gioi tinh, dinh huong) "
-        "KHONG co trong thong tin, ban DUOC PHEP tu tra loi nhung bat buoc RẤT NGAN "
-        "(duoi 50 tu). Neu khong biet, hay noi khong biet, dung tuong tuong.\n\n"
-        "Thong tin:\n{context}\n\n"
-        "Cau hoi: {question}\n"
-        "Cau tra loi:"
+        "Bạn là chuyên gia tư vấn tuyển sinh thông minh.\n"
+        "Sử dụng các thông tin được cung cấp dưới đây để trả lời câu hỏi.\n\n"
+        "LƯU Ý TƯ DUY:\n"
+        "1. Nếu thông tin của một ngành cụ thể không ghi rõ chuẩn ngoại ngữ/tin học, nhưng trong tài liệu có quy định chung về ngoại ngữ/tin học tốt nghiệp của toàn trường, hãy áp dụng quy định chung đó để trả lời cho ngành được hỏi.\n"
+        "2. Trả lời chi tiết, mạch lạc nếu có thông tin. Nếu là câu hỏi chung không có trong tài liệu, được phép tự trả lời ngắn dưới 50 từ. Nếu không biết thì nói không biết, không tự bịa thông tin.\n\n"
+        "Thông tin tài liệu:\n{context}\n\n"
+        "Câu hỏi của thí sinh: {question}\n"
+        "Câu trả lời:"
     ),
     input_variables=["context", "question"],
 )
 
-# --- HÀM KHỞI TẠO HỆ THỐNG ---
-@st.cache_resource 
+# --- HÀM KHỞI TẠO HỆ THỐNG (CHẠY THUẦN TRÊN RAM) ---
 def setup_rag_system():
     if "GOOGLE_API_KEY" in st.secrets:
         os.environ["GOOGLE_API_KEY"] = st.secrets["GOOGLE_API_KEY"]
@@ -156,57 +145,19 @@ def setup_rag_system():
                 docs.append(Document(page_content=content, metadata=metadata))
         return docs
 
-    def build_manifest(source_files):
-        manifest = []
-        for path in source_files:
-            try:
-                stat = os.stat(path)
-            except OSError:
-                continue
-            manifest.append(
-                {
-                    "path": path,
-                    "mtime": stat.st_mtime,
-                    "size": stat.st_size,
-                }
-            )
-        return sorted(manifest, key=lambda item: item["path"])
-
     source_files = collect_source_files()
     if not source_files:
         return None
 
-    persist_directory = "./chroma_db"
-    manifest_path = os.path.join(persist_directory, "_sources.json")
-    current_manifest = build_manifest(source_files)
-    use_existing = False
-
-    if os.path.exists(persist_directory) and os.path.exists(manifest_path):
-        try:
-            with open(manifest_path, "r", encoding="utf-8") as handle:
-                saved_manifest = json.load(handle)
-            if saved_manifest == current_manifest:
-                use_existing = True
-        except Exception:
-            use_existing = False
-
-    if use_existing:
-        vectorstore = Chroma(
-            persist_directory=persist_directory,
-            embedding_function=embeddings,
-        )
-    else:
-        docs = build_documents(source_files)
-        if not docs:
-            return None
-        vectorstore = Chroma.from_documents(
-            documents=docs,
-            embedding=embeddings,
-            persist_directory=persist_directory,
-        )
-        os.makedirs(persist_directory, exist_ok=True)
-        with open(manifest_path, "w", encoding="utf-8") as handle:
-            json.dump(current_manifest, handle, ensure_ascii=False, indent=2)
+    docs = build_documents(source_files)
+    if not docs:
+        return None
+    
+    # KHÔNG TRUYỀN persist_directory -> Chroma tự biết chỉ hoạt động trên RAM
+    vectorstore = Chroma.from_documents(
+        documents=docs,
+        embedding=embeddings
+    )
     
     retriever_all = vectorstore.as_retriever(search_kwargs={"k": 10})
     retriever_diem_chuan = vectorstore.as_retriever(
@@ -228,14 +179,6 @@ def setup_rag_system():
     )
     return qa_chain_all, qa_chain_diem_chuan, llm
 
-# Gọi hàm khởi tạo
-chains = setup_rag_system()
-
-if chains is None:
-    st.error("❌ Không tìm thấy file dữ liệu hợp lệ. Vui lòng kiểm tra lại!")
-    st.stop()
-
-qa_chain_all, qa_chain_diem_chuan, llm = chains
 
 # --- XỬ LÝ LỊCH SỬ CHAT ---
 if "messages" not in st.session_state:
@@ -252,24 +195,37 @@ if prompt := st.chat_input("Bạn muốn hỏi gì về kỳ tuyển sinh năm n
         st.markdown(prompt)
 
     with st.chat_message("assistant"):
-        with st.spinner("AI đang tra cứu tài liệu..."):
+        with st.spinner("Đang quét trực tiếp tệp tin và dựng lại không gian ngữ nghĩa trên RAM..."):
+            
+            # GỌI LẠI HÀM KHỞI TẠO TẠI ĐÂY: Mỗi khi hỏi, hệ thống sẽ quét sạch và nạp lại file JSON mới nhất
+            chains = setup_rag_system()
+            
+            if chains is None:
+                st.error("❌ Không tìm thấy file dữ liệu hợp lệ. Vui lòng kiểm tra lại!")
+                st.stop()
+
+            qa_chain_all, qa_chain_diem_chuan, llm = chains
             prompt_lower = prompt.lower()
             
             if "điểm chuẩn" in prompt_lower or "diem chuan" in prompt_lower:
                 response = qa_chain_diem_chuan.invoke({"query": prompt})
             else:
-                # BỘ TRÍCH XUẤT Ý ĐỊNH MỚI (INTENT EXTRACTOR)
-                # Dạy AI quy luật tư duy, thay vì học vẹt từng chữ
+                # BỘ TRÍCH XUẤT Ý ĐỊNH SIÊU CẤP (ÉP BUỘC BẰNG VÍ DỤ - FEW-SHOT)
                 rewrite_prompt = (
-                    "Bạn là chuyên gia phân tích ngôn ngữ tự nhiên cho hệ thống hỏi đáp trường đại học/cao đẳng.\n"
-                    "Nhiệm vụ: Tìm ra Ý ĐỊNH THỰC SỰ của câu hỏi và viết lại thành 1 câu truy vấn chứa các 'thuật ngữ giáo dục chuẩn' để tìm kiếm trong cơ sở dữ liệu.\n"
-                    "QUY TẮC:\n"
-                    "1. BỎ QUA TẤT CẢ tên riêng (Cao Thắng, tên trường) và từ giao tiếp (dạ, thưa, cho em hỏi, ạ...).\n"
-                    "2. Khái quát hóa từ vựng (Ví dụ tư duy: Hỏi về tiếng Anh/tin học để ra trường -> 'chuẩn đầu ra'; Hỏi học bao lâu -> 'thời gian đào tạo'; Hỏi ra làm gì -> 'vị trí việc làm'; Hỏi học những gì -> 'chương trình đào tạo').\n"
-                    "3. Giữ lại tên ngành học nếu có trong câu hỏi.\n"
-                    "4. Chỉ trả về duy nhất câu truy vấn được viết lại, không giải thích.\n\n"
-                    f"Câu hỏi gốc: {prompt}\n"
-                    "Câu truy vấn chuẩn:"
+                    "Bạn là một cỗ máy trích xuất từ khóa (Search Engine Optimizer) cho database nhà trường.\n"
+                    "Nhiệm vụ: Chuyển câu hỏi thành 1 CỤM TỪ KHÓA NGẮN GỌN (tối đa 5 từ) mang tính học thuật.\n"
+                    "QUY TẮC TỐI THƯỢNG:\n"
+                    "1. TUYỆT ĐỐI XÓA BỎ: 'Cao Thắng', 'trường', 'sinh viên', 'em', 'có', 'không', 'ạ', 'bắt buộc'.\n"
+                    "2. CHỈ TRẢ VỀ TỪ KHÓA, không trả lời thành câu.\n\n"
+                    "VÍ DỤ BẮT BUỘC PHẢI HỌC THEO:\n"
+                    "- Input: Cao Thắng có yêu cầu đầu ra nào về tiếng anh bắt buộc cho sinh viên\n"
+                    "- Output: chuẩn đầu ra tiếng anh\n"
+                    "- Input: Học cơ khí ở trường mình bao lâu thì ra trường\n"
+                    "- Output: thời gian đào tạo cơ khí\n"
+                    "- Input: Ngành ô tô ra làm nghề gì shop\n"
+                    "- Output: vị trí việc làm ô tô\n\n"
+                    f"- Input: {prompt}\n"
+                    "- Output:"
                 )
                 
                 try:
