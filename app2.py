@@ -13,7 +13,7 @@ from langchain_core.documents import Document
 # --- CẤU HÌNH GIAO DIỆN ---
 st.set_page_config(page_title="Tư Vấn Tuyển Sinh AI", page_icon="🎓")
 st.title("🤖 AI Tư Vấn Tuyển Sinh")
-st.info("Hệ thống RAG tự động duyệt/quét lại toàn bộ file dữ liệu trực tiếp trên RAM mỗi khi đặt câu hỏi.")
+st.info("Hệ thống RAG đã được tối ưu: Chỉ nạp dữ liệu vào RAM 1 lần duy nhất khi khởi động ứng dụng để tăng tốc độ chat.")
 
 # --- PROMPT TỔNG: ĐÃ THÊM LƯU Ý TƯ DUY BẮC CẦU ---
 PROMPT = PromptTemplate(
@@ -30,7 +30,8 @@ PROMPT = PromptTemplate(
     input_variables=["context", "question"],
 )
 
-# --- HÀM KHỞI TẠO HỆ THỐNG (CHẠY THUẦN TRÊN RAM) ---
+# --- HÀM KHỞI TẠO HỆ THỐNG (CACHE LẠI ĐỂ KHÔNG CHẠY LẠI MỖI LẦN CHAT) ---
+@st.cache_resource
 def setup_rag_system():
     if "GOOGLE_API_KEY" in st.secrets:
         os.environ["GOOGLE_API_KEY"] = st.secrets["GOOGLE_API_KEY"]
@@ -78,7 +79,7 @@ def setup_rag_system():
                 with open(path, "r", encoding="utf-8") as handle:
                     raw_text = handle.read()
             except Exception as exc:
-                st.warning(f"Khong doc duoc file {path}: {exc}")
+                st.warning(f"Không đọc được file {path}: {exc}")
                 return []
             parsed = parse_multiple_json(raw_text)
             if parsed:
@@ -87,7 +88,7 @@ def setup_rag_system():
                 return [raw_text]
             return []
         except Exception as exc:
-            st.warning(f"Khong doc duoc file {path}: {exc}")
+            st.warning(f"Không đọc được file {path}: {exc}")
             return []
         if isinstance(raw_data, list):
             return raw_data
@@ -179,6 +180,13 @@ def setup_rag_system():
     )
     return qa_chain_all, qa_chain_diem_chuan, llm
 
+# --- KHỞI TẠO HỆ THỐNG TRƯỚC KHI CHAT VÀ CHỈ CHẠY 1 LẦN DỰA VÀO CACHE ---
+with st.spinner("Đang khởi tạo không gian ngữ nghĩa dữ liệu trên RAM..."):
+    chains = setup_rag_system()
+    if chains is None:
+        st.error("❌ Không tìm thấy file dữ liệu hợp lệ. Vui lòng kiểm tra lại!")
+        st.stop()
+    qa_chain_all, qa_chain_diem_chuan, llm = chains
 
 # --- XỬ LÝ LỊCH SỬ CHAT ---
 if "messages" not in st.session_state:
@@ -195,35 +203,24 @@ if prompt := st.chat_input("Bạn muốn hỏi gì về kỳ tuyển sinh năm n
         st.markdown(prompt)
 
     with st.chat_message("assistant"):
-        with st.spinner("Đang quét trực tiếp tệp tin và dựng lại không gian ngữ nghĩa trên RAM..."):
-            
-            # GỌI LẠI HÀM KHỞI TẠO TẠI ĐÂY: Mỗi khi hỏi, hệ thống sẽ quét sạch và nạp lại file JSON mới nhất
-            chains = setup_rag_system()
-            
-            if chains is None:
-                st.error("❌ Không tìm thấy file dữ liệu hợp lệ. Vui lòng kiểm tra lại!")
-                st.stop()
-
-            qa_chain_all, qa_chain_diem_chuan, llm = chains
+        with st.spinner("Đang tra cứu dữ liệu..."):
             prompt_lower = prompt.lower()
             
             if "điểm chuẩn" in prompt_lower or "diem chuan" in prompt_lower:
                 response = qa_chain_diem_chuan.invoke({"query": prompt})
             else:
-                # BỘ TRÍCH XUẤT Ý ĐỊNH SIÊU CẤP (ÉP BUỘC BẰNG VÍ DỤ - FEW-SHOT)
+                # BỘ CHUẨN HÓA CÂU HỎI (SEMANTIC REWRITING)
                 rewrite_prompt = (
-                    "Bạn là một cỗ máy trích xuất từ khóa (Search Engine Optimizer) cho database nhà trường.\n"
-                    "Nhiệm vụ: Chuyển câu hỏi thành 1 CỤM TỪ KHÓA NGẮN GỌN (tối đa 5 từ) mang tính học thuật.\n"
-                    "QUY TẮC TỐI THƯỢNG:\n"
-                    "1. TUYỆT ĐỐI XÓA BỎ: 'Cao Thắng', 'trường', 'sinh viên', 'em', 'có', 'không', 'ạ', 'bắt buộc'.\n"
-                    "2. CHỈ TRẢ VỀ TỪ KHÓA, không trả lời thành câu.\n\n"
-                    "VÍ DỤ BẮT BUỘC PHẢI HỌC THEO:\n"
+                    "Bạn là trợ lý ảo tuyển sinh. Người dùng vừa đặt một câu hỏi lóng, rút gọn hoặc lắt léo.\n"
+                    "Nhiệm vụ: Viết lại câu hỏi này thành một CÂU HỎI HOÀN CHỈNH, RÕ RÀNG, ĐẦY ĐỦ NGỮ CẢNH để tra cứu tài liệu tuyển sinh.\n"
+                    "QUY TẮC: KHÔNG trả lời câu hỏi, CHỈ trả về câu hỏi đã được viết lại. Nếu câu hỏi đã rõ ràng, hãy giữ nguyên.\n\n"
+                    "VÍ DỤ:\n"
                     "- Input: Cao Thắng có yêu cầu đầu ra nào về tiếng anh bắt buộc cho sinh viên\n"
-                    "- Output: chuẩn đầu ra tiếng anh\n"
+                    "- Output: Yêu cầu chuẩn đầu ra tiếng Anh đối với sinh viên của trường là gì?\n"
                     "- Input: Học cơ khí ở trường mình bao lâu thì ra trường\n"
-                    "- Output: thời gian đào tạo cơ khí\n"
-                    "- Input: Ngành ô tô ra làm nghề gì shop\n"
-                    "- Output: vị trí việc làm ô tô\n\n"
+                    "- Output: Thời gian đào tạo tiêu chuẩn của ngành cơ khí là bao lâu?\n"
+                    "- Input: Học bổng khuyến khích học tập thì sao\n"
+                    "- Output: Trường có chính sách học bổng khuyến khích học tập không và điều kiện như thế nào?\n\n"
                     f"- Input: {prompt}\n"
                     "- Output:"
                 )
@@ -246,7 +243,7 @@ if prompt := st.chat_input("Bạn muốn hỏi gì về kỳ tuyển sinh năm n
             # DEBUG
             with st.expander("DEBUG"):
                 if "optimized_query" in locals():
-                    st.info(f"🔑 **Query sau khi trích xuất ý định:** {optimized_query}")
+                    st.info(f"🔑 **Query sau khi chuẩn hóa:** {optimized_query}")
                 for doc in response["source_documents"]:
                     st.write(doc.metadata)
                     st.write(doc.page_content)
