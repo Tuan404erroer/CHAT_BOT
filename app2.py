@@ -3,19 +3,40 @@ import os
 import json
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
-from langchain_community.document_loaders import TextLoader
-from langchain_text_splitters import CharacterTextSplitter
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_classic.chains import RetrievalQA
 from langchain_core.prompts import PromptTemplate
 from langchain_core.documents import Document
+from langchain_community.retrievers import BM25Retriever
+
+# --- BỘ GỘP HYBRID RETRIEVER TỰ ĐỊNH NGHĨA (SỬA LỖI MODULE RETRIEVERS) ---
+from typing import Any, List
+from langchain_core.retrievers import BaseRetriever
+
+class CustomHybridRetriever(BaseRetriever):
+    vector_retriever: Any
+    bm25_retriever: Any
+    
+    def _get_relevant_documents(self, query: str, *, run_manager=None) -> List[Document]:
+        # Gọi song song cả bộ tìm kiếm Vector và Từ khóa chính xác
+        docs_vector = self.vector_retriever.invoke(query)
+        docs_bm25 = self.bm25_retriever.invoke(query)
+        
+        # Gộp chung kết quả và loại bỏ các tài liệu trùng nội dung
+        seen = set()
+        combined = []
+        for doc in docs_bm25 + docs_vector:
+            if doc.page_content not in seen:
+                combined.append(doc)
+                seen.add(doc.page_content)
+        return combined
 
 # --- CẤU HÌNH GIAO DIỆN ---
 st.set_page_config(page_title="Tư Vấn Tuyển Sinh AI", page_icon="🎓")
 st.title("🤖 AI Tư Vấn Tuyển Sinh")
-st.info("Hệ thống RAG đã được tối ưu: Chỉ nạp dữ liệu vào RAM 1 lần duy nhất khi khởi động ứng dụng để tăng tốc độ chat.")
+st.info("Hệ thống RAG đã được nâng cấp lên Hybrid Search: Khắc phục lỗi bỏ sót từ khóa.")
 
-# --- PROMPT TỔNG: ĐÃ THÊM LƯU Ý TƯ DUY BẮC CẦU ---
+# --- PROMPT TỔNG ---
 PROMPT = PromptTemplate(
     template=(
         "Bạn là chuyên gia tư vấn tuyển sinh thông minh.\n"
@@ -30,7 +51,7 @@ PROMPT = PromptTemplate(
     input_variables=["context", "question"],
 )
 
-# --- HÀM KHỞI TẠO HỆ THỐNG (CACHE LẠI ĐỂ KHÔNG CHẠY LẠI MỖI LẦN CHAT) ---
+# --- HÀM KHỞI TẠO HỆ THỐNG ---
 @st.cache_resource
 def setup_rag_system():
     if "GOOGLE_API_KEY" in st.secrets:
@@ -96,54 +117,47 @@ def setup_rag_system():
 
     def build_documents(source_files):
         docs = []
+        
+        def flatten_json_to_text(data):
+            if isinstance(data, dict):
+                parts = []
+                for k, v in data.items():
+                    clean_key = str(k).replace("_", " ").capitalize()
+                    parts.append(f"{clean_key}: {flatten_json_to_text(v)}")
+                return "\n".join(parts)
+            elif isinstance(data, list):
+                return "\n".join([f"- {flatten_json_to_text(item)}" for item in data])
+            else:
+                return str(data).strip()
+
         for path in source_files:
             filename = os.path.basename(path)
+            
             if filename == "diem-chuan.json":
                 for item in load_json_items(path):
                     if isinstance(item, dict) and "nganh" in item and "diem_chuan" in item:
                         diem_chuan_lines = []
                         for year, values in item["diem_chuan"].items():
                             diem_chuan_lines.append(f"  {year}: xet_hoc_ba={values.get('xet_hoc_ba')}, thi_thpt_quoc_gia={values.get('thi_thpt_quoc_gia')}, thi_danh_gia_nang_luc={values.get('thi_danh_gia_nang_luc')}")
-                        content = f"nganh: {item['nganh']}\ndiem_chuan:\n" + "\n".join(diem_chuan_lines)
+                        content = f"Nganh: {item['nganh']}\nDiem chuan:\n" + "\n".join(diem_chuan_lines)
                         metadata = {
                             "nganh": item["nganh"],
                             "source_file": filename
                         }
                         docs.append(Document(page_content=content, metadata=metadata))
                 continue
+            
             for item in load_json_items(path):
-                if isinstance(item, dict) and any(
-                    key in item
-                    for key in [
-                        "ten_nganh",
-                        "ma_nganh",
-                        "chuyen_nganh",
-                        "muc_tieu_dao_tao",
-                        "chuan_dau_ra",
-                        "vi_tri_viec_lam",
-                    ]
-                ):
-                    content = (
-                        f"ten_nganh: {item.get('ten_nganh', '')}\n"
-                        f"ma_nganh: {item.get('ma_nganh', '')}\n"
-                        f"chuyen_nganh: {item.get('chuyen_nganh', '')}\n"
-                        f"muc_tieu_dao_tao: {item.get('muc_tieu_dao_tao', '')}\n"
-                        f"chuan_dau_ra: {item.get('chuan_dau_ra', '')}\n"
-                        f"vi_tri_viec_lam: {item.get('vi_tri_viec_lam', '')}\n"
-                    )
-                    metadata = {
-                        "id": item.get("id"),
-                        "ten_nganh": item.get("ten_nganh", ""),
-                        "ma_nganh": item.get("ma_nganh", ""),
-                        "source_file": filename
-                    }
-                else:
-                    if isinstance(item, str):
-                        content = item
-                    else:
-                        content = json.dumps(item, ensure_ascii=False, indent=2)
-                    metadata = {"source_file": filename}
+                content = flatten_json_to_text(item)
+                metadata = {"source_file": filename}
+                if isinstance(item, dict):
+                    if "id" in item: metadata["id"] = item["id"]
+                    if "nganh" in item: metadata["nganh"] = item.get("nganh", "")
+                    if "ma_nganh" in item: metadata["ma_nganh"] = item.get("ma_nganh", "")
+                    if "ten_nganh" in item: metadata["ten_nganh"] = item.get("ten_nganh", "")
+                
                 docs.append(Document(page_content=content, metadata=metadata))
+                
         return docs
 
     source_files = collect_source_files()
@@ -154,41 +168,52 @@ def setup_rag_system():
     if not docs:
         return None
     
-    # KHÔNG TRUYỀN persist_directory -> Chroma tự biết chỉ hoạt động trên RAM
-    vectorstore = Chroma.from_documents(
-        documents=docs,
-        embedding=embeddings
-    )
+    # -------------------------------------------------------------
+    # BỘ MÁY TÌM KIẾM CẢI TIẾN HYBRID SEARCH
+    # -------------------------------------------------------------
     
-    retriever_all = vectorstore.as_retriever(search_kwargs={"k": 10})
+    # 1. VECTOR SEARCH (Tìm theo ngữ nghĩa)
+    vectorstore = Chroma.from_documents(documents=docs, embedding=embeddings)
+    chroma_retriever_all = vectorstore.as_retriever(search_kwargs={"k": 7})
     retriever_diem_chuan = vectorstore.as_retriever(
         search_kwargs={"k": 10, "filter": {"source_file": "diem-chuan.json"}}
     )
+    
+    # 2. BM25 SEARCH (Tìm theo từ khóa chính xác)
+    bm25_retriever_all = BM25Retriever.from_documents(docs)
+    bm25_retriever_all.k = 7
+    
+    # 3. KẾT HỢP SONG KIẾM HỢP BÍCH (Sử dụng Bộ gộp tự định nghĩa)
+    ensemble_retriever_all = CustomHybridRetriever(
+        vector_retriever=chroma_retriever_all,
+        bm25_retriever=bm25_retriever_all
+    )
+
     qa_chain_all = RetrievalQA.from_chain_type(
         llm=llm,
         chain_type="stuff",
-        retriever=retriever_all,
+        retriever=ensemble_retriever_all,  
         return_source_documents=True,
         chain_type_kwargs={"prompt": PROMPT},
     )
+    
     qa_chain_diem_chuan = RetrievalQA.from_chain_type(
         llm=llm,
         chain_type="stuff",
-        retriever=retriever_diem_chuan,
+        retriever=retriever_diem_chuan, 
         return_source_documents=True,
         chain_type_kwargs={"prompt": PROMPT},
     )
     return qa_chain_all, qa_chain_diem_chuan, llm
 
-# --- KHỞI TẠO HỆ THỐNG TRƯỚC KHI CHAT VÀ CHỈ CHẠY 1 LẦN DỰA VÀO CACHE ---
-with st.spinner("Đang khởi tạo không gian ngữ nghĩa dữ liệu trên RAM..."):
+# --- KHỞI TẠO VÀ CHẠY ỨNG DỤNG ---
+with st.spinner("Đang nạp Hybrid RAG vào RAM..."):
     chains = setup_rag_system()
     if chains is None:
         st.error("❌ Không tìm thấy file dữ liệu hợp lệ. Vui lòng kiểm tra lại!")
         st.stop()
     qa_chain_all, qa_chain_diem_chuan, llm = chains
 
-# --- XỬ LÝ LỊCH SỬ CHAT ---
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
@@ -196,54 +221,93 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# --- PHẦN NHẬP CÂU HỎI ---
 if prompt := st.chat_input("Bạn muốn hỏi gì về kỳ tuyển sinh năm nay?"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
     with st.chat_message("assistant"):
-        with st.spinner("Đang tra cứu dữ liệu..."):
-            prompt_lower = prompt.lower()
+        with st.spinner("Đang quét cả Ngữ nghĩa lẫn Từ khóa..."):
             
-            if "điểm chuẩn" in prompt_lower or "diem chuan" in prompt_lower:
-                response = qa_chain_diem_chuan.invoke({"query": prompt})
-            else:
-                # BỘ CHUẨN HÓA CÂU HỎI (SEMANTIC REWRITING)
-                rewrite_prompt = (
-                    "Bạn là trợ lý ảo tuyển sinh. Người dùng vừa đặt một câu hỏi lóng, rút gọn hoặc lắt léo.\n"
-                    "Nhiệm vụ: Viết lại câu hỏi này thành một CÂU HỎI HOÀN CHỈNH, RÕ RÀNG, ĐẦY ĐỦ NGỮ CẢNH để tra cứu tài liệu tuyển sinh.\n"
-                    "QUY TẮC: KHÔNG trả lời câu hỏi, CHỈ trả về câu hỏi đã được viết lại. Nếu câu hỏi đã rõ ràng, hãy giữ nguyên.\n\n"
-                    "VÍ DỤ:\n"
-                    "- Input: Cao Thắng có yêu cầu đầu ra nào về tiếng anh bắt buộc cho sinh viên\n"
-                    "- Output: Yêu cầu chuẩn đầu ra tiếng Anh đối với sinh viên của trường là gì?\n"
-                    "- Input: Học cơ khí ở trường mình bao lâu thì ra trường\n"
-                    "- Output: Thời gian đào tạo tiêu chuẩn của ngành cơ khí là bao lâu?\n"
-                    "- Input: Học bổng khuyến khích học tập thì sao\n"
-                    "- Output: Trường có chính sách học bổng khuyến khích học tập không và điều kiện như thế nào?\n\n"
-                    f"- Input: {prompt}\n"
-                    "- Output:"
-                )
-                
+            rewrite_prompt = (
+                "Bạn là một hệ thống phân tách ngôn ngữ. Nhiệm vụ của bạn là tách câu hỏi phức tạp của người dùng thành một danh sách (array) các câu hỏi đơn lẻ.\n"
+                "QUY TẮC TỐI THƯỢNG:\n"
+                "1. BẮT BUỘC trả về ĐÚNG định dạng JSON mảng (bắt đầu bằng [ và kết thúc bằng ]).\n"
+                "2. TUYỆT ĐỐI KHÔNG thêm bất kỳ văn bản, lời chào, hay giải thích nào khác ngoài JSON.\n\n"
+                "VÍ DỤ 1:\n"
+                "- Input: Cao Thắng sử dụng phương thức gì để xét tuyển , toán có được nhân 2 không?\n"
+                '- Output: ["Trường Cao Thắng sử dụng phương thức xét tuyển nào?", "Môn Toán có được nhân hệ số 2 khi xét tuyển không?"]\n\n'
+                f"- Input: {prompt}\n"
+                "- Output:"
+            )
+            
+            try:
+                optimized_res = llm.invoke(rewrite_prompt).content.strip()
+                if optimized_res.startswith("```json"):
+                    optimized_res = optimized_res[7:]
+                if optimized_res.startswith("```"):
+                    optimized_res = optimized_res[3:]
+                if optimized_res.endswith("```"):
+                    optimized_res = optimized_res[:-3]
+                    
+                sub_queries = json.loads(optimized_res.strip())
+                if not isinstance(sub_queries, list) or len(sub_queries) == 0:
+                    sub_queries = [prompt]
+            except Exception as e:
+                sub_queries = [prompt]
+
+            sub_answers = []
+            all_source_documents = []
+            
+            for sub_query in sub_queries:
+                sub_query_lower = sub_query.lower()
                 try:
-                    optimized_query = llm.invoke(rewrite_prompt).content.strip()
-                except Exception:
-                    optimized_query = prompt
-                
-                response = qa_chain_all.invoke({"query": optimized_query})
+                    if "điểm chuẩn" in sub_query_lower or "diem chuan" in sub_query_lower:
+                        res = qa_chain_diem_chuan.invoke({"query": sub_query})
+                    else:
+                        res = qa_chain_all.invoke({"query": sub_query})
+                        
+                    # ĐÃ LOẠI BỎ TIỀN TỐ "Ý hỏi..." CHỈ LẤY KẾT QUẢ
+                    sub_answers.append(res['result'])
+                    
+                    if "source_documents" in res:
+                        all_source_documents.extend(res["source_documents"])
+                except Exception as e:
+                    sub_answers.append(f"(Lỗi khi quét ý '{sub_query}': {e})")
+
+            sub_answers_text = "\n\n".join(sub_answers)
+            synthesis_prompt = (
+                "Bạn là một chuyên gia tư vấn tuyển sinh chuyên nghiệp, cẩn trọng và tận tâm.\n"
+                "Nhiệm vụ: Hãy gộp các thông tin câu trả lời đơn lẻ dưới đây thành một văn bản tư vấn hoàn chỉnh.\n"
+                "QUY TẮC CỐT LÕI (NGHIÊM NGẶT):\n"
+                "1. TUYỆT ĐỐI KHÔNG ĐƯỢC LƯỢC BỎ, rút gọn, hoặc làm mất bất kỳ thông tin chi tiết, con số, điều kiện hay phương thức nào có trong dữ liệu cung cấp.\n"
+                "2. Có bao nhiêu ý hỏi, bao nhiêu phương thức xét tuyển ở dữ liệu gốc thì phải giữ lại TRỌN VẸN toàn bộ, không được tự ý gộp hay xóa bớt.\n"
+                "3. Trình bày rõ ràng bằng các đề mục, số thứ tự (1, 2, 3...) hoặc gạch đầu dòng để thí sinh dễ đọc. Chỉ sửa lại câu từ cho mượt mà, không làm giảm lượng thông tin.\n\n"
+                f"Dữ liệu gốc BẮT BUỘC phải giữ nguyên chi tiết:\n{sub_answers_text}\n\n"
+                "Câu trả lời tư vấn đầy đủ và chi tiết nhất:"
+            )
             
-            answer = response["result"]
+            try:
+                answer = llm.invoke(synthesis_prompt).content.strip()
+            except Exception:
+                answer = "\n\n".join(sub_answers)
+            
+            response = {
+                "result": answer,
+                "source_documents": all_source_documents
+            }
+
             st.markdown(answer)
 
-            # Hiển thị nguồn
             with st.expander("Nguồn tài liệu tham khảo"):
+                seen_docs = set()
                 for doc in response["source_documents"]:
-                    st.write(f"- {doc.page_content[:200]}...")
+                    if doc.page_content not in seen_docs:
+                        st.write(f"- {doc.page_content[:200]}...")
+                        seen_docs.add(doc.page_content)
 
-            # DEBUG
             with st.expander("DEBUG"):
-                if "optimized_query" in locals():
-                    st.info(f"🔑 **Query sau khi chuẩn hóa:** {optimized_query}")
+                st.info(f"🔑 **Các ý đã bóc tách được:** {sub_queries}")
                 for doc in response["source_documents"]:
                     st.write(doc.metadata)
                     st.write(doc.page_content)

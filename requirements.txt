@@ -8,7 +8,6 @@ chromadb
 pysqlite3-binary
 torch
 torchvision
-# Fix lỗi Protobuf và tương thích hệ thống
 protobuf==3.20.3
 opentelemetry-api
 opentelemetry-sdk
