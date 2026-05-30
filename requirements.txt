@@ -12,3 +12,4 @@ protobuf==3.20.3
 opentelemetry-api
 opentelemetry-sdk
 opentelemetry-exporter-otlp-proto-grpc
+rank_bm25
