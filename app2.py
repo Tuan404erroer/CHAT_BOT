@@ -72,20 +72,25 @@ parent_dir = os.path.dirname(os.path.abspath(__file__))
 frontend_dir = os.path.join(parent_dir, "frontend")
 _chat_component = components.declare_component("chat_ui", path=frontend_dir)
 
-# --- PROMPT TỔNG ---
+
+# ==============================================================================
+# [CẬP NHẬT 1] PROMPT PHÂN QUYỀN KIẾN THỨC (MỞ GIỚI HẠN LỊCH SỬ Ở ĐẦU FILE)
+# ==============================================================================
 PROMPT = PromptTemplate(
     template=(
-        "Bạn là chuyên gia tư vấn tuyển sinh thông minh.\n"
-        "Sử dụng các thông tin được cung cấp dưới đây để trả lời câu hỏi.\n\n"
-        "LƯU Ý TƯ DUY:\n"
-        "1. Nếu thông tin của một ngành cụ thể không ghi rõ chuẩn ngoại ngữ/tin học, nhưng trong tài liệu có quy định chung về ngoại ngữ/tin học tốt nghiệp của toàn trường, hãy áp dụng quy định chung đó để trả lời cho ngành được hỏi.\n"
-        "2. Trả lời chi tiết, mạch lạc nếu có thông tin. Nếu là câu hỏi chung không có trong tài liệu, được phép tự trả lời ngắn dưới 50 từ. Nếu không biết thì nói không biết, không tự bịa thông tin.\n\n"
+        "Bạn là chuyên gia tư vấn tuyển sinh thân thiện của Trường Cao đẳng Kỹ thuật Cao Thắng (Cao Thắng).\n"
+        "Mọi từ 'trường', 'nhà trường', 'trường mình' trong câu hỏi đều MẶC ĐỊNH hiểu là Trường Cao đẳng Kỹ thuật Cao Thắng.\n\n"
+        "QUY TẮC PHÂN QUYỀN KIẾN THỨC TỐI THƯỢNG:\n"
+        "1. THÔNG TIN TUYỂN SINH (Điểm chuẩn, ngành, học phí, quy chế): BẮT BUỘC dùng dữ liệu cung cấp. Không có thì nói chưa cập nhật, KHÔNG BỊA.\n"
+        "2. THÔNG TIN LỊCH SỬ, VĨ NHÂN: Được phép dùng kiến thức nền để trả lời (VD: trường thành lập 1906, Bác Hồ và Bác Tôn từng học). NHƯNG PHẢI TRẢ LỜI CỰC KỲ NGẮN GỌN, ĐÚNG TRỌNG TÂM câu hỏi. TUYỆT ĐỐI KHÔNG viết văn hoa mỹ, sáo rỗng, không kể lể dài dòng.\n"
+        "3. TƯƠNG TÁC: Nếu câu hỏi chưa rõ ràng, thêm 1 câu gợi mở ngắn gọn cuối bài.\n\n"
         "Thông tin tài liệu:\n{context}\n\n"
         "Câu hỏi của thí sinh: {question}\n"
-        "Câu trả lời:"
+        "Câu trả lời (Ngắn gọn, súc tích):"
     ),
     input_variables=["context", "question"],
 )
+
 
 # --- HÀM KHỞI TẠO HỆ THỐNG ---
 @st.cache_resource
@@ -204,10 +209,6 @@ def setup_rag_system():
     if not docs:
         return None
     
-    # -------------------------------------------------------------
-    # BỘ MÁY TÌM KIẾM CẢI TIẾN HYBRID SEARCH
-    # -------------------------------------------------------------
-    
     # 1. VECTOR SEARCH (Tìm theo ngữ nghĩa)
     vectorstore = Chroma.from_documents(documents=docs, embedding=embeddings)
     chroma_retriever_all = vectorstore.as_retriever(search_kwargs={"k": 7})
@@ -219,7 +220,7 @@ def setup_rag_system():
     bm25_retriever_all = BM25Retriever.from_documents(docs)
     bm25_retriever_all.k = 7
     
-    # 3. KẾT HỢP SONG KIẾM HỢP BÍCH (Sử dụng Bộ gộp tự định nghĩa)
+    # 3. KẾT HỢP SONG KIẾM HỢP BÍCH
     ensemble_retriever_all = CustomHybridRetriever(
         vector_retriever=chroma_retriever_all,
         bm25_retriever=bm25_retriever_all
@@ -246,19 +247,24 @@ def setup_rag_system():
 # --- HÀM XỬ LÝ CÂU HỎI QUA RAG PIPELINE ---
 def process_query(prompt, qa_chain_all, qa_chain_diem_chuan, llm):
     """Xử lý câu hỏi người dùng qua pipeline RAG đầy đủ:
-    1. Bóc tách câu hỏi phức tạp thành các ý đơn lẻ
+    1. Bóc tách câu hỏi phức tạp thành các ý đơn lẻ (Mặc định Cao Thắng)
     2. Truy vấn từng ý qua Hybrid Search
     3. Tổng hợp kết quả thành câu trả lời hoàn chỉnh
     """
-    # Bước 1: Bóc tách câu hỏi
+    # ==============================================================================
+    # [CẬP NHẬT 2] BỘ DỊCH CÂU HỎI TRONG HÀM - ÉP MẶC ĐỊNH CAO THẮNG + GIỮ Ý LỊCH SỬ
+    # ==============================================================================
     rewrite_prompt = (
-        "Bạn là một hệ thống phân tách ngôn ngữ. Nhiệm vụ của bạn là tách câu hỏi phức tạp của người dùng thành một danh sách (array) các câu hỏi đơn lẻ.\n"
+        "Bạn là một hệ thống phân tách ngôn ngữ. Hệ thống này được thiết kế ĐỘC QUYỀN cho 'Trường Cao đẳng Kỹ thuật Cao Thắng'.\n"
+        "Nhiệm vụ của bạn là tách câu hỏi phức tạp của người dùng thành một danh sách (array) các câu hỏi đơn lẻ để hệ thống RAG tìm kiếm.\n"
         "QUY TẮC TỐI THƯỢNG:\n"
-        "1. BẮT BUỘC trả về ĐÚNG định dạng JSON mảng (bắt đầu bằng [ và kết thúc bằng ]).\n"
-        "2. TUYỆT ĐỐI KHÔNG thêm bất kỳ văn bản, lời chào, hay giải thích nào khác ngoài JSON.\n\n"
-        "VÍ DỤ 1:\n"
-        "- Input: Cao Thắng sử dụng phương thức gì để xét tuyển , toán có được nhân 2 không?\n"
-        '- Output: ["Trường Cao Thắng sử dụng phương thức xét tuyển nào?", "Môn Toán có được nhân hệ số 2 khi xét tuyển không?"]\n\n'
+        "1. MẶC ĐỊNH NGỮ CẢNH: Bất cứ khi nào người dùng dùng các từ như 'trường', 'nhà trường', 'trường mình', 'trường đó', 'ở đây', bạn BẮT BUỘC phải thay thế cụm từ đó bằng 'Trường Cao đẳng Kỹ thuật Cao Thắng' trong câu hỏi đầu ra.\n"
+        "2. GIỮ NGUYÊN Ý NGHĨA: Tuyệt đối không được lược bỏ hoặc bỏ qua các câu hỏi mang tính chất lịch sử, vĩ nhân hoặc danh nhân.\n"
+        "3. BẮT BUỘC trả về ĐÚNG định dạng JSON mảng (bắt đầu bằng [ và kết thúc bằng ]).\n"
+        "4. TUYỆT ĐỐI KHÔNG thêm bất kỳ văn bản giải thích nào khác ngoài JSON.\n\n"
+        "VÍ DỤ:\n"
+        "- Input: Điểm chuẩn của trường là bao nhiêu? Có những ai nổi tiếng từng học ở đây?\n"
+        '- Output: ["Điểm chuẩn của trường Cao đẳng Kỹ thuật Cao Thắng là bao nhiêu?", "Có những người nổi tiếng nào từng học tại trường Cao đẳng Kỹ thuật Cao Thắng?"]\n\n'
         f"- Input: {prompt}\n"
         "- Output:"
     )
@@ -298,16 +304,17 @@ def process_query(prompt, qa_chain_all, qa_chain_diem_chuan, llm):
             sub_answers.append(f"(Lỗi khi quét ý '{sub_query}': {e})")
 
     # Bước 3: Tổng hợp kết quả
+    
     sub_answers_text = "\n\n".join(sub_answers)
     synthesis_prompt = (
-        "Bạn là một chuyên gia tư vấn tuyển sinh chuyên nghiệp, cẩn trọng và tận tâm.\n"
+        "Bạn là một chuyên gia tư vấn tuyển sinh chuyên nghiệp của Trường Cao đẳng Kỹ thuật Cao Thắng.\n"
         "Nhiệm vụ: Hãy gộp các thông tin câu trả lời đơn lẻ dưới đây thành một văn bản tư vấn hoàn chỉnh.\n"
         "QUY TẮC CỐT LÕI (NGHIÊM NGẶT):\n"
-        "1. TUYỆT ĐỐI KHÔNG ĐƯỢC LƯỢC BỎ, rút gọn, hoặc làm mất bất kỳ thông tin chi tiết, con số, điều kiện hay phương thức nào có trong dữ liệu cung cấp.\n"
-        "2. Có bao nhiêu ý hỏi, bao nhiêu phương thức xét tuyển ở dữ liệu gốc thì phải giữ lại TRỌN VẸN toàn bộ, không được tự ý gộp hay xóa bớt.\n"
-        "3. Trình bày rõ ràng bằng các đề mục, số thứ tự (1, 2, 3...) hoặc gạch đầu dòng để thí sinh dễ đọc. Chỉ sửa lại câu từ cho mượt mà, không làm giảm lượng thông tin.\n\n"
+        "1. GIỮ NGUYÊN CHI TIẾT: Có bao nhiêu thông tin, con số, phương thức xét tuyển ở dữ liệu gốc phải giữ lại trọn vẹn.\n"
+        "2. NGẮN GỌN & TRỰC DIỆN: Đi thẳng vào vấn đề. TUYỆT ĐỐI KHÔNG thêm thắt các câu chào hỏi dài dòng, văn mẫu PR, sáo rỗng hay tự ca ngợi trường quá mức.\n"
+        "3. CẤU TRÚC: Trình bày dễ đọc (gạch đầu dòng, số thứ tự).\n\n"
         f"Dữ liệu gốc BẮT BUỘC phải giữ nguyên chi tiết:\n{sub_answers_text}\n\n"
-        "Câu trả lời tư vấn đầy đủ và chi tiết nhất:"
+        "Câu trả lời tư vấn (Chuyên nghiệp, súc tích, không lan man):"
     )
     
     try:
@@ -327,11 +334,11 @@ def process_query(prompt, qa_chain_all, qa_chain_diem_chuan, llm):
 
 
 # --- KHỞI TẠO VÀ CHẠY ỨNG DỤNG ---
-chains = setup_rag_system()
-if chains is None:
+chips = setup_rag_system()
+if chips is None:
     st.error("❌ Không tìm thấy file dữ liệu hợp lệ. Vui lòng kiểm tra lại!")
     st.stop()
-qa_chain_all, qa_chain_diem_chuan, llm = chains
+qa_chain_all, qa_chain_diem_chuan, llm = chips
 
 # --- SESSION STATE ---
 if "messages" not in st.session_state:
