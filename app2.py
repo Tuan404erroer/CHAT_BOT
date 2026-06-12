@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import os
 import json
 from langchain_huggingface import HuggingFaceEmbeddings
@@ -32,9 +33,44 @@ class CustomHybridRetriever(BaseRetriever):
         return combined
 
 # --- CẤU HÌNH GIAO DIỆN ---
-st.set_page_config(page_title="Tư Vấn Tuyển Sinh AI", page_icon="🎓")
-st.title("🤖 AI Tư Vấn Tuyển Sinh")
-st.info("Hệ thống RAG đã được nâng cấp lên Hybrid Search: Khắc phục lỗi bỏ sót từ khóa.")
+st.set_page_config(page_title="Tư Vấn Tuyển Sinh AI", page_icon="🎓", layout="wide")
+
+# Ẩn toàn bộ UI mặc định của Streamlit — chỉ hiển thị custom component
+st.markdown("""
+<style>
+    #MainMenu, footer, header,
+    [data-testid="stToolbar"],
+    [data-testid="stDecoration"],
+    [data-testid="stStatusWidget"],
+    [data-testid="stHeader"] { display: none !important; }
+
+    .stApp { overflow: hidden; }
+
+    .block-container,
+    [data-testid="stMainBlockContainer"] {
+        padding: 0 !important;
+        max-width: 100% !important;
+        overflow: hidden;
+    }
+
+    /* Đưa iframe component chiếm full viewport */
+    [data-testid="stCustomComponentV1"],
+    [data-testid="stCustomComponentV1"] > div,
+    [data-testid="stCustomComponentV1"] iframe {
+        position: fixed !important;
+        top: 0 !important; left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        border: none !important;
+        z-index: 999;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# --- KHAI BÁO CUSTOM COMPONENT ---
+parent_dir = os.path.dirname(os.path.abspath(__file__))
+frontend_dir = os.path.join(parent_dir, "frontend")
+_chat_component = components.declare_component("chat_ui", path=frontend_dir)
 
 # --- PROMPT TỔNG ---
 PROMPT = PromptTemplate(
@@ -206,110 +242,130 @@ def setup_rag_system():
     )
     return qa_chain_all, qa_chain_diem_chuan, llm
 
-# --- KHỞI TẠO VÀ CHẠY ỨNG DỤNG ---
-with st.spinner("Đang nạp Hybrid RAG vào RAM..."):
-    chains = setup_rag_system()
-    if chains is None:
-        st.error("❌ Không tìm thấy file dữ liệu hợp lệ. Vui lòng kiểm tra lại!")
-        st.stop()
-    qa_chain_all, qa_chain_diem_chuan, llm = chains
 
+# --- HÀM XỬ LÝ CÂU HỎI QUA RAG PIPELINE ---
+def process_query(prompt, qa_chain_all, qa_chain_diem_chuan, llm):
+    """Xử lý câu hỏi người dùng qua pipeline RAG đầy đủ:
+    1. Bóc tách câu hỏi phức tạp thành các ý đơn lẻ
+    2. Truy vấn từng ý qua Hybrid Search
+    3. Tổng hợp kết quả thành câu trả lời hoàn chỉnh
+    """
+    # Bước 1: Bóc tách câu hỏi
+    rewrite_prompt = (
+        "Bạn là một hệ thống phân tách ngôn ngữ. Nhiệm vụ của bạn là tách câu hỏi phức tạp của người dùng thành một danh sách (array) các câu hỏi đơn lẻ.\n"
+        "QUY TẮC TỐI THƯỢNG:\n"
+        "1. BẮT BUỘC trả về ĐÚNG định dạng JSON mảng (bắt đầu bằng [ và kết thúc bằng ]).\n"
+        "2. TUYỆT ĐỐI KHÔNG thêm bất kỳ văn bản, lời chào, hay giải thích nào khác ngoài JSON.\n\n"
+        "VÍ DỤ 1:\n"
+        "- Input: Cao Thắng sử dụng phương thức gì để xét tuyển , toán có được nhân 2 không?\n"
+        '- Output: ["Trường Cao Thắng sử dụng phương thức xét tuyển nào?", "Môn Toán có được nhân hệ số 2 khi xét tuyển không?"]\n\n'
+        f"- Input: {prompt}\n"
+        "- Output:"
+    )
+    
+    try:
+        optimized_res = llm.invoke(rewrite_prompt).content.strip()
+        if optimized_res.startswith("```json"):
+            optimized_res = optimized_res[7:]
+        if optimized_res.startswith("```"):
+            optimized_res = optimized_res[3:]
+        if optimized_res.endswith("```"):
+            optimized_res = optimized_res[:-3]
+            
+        sub_queries = json.loads(optimized_res.strip())
+        if not isinstance(sub_queries, list) or len(sub_queries) == 0:
+            sub_queries = [prompt]
+    except Exception:
+        sub_queries = [prompt]
+
+    # Bước 2: Truy vấn từng ý
+    sub_answers = []
+    all_source_documents = []
+    
+    for sub_query in sub_queries:
+        sub_query_lower = sub_query.lower()
+        try:
+            if "điểm chuẩn" in sub_query_lower or "diem chuan" in sub_query_lower:
+                res = qa_chain_diem_chuan.invoke({"query": sub_query})
+            else:
+                res = qa_chain_all.invoke({"query": sub_query})
+                
+            sub_answers.append(res['result'])
+            
+            if "source_documents" in res:
+                all_source_documents.extend(res["source_documents"])
+        except Exception as e:
+            sub_answers.append(f"(Lỗi khi quét ý '{sub_query}': {e})")
+
+    # Bước 3: Tổng hợp kết quả
+    sub_answers_text = "\n\n".join(sub_answers)
+    synthesis_prompt = (
+        "Bạn là một chuyên gia tư vấn tuyển sinh chuyên nghiệp, cẩn trọng và tận tâm.\n"
+        "Nhiệm vụ: Hãy gộp các thông tin câu trả lời đơn lẻ dưới đây thành một văn bản tư vấn hoàn chỉnh.\n"
+        "QUY TẮC CỐT LÕI (NGHIÊM NGẶT):\n"
+        "1. TUYỆT ĐỐI KHÔNG ĐƯỢC LƯỢC BỎ, rút gọn, hoặc làm mất bất kỳ thông tin chi tiết, con số, điều kiện hay phương thức nào có trong dữ liệu cung cấp.\n"
+        "2. Có bao nhiêu ý hỏi, bao nhiêu phương thức xét tuyển ở dữ liệu gốc thì phải giữ lại TRỌN VẸN toàn bộ, không được tự ý gộp hay xóa bớt.\n"
+        "3. Trình bày rõ ràng bằng các đề mục, số thứ tự (1, 2, 3...) hoặc gạch đầu dòng để thí sinh dễ đọc. Chỉ sửa lại câu từ cho mượt mà, không làm giảm lượng thông tin.\n\n"
+        f"Dữ liệu gốc BẮT BUỘC phải giữ nguyên chi tiết:\n{sub_answers_text}\n\n"
+        "Câu trả lời tư vấn đầy đủ và chi tiết nhất:"
+    )
+    
+    try:
+        answer = llm.invoke(synthesis_prompt).content.strip()
+    except Exception:
+        answer = "\n\n".join(sub_answers)
+
+    # Bước 4: Chuẩn bị nguồn tài liệu
+    sources = []
+    seen_docs = set()
+    for doc in all_source_documents:
+        if doc.page_content not in seen_docs:
+            sources.append(doc.page_content[:200] + "...")
+            seen_docs.add(doc.page_content)
+
+    return answer, sources
+
+
+# --- KHỞI TẠO VÀ CHẠY ỨNG DỤNG ---
+chains = setup_rag_system()
+if chains is None:
+    st.error("❌ Không tìm thấy file dữ liệu hợp lệ. Vui lòng kiểm tra lại!")
+    st.stop()
+qa_chain_all, qa_chain_diem_chuan, llm = chains
+
+# --- SESSION STATE ---
 if "messages" not in st.session_state:
     st.session_state.messages = []
+if "last_ts" not in st.session_state:
+    st.session_state.last_ts = 0
 
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+# --- RENDER COMPONENT & XỬ LÝ ---
+user_input = _chat_component(
+    messages=json.dumps(st.session_state.messages, ensure_ascii=False),
+    key="chat",
+    default=None
+)
 
-if prompt := st.chat_input("Bạn muốn hỏi gì về kỳ tuyển sinh năm nay?"):
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("user"):
-        st.markdown(prompt)
-
-    with st.chat_message("assistant"):
-        with st.spinner("Đang quét cả Ngữ nghĩa lẫn Từ khóa..."):
-            
-            rewrite_prompt = (
-                "Bạn là một hệ thống phân tách ngôn ngữ. Nhiệm vụ của bạn là tách câu hỏi phức tạp của người dùng thành một danh sách (array) các câu hỏi đơn lẻ.\n"
-                "QUY TẮC TỐI THƯỢNG:\n"
-                "1. BẮT BUỘC trả về ĐÚNG định dạng JSON mảng (bắt đầu bằng [ và kết thúc bằng ]).\n"
-                "2. TUYỆT ĐỐI KHÔNG thêm bất kỳ văn bản, lời chào, hay giải thích nào khác ngoài JSON.\n\n"
-                "VÍ DỤ 1:\n"
-                "- Input: Cao Thắng sử dụng phương thức gì để xét tuyển , toán có được nhân 2 không?\n"
-                '- Output: ["Trường Cao Thắng sử dụng phương thức xét tuyển nào?", "Môn Toán có được nhân hệ số 2 khi xét tuyển không?"]\n\n'
-                f"- Input: {prompt}\n"
-                "- Output:"
-            )
-            
-            try:
-                optimized_res = llm.invoke(rewrite_prompt).content.strip()
-                if optimized_res.startswith("```json"):
-                    optimized_res = optimized_res[7:]
-                if optimized_res.startswith("```"):
-                    optimized_res = optimized_res[3:]
-                if optimized_res.endswith("```"):
-                    optimized_res = optimized_res[:-3]
-                    
-                sub_queries = json.loads(optimized_res.strip())
-                if not isinstance(sub_queries, list) or len(sub_queries) == 0:
-                    sub_queries = [prompt]
-            except Exception as e:
-                sub_queries = [prompt]
-
-            sub_answers = []
-            all_source_documents = []
-            
-            for sub_query in sub_queries:
-                sub_query_lower = sub_query.lower()
-                try:
-                    if "điểm chuẩn" in sub_query_lower or "diem chuan" in sub_query_lower:
-                        res = qa_chain_diem_chuan.invoke({"query": sub_query})
-                    else:
-                        res = qa_chain_all.invoke({"query": sub_query})
-                        
-                    # ĐÃ LOẠI BỎ TIỀN TỐ "Ý hỏi..." CHỈ LẤY KẾT QUẢ
-                    sub_answers.append(res['result'])
-                    
-                    if "source_documents" in res:
-                        all_source_documents.extend(res["source_documents"])
-                except Exception as e:
-                    sub_answers.append(f"(Lỗi khi quét ý '{sub_query}': {e})")
-
-            sub_answers_text = "\n\n".join(sub_answers)
-            synthesis_prompt = (
-                "Bạn là một chuyên gia tư vấn tuyển sinh chuyên nghiệp, cẩn trọng và tận tâm.\n"
-                "Nhiệm vụ: Hãy gộp các thông tin câu trả lời đơn lẻ dưới đây thành một văn bản tư vấn hoàn chỉnh.\n"
-                "QUY TẮC CỐT LÕI (NGHIÊM NGẶT):\n"
-                "1. TUYỆT ĐỐI KHÔNG ĐƯỢC LƯỢC BỎ, rút gọn, hoặc làm mất bất kỳ thông tin chi tiết, con số, điều kiện hay phương thức nào có trong dữ liệu cung cấp.\n"
-                "2. Có bao nhiêu ý hỏi, bao nhiêu phương thức xét tuyển ở dữ liệu gốc thì phải giữ lại TRỌN VẸN toàn bộ, không được tự ý gộp hay xóa bớt.\n"
-                "3. Trình bày rõ ràng bằng các đề mục, số thứ tự (1, 2, 3...) hoặc gạch đầu dòng để thí sinh dễ đọc. Chỉ sửa lại câu từ cho mượt mà, không làm giảm lượng thông tin.\n\n"
-                f"Dữ liệu gốc BẮT BUỘC phải giữ nguyên chi tiết:\n{sub_answers_text}\n\n"
-                "Câu trả lời tư vấn đầy đủ và chi tiết nhất:"
-            )
-            
-            try:
-                answer = llm.invoke(synthesis_prompt).content.strip()
-            except Exception:
-                answer = "\n\n".join(sub_answers)
-            
-            response = {
-                "result": answer,
-                "source_documents": all_source_documents
-            }
-
-            st.markdown(answer)
-
-            with st.expander("Nguồn tài liệu tham khảo"):
-                seen_docs = set()
-                for doc in response["source_documents"]:
-                    if doc.page_content not in seen_docs:
-                        st.write(f"- {doc.page_content[:200]}...")
-                        seen_docs.add(doc.page_content)
-
-            with st.expander("DEBUG"):
-                st.info(f"🔑 **Các ý đã bóc tách được:** {sub_queries}")
-                for doc in response["source_documents"]:
-                    st.write(doc.metadata)
-                    st.write(doc.page_content)
-
-    st.session_state.messages.append({"role": "assistant", "content": answer})
+# Khi nhận được tin nhắn mới từ frontend
+if user_input is not None:
+    ts = user_input.get("timestamp", 0)
+    
+    if ts != st.session_state.last_ts:
+        st.session_state.last_ts = ts
+        query = user_input.get("message", "")
+        
+        # Lưu tin nhắn user
+        st.session_state.messages.append({"role": "user", "content": query})
+        
+        # Xử lý qua RAG pipeline
+        answer, sources = process_query(query, qa_chain_all, qa_chain_diem_chuan, llm)
+        
+        # Lưu tin nhắn assistant
+        st.session_state.messages.append({
+            "role": "assistant",
+            "content": answer,
+            "sources": sources
+        })
+        
+        # Rerun để gửi kết quả xuống frontend
+        st.rerun()
