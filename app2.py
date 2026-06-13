@@ -2,6 +2,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 import os
 import json
+import uuid
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -35,7 +36,7 @@ class CustomHybridRetriever(BaseRetriever):
 # --- CẤU HÌNH GIAO DIỆN ---
 st.set_page_config(page_title="Tư Vấn Tuyển Sinh AI", page_icon="🎓", layout="wide")
 
-# Ẩn toàn bộ UI mặc định của Streamlit — chỉ hiển thị custom component
+# Ẩn toàn bộ UI mặc định của Streamlit
 st.markdown("""
 <style>
     #MainMenu, footer, header,
@@ -340,15 +341,52 @@ if chips is None:
     st.stop()
 qa_chain_all, qa_chain_diem_chuan, llm = chips
 
+HISTORY_FILE = "chat_history.json"
+
+def load_history():
+    if os.path.exists(HISTORY_FILE):
+        try:
+            with open(HISTORY_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            return {}
+    return {}
+
+def save_history(data):
+    with open(HISTORY_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+
 # --- SESSION STATE ---
+if "history_data" not in st.session_state:
+    st.session_state.history_data = load_history()
+if "logged_in" not in st.session_state:
+    st.session_state.logged_in = False
+    st.session_state.mssv = ""
+    st.session_state.dob = ""
+if "current_session_id" not in st.session_state:
+    st.session_state.current_session_id = None
 if "messages" not in st.session_state:
     st.session_state.messages = []
 if "last_ts" not in st.session_state:
     st.session_state.last_ts = 0
 
+user_key = f"{st.session_state.mssv}_{st.session_state.dob}"
+if st.session_state.logged_in and user_key not in st.session_state.history_data:
+    st.session_state.history_data[user_key] = {}
+
+# Khởi tạo session_id nếu rỗng
+if st.session_state.current_session_id is None:
+    st.session_state.current_session_id = str(uuid.uuid4())
+
+user_history = st.session_state.history_data.get(user_key, {}) if st.session_state.logged_in else {}
+
 # --- RENDER COMPONENT & XỬ LÝ ---
 user_input = _chat_component(
     messages=json.dumps(st.session_state.messages, ensure_ascii=False),
+    logged_in=st.session_state.logged_in,
+    mssv=st.session_state.mssv,
+    history=json.dumps(user_history, ensure_ascii=False),
+    current_session_id=st.session_state.current_session_id,
     key="chat",
     default=None
 )
@@ -359,20 +397,63 @@ if user_input is not None:
     
     if ts != st.session_state.last_ts:
         st.session_state.last_ts = ts
-        query = user_input.get("message", "")
         
-        # Lưu tin nhắn user
-        st.session_state.messages.append({"role": "user", "content": query})
+        action = user_input.get("action", "chat")
         
-        # Xử lý qua RAG pipeline
-        answer, sources = process_query(query, qa_chain_all, qa_chain_diem_chuan, llm)
-        
-        # Lưu tin nhắn assistant
-        st.session_state.messages.append({
-            "role": "assistant",
-            "content": answer,
-            "sources": sources
-        })
-        
-        # Rerun để gửi kết quả xuống frontend
-        st.rerun()
+        if action == "login":
+            st.session_state.logged_in = True
+            st.session_state.mssv = user_input.get("mssv", "")
+            st.session_state.dob = user_input.get("dob", "")
+            st.rerun()
+            
+        elif action == "logout":
+            st.session_state.logged_in = False
+            st.session_state.mssv = ""
+            st.session_state.dob = ""
+            st.session_state.messages = []
+            st.rerun()
+            
+        elif action == "new_session":
+            st.session_state.current_session_id = str(uuid.uuid4())
+            st.session_state.messages = []
+            st.rerun()
+            
+        elif action == "load_session":
+            st.session_state.current_session_id = user_input.get("session_id")
+            session_info = st.session_state.history_data.get(user_key, {}).get(st.session_state.current_session_id, {})
+            st.session_state.messages = session_info.get("messages", [])
+            st.rerun()
+            
+        elif action == "chat":
+            query = user_input.get("message", "")
+            
+            # Lưu tin nhắn user
+            st.session_state.messages.append({"role": "user", "content": query})
+            
+            # Xử lý qua RAG pipeline
+            answer, sources = process_query(query, qa_chain_all, qa_chain_diem_chuan, llm)
+            
+            # Lưu tin nhắn assistant
+            st.session_state.messages.append({
+                "role": "assistant",
+                "content": answer,
+                "sources": sources
+            })
+            
+            # --- LƯU LỊCH SỬ NGẦM ---
+            user_history = st.session_state.history_data[user_key]
+            if st.session_state.current_session_id not in user_history:
+                # Lấy 20 ký tự đầu làm tiêu đề
+                title_text = query[:20] + "..." if len(query) > 20 else query
+                title = f"Chat: {title_text}"
+                user_history[st.session_state.current_session_id] = {
+                    "title": title,
+                    "messages": st.session_state.messages
+                }
+            else:
+                user_history[st.session_state.current_session_id]["messages"] = st.session_state.messages
+                
+            save_history(st.session_state.history_data)
+            
+            # Rerun để gửi kết quả xuống frontend
+            st.rerun()

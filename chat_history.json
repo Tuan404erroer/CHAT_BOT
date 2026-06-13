@@ -1,0 +1,79 @@
+{
+    "0306231172_23/12/2005": {
+        "17bbbb0d-0a59-4178-b9b6-8d8731f867d0": {
+            "title": "Chat: Hello",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "Hello"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Chào bạn, mình là chuyên gia tư vấn tuyển sinh của Cao Thắng. Rất vui được hỗ trợ bạn!\n\nBạn cần mình giải đáp thông tin gì về ngành học, thủ tục hay các quy định tại trường không?",
+                    "sources": [
+                        "Chuyen muc: Thủ tục hành chính\nTieu de: Xin giấy xác nhận và Làm thẻ Sinh viên\nNoi dung: - Đăng ký: Trực tuyến tại portal.caothang.edu.vn HOẶC trực tiếp tại Phòng CTCT-HSSV (Lầu 5 nhà F).\n- Lịch tiếp ...",
+                        "Chuyen muc: Thủ tục hành chính\nTieu de: Hướng dẫn nộp Học phí\nNoi dung: - Cách 1: Nộp trực tiếp tại NH Agribank (Cung cấp Mã SV, tên trường CĐ Kỹ Thuật Cao Thắng, thu theo hình thức Bill Payment).\n- C...",
+                        "Chuyen muc: Nội quy và An toàn\nTieu de: An toàn lao động và Chữa cháy\nNoi dung: - An toàn hóa chất: Đóng nắp cẩn thận, tránh xa nguồn cháy.\n- An toàn thiết bị quay (Tiện, Phay): Phải mang kính bảo hộ,...",
+                        "Chuyen muc: Nội quy và An toàn\nTieu de: Nội quy Thực tập xưởng và 5S\nNoi dung: - Thực tập: Có mặt trước 10 phút, mang bảo hộ lao động. Tuyệt đối không tự ý vận hành máy khi chưa có lệnh. Cấm điện thoạ...",
+                        "Chuyen muc: Nội quy và An toàn\nTieu de: Thời gian học tập và Nội quy lớp học\nNoi dung: - Giờ học Lý thuyết: Sáng (06h30-11h30); Chiều (12h30-17h30); Tối (17h45-21h00).\n- Giờ Thực hành: Ca 1 (06h30-11h...",
+                        "Chuyen muc: Chế độ chính sách\nTieu de: Bảo hiểm Y tế (BHYT)\nNoi dung: - BHYT là BẮT BUỘC. Đóng 15 tháng (789.750đ) hoặc 12 tháng (631.800đ).\n- Nếu đã có thẻ BHYT diện khác (Hộ nghèo, thân nhân quân độ...",
+                        "Chuyen muc: Chế độ chính sách\nTieu de: Chính sách cho Nữ sinh kỹ thuật\nNoi dung: - Giảm 50% kinh phí đào tạo: Cao đẳng các ngành CNKT Cơ khí, Ô tô, Cơ điện tử, Nhiệt lạnh, Điện-Điện tử, Điều khiển & T...",
+                        "Id: 13\nTen nganh: Công nghệ Kỹ thuật Cơ điện tử (đạt chuẩn KOSEN-Nhật Bản)\nMa nganh: 6510304\nChuyen nganh: \nMuc tieu dao tao: - Làm trưởng nhóm bảo trì, lắp đặt, vận hành về cơ điện tử tại các doanh n...",
+                        "Id: 1\nTen nganh: Công nghệ Kỹ thuật Điện, Điện tử (đạt chuẩn ABET)\nMa nganh: 6510303\nChuyen nganh: - Chuyên ngành CNKT Điện công nghiệp\n- Chuyên ngành CNKT Điện tử công nghiệp\nMuc tieu dao tao: 1. Thà...",
+                        "Id: 10\nTen nganh: Công nghệ Kỹ thuật Nhiệt (Cơ điện lạnh) (đạt chuẩn ABET)\nMa nganh: 6510211\nChuyen nganh: \nMuc tieu dao tao: Người tốt nghiệp từ chương trình Cao đẳng ngành Công nghệ kỹ thuật Nhiệt\n1...",
+                        "Id: 5\nTen nganh: Công nghệ Kỹ thuật Cơ khí (đạt chuẩn ABET)\nMa nganh: 6510201\nChuyen nganh: \nMuc tieu dao tao: Sinh viên sau khi tốt nghiệp ra trường làm việc từ 2 đến 3 năm có khả năng:\n- Thiết ..."
+                    ]
+                }
+            ]
+        },
+        "aa292948-7b2c-4e3c-baa7-6cada2000799": {
+            "title": "Chat: Người Vĩ Đại nào từn...",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "Người Vĩ Đại nào từng học ở đây"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Trường Cao đẳng Kỹ thuật Cao Thắng vinh dự là nơi Chủ tịch Hồ Chí Minh và Chủ tịch Tôn Đức Thắng từng theo học.\n\nBạn có muốn tìm hiểu thêm về lịch sử hình thành hay thông tin tuyển sinh của trường không?",
+                    "sources": [
+                        "Id: 23\nQuestion: Câu 23: Khi nhập học thí sinh muốn ở ký túc xá của trường có được không?\nAnswer: Nhà trường đã có kế hoạch bảo trì, sửa chữa ký túc xá nên chưa thể giải quyết cho sinh viên vào ở tron...",
+                        "Id: 20\nQuestion: Câu 20: Thí sinh muốn biết các ngành, nghề trong trường được đào tạo như thế nào? Ra trường có xin được việc làm hay không? Làm ở đâu?\nAnswer: - Thí sinh có thể truy cập website của t...",
+                        "Chuyen muc: Chế độ chính sách\nTieu de: Học bổng Khuyến khích học tập (KKHT)\nNoi dung: - Điều kiện xét: Điểm tổng kết HK >= 7.0 (không môn nào < 5.0 ở lần thi 1), Hạnh kiểm loại A, không bị kỷ luật.\n- ...",
+                        "Chuyen muc: Quy chế đào tạo\nTieu de: Xếp loại và Xét Tốt nghiệp\nNoi dung: - Điều kiện dự thi TN: ĐTB năm >= 5.0, nợ không quá 20 ĐVHT, không bị kỷ luật.\n- Điều kiện công nhận TN: Tích lũy đủ môn (khôn...",
+                        "Id: 22\nQuestion: Câu 22: Khi thí sinh tốt nghiệp các ngành/nghề đào tạo, có được học liên thông lên các bậc cao hơn không?\nAnswer: - Sau khi tốt nghiệp, thí sinh được học liên thông lên trình độ cao h...",
+                        "Id: 3\nQuestion: Câu 3: Điểm từng môn đối với phương thức xét tuyển bằng Học bạ được tính như thế nào?\nAnswer: Điểm từng môn trong tổ hợp xét tuyển được tính là điểm trung bình cộng của 4 học kỳ (HK1, ...",
+                        "Id: 21\nQuestion: Câu 21: Khi thí sinh vào học ở trường thì thí sinh có được hoãn nghĩa vụ quân sự không?\nAnswer: - Thí sinh được hoãn nghĩa vụ quân sự theo quy định của Nhà nước....",
+                        "Id: 19\nQuestion: Câu 19: Năm nay chỉ tiêu tuyển sinh từng ngành, nghề của nhà trường như thế nào?\nAnswer: - Thí sinh truy cập trang web của trường www.caothang.edu.vn để biết thông tin chi tiết....",
+                        "Id: 26\nQuestion: Câu 26: Thí sinh muốn biết mình có trúng tuyển các ngành, nghề đào tạo hay không phải làm sao?\nAnswer: - Trường dự kiến công bố kết quả trúng tuyển các ngành, nghề đào tạo như sau:\n+ ...",
+                        "Id: 5\nQuestion: Câu 5: Xét tuyển bằng phương thức học bạ có cần thi tốt nghiệp THPT hay không?\nAnswer: Thí sinh trúng tuyển bằng phương thức xét học bạ PHẢI tốt nghiệp THPT (các thí sinh tốt nghiệp TH...",
+                        "Id: 9\nTen nganh: Công nghệ Tài chính và Kinh doanh số\nMa nganh: \nChuyen nganh: - Công nghệ Tài chính (Fintech)\n- Thương mại điện tử và Kinh doanh số (E-commerce & Digital Business)\nMuc tieu dao tao: S...",
+                        "Id: 4\nQuestion: Câu 4: Điểm xét tuyển được tính như thế nào?\nAnswer: Điểm xét tuyển được tính như sau:\n   - Điểm xét tuyển = Toán * 2 + 2 môn (Trong 6 môn sau: Lý, Hóa, Văn, Tiếng Anh, Tin học, Công n..."
+                    ]
+                },
+                {
+                    "role": "user",
+                    "content": "CÔng nghệ thông tin có dễ tìm việc không?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Sinh viên tốt nghiệp ngành Công nghệ thông tin tại trường có cơ hội việc làm rất rộng mở. Sau khi tốt nghiệp, bạn có thể đảm nhận các vị trí chủ chốt như:\n\n*   Thiết kế, xây dựng và triển khai các dự án phần mềm.\n*   Phân tích, thiết kế, triển khai và quản trị hệ thống mạng.\n*   Tư vấn kỹ thuật và giải pháp tin học hóa cho các cơ quan, doanh nghiệp.\n\nVới nền tảng kiến thức vững chắc và kỹ năng thực hành thành thạo các ngôn ngữ lập trình, hệ quản trị cơ sở dữ liệu, sinh viên dễ dàng đáp ứng yêu cầu của thị trường lao động và tiếp cận các công nghệ mới.\n\nBạn có muốn tìm hiểu kỹ hơn về các chuyên ngành cụ thể như Lập trình web, di động hay Trí tuệ nhân tạo (AI) không?",
+                    "sources": [
+                        "Id: 20\nQuestion: Câu 20: Thí sinh muốn biết các ngành, nghề trong trường được đào tạo như thế nào? Ra trường có xin được việc làm hay không? Làm ở đâu?\nAnswer: - Thí sinh có thể truy cập website của t...",
+                        "Id: 23\nQuestion: Câu 23: Khi nhập học thí sinh muốn ở ký túc xá của trường có được không?\nAnswer: Nhà trường đã có kế hoạch bảo trì, sửa chữa ký túc xá nên chưa thể giải quyết cho sinh viên vào ở tron...",
+                        "Id: 8\nTen nganh: Công nghệ Thông tin\nMa nganh: 6480201\nChuyen nganh: - Chuyên ngành Công nghệ lập trình ứng dụng web\n- Chuyên ngành Công nghệ lập trình ứng dụng di động\n- Chuyên ngành Mạng máy tính\n- ...",
+                        "Id: 22\nQuestion: Câu 22: Khi thí sinh tốt nghiệp các ngành/nghề đào tạo, có được học liên thông lên các bậc cao hơn không?\nAnswer: - Sau khi tốt nghiệp, thí sinh được học liên thông lên trình độ cao h...",
+                        "Id: 23\nTen nganh: Kỹ thuật sửa chữa, lắp ráp máy tính\nMa nganh: 6480102\nChuyen nganh: \nMuc tieu dao tao: Sau khi làm việc từ 2-3 năm trong chuyên ngành phù hợp với chuyên môn đào tạo, Sinh viên đã tốt...",
+                        "Id: 14\nTen nganh: Kế toán tin học (Kế toán doanh nghiệp)\nMa nganh: 6340302\nChuyen nganh: \nMuc tieu dao tao: Sinh viên sau khi tốt nghiệp ra trường làm việc từ 2 đến 3 năm có khả năng:\n1. Trưởng, p...",
+                        "Id: 19\nQuestion: Câu 19: Năm nay chỉ tiêu tuyển sinh từng ngành, nghề của nhà trường như thế nào?\nAnswer: - Thí sinh truy cập trang web của trường www.caothang.edu.vn để biết thông tin chi tiết....",
+                        "Id: 13\nTen nganh: Công nghệ Kỹ thuật Cơ điện tử (đạt chuẩn KOSEN-Nhật Bản)\nMa nganh: 6510304\nChuyen nganh: \nMuc tieu dao tao: - Làm trưởng nhóm bảo trì, lắp đặt, vận hành về cơ điện tử tại các doanh n...",
+                        "Id: 9\nTen nganh: Công nghệ Tài chính và Kinh doanh số\nMa nganh: \nChuyen nganh: - Công nghệ Tài chính (Fintech)\n- Thương mại điện tử và Kinh doanh số (E-commerce & Digital Business)\nMuc tieu dao tao: S...",
+                        "Id: 22\nTen nganh: Quản trị mạng máy tính\nMa nganh: 6480209\nChuyen nganh: \nMuc tieu dao tao: Sau khi làm việc từ 2-3 năm trong chuyên ngành phù hợp với chuyên môn đào tạo, Sinh viên tốt nghiệp Quản Trị...",
+                        "Id: 15\nTen nganh: Cơ khí chế tạo (Cắt gọt kim loại)\nMa nganh: 6520121\nChuyen nganh: \nMuc tieu dao tao: - Lập được quy trình công nghệ gia công các chi tiết cơ khí.\n- Thực hiện gia công, lắp ráp các ...",
+                        "Id: 5\nTen nganh: Công nghệ Kỹ thuật Cơ khí (đạt chuẩn ABET)\nMa nganh: 6510201\nChuyen nganh: \nMuc tieu dao tao: Sinh viên sau khi tốt nghiệp ra trường làm việc từ 2 đến 3 năm có khả năng:\n- Thiết ..."
+                    ]
+                }
+            ]
+        }
+    }
+}
