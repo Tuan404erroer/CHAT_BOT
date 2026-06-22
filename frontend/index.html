@@ -328,14 +328,17 @@
         /* ============================================= */
         /*  LAYOUT                                       */
         /* ============================================= */
-        .app-container {
+       .app-container {
             display: flex;
             flex-direction: column;
             height: 100vh;
             position: relative;
             z-index: 1;
-        }
-
+    
+    /* THÊM 2 DÒNG NÀY VÀO */
+            flex: 1;        /* Ép nó chiếm nốt toàn bộ khoảng trống bên phải của Sidebar */
+            width: 100%;    /* Đảm bảo bung hết cỡ ngang */
+        }   
         /* ============================================= */
         /*  HEADER                                       */
         /* ============================================= */

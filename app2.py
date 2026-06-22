@@ -15,6 +15,7 @@ from langchain_community.retrievers import BM25Retriever
 from typing import Any, List
 from langchain_core.retrievers import BaseRetriever
 
+st.set_page_config(layout="wide")
 class CustomHybridRetriever(BaseRetriever):
     vector_retriever: Any
     bm25_retriever: Any
