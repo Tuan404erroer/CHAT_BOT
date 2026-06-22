@@ -71,7 +71,57 @@
                         "Id: 22\nTen nganh: Quản trị mạng máy tính\nMa nganh: 6480209\nChuyen nganh: \nMuc tieu dao tao: Sau khi làm việc từ 2-3 năm trong chuyên ngành phù hợp với chuyên môn đào tạo, Sinh viên tốt nghiệp Quản Trị...",
                         "Id: 15\nTen nganh: Cơ khí chế tạo (Cắt gọt kim loại)\nMa nganh: 6520121\nChuyen nganh: \nMuc tieu dao tao: - Lập được quy trình công nghệ gia công các chi tiết cơ khí.\n- Thực hiện gia công, lắp ráp các ...",
                         "Id: 5\nTen nganh: Công nghệ Kỹ thuật Cơ khí (đạt chuẩn ABET)\nMa nganh: 6510201\nChuyen nganh: \nMuc tieu dao tao: Sinh viên sau khi tốt nghiệp ra trường làm việc từ 2 đến 3 năm có khả năng:\n- Thiết ..."
+                    ],
+                    "rating": "down"
+                },
+                {
+                    "role": "user",
+                    "content": "Vậy ngoài 2/6 khi ra trường thì cần chứng chỉ tiếng anh nào nữa không?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Chào bạn, về chuẩn đầu ra ngoại ngữ, ngoài chứng nhận Tiếng Anh Bậc 2/6 nội bộ, tùy vào yêu cầu cụ thể của từng chương trình đào tạo hoặc định hướng nghề nghiệp sau này, bạn có thể tham khảo thêm các chứng chỉ quốc tế như TOEIC để tăng lợi thế cạnh tranh khi đi làm.\n\nBạn đã có kế hoạch ôn luyện chứng chỉ ngoại ngữ nào chưa?",
+                    "sources": [
+                        "Chuyen muc: Quy định học phần\nTieu de: Ứng dụng CNTT cơ bản và CAD\nNoi dung: - Ứng dụng CNTT (5 ĐVHT): Học/Thi tại TT Tin học. Miễn học nếu có chứng chỉ tương đương (ICDL, MOS, IC3 hoặc chứng chỉ ĐH B...",
+                        "Id: 2\nQuestion: Câu 2: Em thấy nhà trường có phương thức xét tuyển thẳng, với phương thức này thì nhà trường dành bao nhiêu chỉ tiêu và khi nào nhận hồ sơ xét tuyển?\nAnswer: Đối với xét tuyển thẳng nh...",
+                        "Chuyen muc: Quy định học phần\nTieu de: Chuẩn đầu ra Tiếng Anh Bậc 2/6\nNoi dung: - Đánh giá 4 kỹ năng (Nghe, Nói, Đọc, Viết) do TT Ngoại ngữ tổ chức (Chứng nhận nội bộ).\n- Điều kiện đạt: Tổng điểm >= 2...",
+                        "Id: 5\nQuestion: Câu 5: Xét tuyển bằng phương thức học bạ có cần thi tốt nghiệp THPT hay không?\nAnswer: Thí sinh trúng tuyển bằng phương thức xét học bạ PHẢI tốt nghiệp THPT (các thí sinh tốt nghiệp TH...",
+                        "Id: 32\nQuestion: Câu 32: Năm nay (2026) trường có mở thêm ngành học nào mới không?\nAnswer: Năm 2026, Trường Cao đẳng Kỹ thuật Cao Thắng mở thêm 5 ngành học mới đáp ứng nhu cầu nhân lực chất lượng cao,...",
+                        "Chuyen muc: Cơ cấu tổ chức\nTieu de: Hệ thống Trung tâm và Thư viện\nNoi dung: - Thư viện (Tầng 3 nhà C): Phục vụ mượn/trả sách, eBooks, máy tính, phòng học nhóm miễn phí.\n- TT Đánh giá Kỹ năng nghề (Nh...",
+                        "Id: 25\nQuestion: Câu 25: Đến khi thi tốt nghiệp THPT xong mới nộp hồ sơ vào trường mình như vậy có trễ quá không? hay là em phải đăng ký online sớm để giữ chỗ?\nAnswer: - Thời gian đăng ký xét tuyển cá...",
+                        "Id: 26\nQuestion: Câu 26: Thí sinh muốn biết mình có trúng tuyển các ngành, nghề đào tạo hay không phải làm sao?\nAnswer: - Trường dự kiến công bố kết quả trúng tuyển các ngành, nghề đào tạo như sau:\n+ ...",
+                        "Id: 27\nQuestion: Câu 27: Thí sinh muốn đăng ký xét tuyển vào trường CĐKT Cao Thắng trước khi biết kết quả thi THPT/Kết quả thi đánh giá năng lực, nhưng khi đăng ký yêu cầu nhập điểm các môn thi THPT?\n...",
+                        "Id: 9\nQuestion: Câu 9: Năm 2026, Trường tuyển bao nhiêu thí sinh dựa vào học bạ THPT?\nAnswer: Chỉ tiêu của Trường là 4.800 (dự kiến), Trường dành khoảng 60% chỉ tiêu (dự kiến) để xét học bạ THPT – 4 h...",
+                        "Id: 6\nQuestion: Câu 6: Xét học bạ thì khoảng bao nhiêu điểm trúng tuyển?\nAnswer: Điểm trúng tuyển tùy theo ngành, nghề mà thí sinh đăng ký. Để không bỏ lỡ cơ hội, thí sinh nên nộp hồ sơ xét tuyển vào ..."
                     ]
+                }
+            ]
+        },
+        "03a8a956-3582-4eb2-bdb0-1fd31b4fc3c7": {
+            "title": "Chat: Hello",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "Hello"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Chào bạn, mình là chuyên gia tư vấn tuyển sinh của Cao Thắng. Rất vui được hỗ trợ bạn!\n\nBạn cần mình giải đáp thông tin gì về ngành học, thủ tục hay các quy định tại trường không?",
+                    "sources": [
+                        "0306231172 23/12/2005: 17bbbb0d-0a59-4178-b9b6-8d8731f867d0: Title: Chat: Hello\nMessages: - Role: user\nContent: Hello\n- Role: assistant\nContent: Chào bạn, mình là chuyên gia tư vấn tuyển sinh của Cao ...",
+                        "Chuyen muc: Thủ tục hành chính\nTieu de: Hướng dẫn nộp Học phí\nNoi dung: - Cách 1: Nộp trực tiếp tại NH Agribank (Cung cấp Mã SV, tên trường CĐ Kỹ Thuật Cao Thắng, thu theo hình thức Bill Payment).\n- C...",
+                        "Chuyen muc: Nội quy và An toàn\nTieu de: An toàn lao động và Chữa cháy\nNoi dung: - An toàn hóa chất: Đóng nắp cẩn thận, tránh xa nguồn cháy.\n- An toàn thiết bị quay (Tiện, Phay): Phải mang kính bảo hộ,...",
+                        "Chuyen muc: Nội quy và An toàn\nTieu de: Nội quy Thực tập xưởng và 5S\nNoi dung: - Thực tập: Có mặt trước 10 phút, mang bảo hộ lao động. Tuyệt đối không tự ý vận hành máy khi chưa có lệnh. Cấm điện thoạ...",
+                        "Chuyen muc: Nội quy và An toàn\nTieu de: Thời gian học tập và Nội quy lớp học\nNoi dung: - Giờ học Lý thuyết: Sáng (06h30-11h30); Chiều (12h30-17h30); Tối (17h45-21h00).\n- Giờ Thực hành: Ca 1 (06h30-11h...",
+                        "Chuyen muc: Chế độ chính sách\nTieu de: Bảo hiểm Y tế (BHYT)\nNoi dung: - BHYT là BẮT BUỘC. Đóng 15 tháng (789.750đ) hoặc 12 tháng (631.800đ).\n- Nếu đã có thẻ BHYT diện khác (Hộ nghèo, thân nhân quân độ...",
+                        "Chuyen muc: Chế độ chính sách\nTieu de: Chính sách cho Nữ sinh kỹ thuật\nNoi dung: - Giảm 50% kinh phí đào tạo: Cao đẳng các ngành CNKT Cơ khí, Ô tô, Cơ điện tử, Nhiệt lạnh, Điện-Điện tử, Điều khiển & T...",
+                        "Id: 13\nTen nganh: Công nghệ Kỹ thuật Cơ điện tử (đạt chuẩn KOSEN-Nhật Bản)\nMa nganh: 6510304\nChuyen nganh: \nMuc tieu dao tao: - Làm trưởng nhóm bảo trì, lắp đặt, vận hành về cơ điện tử tại các doanh n...",
+                        "Id: 1\nTen nganh: Công nghệ Kỹ thuật Điện, Điện tử (đạt chuẩn ABET)\nMa nganh: 6510303\nChuyen nganh: - Chuyên ngành CNKT Điện công nghiệp\n- Chuyên ngành CNKT Điện tử công nghiệp\nMuc tieu dao tao: 1. Thà...",
+                        "Chuyen muc: Thủ tục hành chính\nTieu de: Xin giấy xác nhận và Làm thẻ Sinh viên\nNoi dung: - Đăng ký: Trực tuyến tại portal.caothang.edu.vn HOẶC trực tiếp tại Phòng CTCT-HSSV (Lầu 5 nhà F).\n- Lịch tiếp ...",
+                        "Id: 10\nTen nganh: Công nghệ Kỹ thuật Nhiệt (Cơ điện lạnh) (đạt chuẩn ABET)\nMa nganh: 6510211\nChuyen nganh: \nMuc tieu dao tao: Người tốt nghiệp từ chương trình Cao đẳng ngành Công nghệ kỹ thuật Nhiệt\n1...",
+                        "Id: 5\nTen nganh: Công nghệ Kỹ thuật Cơ khí (đạt chuẩn ABET)\nMa nganh: 6510201\nChuyen nganh: \nMuc tieu dao tao: Sinh viên sau khi tốt nghiệp ra trường làm việc từ 2 đến 3 năm có khả năng:\n- Thiết ..."
+                    ],
+                    "rating": "up"
                 }
             ]
         }

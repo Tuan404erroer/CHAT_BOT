@@ -36,7 +36,163 @@ class CustomHybridRetriever(BaseRetriever):
 # --- CẤU HÌNH GIAO DIỆN ---
 st.set_page_config(page_title="Tư Vấn Tuyển Sinh AI", page_icon="🎓", layout="wide")
 
-# Ẩn toàn bộ UI mặc định của Streamlit
+# --- ĐIỀU HƯỚNG BẰNG QUERY PARAMS ---
+page = st.query_params.get("page", "chat")
+
+if page == "admin":
+    # ==============================================================================
+    # TRANG ADMIN
+    # ==============================================================================
+    from datetime import datetime
+    
+    st.markdown("""
+    <style>
+        #MainMenu, footer, header, [data-testid="stToolbar"], [data-testid="stDecoration"], [data-testid="stStatusWidget"], [data-testid="stHeader"] { display: none !important; }
+        .stApp { overflow: hidden; }
+        .block-container, [data-testid="stMainBlockContainer"] { padding: 0 !important; max-width: 100% !important; overflow: hidden; }
+        [data-testid="stCustomComponentV1"], [data-testid="stCustomComponentV1"] > div, [data-testid="stCustomComponentV1"] iframe {
+            position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; border: none !important; z-index: 999;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    parent_dir = os.path.dirname(os.path.abspath(__file__))
+    frontend_admin_dir = os.path.join(parent_dir, "frontend_admin")
+    _admin_component = components.declare_component("admin_ui", path=frontend_admin_dir)
+    
+    HISTORY_FILE = "chat_history.json"
+    
+    def load_history():
+        if os.path.exists(HISTORY_FILE):
+            try:
+                with open(HISTORY_FILE, "r", encoding="utf-8") as f:
+                    return json.load(f)
+            except Exception:
+                return {}
+        return {}
+    
+    def compute_stats(history_data):
+        total_sessions = 0
+        total_questions = 0
+        total_rated = 0
+        total_up = 0
+        total_down = 0
+        
+        users_list = []
+        all_sessions = []
+        rated_messages = []
+        
+        for user_key, sessions in history_data.items():
+            user_session_count = len(sessions)
+            user_question_count = 0
+            
+            for session_id, session_info in sessions.items():
+                total_sessions += 1
+                messages = session_info.get("messages", [])
+                title = session_info.get("title", "Không có tiêu đề")
+                
+                session_questions = 0
+                session_up = 0
+                session_down = 0
+                session_no_rate = 0
+                
+                for i, msg in enumerate(messages):
+                    if msg.get("role") == "user":
+                        total_questions += 1
+                        session_questions += 1
+                        user_question_count += 1
+                    
+                    if msg.get("role") == "assistant":
+                        rating = msg.get("rating")
+                        if rating:
+                            total_rated += 1
+                            if rating == "up":
+                                total_up += 1
+                                session_up += 1
+                            elif rating == "down":
+                                total_down += 1
+                                session_down += 1
+                            
+                            question_content = ""
+                            if i > 0 and messages[i-1].get("role") == "user":
+                                question_content = messages[i-1].get("content", "")
+                            
+                            rated_messages.append({
+                                "user": user_key,
+                                "session_title": title,
+                                "question": question_content,
+                                "answer": msg.get("content", "")[:200] + "..." if len(msg.get("content", "")) > 200 else msg.get("content", ""),
+                                "rating": rating
+                            })
+                        else:
+                            session_no_rate += 1
+                
+                all_sessions.append({
+                    "user": user_key,
+                    "session_id": session_id,
+                    "title": title,
+                    "message_count": len(messages),
+                    "question_count": session_questions,
+                    "thumbs_up": session_up,
+                    "thumbs_down": session_down,
+                    "no_rating": session_no_rate,
+                    "messages": messages
+                })
+            
+            users_list.append({
+                "user_key": user_key,
+                "session_count": user_session_count,
+                "question_count": user_question_count
+            })
+        
+        satisfaction_rate = round((total_up / total_rated * 100), 1) if total_rated > 0 else 0
+        
+        knowledge_files = []
+        for entry in os.listdir("."):
+            if entry.lower().endswith(".json") and os.path.isfile(entry) and entry != "chat_history.json":
+                file_size = os.path.getsize(entry)
+                knowledge_files.append({
+                    "name": entry,
+                    "size_kb": round(file_size / 1024, 1)
+                })
+        for entry in os.listdir("."):
+            if entry.lower().endswith(".txt") and os.path.isfile(entry):
+                file_size = os.path.getsize(entry)
+                knowledge_files.append({
+                    "name": entry,
+                    "size_kb": round(file_size / 1024, 1)
+                })
+        
+        return {
+            "total_sessions": total_sessions,
+            "total_questions": total_questions,
+            "total_rated": total_rated,
+            "total_up": total_up,
+            "total_down": total_down,
+            "satisfaction_rate": satisfaction_rate,
+            "total_users": len(users_list),
+            "users": users_list,
+            "sessions": all_sessions,
+            "rated_messages": rated_messages,
+            "knowledge_files": knowledge_files,
+            "greeting_hour": datetime.now().hour
+        }
+
+    history_data = load_history()
+    stats = compute_stats(history_data)
+
+    _admin_component(
+        stats=json.dumps(stats, ensure_ascii=False),
+        key="admin",
+        default=None
+    )
+    
+    # Dừng chạy code bên dưới (phần chatbot)
+    st.stop()
+
+# ==============================================================================
+# TRANG CHATBOT (MẶC ĐỊNH)
+# ==============================================================================
 st.markdown("""
 <style>
     #MainMenu, footer, header,
@@ -422,6 +578,19 @@ if user_input is not None:
             st.session_state.current_session_id = user_input.get("session_id")
             session_info = st.session_state.history_data.get(user_key, {}).get(st.session_state.current_session_id, {})
             st.session_state.messages = session_info.get("messages", [])
+            st.rerun()
+            
+        elif action == "rate":
+            msg_index = user_input.get("message_index")
+            rating = user_input.get("rating")
+            if msg_index is not None and msg_index < len(st.session_state.messages):
+                st.session_state.messages[msg_index]["rating"] = rating
+                
+                user_history = st.session_state.history_data.get(user_key, {})
+                if st.session_state.current_session_id in user_history:
+                    user_history[st.session_state.current_session_id]["messages"] = st.session_state.messages
+                    save_history(st.session_state.history_data)
+                    
             st.rerun()
             
         elif action == "chat":
