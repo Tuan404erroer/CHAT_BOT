@@ -22,7 +22,8 @@
                         "Id: 1\nTen nganh: Công nghệ Kỹ thuật Điện, Điện tử (đạt chuẩn ABET)\nMa nganh: 6510303\nChuyen nganh: - Chuyên ngành CNKT Điện công nghiệp\n- Chuyên ngành CNKT Điện tử công nghiệp\nMuc tieu dao tao: 1. Thà...",
                         "Id: 10\nTen nganh: Công nghệ Kỹ thuật Nhiệt (Cơ điện lạnh) (đạt chuẩn ABET)\nMa nganh: 6510211\nChuyen nganh: \nMuc tieu dao tao: Người tốt nghiệp từ chương trình Cao đẳng ngành Công nghệ kỹ thuật Nhiệt\n1...",
                         "Id: 5\nTen nganh: Công nghệ Kỹ thuật Cơ khí (đạt chuẩn ABET)\nMa nganh: 6510201\nChuyen nganh: \nMuc tieu dao tao: Sinh viên sau khi tốt nghiệp ra trường làm việc từ 2 đến 3 năm có khả năng:\n- Thiết ..."
-                    ]
+                    ],
+                    "rating": "down"
                 }
             ]
         },
@@ -122,6 +123,63 @@
                         "Id: 5\nTen nganh: Công nghệ Kỹ thuật Cơ khí (đạt chuẩn ABET)\nMa nganh: 6510201\nChuyen nganh: \nMuc tieu dao tao: Sinh viên sau khi tốt nghiệp ra trường làm việc từ 2 đến 3 năm có khả năng:\n- Thiết ..."
                     ],
                     "rating": "up"
+                }
+            ]
+        },
+        "5f018612-6ca4-45b9-8713-b8c522ebcc5e": {
+            "title": "Chat: Bạn nhiêu tuổi?",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "Bạn nhiêu tuổi?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Chào bạn, mình là trợ lý ảo được xây dựng để hỗ trợ tư vấn tuyển sinh cho Cao Thắng, vì vậy mình không có tuổi như con người.\n\nBạn có cần mình hỗ trợ thêm thông tin về các ngành học hay thủ tục xét tuyển tại trường không?",
+                    "sources": [
+                        "Id: 6\nQuestion: Câu 6: Xét học bạ thì khoảng bao nhiêu điểm trúng tuyển?\nAnswer: Điểm trúng tuyển tùy theo ngành, nghề mà thí sinh đăng ký. Để không bỏ lỡ cơ hội, thí sinh nên nộp hồ sơ xét tuyển vào ...",
+                        "Id: 9\nQuestion: Câu 9: Năm 2026, Trường tuyển bao nhiêu thí sinh dựa vào học bạ THPT?\nAnswer: Chỉ tiêu của Trường là 4.800 (dự kiến), Trường dành khoảng 60% chỉ tiêu (dự kiến) để xét học bạ THPT – 4 h...",
+                        "Id: 8\nQuestion: Câu 8: Năm 2026, Trường tuyển bao nhiêu thí sinh dựa vào kết quả kỳ thi đánh giá năng lực của ĐHQG Tp.HCM?\nAnswer: Chỉ tiêu của Trường là 4.800 (dự kiến), Trường dành khoảng 5% chỉ tiê...",
+                        "0306231172 23/12/2005: 17bbbb0d-0a59-4178-b9b6-8d8731f867d0: Title: Chat: Hello\nMessages: - Role: user\nContent: Hello\n- Role: assistant\nContent: Chào bạn, mình là chuyên gia tư vấn tuyển sinh của Cao ...",
+                        "Id: 2\nQuestion: Câu 2: Em thấy nhà trường có phương thức xét tuyển thẳng, với phương thức này thì nhà trường dành bao nhiêu chỉ tiêu và khi nào nhận hồ sơ xét tuyển?\nAnswer: Đối với xét tuyển thẳng nh...",
+                        "Chuyen muc: Thủ tục hành chính\nTieu de: Hướng dẫn nộp Học phí\nNoi dung: - Cách 1: Nộp trực tiếp tại NH Agribank (Cung cấp Mã SV, tên trường CĐ Kỹ Thuật Cao Thắng, thu theo hình thức Bill Payment).\n- C...",
+                        "Chuyen muc: Nội quy và An toàn\nTieu de: An toàn lao động và Chữa cháy\nNoi dung: - An toàn hóa chất: Đóng nắp cẩn thận, tránh xa nguồn cháy.\n- An toàn thiết bị quay (Tiện, Phay): Phải mang kính bảo hộ,...",
+                        "Id: 26\nQuestion: Câu 26: Thí sinh muốn biết mình có trúng tuyển các ngành, nghề đào tạo hay không phải làm sao?\nAnswer: - Trường dự kiến công bố kết quả trúng tuyển các ngành, nghề đào tạo như sau:\n+ ...",
+                        "Id: 25\nQuestion: Câu 25: Đến khi thi tốt nghiệp THPT xong mới nộp hồ sơ vào trường mình như vậy có trễ quá không? hay là em phải đăng ký online sớm để giữ chỗ?\nAnswer: - Thời gian đăng ký xét tuyển cá...",
+                        "Id: 15\nQuestion: Câu 15: Thí sinh có được thay đổi ngành, nghề đã đăng ký không?\nAnswer: - Thí sinh được thay đổi ngành, nghề đã đăng ký trước khi hết hạn đăng ký xét tuyển tương ứng với từng phương t...",
+                        "Id: 19\nTen nganh: Bảo trì, sửa chữa Ô tô (Công nghệ Ô tô)\nMa nganh: 6510216\nChuyen nganh: \nMuc tieu dao tao: Sau 2 đến 3 năm, người tốt nghiệp có khả năng:\n- Thành viên chính trong lĩnh vực bảo dưỡng ...",
+                        "Id: 17\nTen nganh: Hàn (Công nghệ cao)\nMa nganh: 6520123\nChuyen nganh: \nMuc tieu dao tao: Sinh viên sau khi tốt nghiệp ra trường làm việc từ 2 đến 3 năm có khả năng: \n- Tiếp nhận và ứng dụng công n...",
+                        "Id: 14\nTen nganh: Kế toán tin học (Kế toán doanh nghiệp)\nMa nganh: 6340302\nChuyen nganh: \nMuc tieu dao tao: Sinh viên sau khi tốt nghiệp ra trường làm việc từ 2 đến 3 năm có khả năng:\n1. Trưởng, p...",
+                        "Id: 3\nTen nganh: Công nghệ Kỹ thuật Điện tử - Viễn thông (Điện tử, Truyền thông)\nMa nganh: 6510312\nChuyen nganh: \nMuc tieu dao tao: Sau khi tốt nghiệp chương trình đào tạo CNKT Điện tử - Viễn thông từ..."
+                    ]
+                }
+            ]
+        },
+        "8c9431c9-52b8-431d-9a3f-5ede64c440df": {
+            "title": "Chat: Phốt trường Bách Kha...",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "Phốt trường Bách Khao!!"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Chào bạn, mình là chuyên gia tư vấn tuyển sinh của Trường Cao đẳng Kỹ thuật Cao Thắng.\n\nRất tiếc, mình không có thông tin về các vấn đề liên quan đến các đơn vị khác. Mình chỉ tập trung hỗ trợ giải đáp các thắc mắc về quy chế, ngành nghề và thông tin tuyển sinh tại trường mình.\n\nBạn có cần mình hỗ trợ thêm thông tin về các ngành đào tạo hoặc thủ tục xét tuyển tại trường không?",
+                    "sources": [
+                        "Id: 22\nQuestion: Câu 22: Khi thí sinh tốt nghiệp các ngành/nghề đào tạo, có được học liên thông lên các bậc cao hơn không?\nAnswer: - Sau khi tốt nghiệp, thí sinh được học liên thông lên trình độ cao h...",
+                        "Chuyen muc: Quy định học phần\nTieu de: Ứng dụng CNTT cơ bản và CAD\nNoi dung: - Ứng dụng CNTT (5 ĐVHT): Học/Thi tại TT Tin học. Miễn học nếu có chứng chỉ tương đương (ICDL, MOS, IC3 hoặc chứng chỉ ĐH B...",
+                        "Id: 20\nQuestion: Câu 20: Thí sinh muốn biết các ngành, nghề trong trường được đào tạo như thế nào? Ra trường có xin được việc làm hay không? Làm ở đâu?\nAnswer: - Thí sinh có thể truy cập website của t...",
+                        "Id: 18\nQuestion: Câu 18: Trong trường hợp thí sinh trúng tuyển vào trường nhưng thí sinh không học mà muốn bảo lưu có được không?\nAnswer: - Thí sinh muốn bảo lưu thì phải nằm trong những trường hợp đư...",
+                        "Id: 24\nQuestion: Câu 24: Ký hiệu của trường mình là gì vậy?\nAnswer: Ký hiệu trường CĐKT Cao Thắng là: CKC\n(Trường Cao đẳng Kỹ thuật Cao Thắng xét tuyển bằng phần mềm riêng của Trường. Thí sinh muốn đă...",
+                        "Id: 2\nQuestion: Câu 2: Em thấy nhà trường có phương thức xét tuyển thẳng, với phương thức này thì nhà trường dành bao nhiêu chỉ tiêu và khi nào nhận hồ sơ xét tuyển?\nAnswer: Đối với xét tuyển thẳng nh...",
+                        "Id: 16\nQuestion: Câu 16: Khi thí sinh đăng ký xét tuyển thì làm sao thí sinh biết được hồ sơ của mình đã được nhận?\nAnswer: + Nếu đăng ký xét tuyển trực tiếp tại trường, thí sinh sẽ nhận được biên nhậ...",
+                        "Id: 17\nTen nganh: Hàn (Công nghệ cao)\nMa nganh: 6520123\nChuyen nganh: \nMuc tieu dao tao: Sinh viên sau khi tốt nghiệp ra trường làm việc từ 2 đến 3 năm có khả năng: \n- Tiếp nhận và ứng dụng công n...",
+                        "Chuyen muc: Quy ước mã đào tạo\nTieu de: Mã bậc và Mã ngành/nghề\nNoi dung: - Bậc Cao đẳng (Ngành): Mã 03. Bậc Cao đẳng (Nghề): Mã 04.\n- Một số mã ngành tiêu biểu: Cơ khí (01), Ô tô (02), Điện-Điện tử (...",
+                        "Chuyen muc: Thủ tục hành chính\nTieu de: Hướng dẫn nộp Học phí\nNoi dung: - Cách 1: Nộp trực tiếp tại NH Agribank (Cung cấp Mã SV, tên trường CĐ Kỹ Thuật Cao Thắng, thu theo hình thức Bill Payment).\n- C...",
+                        "Chuyen muc: Quy chế đào tạo\nTieu de: Điều kiện học tiếp, ngừng học và thôi học\nNoi dung: - Điều kiện học tiếp: Điểm TB năm >= 5.0 VÀ nợ không quá 25 ĐVHT (tính từ đầu khóa).\n- Ngừng học 1 năm: Dành ch...",
+                        "Id: 13\nTen nganh: Công nghệ Kỹ thuật Cơ điện tử (đạt chuẩn KOSEN-Nhật Bản)\nMa nganh: 6510304\nChuyen nganh: \nMuc tieu dao tao: - Làm trưởng nhóm bảo trì, lắp đặt, vận hành về cơ điện tử tại các doanh n...",
+                        "Chuyen muc: Chế độ chính sách\nTieu de: Chính sách cho Nữ sinh kỹ thuật\nNoi dung: - Giảm 50% kinh phí đào tạo: Cao đẳng các ngành CNKT Cơ khí, Ô tô, Cơ điện tử, Nhiệt lạnh, Điện-Điện tử, Điều khiển & T..."
+                    ]
                 }
             ]
         }

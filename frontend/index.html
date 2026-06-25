@@ -125,39 +125,57 @@
         }
 
         /* ============================================= */
-        
-        /* OVERLAY LOGIN */
-        .login-overlay {
+
+        /* LOGIN MODAL (popup, not full overlay) */
+        .login-modal-backdrop {
             position: fixed;
             inset: 0;
-            background: var(--bg-primary);
-            z-index: 9999;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 10000;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
             padding: 20px;
+            opacity: 1;
+            transition: opacity 0.3s ease;
         }
-        .login-overlay[hidden] { display: none !important; }
+
+        .login-modal-backdrop.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
         .login-box {
             background: var(--bg-secondary);
             padding: 40px;
             border-radius: 20px;
             border: 1px solid var(--divider);
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-lg), 0 0 60px rgba(99, 102, 241, 0.15);
             width: 100%;
             max-width: 420px;
             text-align: center;
+            transform: translateY(0) scale(1);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
         }
+
+        .login-modal-backdrop.hidden .login-box {
+            transform: translateY(20px) scale(0.95);
+            opacity: 0;
+        }
+
         .login-box h2 {
             margin-bottom: 8px;
             color: var(--text-primary);
         }
+
         .login-box p {
             margin-bottom: 24px;
             color: var(--text-secondary);
             font-size: 0.95rem;
         }
+
         .login-box input {
             width: 100%;
             padding: 14px;
@@ -168,7 +186,8 @@
             color: var(--text-primary);
             font-family: inherit;
         }
-        .login-box button {
+
+        .login-box .login-submit-btn {
             width: 100%;
             padding: 14px;
             background: var(--accent);
@@ -179,15 +198,207 @@
             cursor: pointer;
             transition: all 0.2s ease;
         }
-        .login-box button:hover { opacity: 0.9; }
-        
+
+        .login-box .login-submit-btn:hover {
+            opacity: 0.9;
+        }
+
+        .login-box .login-close-btn {
+            margin-top: 12px;
+            padding: 10px;
+            background: transparent;
+            border: 1px solid var(--divider);
+            border-radius: 10px;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.85rem;
+            width: 100%;
+            transition: all 0.2s;
+        }
+
+        .login-box .login-close-btn:hover {
+            background: var(--bg-surface-hover);
+            color: var(--text-secondary);
+        }
+
+        /* HEADER LOGIN BUTTON */
+        .header-login-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+        }
+
+        .header-login-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.45);
+        }
+
+        .header-user-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: var(--accent-dim);
+            border: 1px solid var(--accent-border);
+            border-radius: 10px;
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .header-logout-btn {
+            padding: 8px 12px;
+            background: transparent;
+            border: 1px solid var(--divider);
+            border-radius: 10px;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .header-logout-btn:hover {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        /* AUTH DROPDOWN */
+        .auth-dropdown-wrap {
+            position: relative;
+        }
+
+        .auth-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            min-width: 220px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--divider);
+            border-radius: 14px;
+            box-shadow: var(--shadow-lg), 0 0 40px rgba(0, 0, 0, 0.2);
+            padding: 6px;
+            z-index: 100;
+            opacity: 0;
+            transform: translateY(-6px) scale(0.97);
+            pointer-events: none;
+            transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .auth-dropdown.open {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
+        .auth-dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px 14px;
+            background: transparent;
+            border: none;
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 0.88rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            font-family: inherit;
+        }
+
+        .auth-dropdown-item:hover {
+            background: var(--bg-surface-hover);
+        }
+
+        .auth-dropdown-item .item-icon {
+            font-size: 1.1rem;
+            width: 24px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .auth-dropdown-item .item-label {
+            flex: 1;
+            text-align: left;
+        }
+
+        .auth-dropdown-item .item-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-align: left;
+        }
+
+        .auth-dropdown-item.danger:hover {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+
+        .auth-dropdown-divider {
+            height: 1px;
+            background: var(--divider);
+            margin: 4px 8px;
+        }
+
+        /* SIDEBAR GUEST STATE */
+        .sidebar-guest-prompt {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            padding: 30px 20px;
+            text-align: center;
+            gap: 16px;
+        }
+
+        .sidebar-guest-prompt .guest-icon {
+            font-size: 2.5rem;
+            filter: drop-shadow(0 0 12px rgba(99, 102, 241, 0.3));
+        }
+
+        .sidebar-guest-prompt p {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        .sidebar-login-btn {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+        }
+
+        .sidebar-login-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.45);
+        }
+
         /* APP LAYOUT */
         .main-wrapper {
             display: flex;
             height: 100vh;
             width: 100vw;
         }
-        .main-wrapper[hidden] { display: none !important; }
 
         .sidebar {
             width: 280px;
@@ -196,17 +407,44 @@
             display: flex;
             flex-direction: column;
             flex-shrink: 0;
+            transition: margin-left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
+
+        .sidebar.collapsed {
+            margin-left: -280px;
+        }
+
+        .sidebar-toggle-btn {
+            width: 38px;
+            height: 38px;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+            transition: all 0.25s ease;
+        }
+
+        .sidebar-toggle-btn:hover {
+            background: var(--bg-surface-hover);
+            color: var(--text-primary);
+        }
+
         .sidebar-header {
             padding: 20px;
             border-bottom: 1px solid var(--divider);
         }
+
         .sidebar-header .user-info {
             font-weight: 600;
             margin-bottom: 12px;
             color: var(--accent);
             text-align: left;
         }
+
         .new-chat-btn {
             width: 100%;
             padding: 12px;
@@ -218,10 +456,12 @@
             font-weight: 500;
             transition: 0.2s;
         }
+
         .new-chat-btn:hover {
             background: var(--accent-dim);
             border-color: var(--accent);
         }
+
         .history-list {
             flex: 1;
             overflow-y: auto;
@@ -230,6 +470,7 @@
             flex-direction: column;
             gap: 4px;
         }
+
         .history-item {
             padding: 12px;
             border-radius: 8px;
@@ -243,16 +484,22 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .history-item:hover { background: var(--bg-surface); }
+
+        .history-item:hover {
+            background: var(--bg-surface);
+        }
+
         .history-item.active {
             background: var(--accent-dim);
             border: 1px solid var(--accent-border);
             color: var(--accent);
         }
+
         .sidebar-footer {
             padding: 20px;
             border-top: 1px solid var(--divider);
         }
+
         .logout-btn {
             width: 100%;
             padding: 10px;
@@ -262,6 +509,7 @@
             color: var(--text-secondary);
             cursor: pointer;
         }
+
         .logout-btn:hover {
             background: rgba(239, 68, 68, 0.1);
             color: #ef4444;
@@ -328,17 +576,20 @@
         /* ============================================= */
         /*  LAYOUT                                       */
         /* ============================================= */
-       .app-container {
+        .app-container {
             display: flex;
             flex-direction: column;
             height: 100vh;
             position: relative;
             z-index: 1;
-    
-    /* THÊM 2 DÒNG NÀY VÀO */
-            flex: 1;        /* Ép nó chiếm nốt toàn bộ khoảng trống bên phải của Sidebar */
-            width: 100%;    /* Đảm bảo bung hết cỡ ngang */
-        }   
+
+            /* THÊM 2 DÒNG NÀY VÀO */
+            flex: 1;
+            /* Ép nó chiếm nốt toàn bộ khoảng trống bên phải của Sidebar */
+            width: 100%;
+            /* Đảm bảo bung hết cỡ ngang */
+        }
+
         /* ============================================= */
         /*  HEADER                                       */
         /* ============================================= */
@@ -382,27 +633,7 @@
             gap: 12px;
         }
 
-        .admin-link-btn {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 14px;
-            background: var(--bg-surface);
-            border: 1px solid var(--divider);
-            border-radius: 10px;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.25s ease;
-        }
-
-        .admin-link-btn:hover {
-            background: var(--accent-dim);
-            border-color: var(--accent-border);
-            color: var(--accent);
-            transform: translateY(-1px);
-        }
+        /* admin-link-btn removed — merged into auth dropdown */
 
         .theme-btn {
             width: 38px;
@@ -1073,387 +1304,547 @@
 <body>
 
 
-    <!-- LOGIN SCREEN -->
-    <div id="loginScreen" class="login-overlay">
+    <!-- LOGIN MODAL (hidden by default) -->
+    <div id="loginModal" class="login-modal-backdrop hidden">
         <div class="login-box">
             <h2>🎓 Cổng Tư Vấn AI</h2>
-            <p>Vui lòng đăng nhập để tiếp tục</p>
+            <p>Đăng nhập để lưu và xem lại lịch sử trò chuyện</p>
             <input type="text" id="loginMssv" placeholder="Mã số sinh viên (MSSV) / SĐT">
             <input type="text" id="loginDob" placeholder="Ngày sinh (VD: 01/01/2005)">
-            <button id="loginBtn">Đăng nhập</button>
+            <button class="login-submit-btn" id="loginBtn">Đăng nhập</button>
+            <button class="login-close-btn" id="loginCloseBtn">Đóng</button>
         </div>
     </div>
 
-    <div class="main-wrapper" id="mainWrapper" hidden>
+    <div class="main-wrapper" id="mainWrapper">
         <!-- SIDEBAR -->
         <div class="sidebar">
-            <div class="sidebar-header">
-                <div class="user-info" id="userInfoDisplay">Chào bạn: ...</div>
-                <button class="new-chat-btn" id="newChatBtn">➕ Cuộc trò chuyện mới</button>
+            <!-- Logged-in sidebar content -->
+            <div id="sidebarLoggedIn" style="display:none; flex-direction:column; height:100%;">
+                <div class="sidebar-header">
+                    <div class="user-info" id="userInfoDisplay">Chào bạn: ...</div>
+                    <button class="new-chat-btn" id="newChatBtn">➕ Cuộc trò chuyện mới</button>
+                </div>
+                <div class="history-list" id="historyList">
+                    <!-- History injected via JS -->
+                </div>
+                <div class="sidebar-footer">
+                    <button class="logout-btn" id="logoutBtn">Đăng xuất</button>
+                </div>
             </div>
-            <div class="history-list" id="historyList">
-                <!-- History injected via JS -->
-            </div>
-            <div class="sidebar-footer">
-                <button class="logout-btn" id="logoutBtn">Đăng xuất</button>
-            </div>
-        </div>
-
-
-    <!-- Loading overlay -->
-    <div class="loading-overlay" id="loading-overlay">
-        <div style="text-align:center">
-            <div class="loading-spinner"></div>
-            <div class="loading-text">Đang kết nối...</div>
-        </div>
-    </div>
-
-    <div class="app-container">
-        <!-- Header -->
-        <header class="app-header">
-            <div class="header-left">
-                <span class="logo-emoji">🤖</span>
-                <h1>AI Tư Vấn Tuyển Sinh</h1>
-            </div>
-            <div class="header-right">
-                <a href="/?page=admin" target="_blank" class="admin-link-btn" title="Đi tới trang Admin">
-                    ⚙️ Admin
-                </a>
-                <button class="theme-btn" id="theme-toggle" title="Chuyển đổi giao diện">
-                    <span id="theme-icon">🌙</span>
-                </button>
-            </div>
-        </header>
-
-        <!-- Info Banner -->
-        <div class="info-banner">
-            <span class="info-icon">ℹ️</span>
-            <span>Hệ thống RAG đã được nâng cấp lên Hybrid Search: Khắc phục lỗi bỏ sót từ khóa.</span>
-        </div>
-
-        <!-- Chat Container -->
-        <div class="chat-container" id="chat-container">
-            <div id="messages-area"></div>
-
-            <!-- Typing Indicator -->
-            <div class="typing-indicator" id="typing-indicator">
-                <div class="typing-avatar">🤖</div>
-                <div class="typing-dots">
-                    <div class="typing-dot"></div>
-                    <div class="typing-dot"></div>
-                    <div class="typing-dot"></div>
+            <!-- Guest sidebar content -->
+            <div id="sidebarGuest" style="display:flex; flex-direction:column; height:100%;">
+                <div class="sidebar-header">
+                    <div class="user-info" style="color: var(--text-secondary);">👋 Chế độ khách</div>
+                </div>
+                <div class="sidebar-guest-prompt">
+                    <div class="guest-icon">🔐</div>
+                    <p>Đăng nhập để lưu lịch sử trò chuyện và xem lại các cuộc hội thoại trước.</p>
+                    <button class="sidebar-login-btn" id="sidebarLoginBtn">🔑 Đăng nhập ngay</button>
                 </div>
             </div>
         </div>
 
-        <!-- Input Area -->
-        <div class="input-area">
-            <div class="input-wrapper">
-                <textarea id="user-input" placeholder="Bạn muốn hỏi gì về kỳ tuyển sinh năm nay?" rows="1"></textarea>
-                <button class="send-btn" id="send-btn" title="Gửi tin nhắn">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <line x1="22" y1="2" x2="11" y2="13"></line>
-                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                    </svg>
-                </button>
+
+        <!-- Loading overlay -->
+        <div class="loading-overlay" id="loading-overlay">
+            <div style="text-align:center">
+                <div class="loading-spinner"></div>
+                <div class="loading-text">Đang kết nối...</div>
             </div>
         </div>
-    </div>
 
-    <!-- Markdown library -->
-    <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+        <div class="app-container">
+            <!-- Header -->
+            <header class="app-header">
+                <div class="header-left">
+                    <button class="sidebar-toggle-btn" id="sidebarToggleBtn" title="Đóng/Mở thanh bên">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                    <span class="logo-emoji">🤖</span>
+                    <h1>AI Tư Vấn Tuyển Sinh</h1>
+                </div>
+                <div class="header-right">
+                    <!-- Auth dropdown area -->
+                    <div class="auth-dropdown-wrap" id="headerAuthArea">
+                        <button class="header-login-btn" id="headerLoginBtn" title="Đăng nhập">
+                            🔑 Đăng nhập
+                        </button>
+                        <div class="auth-dropdown" id="authDropdown">
+                            <button class="auth-dropdown-item" id="ddLoginUser">
+                                <span class="item-icon">👤</span>
+                                <span class="item-label">Đăng nhập Người dùng</span>
+                            </button>
+                            <div class="auth-dropdown-divider"></div>
+                            <a href="/?page=admin" target="_blank" class="auth-dropdown-item" id="ddLoginAdmin">
+                                <span class="item-icon">⚙️</span>
+                                <span class="item-label">Đăng nhập Admin</span>
+                            </a>
+                        </div>
+                    </div>
+                    <button class="theme-btn" id="theme-toggle" title="Chuyển đổi giao diện">
+                        <span id="theme-icon">🌙</span>
+                    </button>
+                </div>
+            </header>
 
-    <script>
-        /* ========================================================= */
-        /*  STREAMLIT COMPONENT PROTOCOL                             */
-        /* ========================================================= */
-        const StreamlitApi = {
-            setComponentReady() {
-                window.parent.postMessage({
-                    isStreamlitMessage: true,
-                    type: "streamlit:componentReady",
-                    apiVersion: 1
-                }, "*");
-            },
-            setFrameHeight(h) {
-                window.parent.postMessage({
-                    isStreamlitMessage: true,
-                    type: "streamlit:setFrameHeight",
-                    height: h
-                }, "*");
-            },
-            setComponentValue(val) {
-                window.parent.postMessage({
-                    isStreamlitMessage: true,
-                    type: "streamlit:setComponentValue",
-                    value: val,
-                    dataType: "json"
-                }, "*");
+            <!-- Info Banner -->
+            <div class="info-banner">
+                <span class="info-icon">ℹ️</span>
+                <span>Hệ thống RAG đã được nâng cấp lên Hybrid Search: Khắc phục lỗi bỏ sót từ khóa.</span>
+            </div>
+
+            <!-- Chat Container -->
+            <div class="chat-container" id="chat-container">
+                <div id="messages-area"></div>
+
+                <!-- Typing Indicator -->
+                <div class="typing-indicator" id="typing-indicator">
+                    <div class="typing-avatar">🤖</div>
+                    <div class="typing-dots">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area">
+                <div class="input-wrapper">
+                    <textarea id="user-input" placeholder="Bạn muốn hỏi gì về kỳ tuyển sinh năm nay?"
+                        rows="1"></textarea>
+                    <button class="send-btn" id="send-btn" title="Gửi tin nhắn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Markdown library -->
+        <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+
+        <script>
+            /* ========================================================= */
+            /*  STREAMLIT COMPONENT PROTOCOL                             */
+            /* ========================================================= */
+            const StreamlitApi = {
+                setComponentReady() {
+                    window.parent.postMessage({
+                        isStreamlitMessage: true,
+                        type: "streamlit:componentReady",
+                        apiVersion: 1
+                    }, "*");
+                },
+                setFrameHeight(h) {
+                    window.parent.postMessage({
+                        isStreamlitMessage: true,
+                        type: "streamlit:setFrameHeight",
+                        height: h
+                    }, "*");
+                },
+                setComponentValue(val) {
+                    window.parent.postMessage({
+                        isStreamlitMessage: true,
+                        type: "streamlit:setComponentValue",
+                        value: val,
+                        dataType: "json"
+                    }, "*");
+                }
+            };
+
+            /* ========================================================= */
+            /*  STATE                                                    */
+            /* ========================================================= */
+            let messages = [];
+            let isProcessing = false;
+            let isDarkMode = true;
+            let componentReady = false;
+
+            const loginModal = document.getElementById("loginModal");
+            const loginBtn = document.getElementById("loginBtn");
+            const loginCloseBtn = document.getElementById("loginCloseBtn");
+            const loginMssv = document.getElementById("loginMssv");
+            const loginDob = document.getElementById("loginDob");
+            const headerLoginBtn = document.getElementById("headerLoginBtn");
+            const headerAuthArea = document.getElementById("headerAuthArea");
+            const sidebarLoginBtn = document.getElementById("sidebarLoginBtn");
+            const sidebarLoggedIn = document.getElementById("sidebarLoggedIn");
+            const sidebarGuest = document.getElementById("sidebarGuest");
+            const userInfoDisplay = document.getElementById("userInfoDisplay");
+            const newChatBtn = document.getElementById("newChatBtn");
+            const logoutBtn = document.getElementById("logoutBtn");
+            const historyList = document.getElementById("historyList");
+
+            let currentSessionId = null;
+            let isLoggedIn = false;
+
+            // Show/hide login modal
+            function openLoginModal() {
+                loginModal.classList.remove("hidden");
+                loginMssv.focus();
             }
-        };
-
-        /* ========================================================= */
-        /*  STATE                                                    */
-        /* ========================================================= */
-        let messages = [];
-        let isProcessing = false;
-        let isDarkMode = true;
-        let componentReady = false;
-
-        const loginScreen = document.getElementById("loginScreen");
-        const mainWrapper = document.getElementById("mainWrapper");
-        const loginBtn = document.getElementById("loginBtn");
-        const loginMssv = document.getElementById("loginMssv");
-        const loginDob = document.getElementById("loginDob");
-        const userInfoDisplay = document.getElementById("userInfoDisplay");
-        const newChatBtn = document.getElementById("newChatBtn");
-        const logoutBtn = document.getElementById("logoutBtn");
-        const historyList = document.getElementById("historyList");
-
-        let currentSessionId = null;
-
-        loginBtn.addEventListener("click", () => {
-            const mssv = loginMssv.value.trim();
-            const dob = loginDob.value.trim();
-            if (mssv && dob) {
-                StreamlitApi.setComponentValue({ action: "login", mssv, dob, timestamp: Date.now() });
-            } else {
-                alert("Vui lòng điền đủ MSSV và ngày sinh!");
+            function closeLoginModal() {
+                loginModal.classList.add("hidden");
             }
-        });
 
-        logoutBtn.addEventListener("click", () => {
-            StreamlitApi.setComponentValue({ action: "logout", timestamp: Date.now() });
-        });
+            headerLoginBtn.addEventListener("click", openLoginModal);
+            sidebarLoginBtn.addEventListener("click", openLoginModal);
+            loginCloseBtn.addEventListener("click", closeLoginModal);
 
-        newChatBtn.addEventListener("click", () => {
-            StreamlitApi.setComponentValue({ action: "new_session", timestamp: Date.now() });
-        });
+            // Close modal on backdrop click
+            loginModal.addEventListener("click", (e) => {
+                if (e.target === loginModal) closeLoginModal();
+            });
 
-        function renderHistoryDOM(historyStr, activeId) {
-            historyList.innerHTML = "";
-            let historyObj = {};
-            try { historyObj = JSON.parse(historyStr); } catch (e) {}
-            
-            const keys = Object.keys(historyObj).reverse();
-            for (let id of keys) {
-                const sessionInfo = historyObj[id];
-                const btn = document.createElement("button");
-                btn.className = "history-item";
-                if (id === activeId) btn.classList.add("active");
-                btn.textContent = sessionInfo.title || "Đoạn chat";
-                btn.onclick = () => {
-                    StreamlitApi.setComponentValue({ action: "load_session", session_id: id, timestamp: Date.now() });
-                };
-                historyList.appendChild(btn);
+            loginBtn.addEventListener("click", () => {
+                const mssv = loginMssv.value.trim();
+                const dob = loginDob.value.trim();
+                if (mssv && dob) {
+                    StreamlitApi.setComponentValue({ action: "login", mssv, dob, timestamp: Date.now() });
+                    closeLoginModal();
+                } else {
+                    alert("Vui lòng điền đủ MSSV và ngày sinh!");
+                }
+            });
+
+            logoutBtn.addEventListener("click", () => {
+                StreamlitApi.setComponentValue({ action: "logout", timestamp: Date.now() });
+            });
+
+            newChatBtn.addEventListener("click", () => {
+                StreamlitApi.setComponentValue({ action: "new_session", timestamp: Date.now() });
+            });
+
+            // Dropdown toggle logic
+            const authDropdown = document.getElementById("authDropdown");
+            let dropdownOpen = false;
+
+            function toggleDropdown() {
+                dropdownOpen = !dropdownOpen;
+                authDropdown.classList.toggle("open", dropdownOpen);
             }
-        }
+            function closeDropdown() {
+                dropdownOpen = false;
+                authDropdown.classList.remove("open");
+            }
+
+            // Close dropdown when clicking outside
+            document.addEventListener("click", (e) => {
+                if (!headerAuthArea.contains(e.target)) closeDropdown();
+            });
+
+            // Initial wiring for guest state
+            headerLoginBtn.addEventListener("click", toggleDropdown);
+            document.getElementById("ddLoginUser").addEventListener("click", () => {
+                closeDropdown();
+                openLoginModal();
+            });
+
+            function updateAuthUI(loggedIn, mssv) {
+                isLoggedIn = loggedIn;
+                closeDropdown();
+                if (loggedIn) {
+                    // Header: show user badge with dropdown
+                    headerAuthArea.innerHTML = `
+                        <button class="header-user-badge" id="headerUserBtn" style="cursor:pointer;">
+                            👤 ${mssv} ▾
+                        </button>
+                        <div class="auth-dropdown" id="authDropdown">
+                            <a href="/?page=admin" target="_blank" class="auth-dropdown-item">
+                                <span class="item-icon">⚙️</span>
+                                <span class="item-label">Trang Admin</span>
+                            </a>
+                            <div class="auth-dropdown-divider"></div>
+                            <button class="auth-dropdown-item danger" id="ddLogout">
+                                <span class="item-icon">🚪</span>
+                                <span class="item-label">Đăng xuất</span>
+                            </button>
+                        </div>
+                    `;
+                    // Re-wire dropdown
+                    const newDropdown = document.getElementById("authDropdown");
+                    document.getElementById("headerUserBtn").addEventListener("click", () => {
+                        dropdownOpen = !dropdownOpen;
+                        newDropdown.classList.toggle("open", dropdownOpen);
+                    });
+                    document.getElementById("ddLogout").addEventListener("click", () => {
+                        StreamlitApi.setComponentValue({ action: "logout", timestamp: Date.now() });
+                    });
+                    // Sidebar: show logged-in content
+                    userInfoDisplay.textContent = "Chào bạn: " + mssv;
+                    sidebarLoggedIn.style.display = "flex";
+                    sidebarGuest.style.display = "none";
+                } else {
+                    // Header: show login button with dropdown
+                    headerAuthArea.innerHTML = `
+                        <button class="header-login-btn" id="headerLoginBtn" title="Đăng nhập">
+                            🔑 Đăng nhập
+                        </button>
+                        <div class="auth-dropdown" id="authDropdown">
+                            <button class="auth-dropdown-item" id="ddLoginUser">
+                                <span class="item-icon">👤</span>
+                                <span class="item-label">Đăng nhập Người dùng</span>
+                            </button>
+                            <div class="auth-dropdown-divider"></div>
+                            <a href="/?page=admin" target="_blank" class="auth-dropdown-item" id="ddLoginAdmin">
+                                <span class="item-icon">⚙️</span>
+                                <span class="item-label">Đăng nhập Admin</span>
+                            </a>
+                        </div>
+                    `;
+                    const newDropdown = document.getElementById("authDropdown");
+                    document.getElementById("headerLoginBtn").addEventListener("click", () => {
+                        dropdownOpen = !dropdownOpen;
+                        newDropdown.classList.toggle("open", dropdownOpen);
+                    });
+                    document.getElementById("ddLoginUser").addEventListener("click", () => {
+                        closeDropdown();
+                        openLoginModal();
+                    });
+                    // Sidebar: show guest prompt
+                    sidebarLoggedIn.style.display = "none";
+                    sidebarGuest.style.display = "flex";
+                }
+            }
+
+            function renderHistoryDOM(historyStr, activeId) {
+                historyList.innerHTML = "";
+                let historyObj = {};
+                try { historyObj = JSON.parse(historyStr); } catch (e) { }
+
+                const keys = Object.keys(historyObj).reverse();
+                for (let id of keys) {
+                    const sessionInfo = historyObj[id];
+                    const btn = document.createElement("button");
+                    btn.className = "history-item";
+                    if (id === activeId) btn.classList.add("active");
+                    btn.textContent = sessionInfo.title || "Đoạn chat";
+                    btn.onclick = () => {
+                        StreamlitApi.setComponentValue({ action: "load_session", session_id: id, timestamp: Date.now() });
+                    };
+                    historyList.appendChild(btn);
+                }
+            }
 
 
-        /* ========================================================= */
-        /*  DOM REFS                                                 */
-        /* ========================================================= */
-        const messagesArea = document.getElementById("messages-area");
-        const chatContainer = document.getElementById("chat-container");
-        const typingIndicator = document.getElementById("typing-indicator");
-        const userInput = document.getElementById("user-input");
-        const sendBtn = document.getElementById("send-btn");
-        const themeToggle = document.getElementById("theme-toggle");
-        const themeIcon = document.getElementById("theme-icon");
-        const loadingOverlay = document.getElementById("loading-overlay");
+            /* ========================================================= */
+            /*  DOM REFS                                                 */
+            /* ========================================================= */
+            const messagesArea = document.getElementById("messages-area");
+            const chatContainer = document.getElementById("chat-container");
+            const typingIndicator = document.getElementById("typing-indicator");
+            const userInput = document.getElementById("user-input");
+            const sendBtn = document.getElementById("send-btn");
+            const themeToggle = document.getElementById("theme-toggle");
+            const themeIcon = document.getElementById("theme-icon");
+            const loadingOverlay = document.getElementById("loading-overlay");
+            const sidebar = document.querySelector(".sidebar");
+            const sidebarToggleBtn = document.getElementById("sidebarToggleBtn");
 
-        /* ========================================================= */
-        /*  STREAMLIT RENDER LISTENER                                */
-        /* ========================================================= */
-        window.addEventListener("message", (event) => {
-            if (event.data.type === "streamlit:render") {
-                const args = event.data.args || {};
+            /* ========================================================= */
+            /*  SIDEBAR TOGGLE LOGIC                                     */
+            /* ========================================================= */
+            sidebarToggleBtn.addEventListener("click", () => {
+                sidebar.classList.toggle("collapsed");
+            });
 
-                if (args.logged_in === true) {
-                    loginScreen.hidden = true;
-                    mainWrapper.hidden = false;
-                    userInfoDisplay.textContent = "Chào bạn: " + args.mssv;
-                    currentSessionId = args.current_session_id;
-                    if (args.history) {
+            /* ========================================================= */
+            /*  STREAMLIT RENDER LISTENER                                */
+            /* ========================================================= */
+            window.addEventListener("message", (event) => {
+                if (event.data.type === "streamlit:render") {
+                    const args = event.data.args || {};
+
+                    if (args.logged_in === true) {
+                        updateAuthUI(true, args.mssv);
+                        currentSessionId = args.current_session_id;
+                        if (args.history) {
+                            try {
+                                renderHistoryDOM(args.history, currentSessionId);
+                            } catch (e) { }
+                        }
+                    } else {
+                        updateAuthUI(false, "");
+                    }
+
+
+                    // Hide loading overlay on first render
+                    if (!componentReady) {
+                        componentReady = true;
+                        loadingOverlay.classList.add("hidden");
+                        setTimeout(() => loadingOverlay.remove(), 600);
+                    }
+
+                    // Update messages from backend
+                    if (args.messages) {
                         try {
-                            renderHistoryDOM(args.history, currentSessionId);
-                        } catch(e) {}
+                            const serverMessages = JSON.parse(args.messages);
+                            messages = serverMessages;
+                            isProcessing = false;
+                            renderMessages(false);
+                            hideTyping();
+                            enableInput();
+                        } catch (e) {
+                            console.error("Failed to parse messages:", e);
+                        }
                     }
-                } else if (args.logged_in === false) {
-                    loginScreen.hidden = false;
-                    mainWrapper.hidden = true;
+
+                    StreamlitApi.setFrameHeight(document.documentElement.scrollHeight);
                 }
-
-
-                // Hide loading overlay on first render
-                if (!componentReady) {
-                    componentReady = true;
-                    loadingOverlay.classList.add("hidden");
-                    setTimeout(() => loadingOverlay.remove(), 600);
-                }
-
-                // Update messages from backend
-                if (args.messages) {
-                    try {
-                        const serverMessages = JSON.parse(args.messages);
-                        messages = serverMessages;
-                        isProcessing = false;
-                        renderMessages(false);
-                        hideTyping();
-                        enableInput();
-                    } catch (e) {
-                        console.error("Failed to parse messages:", e);
-                    }
-                }
-
-                StreamlitApi.setFrameHeight(document.documentElement.scrollHeight);
-            }
-        });
-
-        /* ========================================================= */
-        /*  INIT                                                     */
-        /* ========================================================= */
-        StreamlitApi.setComponentReady();
-        StreamlitApi.setFrameHeight(window.innerHeight);
-
-        /* ========================================================= */
-        /*  RENDER MESSAGES                                          */
-        /* ========================================================= */
-        function renderMessages(animateLast = true) {
-            messagesArea.innerHTML = "";
-
-            if (messages.length === 0) {
-                renderEmptyState();
-                return;
-            }
-
-            messages.forEach((msg, idx) => {
-                const shouldAnimate = animateLast && idx === messages.length - 1;
-                appendMessageDOM(msg, shouldAnimate, idx);
             });
 
-            scrollToBottom();
-        }
+            /* ========================================================= */
+            /*  INIT                                                     */
+            /* ========================================================= */
+            StreamlitApi.setComponentReady();
+            StreamlitApi.setFrameHeight(window.innerHeight);
 
-        function appendMessageDOM(msg, animate, msgIndex) {
-            const row = document.createElement("div");
-            row.className = "message " + msg.role;
-            if (animate) row.style.animationDelay = "0.05s";
+            /* ========================================================= */
+            /*  RENDER MESSAGES                                          */
+            /* ========================================================= */
+            function renderMessages(animateLast = true) {
+                messagesArea.innerHTML = "";
 
-            // Avatar
-            const avatar = document.createElement("div");
-            avatar.className = "message-avatar";
-            avatar.textContent = msg.role === "user" ? "👤" : "🤖";
+                if (messages.length === 0) {
+                    renderEmptyState();
+                    return;
+                }
 
-            // Bubble
-            const bubble = document.createElement("div");
-            bubble.className = "message-bubble";
+                messages.forEach((msg, idx) => {
+                    const shouldAnimate = animateLast && idx === messages.length - 1;
+                    appendMessageDOM(msg, shouldAnimate, idx);
+                });
 
-            // Content
-            const content = document.createElement("div");
-            content.className = "message-content";
-            if (msg.role === "assistant") {
-                content.innerHTML = renderMarkdown(msg.content);
-            } else {
-                content.textContent = msg.content;
-            }
-            bubble.appendChild(content);
-
-            // Sources (assistant only)
-            if (msg.role === "assistant" && msg.sources && msg.sources.length > 0) {
-                bubble.appendChild(createSourcesSection(msg.sources));
+                scrollToBottom();
             }
 
-            // Rating Buttons (assistant only)
-            if (msg.role === "assistant" && typeof msgIndex !== "undefined") {
-                const ratingContainer = document.createElement("div");
-                ratingContainer.className = "rating-container";
+            function appendMessageDOM(msg, animate, msgIndex) {
+                const row = document.createElement("div");
+                row.className = "message " + msg.role;
+                if (animate) row.style.animationDelay = "0.05s";
 
-                const btnUp = document.createElement("button");
-                btnUp.className = "rating-btn up" + (msg.rating === "up" ? " active" : "");
-                btnUp.textContent = "👍";
-                btnUp.title = "Câu trả lời tốt";
-                btnUp.onclick = () => {
-                    StreamlitApi.setComponentValue({ action: "rate", rating: "up", message_index: msgIndex, timestamp: Date.now() });
-                };
+                // Avatar
+                const avatar = document.createElement("div");
+                avatar.className = "message-avatar";
+                avatar.textContent = msg.role === "user" ? "👤" : "🤖";
 
-                const btnDown = document.createElement("button");
-                btnDown.className = "rating-btn down" + (msg.rating === "down" ? " active" : "");
-                btnDown.textContent = "👎";
-                btnDown.title = "Câu trả lời chưa tốt";
-                btnDown.onclick = () => {
-                    StreamlitApi.setComponentValue({ action: "rate", rating: "down", message_index: msgIndex, timestamp: Date.now() });
-                };
+                // Bubble
+                const bubble = document.createElement("div");
+                bubble.className = "message-bubble";
 
-                ratingContainer.appendChild(btnUp);
-                ratingContainer.appendChild(btnDown);
-                bubble.appendChild(ratingContainer);
+                // Content
+                const content = document.createElement("div");
+                content.className = "message-content";
+                if (msg.role === "assistant") {
+                    content.innerHTML = renderMarkdown(msg.content);
+                } else {
+                    content.textContent = msg.content;
+                }
+                bubble.appendChild(content);
+
+                // Sources (assistant only)
+                if (msg.role === "assistant" && msg.sources && msg.sources.length > 0) {
+                    bubble.appendChild(createSourcesSection(msg.sources));
+                }
+
+                // Rating Buttons (assistant only)
+                if (msg.role === "assistant" && typeof msgIndex !== "undefined") {
+                    const ratingContainer = document.createElement("div");
+                    ratingContainer.className = "rating-container";
+
+                    const btnUp = document.createElement("button");
+                    btnUp.className = "rating-btn up" + (msg.rating === "up" ? " active" : "");
+                    btnUp.textContent = "👍";
+                    btnUp.title = "Câu trả lời tốt";
+                    btnUp.onclick = () => {
+                        StreamlitApi.setComponentValue({ action: "rate", rating: "up", message_index: msgIndex, timestamp: Date.now() });
+                    };
+
+                    const btnDown = document.createElement("button");
+                    btnDown.className = "rating-btn down" + (msg.rating === "down" ? " active" : "");
+                    btnDown.textContent = "👎";
+                    btnDown.title = "Câu trả lời chưa tốt";
+                    btnDown.onclick = () => {
+                        StreamlitApi.setComponentValue({ action: "rate", rating: "down", message_index: msgIndex, timestamp: Date.now() });
+                    };
+
+                    ratingContainer.appendChild(btnUp);
+                    ratingContainer.appendChild(btnDown);
+                    bubble.appendChild(ratingContainer);
+                }
+
+                row.appendChild(avatar);
+                row.appendChild(bubble);
+                messagesArea.appendChild(row);
             }
 
-            row.appendChild(avatar);
-            row.appendChild(bubble);
-            messagesArea.appendChild(row);
-        }
-
-        /* ========================================================= */
-        /*  MARKDOWN RENDERING                                       */
-        /* ========================================================= */
-        function renderMarkdown(text) {
-            if (typeof marked !== "undefined") {
-                marked.setOptions({ breaks: true, gfm: true });
-                return marked.parse(text || "");
+            /* ========================================================= */
+            /*  MARKDOWN RENDERING                                       */
+            /* ========================================================= */
+            function renderMarkdown(text) {
+                if (typeof marked !== "undefined") {
+                    marked.setOptions({ breaks: true, gfm: true });
+                    return marked.parse(text || "");
+                }
+                // Fallback: basic escaping + line breaks
+                return escapeHtml(text).replace(/\n/g, "<br>");
             }
-            // Fallback: basic escaping + line breaks
-            return escapeHtml(text).replace(/\n/g, "<br>");
-        }
 
-        function escapeHtml(str) {
-            const div = document.createElement("div");
-            div.textContent = str || "";
-            return div.innerHTML;
-        }
+            function escapeHtml(str) {
+                const div = document.createElement("div");
+                div.textContent = str || "";
+                return div.innerHTML;
+            }
 
-        /* ========================================================= */
-        /*  SOURCES SECTION                                          */
-        /* ========================================================= */
-        function createSourcesSection(sources) {
-            const section = document.createElement("div");
-            section.className = "sources-section";
+            /* ========================================================= */
+            /*  SOURCES SECTION                                          */
+            /* ========================================================= */
+            function createSourcesSection(sources) {
+                const section = document.createElement("div");
+                section.className = "sources-section";
 
-            const toggle = document.createElement("div");
-            toggle.className = "sources-toggle";
-            toggle.innerHTML = '📚 Nguồn tài liệu tham khảo <span class="chevron">▼</span>';
+                const toggle = document.createElement("div");
+                toggle.className = "sources-toggle";
+                toggle.innerHTML = '📚 Nguồn tài liệu tham khảo <span class="chevron">▼</span>';
 
-            const contentWrap = document.createElement("div");
-            contentWrap.className = "sources-content";
+                const contentWrap = document.createElement("div");
+                contentWrap.className = "sources-content";
 
-            const list = document.createElement("ul");
-            list.className = "sources-list";
+                const list = document.createElement("ul");
+                list.className = "sources-list";
 
-            sources.forEach((src) => {
-                const li = document.createElement("li");
-                li.textContent = typeof src === "string" ? src : (src.content || JSON.stringify(src));
-                list.appendChild(li);
-            });
+                sources.forEach((src) => {
+                    const li = document.createElement("li");
+                    li.textContent = typeof src === "string" ? src : (src.content || JSON.stringify(src));
+                    list.appendChild(li);
+                });
 
-            contentWrap.appendChild(list);
+                contentWrap.appendChild(list);
 
-            toggle.addEventListener("click", () => {
-                toggle.classList.toggle("open");
-                contentWrap.classList.toggle("open");
-            });
+                toggle.addEventListener("click", () => {
+                    toggle.classList.toggle("open");
+                    contentWrap.classList.toggle("open");
+                });
 
-            section.appendChild(toggle);
-            section.appendChild(contentWrap);
-            return section;
-        }
+                section.appendChild(toggle);
+                section.appendChild(contentWrap);
+                return section;
+            }
 
-        /* ========================================================= */
-        /*  EMPTY STATE                                              */
-        /* ========================================================= */
-        function renderEmptyState() {
-            messagesArea.innerHTML = `
+            /* ========================================================= */
+            /*  EMPTY STATE                                              */
+            /* ========================================================= */
+            function renderEmptyState() {
+                messagesArea.innerHTML = `
             <div class="empty-state">
                 <div class="empty-icon">🎓</div>
                 <h2>Chào mừng đến với AI Tư Vấn Tuyển Sinh</h2>
@@ -1466,89 +1857,89 @@
                 </div>
                 <div class="empty-powered">Được hỗ trợ bởi Google Gemini &amp; Hybrid RAG Search</div>
             </div>`;
-        }
+            }
 
-        function askSuggestion(text) {
-            userInput.value = text;
-            sendMessage();
-        }
-
-        /* ========================================================= */
-        /*  SEND MESSAGE                                             */
-        /* ========================================================= */
-        function sendMessage() {
-            const text = userInput.value.trim();
-            if (!text || isProcessing) return;
-
-            isProcessing = true;
-            userInput.value = "";
-            resizeInput();
-            disableInput();
-
-            // Show user message locally
-            messages.push({ role: "user", content: text });
-            renderMessages(true);
-
-            // Show typing indicator
-            showTyping();
-            scrollToBottom();
-
-            // Send to Streamlit backend
-            StreamlitApi.setComponentValue({ action: "chat", message: text, timestamp: Date.now() });
-        }
-
-        /* ========================================================= */
-        /*  TYPING INDICATOR                                         */
-        /* ========================================================= */
-        function showTyping() { typingIndicator.classList.add("visible"); }
-        function hideTyping() { typingIndicator.classList.remove("visible"); }
-
-        /* ========================================================= */
-        /*  INPUT CONTROLS                                           */
-        /* ========================================================= */
-        function disableInput() { sendBtn.disabled = true; }
-        function enableInput() { sendBtn.disabled = false; }
-
-        function resizeInput() {
-            userInput.style.height = "auto";
-            userInput.style.height = Math.min(userInput.scrollHeight, 150) + "px";
-        }
-
-        // Enter to send (Shift+Enter for newline)
-        userInput.addEventListener("keydown", (e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
+            function askSuggestion(text) {
+                userInput.value = text;
                 sendMessage();
             }
-        });
 
-        userInput.addEventListener("input", resizeInput);
-        sendBtn.addEventListener("click", sendMessage);
+            /* ========================================================= */
+            /*  SEND MESSAGE                                             */
+            /* ========================================================= */
+            function sendMessage() {
+                const text = userInput.value.trim();
+                if (!text || isProcessing) return;
 
-        /* ========================================================= */
-        /*  SCROLL                                                   */
-        /* ========================================================= */
-        function scrollToBottom() {
-            requestAnimationFrame(() => {
-                chatContainer.scrollTop = chatContainer.scrollHeight;
+                isProcessing = true;
+                userInput.value = "";
+                resizeInput();
+                disableInput();
+
+                // Show user message locally
+                messages.push({ role: "user", content: text });
+                renderMessages(true);
+
+                // Show typing indicator
+                showTyping();
+                scrollToBottom();
+
+                // Send to Streamlit backend
+                StreamlitApi.setComponentValue({ action: "chat", message: text, timestamp: Date.now() });
+            }
+
+            /* ========================================================= */
+            /*  TYPING INDICATOR                                         */
+            /* ========================================================= */
+            function showTyping() { typingIndicator.classList.add("visible"); }
+            function hideTyping() { typingIndicator.classList.remove("visible"); }
+
+            /* ========================================================= */
+            /*  INPUT CONTROLS                                           */
+            /* ========================================================= */
+            function disableInput() { sendBtn.disabled = true; }
+            function enableInput() { sendBtn.disabled = false; }
+
+            function resizeInput() {
+                userInput.style.height = "auto";
+                userInput.style.height = Math.min(userInput.scrollHeight, 150) + "px";
+            }
+
+            // Enter to send (Shift+Enter for newline)
+            userInput.addEventListener("keydown", (e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
             });
-        }
 
-        /* ========================================================= */
-        /*  THEME TOGGLE                                             */
-        /* ========================================================= */
-        themeToggle.addEventListener("click", () => {
-            isDarkMode = !isDarkMode;
-            document.documentElement.setAttribute("data-theme", isDarkMode ? "dark" : "light");
-            themeIcon.textContent = isDarkMode ? "🌙" : "☀️";
-        });
+            userInput.addEventListener("input", resizeInput);
+            sendBtn.addEventListener("click", sendMessage);
 
-        /* ========================================================= */
-        /*  INITIAL RENDER                                           */
-        /* ========================================================= */
-        renderMessages(false);
+            /* ========================================================= */
+            /*  SCROLL                                                   */
+            /* ========================================================= */
+            function scrollToBottom() {
+                requestAnimationFrame(() => {
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                });
+            }
 
-    </script>
+            /* ========================================================= */
+            /*  THEME TOGGLE                                             */
+            /* ========================================================= */
+            themeToggle.addEventListener("click", () => {
+                isDarkMode = !isDarkMode;
+                document.documentElement.setAttribute("data-theme", isDarkMode ? "dark" : "light");
+                themeIcon.textContent = isDarkMode ? "🌙" : "☀️";
+            });
+
+            /* ========================================================= */
+            /*  INITIAL RENDER                                           */
+            /* ========================================================= */
+            renderMessages(false);
+
+        </script>
 
     </div>
 </body>
