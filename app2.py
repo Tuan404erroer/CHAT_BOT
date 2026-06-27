@@ -148,21 +148,44 @@ if page == "admin":
         
         satisfaction_rate = round((total_up / total_rated * 100), 1) if total_rated > 0 else 0
         
+        KNOWLEDGE_CONFIG_FILE = "knowledge_config.json"
+        knowledge_config = {}
+        if os.path.exists(KNOWLEDGE_CONFIG_FILE):
+            try:
+                with open(KNOWLEDGE_CONFIG_FILE, "r", encoding="utf-8") as f:
+                    knowledge_config = json.load(f)
+            except Exception:
+                pass
+
         knowledge_files = []
         for entry in os.listdir("."):
-            if entry.lower().endswith(".json") and os.path.isfile(entry) and entry != "chat_history.json":
+            if entry.lower().endswith((".json", ".txt")) and os.path.isfile(entry) and entry not in ["chat_history.json", "consult_registrations.json", "knowledge_config.json"]:
                 file_size = os.path.getsize(entry)
+                
+                # Default config if not exists
+                if entry not in knowledge_config:
+                    knowledge_config[entry] = {
+                        "enabled": True,
+                        "description": "File dữ liệu mới",
+                        "uploaded_at": datetime.now().isoformat()
+                    }
+                    
+                cfg = knowledge_config[entry]
+                
                 knowledge_files.append({
                     "name": entry,
-                    "size_kb": round(file_size / 1024, 1)
+                    "size_kb": round(file_size / 1024, 1),
+                    "enabled": cfg.get("enabled", True),
+                    "description": cfg.get("description", ""),
+                    "uploaded_at": cfg.get("uploaded_at", datetime.now().isoformat())
                 })
-        for entry in os.listdir("."):
-            if entry.lower().endswith(".txt") and os.path.isfile(entry):
-                file_size = os.path.getsize(entry)
-                knowledge_files.append({
-                    "name": entry,
-                    "size_kb": round(file_size / 1024, 1)
-                })
+                
+        # Save updated config back to ensure sync
+        try:
+            with open(KNOWLEDGE_CONFIG_FILE, "w", encoding="utf-8") as f:
+                json.dump(knowledge_config, f, ensure_ascii=False, indent=4)
+        except Exception:
+            pass
         
         return {
             "total_sessions": total_sessions,
@@ -181,12 +204,129 @@ if page == "admin":
 
     history_data = load_history()
     stats = compute_stats(history_data)
+    
+    # Load consultation registrations
+    CONSULT_FILE = "consult_registrations.json"
+    consult_list = []
+    if os.path.exists(CONSULT_FILE):
+        try:
+            with open(CONSULT_FILE, "r", encoding="utf-8") as f:
+                consult_list = json.load(f)
+        except Exception:
+            consult_list = []
+    
+    stats["consult_registrations"] = consult_list
 
-    _admin_component(
+    if "admin_last_ts" not in st.session_state:
+        st.session_state.admin_last_ts = 0
+
+    admin_action = _admin_component(
         stats=json.dumps(stats, ensure_ascii=False),
         key="admin",
         default=None
     )
+    
+    # Handle admin actions from frontend
+    if admin_action is not None:
+        ts = admin_action.get("timestamp", 0)
+        if ts != st.session_state.admin_last_ts:
+            st.session_state.admin_last_ts = ts
+            action = admin_action.get("action", "")
+            
+            if action == "delete_consult":
+                idx = admin_action.get("index")
+                if idx is not None and 0 <= idx < len(consult_list):
+                    consult_list.pop(idx)
+                    with open(CONSULT_FILE, "w", encoding="utf-8") as f:
+                        json.dump(consult_list, f, ensure_ascii=False, indent=4)
+                    st.rerun()
+        
+            elif action == "update_consult_status":
+                idx = admin_action.get("index")
+                status = admin_action.get("status", "")
+                if idx is not None and 0 <= idx < len(consult_list):
+                    consult_list[idx]["status"] = status
+                    with open(CONSULT_FILE, "w", encoding="utf-8") as f:
+                        json.dump(consult_list, f, ensure_ascii=False, indent=4)
+                    st.rerun()
+        
+            elif action == "update_consult_note":
+                idx = admin_action.get("index")
+                note = admin_action.get("note", "")
+                if idx is not None and 0 <= idx < len(consult_list):
+                    consult_list[idx]["admin_note"] = note
+                    with open(CONSULT_FILE, "w", encoding="utf-8") as f:
+                        json.dump(consult_list, f, ensure_ascii=False, indent=4)
+                    st.rerun()
+
+            elif action == "update_knowledge_status":
+                filename = admin_action.get("filename")
+                enabled = admin_action.get("enabled")
+            
+                KNOWLEDGE_CONFIG_FILE = "knowledge_config.json"
+                knowledge_config = {}
+                if os.path.exists(KNOWLEDGE_CONFIG_FILE):
+                    try:
+                        with open(KNOWLEDGE_CONFIG_FILE, "r", encoding="utf-8") as f:
+                            knowledge_config = json.load(f)
+                    except Exception:
+                        pass
+                    
+                if filename in knowledge_config:
+                    knowledge_config[filename]["enabled"] = enabled
+                    with open(KNOWLEDGE_CONFIG_FILE, "w", encoding="utf-8") as f:
+                        json.dump(knowledge_config, f, ensure_ascii=False, indent=4)
+                st.rerun()
+
+            elif action == "delete_knowledge_file":
+                filename = admin_action.get("filename")
+                if filename and filename not in ["chat_history.json", "consult_registrations.json", "knowledge_config.json"]:
+                    # Xóa file vật lý
+                    if os.path.exists(filename):
+                        os.remove(filename)
+                
+                    # Xóa khỏi config
+                    KNOWLEDGE_CONFIG_FILE = "knowledge_config.json"
+                    if os.path.exists(KNOWLEDGE_CONFIG_FILE):
+                        try:
+                            with open(KNOWLEDGE_CONFIG_FILE, "r", encoding="utf-8") as f:
+                                knowledge_config = json.load(f)
+                            if filename in knowledge_config:
+                                del knowledge_config[filename]
+                                with open(KNOWLEDGE_CONFIG_FILE, "w", encoding="utf-8") as f:
+                                    json.dump(knowledge_config, f, ensure_ascii=False, indent=4)
+                        except Exception:
+                            pass
+                st.rerun()
+
+            elif action == "upload_knowledge_file":
+                filename = admin_action.get("filename")
+                content = admin_action.get("content")
+            
+                if filename and content and filename.lower().endswith((".json", ".txt")):
+                    with open(filename, "w", encoding="utf-8") as f:
+                        f.write(content)
+                    
+                    # Thêm vào config
+                    KNOWLEDGE_CONFIG_FILE = "knowledge_config.json"
+                    knowledge_config = {}
+                    if os.path.exists(KNOWLEDGE_CONFIG_FILE):
+                        try:
+                            with open(KNOWLEDGE_CONFIG_FILE, "r", encoding="utf-8") as f:
+                                knowledge_config = json.load(f)
+                        except Exception:
+                            pass
+                
+                    knowledge_config[filename] = {
+                        "enabled": True,
+                        "description": "File tải lên từ Admin",
+                        "uploaded_at": datetime.now().isoformat()
+                    }
+                
+                    with open(KNOWLEDGE_CONFIG_FILE, "w", encoding="utf-8") as f:
+                        json.dump(knowledge_config, f, ensure_ascii=False, indent=4)
+                    
+                st.rerun()
     
     # Dừng chạy code bên dưới (phần chatbot)
     st.stop()
@@ -223,6 +363,24 @@ st.markdown("""
         z-index: 999;
     }
 </style>
+<script>
+    // Inject allow="microphone" vào iframe của custom component
+    // để Web Speech API có thể hoạt động bên trong iframe
+    function enableMicInIframe() {
+        const iframes = document.querySelectorAll('[data-testid="stCustomComponentV1"] iframe');
+        iframes.forEach(iframe => {
+            if (!iframe.getAttribute('allow') || !iframe.getAttribute('allow').includes('microphone')) {
+                iframe.setAttribute('allow', 'microphone; autoplay');
+            }
+        });
+    }
+    // Chạy ngay và lặp lại vì iframe có thể load sau
+    enableMicInIframe();
+    const micObserver = new MutationObserver(enableMicInIframe);
+    micObserver.observe(document.body, { childList: true, subtree: true });
+    // Dừng theo dõi sau 10 giây để tiết kiệm tài nguyên
+    setTimeout(() => micObserver.disconnect(), 10000);
+</script>
 """, unsafe_allow_html=True)
 
 # --- KHAI BÁO CUSTOM COMPONENT ---
@@ -252,7 +410,11 @@ PROMPT = PromptTemplate(
 
 # --- HÀM KHỞI TẠO HỆ THỐNG ---
 @st.cache_resource
-def setup_rag_system():
+def get_global_rag_cache():
+    return {"hash": None, "chains": None}
+
+@st.cache_resource
+def load_models():
     if "GOOGLE_API_KEY" in st.secrets:
         os.environ["GOOGLE_API_KEY"] = st.secrets["GOOGLE_API_KEY"]
     else:
@@ -261,12 +423,32 @@ def setup_rag_system():
     model_name = "paraphrase-multilingual-MiniLM-L12-v2"
     embeddings = HuggingFaceEmbeddings(model_name=model_name)
     llm = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite", temperature=0.3)
+    return embeddings, llm
+
+def setup_rag_system(config_hash=None):
+    cache = get_global_rag_cache()
+    if cache["hash"] == config_hash and cache["chains"] is not None:
+        return cache["chains"]
+
+    embeddings, llm = load_models()
 
     def collect_source_files():
+        KNOWLEDGE_CONFIG_FILE = "knowledge_config.json"
+        knowledge_config = {}
+        if os.path.exists(KNOWLEDGE_CONFIG_FILE):
+            try:
+                with open(KNOWLEDGE_CONFIG_FILE, "r", encoding="utf-8") as f:
+                    knowledge_config = json.load(f)
+            except Exception:
+                pass
+                
         candidates = []
         for entry in os.listdir("."):
-            if entry.lower().endswith(".json") and os.path.isfile(entry):
-                candidates.append(entry)
+            if entry.lower().endswith((".json", ".txt")) and os.path.isfile(entry) and entry not in ["chat_history.json", "consult_registrations.json", "knowledge_config.json"]:
+                # Kiểm tra trạng thái enabled
+                cfg = knowledge_config.get(entry, {})
+                if cfg.get("enabled", True):
+                    candidates.append(entry)
         return sorted(set(candidates))
 
     def parse_multiple_json(text):
@@ -361,10 +543,14 @@ def setup_rag_system():
 
     source_files = collect_source_files()
     if not source_files:
+        cache["chains"] = None
+        cache["hash"] = config_hash
         return None
 
     docs = build_documents(source_files)
     if not docs:
+        cache["chains"] = None
+        cache["hash"] = config_hash
         return None
     
     # 1. VECTOR SEARCH (Tìm theo ngữ nghĩa)
@@ -399,7 +585,9 @@ def setup_rag_system():
         return_source_documents=True,
         chain_type_kwargs={"prompt": PROMPT},
     )
-    return qa_chain_all, qa_chain_diem_chuan, llm
+    cache["chains"] = (qa_chain_all, qa_chain_diem_chuan, llm)
+    cache["hash"] = config_hash
+    return cache["chains"]
 
 
 # --- HÀM XỬ LÝ CÂU HỎI QUA RAG PIPELINE ---
@@ -492,7 +680,25 @@ def process_query(prompt, qa_chain_all, qa_chain_diem_chuan, llm):
 
 
 # --- KHỞI TẠO VÀ CHẠY ỨNG DỤNG ---
-chips = setup_rag_system()
+def get_rag_hash():
+    KNOWLEDGE_CONFIG_FILE = "knowledge_config.json"
+    hash_str = ""
+    if os.path.exists(KNOWLEDGE_CONFIG_FILE):
+        try:
+            with open(KNOWLEDGE_CONFIG_FILE, "r", encoding="utf-8") as f:
+                hash_str += f.read()
+        except: pass
+    
+    # Also hash file modified times
+    for entry in os.listdir("."):
+        if entry.lower().endswith((".json", ".txt")):
+            hash_str += f"{entry}_{os.path.getmtime(entry)}"
+            
+    import hashlib
+    return hashlib.md5(hash_str.encode()).hexdigest()
+
+rag_hash = get_rag_hash()
+chips = setup_rag_system(rag_hash)
 if chips is None:
     st.error("❌ Không tìm thấy file dữ liệu hợp lệ. Vui lòng kiểm tra lại!")
     st.stop()
@@ -594,6 +800,33 @@ if user_input is not None:
                     user_history[st.session_state.current_session_id]["messages"] = st.session_state.messages
                     save_history(st.session_state.history_data)
                     
+            st.rerun()
+            
+        elif action == "consult_register":
+            # Save consultation registration to a separate JSON file
+            consult_data = {
+                "name": user_input.get("name", ""),
+                "phone": user_input.get("phone", ""),
+                "email": user_input.get("email", ""),
+                "major": user_input.get("major", ""),
+                "message": user_input.get("message", ""),
+                "timestamp": ts,
+                "user_key": user_key if st.session_state.logged_in else "guest"
+            }
+            
+            CONSULT_FILE = "consult_registrations.json"
+            consult_list = []
+            if os.path.exists(CONSULT_FILE):
+                try:
+                    with open(CONSULT_FILE, "r", encoding="utf-8") as f:
+                        consult_list = json.load(f)
+                except Exception:
+                    consult_list = []
+            
+            consult_list.append(consult_data)
+            with open(CONSULT_FILE, "w", encoding="utf-8") as f:
+                json.dump(consult_list, f, ensure_ascii=False, indent=4)
+            
             st.rerun()
             
         elif action == "chat":

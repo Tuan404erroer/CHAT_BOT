@@ -183,5 +183,166 @@
                 }
             ]
         }
+    },
+    "0306231010_11/01/2005": {
+        "cf43e222-9c97-4235-a383-8c58dfcb8219": {
+            "title": "Chat: Học phí các ngành ba...",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "Học phí các ngành bao nhiêu?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Chào bạn, học phí dự kiến năm học 2026 - 2027 tại trường như sau:\n\n*   **Nhóm ngành kỹ thuật công nghệ:** Khoảng 8.000.000 - 9.000.000 VNĐ/học kỳ.\n*   **Nhóm ngành kế toán kinh tế:** Khoảng 7.000.000 - 8.000.000 VNĐ/học kỳ.\n*   **Tổng học phí trung bình:** Khoảng 16.000.000 - 18.000.000 VNĐ/năm.\n\nLưu ý: Học phí được thu theo niên khóa (từng học kỳ/năm học), không thu theo số tín chỉ. Ngoài ra, khi nhập học, tân sinh viên sẽ có thêm các khoản chi phí phát sinh khác như bảo hiểm y tế, đồng phục, giáo trình...\n\nBạn có muốn mình tư vấn thêm về các chính sách miễn giảm học phí dành cho sinh viên không?",
+                    "sources": [
+                        "Chuyen muc: Chế độ chính sách\nTieu de: Miễn giảm học phí\nNoi dung: - Miễn 100%: Con liệt sĩ/thương binh, mồ côi, khuyết tật, DTTS hộ nghèo/cận nghèo, dân tộc rất ít người.\n- Giảm 70%: DTTS vùng Đặc bi...",
+                        "Id: 2\nQuestion: Câu 2: Em thấy nhà trường có phương thức xét tuyển thẳng, với phương thức này thì nhà trường dành bao nhiêu chỉ tiêu và khi nào nhận hồ sơ xét tuyển?\nAnswer: Đối với xét tuyển thẳng nh...",
+                        "Chuyen muc: Thông tin học phí\nTieu de: Học phí dự kiến năm học 2026 - 2027 và lịch sử học phí (Dành cho Tân sinh viên)\nMuc hoc phi du kien 2026 2027: Nhom nganh ky thuat cong nghe: Khoảng 8.000.000 - ...",
+                        "Chuyen muc: Chế độ chính sách\nTieu de: Chính sách cho Nữ sinh kỹ thuật\nNoi dung: - Giảm 50% kinh phí đào tạo: Cao đẳng các ngành CNKT Cơ khí, Ô tô, Cơ điện tử, Nhiệt lạnh, Điện-Điện tử, Điều khiển & T...",
+                        "Chuyen muc: Thủ tục hành chính\nTieu de: Hướng dẫn nộp Học phí\nNoi dung: - Cách 1: Nộp trực tiếp tại NH Agribank (Cung cấp Mã SV, tên trường CĐ Kỹ Thuật Cao Thắng, thu theo hình thức Bill Payment).\n- C...",
+                        "Id: 12\nQuestion: Câu 12: Thí sinh muốn đăng ký xét tuyển vào trường thì hồ sơ đăng ký như thế nào?\nAnswer: Thí sinh đăng ký xét tuyển theo một trong các cách thức sau:\n+ Đăng ký trực tuyến (Online) we...",
+                        "0306231172 23/12/2005: 17bbbb0d-0a59-4178-b9b6-8d8731f867d0: Title: Chat: Hello\nMessages: - Role: user\nContent: Hello\n- Role: assistant\nContent: Chào bạn, mình là chuyên gia tư vấn tuyển sinh của Cao ...",
+                        "Id: 26\nQuestion: Câu 26: Thí sinh muốn biết mình có trúng tuyển các ngành, nghề đào tạo hay không phải làm sao?\nAnswer: - Trường dự kiến công bố kết quả trúng tuyển các ngành, nghề đào tạo như sau:\n+ ...",
+                        "Id: 22\nQuestion: Câu 22: Khi thí sinh tốt nghiệp các ngành/nghề đào tạo, có được học liên thông lên các bậc cao hơn không?\nAnswer: - Sau khi tốt nghiệp, thí sinh được học liên thông lên trình độ cao h...",
+                        "Id: 19\nQuestion: Câu 19: Năm nay chỉ tiêu tuyển sinh từng ngành, nghề của nhà trường như thế nào?\nAnswer: - Thí sinh truy cập trang web của trường www.caothang.edu.vn để biết thông tin chi tiết....",
+                        "Id: 1\nQuestion: Câu 1: Năm nay thí sinh muốn đăng ký xét tuyển vào trường thì điều kiện đăng ký như thế nào?\nAnswer: Năm 2026, Trường tuyển sinh trình độ Cao đẳng với 23 ngành, nghề đào tạo.\n- Thời gi...",
+                        "Id: 4\nTen nganh: Công nghệ Kỹ thuật Bán dẫn và Vi mạch\nMa nganh: \nChuyen nganh: \nMuc tieu dao tao: Sau khi tốt nghiệp từ 2 đến 3 năm, Sinh viên có khả năng\n1. Thành viên chính trong nhóm kỹ thuật, có ...",
+                        "Id: 5\nQuestion: Câu 5: Xét tuyển bằng phương thức học bạ có cần thi tốt nghiệp THPT hay không?\nAnswer: Thí sinh trúng tuyển bằng phương thức xét học bạ PHẢI tốt nghiệp THPT (các thí sinh tốt nghiệp TH...",
+                        "Id: 9\nQuestion: Câu 9: Năm 2026, Trường tuyển bao nhiêu thí sinh dựa vào học bạ THPT?\nAnswer: Chỉ tiêu của Trường là 4.800 (dự kiến), Trường dành khoảng 60% chỉ tiêu (dự kiến) để xét học bạ THPT – 4 h..."
+                    ]
+                }
+            ]
+        },
+        "f62a04e6-8649-4113-a4fb-3b15284f78cd": {
+            "title": "Chat: Học phí các ngành ba...",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "Học phí các ngành bao nhiêu?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Chào bạn, hiện tại thông tin chi tiết về mức học phí cụ thể cho từng ngành chưa được cập nhật trong dữ liệu tuyển sinh năm nay. Bạn vui lòng theo dõi website chính thức www.caothang.edu.vn để cập nhật thông tin mới nhất nhé.\n\nBạn có muốn mình hỗ trợ thêm về các chính sách miễn giảm học phí hiện có tại trường không?",
+                    "sources": [
+                        "Chuyen muc: Chế độ chính sách\nTieu de: Miễn giảm học phí\nNoi dung: - Miễn 100%: Con liệt sĩ/thương binh, mồ côi, khuyết tật, DTTS hộ nghèo/cận nghèo, dân tộc rất ít người.\n- Giảm 70%: DTTS vùng Đặc bi...",
+                        "Chuyen muc: Thủ tục hành chính\nTieu de: Hướng dẫn nộp Học phí\nNoi dung: - Cách 1: Nộp trực tiếp tại NH Agribank (Cung cấp Mã SV, tên trường CĐ Kỹ Thuật Cao Thắng, thu theo hình thức Bill Payment).\n- C...",
+                        "Id: 2\nQuestion: Câu 2: Em thấy nhà trường có phương thức xét tuyển thẳng, với phương thức này thì nhà trường dành bao nhiêu chỉ tiêu và khi nào nhận hồ sơ xét tuyển?\nAnswer: Đối với xét tuyển thẳng nh...",
+                        "Chuyen muc: Chế độ chính sách\nTieu de: Chính sách cho Nữ sinh kỹ thuật\nNoi dung: - Giảm 50% kinh phí đào tạo: Cao đẳng các ngành CNKT Cơ khí, Ô tô, Cơ điện tử, Nhiệt lạnh, Điện-Điện tử, Điều khiển & T...",
+                        "Id: 12\nQuestion: Câu 12: Thí sinh muốn đăng ký xét tuyển vào trường thì hồ sơ đăng ký như thế nào?\nAnswer: Thí sinh đăng ký xét tuyển theo một trong các cách thức sau:\n+ Đăng ký trực tuyến (Online) we...",
+                        "Id: 26\nQuestion: Câu 26: Thí sinh muốn biết mình có trúng tuyển các ngành, nghề đào tạo hay không phải làm sao?\nAnswer: - Trường dự kiến công bố kết quả trúng tuyển các ngành, nghề đào tạo như sau:\n+ ...",
+                        "Id: 22\nQuestion: Câu 22: Khi thí sinh tốt nghiệp các ngành/nghề đào tạo, có được học liên thông lên các bậc cao hơn không?\nAnswer: - Sau khi tốt nghiệp, thí sinh được học liên thông lên trình độ cao h...",
+                        "Id: 19\nQuestion: Câu 19: Năm nay chỉ tiêu tuyển sinh từng ngành, nghề của nhà trường như thế nào?\nAnswer: - Thí sinh truy cập trang web của trường www.caothang.edu.vn để biết thông tin chi tiết....",
+                        "Id: 1\nQuestion: Câu 1: Năm nay thí sinh muốn đăng ký xét tuyển vào trường thì điều kiện đăng ký như thế nào?\nAnswer: Năm 2026, Trường tuyển sinh trình độ Cao đẳng với 23 ngành, nghề đào tạo.\n- Thời gi..."
+                    ]
+                }
+            ]
+        },
+        "58bb5090-0a4d-431c-b1e3-2743244a58ac": {
+            "title": "Chat: Học phí các ngành ba...",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "Học phí các ngành bao nhiêu?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Chào bạn, hiện tại thông tin về mức học phí cụ thể cho từng ngành chưa được cập nhật trong dữ liệu hệ thống. Bạn vui lòng theo dõi website chính thức của trường tại địa chỉ www.caothang.edu.vn để cập nhật thông báo mới nhất nhé.\n\nBạn có muốn mình hỗ trợ thêm thông tin về các chính sách miễn giảm học phí hiện có tại trường không?",
+                    "sources": [
+                        "Chuyen muc: Chế độ chính sách\nTieu de: Miễn giảm học phí\nNoi dung: - Miễn 100%: Con liệt sĩ/thương binh, mồ côi, khuyết tật, DTTS hộ nghèo/cận nghèo, dân tộc rất ít người.\n- Giảm 70%: DTTS vùng Đặc bi...",
+                        "Chuyen muc: Thủ tục hành chính\nTieu de: Hướng dẫn nộp Học phí\nNoi dung: - Cách 1: Nộp trực tiếp tại NH Agribank (Cung cấp Mã SV, tên trường CĐ Kỹ Thuật Cao Thắng, thu theo hình thức Bill Payment).\n- C...",
+                        "Id: 2\nQuestion: Câu 2: Em thấy nhà trường có phương thức xét tuyển thẳng, với phương thức này thì nhà trường dành bao nhiêu chỉ tiêu và khi nào nhận hồ sơ xét tuyển?\nAnswer: Đối với xét tuyển thẳng nh...",
+                        "Chuyen muc: Chế độ chính sách\nTieu de: Chính sách cho Nữ sinh kỹ thuật\nNoi dung: - Giảm 50% kinh phí đào tạo: Cao đẳng các ngành CNKT Cơ khí, Ô tô, Cơ điện tử, Nhiệt lạnh, Điện-Điện tử, Điều khiển & T...",
+                        "Id: 12\nQuestion: Câu 12: Thí sinh muốn đăng ký xét tuyển vào trường thì hồ sơ đăng ký như thế nào?\nAnswer: Thí sinh đăng ký xét tuyển theo một trong các cách thức sau:\n+ Đăng ký trực tuyến (Online) we...",
+                        "Id: 26\nQuestion: Câu 26: Thí sinh muốn biết mình có trúng tuyển các ngành, nghề đào tạo hay không phải làm sao?\nAnswer: - Trường dự kiến công bố kết quả trúng tuyển các ngành, nghề đào tạo như sau:\n+ ...",
+                        "Id: 22\nQuestion: Câu 22: Khi thí sinh tốt nghiệp các ngành/nghề đào tạo, có được học liên thông lên các bậc cao hơn không?\nAnswer: - Sau khi tốt nghiệp, thí sinh được học liên thông lên trình độ cao h..."
+                    ]
+                }
+            ]
+        },
+        "9efeb248-ea8c-43b6-bad8-975e9c04a11d": {
+            "title": "Chat: Học phí các ngành ba...",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "Học phí các ngành bao nhiêu?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Học phí dự kiến năm học 2026 - 2027 tại trường như sau:\n\n*   **Nhóm ngành Kỹ thuật công nghệ:** Khoảng 8.000.000 - 9.000.000 VNĐ/học kỳ.\n*   **Nhóm ngành Kế toán kinh tế:** Khoảng 7.000.000 - 8.000.000 VNĐ/học kỳ.\n*   **Tổng học phí trung bình:** Khoảng 16.000.000 - 18.000.000 VNĐ/năm.\n\nLưu ý: Học phí thu theo niên khóa, không thu theo số tín chỉ. Ngoài ra, sinh viên cần đóng thêm các chi phí phát sinh khác như bảo hiểm y tế, đồng phục, giáo trình... Bạn có muốn tìm hiểu thêm về các chính sách miễn giảm học phí không?",
+                    "sources": [
+                        "Chuyen muc: Chế độ chính sách\nTieu de: Miễn giảm học phí\nNoi dung: - Miễn 100%: Con liệt sĩ/thương binh, mồ côi, khuyết tật, DTTS hộ nghèo/cận nghèo, dân tộc rất ít người.\n- Giảm 70%: DTTS vùng Đặc bi...",
+                        "Chuyen muc: Thông tin học phí\nTieu de: Học phí dự kiến năm học 2026 - 2027 và lịch sử học phí (Dành cho Tân sinh viên)\nMuc hoc phi du kien 2026 2027: Nhom nganh ky thuat cong nghe: Khoảng 8.000.000 - ...",
+                        "Id: 2\nQuestion: Câu 2: Em thấy nhà trường có phương thức xét tuyển thẳng, với phương thức này thì nhà trường dành bao nhiêu chỉ tiêu và khi nào nhận hồ sơ xét tuyển?\nAnswer: Đối với xét tuyển thẳng nh...",
+                        "Chuyen muc: Chế độ chính sách\nTieu de: Chính sách cho Nữ sinh kỹ thuật\nNoi dung: - Giảm 50% kinh phí đào tạo: Cao đẳng các ngành CNKT Cơ khí, Ô tô, Cơ điện tử, Nhiệt lạnh, Điện-Điện tử, Điều khiển & T...",
+                        "Id: 12\nQuestion: Câu 12: Thí sinh muốn đăng ký xét tuyển vào trường thì hồ sơ đăng ký như thế nào?\nAnswer: Thí sinh đăng ký xét tuyển theo một trong các cách thức sau:\n+ Đăng ký trực tuyến (Online) we...",
+                        "Id: 26\nQuestion: Câu 26: Thí sinh muốn biết mình có trúng tuyển các ngành, nghề đào tạo hay không phải làm sao?\nAnswer: - Trường dự kiến công bố kết quả trúng tuyển các ngành, nghề đào tạo như sau:\n+ ..."
+                    ]
+                },
+                {
+                    "role": "user",
+                    "content": "em là con gái có học cao thắng được không"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Chào bạn, trường mình luôn chào đón tất cả các bạn học sinh có đam mê kỹ thuật, không phân biệt giới tính. Các bạn nữ hoàn toàn có thể đăng ký xét tuyển và theo học tại trường nhé!\n\nBạn đang quan tâm đến ngành học cụ thể nào tại trường mình không?",
+                    "sources": [
+                        "Id: 23\nQuestion: Câu 23: Khi nhập học thí sinh muốn ở ký túc xá của trường có được không?\nAnswer: Nhà trường đã có kế hoạch bảo trì, sửa chữa ký túc xá nên chưa thể giải quyết cho sinh viên vào ở tron...",
+                        "Id: 25\nQuestion: Câu 25: Đến khi thi tốt nghiệp THPT xong mới nộp hồ sơ vào trường mình như vậy có trễ quá không? hay là em phải đăng ký online sớm để giữ chỗ?\nAnswer: - Thời gian đăng ký xét tuyển cá...",
+                        "Id: 17\nQuestion: Câu 17: Thí sinh nộp hồ sơ đăng ký xét tuyển qua đường bưu điện thì thời gian tính như thế nào?\nAnswer: - Thời gian đăng ký xét tuyển hợp lệ được tính theo thời gian trên con dấu của ...",
+                        "Id: 30\nQuestion: Câu 30: Trường Cao đẳng Kỹ thuật Cao Thắng có phải là trường chất lượng cao không?\nAnswer: Theo Quyết định số 209/QĐ-BGDĐT của Bộ Giáo dục và Đào tạo, Trường Cao đẳng Kỹ thuật Cao Thắ...",
+                        "Id: 5\nQuestion: Câu 5: Xét tuyển bằng phương thức học bạ có cần thi tốt nghiệp THPT hay không?\nAnswer: Thí sinh trúng tuyển bằng phương thức xét học bạ PHẢI tốt nghiệp THPT (các thí sinh tốt nghiệp TH..."
+                    ]
+                },
+                {
+                    "role": "user",
+                    "content": "Học phí các ngành bao nhiêu?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Chào bạn, hiện tại thông tin cụ thể về mức học phí cho từng ngành chưa được cập nhật trong dữ liệu hệ thống. Bạn vui lòng theo dõi website chính thức của trường tại địa chỉ www.caothang.edu.vn để cập nhật thông báo mới nhất nhé.\n\nBạn có muốn mình hỗ trợ thêm thông tin về các chính sách miễn giảm học phí hiện có tại trường không?",
+                    "sources": [
+                        "Chuyen muc: Chế độ chính sách\nTieu de: Miễn giảm học phí\nNoi dung: - Miễn 100%: Con liệt sĩ/thương binh, mồ côi, khuyết tật, DTTS hộ nghèo/cận nghèo, dân tộc rất ít người.\n- Giảm 70%: DTTS vùng Đặc bi...",
+                        "Chuyen muc: Thủ tục hành chính\nTieu de: Hướng dẫn nộp Học phí\nNoi dung: - Cách 1: Nộp trực tiếp tại NH Agribank (Cung cấp Mã SV, tên trường CĐ Kỹ Thuật Cao Thắng, thu theo hình thức Bill Payment).\n- C...",
+                        "Id: 2\nQuestion: Câu 2: Em thấy nhà trường có phương thức xét tuyển thẳng, với phương thức này thì nhà trường dành bao nhiêu chỉ tiêu và khi nào nhận hồ sơ xét tuyển?\nAnswer: Đối với xét tuyển thẳng nh...",
+                        "Chuyen muc: Chế độ chính sách\nTieu de: Chính sách cho Nữ sinh kỹ thuật\nNoi dung: - Giảm 50% kinh phí đào tạo: Cao đẳng các ngành CNKT Cơ khí, Ô tô, Cơ điện tử, Nhiệt lạnh, Điện-Điện tử, Điều khiển & T...",
+                        "Id: 12\nQuestion: Câu 12: Thí sinh muốn đăng ký xét tuyển vào trường thì hồ sơ đăng ký như thế nào?\nAnswer: Thí sinh đăng ký xét tuyển theo một trong các cách thức sau:\n+ Đăng ký trực tuyến (Online) we...",
+                        "Id: 26\nQuestion: Câu 26: Thí sinh muốn biết mình có trúng tuyển các ngành, nghề đào tạo hay không phải làm sao?\nAnswer: - Trường dự kiến công bố kết quả trúng tuyển các ngành, nghề đào tạo như sau:\n+ ..."
+                    ]
+                },
+                {
+                    "role": "user",
+                    "content": "Học phí các ngành bao nhiêu?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Học phí dự kiến năm học 2026 - 2027 tại trường như sau:\n\n*   **Nhóm ngành kỹ thuật công nghệ:** Khoảng 8.000.000 - 9.000.000 VNĐ/học kỳ.\n*   **Nhóm ngành kế toán kinh tế:** Khoảng 7.000.000 - 8.000.000 VNĐ/học kỳ.\n*   **Tổng học phí trung bình năm:** Khoảng 16.000.000 - 18.000.000 VNĐ/năm.\n\nLưu ý: Trường thu học phí theo niên khóa, không thu theo số tín chỉ. Ngoài ra, sinh viên cần đóng thêm các chi phí phát sinh khác (BHYT, đồng phục, giáo trình, phí học thể dục/quốc phòng...).\n\nBạn có muốn tìm hiểu thêm về các chính sách miễn giảm học phí hiện có tại trường không?",
+                    "sources": [
+                        "Chuyen muc: Chế độ chính sách\nTieu de: Miễn giảm học phí\nNoi dung: - Miễn 100%: Con liệt sĩ/thương binh, mồ côi, khuyết tật, DTTS hộ nghèo/cận nghèo, dân tộc rất ít người.\n- Giảm 70%: DTTS vùng Đặc bi...",
+                        "Chuyen muc: Thông tin học phí\nTieu de: Học phí dự kiến năm học 2026 - 2027 và lịch sử học phí (Dành cho Tân sinh viên)\nMuc hoc phi du kien 2026 2027: Nhom nganh ky thuat cong nghe: Khoảng 8.000.000 - ...",
+                        "Id: 2\nQuestion: Câu 2: Em thấy nhà trường có phương thức xét tuyển thẳng, với phương thức này thì nhà trường dành bao nhiêu chỉ tiêu và khi nào nhận hồ sơ xét tuyển?\nAnswer: Đối với xét tuyển thẳng nh...",
+                        "Chuyen muc: Chế độ chính sách\nTieu de: Chính sách cho Nữ sinh kỹ thuật\nNoi dung: - Giảm 50% kinh phí đào tạo: Cao đẳng các ngành CNKT Cơ khí, Ô tô, Cơ điện tử, Nhiệt lạnh, Điện-Điện tử, Điều khiển & T...",
+                        "Id: 12\nQuestion: Câu 12: Thí sinh muốn đăng ký xét tuyển vào trường thì hồ sơ đăng ký như thế nào?\nAnswer: Thí sinh đăng ký xét tuyển theo một trong các cách thức sau:\n+ Đăng ký trực tuyến (Online) we...",
+                        "Id: 26\nQuestion: Câu 26: Thí sinh muốn biết mình có trúng tuyển các ngành, nghề đào tạo hay không phải làm sao?\nAnswer: - Trường dự kiến công bố kết quả trúng tuyển các ngành, nghề đào tạo như sau:\n+ ..."
+                    ]
+                },
+                {
+                    "role": "user",
+                    "content": "Học phí các ngành bao nhiêu?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Chào bạn, hiện tại thông tin chi tiết về mức học phí cụ thể cho từng ngành chưa được cập nhật trong dữ liệu hệ thống. Bạn vui lòng theo dõi website chính thức của trường tại địa chỉ www.caothang.edu.vn để cập nhật thông tin mới nhất nhé.\n\nBạn có muốn mình hỗ trợ thêm về các chính sách miễn giảm học phí hiện có tại trường không?",
+                    "sources": [
+                        "Chuyen muc: Chế độ chính sách\nTieu de: Miễn giảm học phí\nNoi dung: - Miễn 100%: Con liệt sĩ/thương binh, mồ côi, khuyết tật, DTTS hộ nghèo/cận nghèo, dân tộc rất ít người.\n- Giảm 70%: DTTS vùng Đặc bi...",
+                        "Chuyen muc: Thủ tục hành chính\nTieu de: Hướng dẫn nộp Học phí\nNoi dung: - Cách 1: Nộp trực tiếp tại NH Agribank (Cung cấp Mã SV, tên trường CĐ Kỹ Thuật Cao Thắng, thu theo hình thức Bill Payment).\n- C...",
+                        "Id: 2\nQuestion: Câu 2: Em thấy nhà trường có phương thức xét tuyển thẳng, với phương thức này thì nhà trường dành bao nhiêu chỉ tiêu và khi nào nhận hồ sơ xét tuyển?\nAnswer: Đối với xét tuyển thẳng nh...",
+                        "Chuyen muc: Chế độ chính sách\nTieu de: Chính sách cho Nữ sinh kỹ thuật\nNoi dung: - Giảm 50% kinh phí đào tạo: Cao đẳng các ngành CNKT Cơ khí, Ô tô, Cơ điện tử, Nhiệt lạnh, Điện-Điện tử, Điều khiển & T...",
+                        "Id: 12\nQuestion: Câu 12: Thí sinh muốn đăng ký xét tuyển vào trường thì hồ sơ đăng ký như thế nào?\nAnswer: Thí sinh đăng ký xét tuyển theo một trong các cách thức sau:\n+ Đăng ký trực tuyến (Online) we...",
+                        "Id: 26\nQuestion: Câu 26: Thí sinh muốn biết mình có trúng tuyển các ngành, nghề đào tạo hay không phải làm sao?\nAnswer: - Trường dự kiến công bố kết quả trúng tuyển các ngành, nghề đào tạo như sau:\n+ ..."
+                    ]
+                }
+            ]
+        }
     }
 }
