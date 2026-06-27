@@ -1,0 +1,23 @@
+[
+    {
+        "name": "2",
+        "phone": "0987654321",
+        "email": "12",
+        "major": "Cắt gọt kim loại",
+        "message": "1111",
+        "timestamp": 1782528673005,
+        "user_key": "0306231010_11/01/2005",
+        "status": "contacted",
+        "admin_note": "ok"
+    },
+    {
+        "name": "ABC",
+        "phone": "0421748278",
+        "email": "424434",
+        "major": "Công nghệ kỹ thuật điện - điện tử",
+        "message": "",
+        "timestamp": 1782534964385,
+        "user_key": "0306231010_11/01/2005",
+        "status": "new"
+    }
+]

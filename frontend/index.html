@@ -417,9 +417,9 @@
         .sidebar-toggle-btn {
             width: 38px;
             height: 38px;
-            border: 1px solid transparent;
+            border: 1px solid var(--divider);
             border-radius: 10px;
-            background: transparent;
+            background: var(--bg-surface);
             color: var(--text-secondary);
             font-size: 1.2rem;
             cursor: pointer;
@@ -430,7 +430,13 @@
 
         .sidebar-toggle-btn:hover {
             background: var(--bg-surface-hover);
-            color: var(--text-primary);
+            border-color: var(--accent-border);
+            color: var(--accent);
+            transform: scale(1.05);
+        }
+
+        .sidebar-toggle-btn:active {
+            transform: scale(0.95);
         }
 
         .sidebar-header {
@@ -1298,11 +1304,376 @@
             color: var(--text-muted);
             font-size: 0.88rem;
         }
+
+        /* ============================================= */
+        /*  MICROPHONE BUTTON                            */
+        /* ============================================= */
+        .mic-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 12px;
+            background: var(--bg-surface);
+            border: 1px solid var(--input-border);
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            transition: all 0.25s ease;
+        }
+
+        .mic-btn:hover {
+            background: var(--bg-surface-hover);
+            border-color: var(--accent-border);
+            color: var(--accent);
+            transform: scale(1.08);
+        }
+
+        .mic-btn:active {
+            transform: scale(0.95);
+        }
+
+        .mic-btn.recording {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: rgba(239, 68, 68, 0.4);
+            color: #ef4444;
+            animation: micPulse 1.5s ease-in-out infinite;
+        }
+
+        .mic-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        @keyframes micPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+            }
+        }
+
+        /* ============================================= */
+        /*  CONSULTATION REGISTER BUTTON                 */
+        /* ============================================= */
+        .consult-register-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 8px auto 0;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%);
+            border: 1px solid var(--accent-border);
+            border-radius: 12px;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            letter-spacing: 0.01em;
+        }
+
+        .consult-register-btn:hover {
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.15) 0%, rgba(99, 102, 241, 0.15) 100%);
+            border-color: var(--accent);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(34, 211, 238, 0.15);
+        }
+
+        .consult-register-btn:active {
+            transform: translateY(0);
+        }
+
+        .consult-register-btn .consult-icon {
+            font-size: 1.1rem;
+        }
+
+        /* ============================================= */
+        /*  CONSULTATION FORM MODAL                      */
+        /* ============================================= */
+        .consult-modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .consult-modal-backdrop.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .consult-box {
+            background: var(--bg-secondary);
+            padding: 36px 32px;
+            border-radius: 20px;
+            border: 1px solid var(--divider);
+            box-shadow: var(--shadow-lg), 0 0 80px rgba(34, 211, 238, 0.08);
+            width: 100%;
+            max-width: 480px;
+            transform: translateY(0) scale(1);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .consult-modal-backdrop.hidden .consult-box {
+            transform: translateY(20px) scale(0.95);
+            opacity: 0;
+        }
+
+        .consult-box .consult-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .consult-box .consult-header .consult-header-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            display: block;
+            filter: drop-shadow(0 0 12px rgba(34, 211, 238, 0.3));
+        }
+
+        .consult-box .consult-header h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
+        }
+
+        .consult-box .consult-header p {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        .consult-form-group {
+            margin-bottom: 16px;
+        }
+
+        .consult-form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            letter-spacing: 0.01em;
+        }
+
+        .consult-form-group label .required {
+            color: #ef4444;
+            margin-left: 2px;
+        }
+
+        .consult-form-group input,
+        .consult-form-group select,
+        .consult-form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        .consult-form-group input:focus,
+        .consult-form-group select:focus,
+        .consult-form-group textarea:focus {
+            border-color: var(--input-focus-border);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .consult-form-group input::placeholder,
+        .consult-form-group textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .consult-form-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 36px;
+        }
+
+        .consult-form-group select option {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .consult-form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+            line-height: 1.5;
+        }
+
+        .consult-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .consult-submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #22d3ee 0%, #6366f1 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: inherit;
+            letter-spacing: 0.01em;
+            margin-top: 8px;
+        }
+
+        .consult-submit-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(34, 211, 238, 0.25);
+        }
+
+        .consult-submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .consult-close-btn {
+            margin-top: 10px;
+            padding: 10px;
+            background: transparent;
+            border: 1px solid var(--divider);
+            border-radius: 10px;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.85rem;
+            width: 100%;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .consult-close-btn:hover {
+            background: var(--bg-surface-hover);
+            color: var(--text-secondary);
+        }
+
+        /* Success state for consultation form */
+        .consult-success {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .consult-success .success-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            display: block;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        .consult-success h3 {
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .consult-success p {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        /* Responsive for consult form */
+        @media (max-width: 640px) {
+            .consult-box {
+                padding: 24px 18px;
+            }
+
+            .consult-form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .consult-register-btn {
+                font-size: 0.85rem;
+                padding: 10px 16px;
+            }
+        }
     </style>
 </head>
 
 <body>
 
+    <!-- CONSULTATION REGISTRATION MODAL -->
+    <div id="consultModal" class="consult-modal-backdrop hidden">
+        <div class="consult-box">
+            <div id="consultFormContent">
+                <div class="consult-header">
+                    <span class="consult-header-icon">📋</span>
+                    <h2>Đăng ký tư vấn tuyển sinh</h2>
+                    <p>Điền thông tin bên dưới, bộ phận tuyển sinh sẽ liên hệ bạn trong thời gian sớm nhất.</p>
+                </div>
+                <div class="consult-form-row">
+                    <div class="consult-form-group">
+                        <label>Họ và tên <span class="required">*</span></label>
+                        <input type="text" id="consultName" placeholder="Nguyễn Văn A">
+                    </div>
+                    <div class="consult-form-group">
+                        <label>Số điện thoại <span class="required">*</span></label>
+                        <input type="tel" id="consultPhone" placeholder="0901 234 567">
+                    </div>
+                </div>
+                <div class="consult-form-group">
+                    <label>Email</label>
+                    <input type="email" id="consultEmail" placeholder="email@example.com">
+                </div>
+                <div class="consult-form-group">
+                    <label>Ngành quan tâm</label>
+                    <select id="consultMajor">
+                        <option value="">-- Chọn ngành --</option>
+                        <option value="Công nghệ kỹ thuật cơ khí">Công nghệ kỹ thuật cơ khí</option>
+                        <option value="Công nghệ kỹ thuật điện - điện tử">Công nghệ kỹ thuật điện - điện tử</option>
+                        <option value="Công nghệ kỹ thuật ô tô">Công nghệ kỹ thuật ô tô</option>
+                        <option value="Công nghệ thông tin">Công nghệ thông tin</option>
+                        <option value="Kế toán">Kế toán</option>
+                        <option value="Quản trị kinh doanh">Quản trị kinh doanh</option>
+                        <option value="Công nghệ kỹ thuật nhiệt">Công nghệ kỹ thuật nhiệt</option>
+                        <option value="Điện công nghiệp">Điện công nghiệp</option>
+                        <option value="Cắt gọt kim loại">Cắt gọt kim loại</option>
+                        <option value="Khác">Khác</option>
+                    </select>
+                </div>
+                <div class="consult-form-group">
+                    <label>Nội dung cần tư vấn</label>
+                    <textarea id="consultMessage" placeholder="Nhập nội dung bạn muốn được tư vấn..."></textarea>
+                </div>
+                <button class="consult-submit-btn" id="consultSubmitBtn">📨 Gửi đăng ký tư vấn</button>
+                <button class="consult-close-btn" id="consultCloseBtn">Đóng</button>
+            </div>
+        </div>
+    </div>
 
     <!-- LOGIN MODAL (hidden by default) -->
     <div id="loginModal" class="login-modal-backdrop hidden">
@@ -1359,7 +1730,8 @@
             <header class="app-header">
                 <div class="header-left">
                     <button class="sidebar-toggle-btn" id="sidebarToggleBtn" title="Đóng/Mở thanh bên">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="3" y1="12" x2="21" y2="12"></line>
                             <line x1="3" y1="6" x2="21" y2="6"></line>
                             <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -1418,6 +1790,15 @@
                 <div class="input-wrapper">
                     <textarea id="user-input" placeholder="Bạn muốn hỏi gì về kỳ tuyển sinh năm nay?"
                         rows="1"></textarea>
+                    <button class="mic-btn" id="mic-btn" title="Nhấn để nói">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                            <line x1="12" y1="19" x2="12" y2="23"></line>
+                            <line x1="8" y1="23" x2="16" y2="23"></line>
+                        </svg>
+                    </button>
                     <button class="send-btn" id="send-btn" title="Gửi tin nhắn">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                             stroke-linecap="round" stroke-linejoin="round">
@@ -1426,6 +1807,10 @@
                         </svg>
                     </button>
                 </div>
+                <button class="consult-register-btn" id="consultRegisterBtn">
+                    <span class="consult-icon">📝</span>
+                    <span>Đăng ký tư vấn tuyển sinh</span>
+                </button>
             </div>
         </div>
 
@@ -1932,6 +2317,246 @@
                 isDarkMode = !isDarkMode;
                 document.documentElement.setAttribute("data-theme", isDarkMode ? "dark" : "light");
                 themeIcon.textContent = isDarkMode ? "🌙" : "☀️";
+            });
+
+            /* ========================================================= */
+            /*  MICROPHONE - SPEECH TO TEXT                               */
+            /* ========================================================= */
+            const micBtn = document.getElementById("mic-btn");
+            let recognition = null;
+            let isRecording = false;
+
+            // Check for Web Speech API support
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+            if (SpeechRecognition) {
+                let finalTranscript = "";
+
+                function initRecognition() {
+                    recognition = new SpeechRecognition();
+                    recognition.lang = "vi-VN";
+                    recognition.continuous = true;
+                    recognition.interimResults = true;
+
+                    recognition.onresult = (event) => {
+                        let interimTranscript = "";
+                        for (let i = event.resultIndex; i < event.results.length; i++) {
+                            const transcript = event.results[i][0].transcript;
+                            if (event.results[i].isFinal) {
+                                finalTranscript += transcript + " ";
+                            } else {
+                                interimTranscript += transcript;
+                            }
+                        }
+                        userInput.value = finalTranscript + interimTranscript;
+                        resizeInput();
+                    };
+
+                    recognition.onerror = (event) => {
+                        console.error("Speech recognition error:", event.error);
+                        if (event.error === "not-allowed" || event.error === "service-not-allowed") {
+                            stopRecording();
+                            alert("Trình duyệt không cho phép truy cập micro.\n\n" +
+                                "Hãy thử:\n1. Cho phép quyền micro trong trình duyệt\n" +
+                                "2. Sử dụng Chrome/Edge trên HTTPS\n" +
+                                "3. Mở trực tiếp trang web (không trong iframe)");
+                        } else if (event.error === "no-speech") {
+                            // Không phát hiện giọng nói - tự restart
+                        } else if (event.error === "aborted") {
+                            stopRecording();
+                        } else if (event.error === "network") {
+                            stopRecording();
+                            alert("Lỗi kết nối mạng. Tính năng nhận diện giọng nói cần kết nối internet.");
+                        }
+                    };
+
+                    recognition.onend = () => {
+                        if (isRecording) {
+                            try { recognition.start(); } catch (e) { }
+                        }
+                    };
+                }
+
+                async function startRecording() {
+                    // Yêu cầu quyền micro trước (quan trọng cho iframe)
+                    try {
+                        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                        // Dừng stream ngay - chỉ cần trigger permission prompt
+                        stream.getTracks().forEach(track => track.stop());
+                    } catch (err) {
+                        console.error("Mic permission denied:", err);
+                        alert("Không thể truy cập micro.\nVui lòng cho phép quyền micro trong trình duyệt và thử lại.");
+                        return;
+                    }
+
+                    finalTranscript = userInput.value;
+                    isRecording = true;
+                    micBtn.classList.add("recording");
+                    micBtn.title = "Đang nghe... Nhấn để dừng";
+
+                    // Tạo mới recognition mỗi lần để tránh lỗi state
+                    initRecognition();
+                    try {
+                        recognition.start();
+                    } catch (e) {
+                        console.error("Cannot start recognition:", e);
+                        stopRecording();
+                        alert("Không thể khởi động nhận diện giọng nói.\nVui lòng thử lại hoặc sử dụng trình duyệt Chrome/Edge.");
+                    }
+                }
+
+                function stopRecording() {
+                    isRecording = false;
+                    micBtn.classList.remove("recording");
+                    micBtn.title = "Nhấn để nói";
+                    try {
+                        if (recognition) recognition.stop();
+                    } catch (e) { }
+                }
+
+                micBtn.addEventListener("click", () => {
+                    if (isRecording) {
+                        stopRecording();
+                    } else {
+                        startRecording();
+                    }
+                });
+            } else {
+                // Speech API not supported
+                micBtn.addEventListener("click", () => {
+                    alert("Trình duyệt của bạn không hỗ trợ nhận diện giọng nói.\nVui lòng sử dụng Google Chrome hoặc Microsoft Edge.");
+                });
+                micBtn.style.opacity = "0.5";
+                micBtn.title = "Trình duyệt không hỗ trợ";
+                console.warn("Web Speech API not supported in this browser.");
+            }
+
+            /* ========================================================= */
+            /*  CONSULTATION FORM                                        */
+            /* ========================================================= */
+            const consultModal = document.getElementById("consultModal");
+            const consultRegisterBtn = document.getElementById("consultRegisterBtn");
+            const consultCloseBtn = document.getElementById("consultCloseBtn");
+            const consultSubmitBtn = document.getElementById("consultSubmitBtn");
+            const consultFormContent = document.getElementById("consultFormContent");
+
+            function openConsultModal() {
+                consultModal.classList.remove("hidden");
+                // Reset to form state (in case it was showing success)
+                resetConsultForm();
+            }
+
+            function closeConsultModal() {
+                consultModal.classList.add("hidden");
+            }
+
+            function resetConsultForm() {
+                consultFormContent.innerHTML = `
+                    <div class="consult-header">
+                        <span class="consult-header-icon">📋</span>
+                        <h2>Đăng ký tư vấn tuyển sinh</h2>
+                        <p>Điền thông tin bên dưới, bộ phận tuyển sinh sẽ liên hệ bạn trong thời gian sớm nhất.</p>
+                    </div>
+                    <div class="consult-form-row">
+                        <div class="consult-form-group">
+                            <label>Họ và tên <span class="required">*</span></label>
+                            <input type="text" id="consultName" placeholder="Nguyễn Văn A">
+                        </div>
+                        <div class="consult-form-group">
+                            <label>Số điện thoại <span class="required">*</span></label>
+                            <input type="tel" id="consultPhone" placeholder="0901 234 567">
+                        </div>
+                    </div>
+                    <div class="consult-form-group">
+                        <label>Email</label>
+                        <input type="email" id="consultEmail" placeholder="email@example.com">
+                    </div>
+                    <div class="consult-form-group">
+                        <label>Ngành quan tâm</label>
+                        <select id="consultMajor">
+                            <option value="">-- Chọn ngành --</option>
+                            <option value="Công nghệ kỹ thuật cơ khí">Công nghệ kỹ thuật cơ khí</option>
+                            <option value="Công nghệ kỹ thuật điện - điện tử">Công nghệ kỹ thuật điện - điện tử</option>
+                            <option value="Công nghệ kỹ thuật ô tô">Công nghệ kỹ thuật ô tô</option>
+                            <option value="Công nghệ thông tin">Công nghệ thông tin</option>
+                            <option value="Kế toán">Kế toán</option>
+                            <option value="Quản trị kinh doanh">Quản trị kinh doanh</option>
+                            <option value="Công nghệ kỹ thuật nhiệt">Công nghệ kỹ thuật nhiệt</option>
+                            <option value="Điện công nghiệp">Điện công nghiệp</option>
+                            <option value="Cắt gọt kim loại">Cắt gọt kim loại</option>
+                            <option value="Khác">Khác</option>
+                        </select>
+                    </div>
+                    <div class="consult-form-group">
+                        <label>Nội dung cần tư vấn</label>
+                        <textarea id="consultMessage" placeholder="Nhập nội dung bạn muốn được tư vấn..."></textarea>
+                    </div>
+                    <button class="consult-submit-btn" id="consultSubmitBtn">📨 Gửi đăng ký tư vấn</button>
+                    <button class="consult-close-btn" id="consultCloseBtn">Đóng</button>
+                `;
+
+                // Re-wire event listeners after DOM reset
+                document.getElementById("consultSubmitBtn").addEventListener("click", submitConsultForm);
+                document.getElementById("consultCloseBtn").addEventListener("click", closeConsultModal);
+            }
+
+            function submitConsultForm() {
+                const name = document.getElementById("consultName").value.trim();
+                const phone = document.getElementById("consultPhone").value.trim();
+                const email = document.getElementById("consultEmail").value.trim();
+                const major = document.getElementById("consultMajor").value;
+                const message = document.getElementById("consultMessage").value.trim();
+
+                // Validation
+                if (!name) {
+                    alert("Vui lòng nhập họ và tên!");
+                    document.getElementById("consultName").focus();
+                    return;
+                }
+                if (!phone) {
+                    alert("Vui lòng nhập số điện thoại!");
+                    document.getElementById("consultPhone").focus();
+                    return;
+                }
+
+                // Phone validation
+                const phoneRegex = /^[0-9\s\-\+]{8,15}$/;
+                if (!phoneRegex.test(phone)) {
+                    alert("Số điện thoại không hợp lệ!");
+                    document.getElementById("consultPhone").focus();
+                    return;
+                }
+
+                // Send to backend via Streamlit
+                StreamlitApi.setComponentValue({
+                    action: "consult_register",
+                    name: name,
+                    phone: phone,
+                    email: email,
+                    major: major,
+                    message: message,
+                    timestamp: Date.now()
+                });
+
+                // Show success state
+                consultFormContent.innerHTML = `
+                    <div class="consult-success">
+                        <span class="success-icon">✅</span>
+                        <h3>Đăng ký thành công!</h3>
+                        <p>Cảm ơn bạn <strong>${escapeHtml(name)}</strong> đã đăng ký tư vấn.<br>Bộ phận tuyển sinh sẽ liên hệ bạn qua SĐT <strong>${escapeHtml(phone)}</strong> trong thời gian sớm nhất.</p>
+                    </div>
+                    <button class="consult-close-btn" id="consultSuccessClose">Đóng</button>
+                `;
+                document.getElementById("consultSuccessClose").addEventListener("click", closeConsultModal);
+            }
+
+            consultRegisterBtn.addEventListener("click", openConsultModal);
+            consultCloseBtn.addEventListener("click", closeConsultModal);
+            consultSubmitBtn.addEventListener("click", submitConsultForm);
+
+            // Close modal on backdrop click
+            consultModal.addEventListener("click", (e) => {
+                if (e.target === consultModal) closeConsultModal();
             });
 
             /* ========================================================= */
