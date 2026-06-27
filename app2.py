@@ -44,8 +44,242 @@ if page == "admin":
     # ==============================================================================
     # TRANG ADMIN
     # ==============================================================================
+    import smtplib
+    import random
+    from email.mime.text import MIMEText
+    from email.mime.multipart import MIMEMultipart
     from datetime import datetime
     
+    # Khởi tạo trạng thái Admin
+    if "admin_logged_in" not in st.session_state:
+        st.session_state.admin_logged_in = False
+    if "admin_otp" not in st.session_state:
+        st.session_state.admin_otp = ""
+    if "admin_email" not in st.session_state:
+        st.session_state.admin_email = ""
+    if "admin_otp_sent" not in st.session_state:
+        st.session_state.admin_otp_sent = False
+
+    def send_otp_email(receiver_email, otp):
+        smtp_email = st.secrets.get("SMTP_EMAIL", "")
+        smtp_password = st.secrets.get("SMTP_PASSWORD", "")
+        
+        if not smtp_email or not smtp_password:
+            st.warning(f"⚠️ Chưa cấu hình SMTP_EMAIL và SMTP_PASSWORD trong secrets. OTP của bạn là: {otp}")
+            return True
+            
+        try:
+            msg = MIMEMultipart()
+            msg['From'] = smtp_email
+            msg['To'] = receiver_email
+            msg['Subject'] = "🔐 Mã OTP Đăng Nhập Hệ Thống Admin"
+            
+            body = f"""
+            Chào Admin,
+            
+            Bạn đang thực hiện đăng nhập vào hệ thống quản trị Tuyển Sinh AI.
+            Mã OTP xác thực của bạn là:
+            
+            👉 {otp} 👈
+            
+            Mã này có hiệu lực trong vòng 5 phút. Vui lòng không chia sẻ mã này cho bất kỳ ai.
+            
+            Trân trọng,
+            Hệ thống Tuyển sinh AI.
+            """
+            msg.attach(MIMEText(body, 'plain', 'utf-8'))
+            
+            server = smtplib.SMTP('smtp.gmail.com', 587)
+            server.starttls()
+            server.login(smtp_email, smtp_password)
+            text = msg.as_string()
+            server.sendmail(smtp_email, receiver_email, text)
+            server.quit()
+            return True
+        except Exception as e:
+            st.error(f"❌ Không thể gửi email OTP: {e}")
+            return False
+
+    # Giao diện Đăng nhập
+    if not st.session_state.admin_logged_in:
+        st.markdown("""
+        <style>
+            #MainMenu, footer, header, [data-testid="stToolbar"], [data-testid="stDecoration"], [data-testid="stStatusWidget"], [data-testid="stHeader"] { display: none !important; }
+            /* Animated gradient background */
+            .stApp {
+                background: linear-gradient(-45deg, #0f172a, #312e81, #1e1b4b, #0f172a) !important;
+                background-size: 400% 400% !important;
+                animation: gradientBG 15s ease infinite !important;
+                color: #f8fafc !important;
+            }
+            @keyframes gradientBG {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+            }
+            .block-container, [data-testid="stMainBlockContainer"] {
+                padding-top: 10vh !important;
+                max-width: 480px !important;
+                margin: 0 auto !important;
+                z-index: 10 !important;
+            }
+            /* Glowing container for title */
+            .login-container {
+                padding: 40px 30px 20px 30px;
+                background: rgba(255, 255, 255, 0.03);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-bottom: none;
+                border-radius: 24px 24px 0 0;
+                text-align: center;
+                margin-bottom: -25px; /* pull form up */
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                position: relative;
+                z-index: 20;
+            }
+            .login-title {
+                background: linear-gradient(to right, #a855f7, #3b82f6, #06b6d4);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                font-size: 30px;
+                font-weight: 850;
+                margin-bottom: 8px;
+                letter-spacing: -0.03em;
+            }
+            .login-subtitle {
+                color: #cbd5e1;
+                font-size: 15px;
+                font-weight: 400;
+            }
+            /* Streamlit Form Container */
+            div[data-testid="stForm"] {
+                background: rgba(15, 23, 42, 0.5) !important;
+                backdrop-filter: blur(20px) !important;
+                border: 1px solid rgba(255, 255, 255, 0.1) !important;
+                border-radius: 0 0 24px 24px !important;
+                padding: 40px 35px 30px 35px !important;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5) !important;
+                position: relative;
+                z-index: 10;
+            }
+            /* Input Labels */
+            div[data-testid="stTextInput"] label p {
+                color: #e2e8f0 !important;
+                font-size: 14px !important;
+                font-weight: 600 !important;
+                letter-spacing: 0.02em !important;
+            }
+            /* Customizing Streamlit inputs */
+            div[data-testid="stTextInput"] input {
+                background-color: rgba(255, 255, 255, 0.05) !important;
+                border: 1px solid rgba(255, 255, 255, 0.15) !important;
+                color: #ffffff !important;
+                border-radius: 12px !important;
+                padding: 14px !important;
+                font-size: 15px !important;
+                transition: all 0.3s ease !important;
+            }
+            div[data-testid="stTextInput"] input:focus {
+                border-color: #8b5cf6 !important;
+                background-color: rgba(255, 255, 255, 0.1) !important;
+                box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.2) !important;
+            }
+            /* Form Submit Button */
+            div[data-testid="stForm"] button {
+                background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%) !important;
+                color: white !important;
+                border: none !important;
+                padding: 12px 24px !important;
+                font-size: 16px !important;
+                font-weight: 700 !important;
+                width: 100% !important;
+                border-radius: 12px !important;
+                box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4) !important;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+                margin-top: 15px !important;
+            }
+            div[data-testid="stForm"] button:hover {
+                transform: translateY(-2px) scale(1.02) !important;
+                box-shadow: 0 12px 25px rgba(99, 102, 241, 0.6) !important;
+            }
+            div[data-testid="stForm"] button:active {
+                transform: translateY(0) scale(0.98) !important;
+            }
+            /* Back button style */
+            .stButton > button {
+                background: transparent !important;
+                border: 1px solid rgba(255, 255, 255, 0.15) !important;
+                color: #cbd5e1 !important;
+                margin-top: 20px !important;
+                border-radius: 12px !important;
+                font-weight: 500 !important;
+                transition: all 0.2s !important;
+            }
+            .stButton > button:hover {
+                background: rgba(255, 255, 255, 0.05) !important;
+                color: white !important;
+                border-color: rgba(255, 255, 255, 0.3) !important;
+            }
+        </style>
+        """, unsafe_allow_html=True)
+
+        if not st.session_state.admin_otp_sent:
+            st.markdown("""
+            <div class="login-container">
+                <div class="login-title">🎓 Cổng Admin Tuyển Sinh</div>
+                <div class="login-subtitle">Nhập thông tin quản trị viên để tiếp tục</div>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            with st.form("admin_login_form"):
+                email = st.text_input("📧 Email Admin", placeholder="admin@example.com")
+                password = st.text_input("🔑 Mật khẩu", type="password", placeholder="••••••••")
+                submit = st.form_submit_button("Gửi mã OTP")
+                
+                if submit:
+                    admin_password = st.secrets.get("ADMIN_PASSWORD", "admin123")
+                    if password == admin_password:
+                        if email:
+                            # Sinh OTP ngẫu nhiên 6 chữ số
+                            otp = str(random.randint(100000, 999999))
+                            st.session_state.admin_otp = otp
+                            st.session_state.admin_email = email
+                            
+                            with st.spinner("Đang gửi OTP..."):
+                                if send_otp_email(email, otp):
+                                    st.session_state.admin_otp_sent = True
+                                    st.rerun()
+                        else:
+                            st.error("Vui lòng nhập Email!")
+                    else:
+                        st.error("Mật khẩu không chính xác!")
+        else:
+            st.markdown(f"""
+            <div class="login-container">
+                <div class="login-title">🔐 Xác thực OTP</div>
+                <div class="login-subtitle">Mã OTP đã được gửi đến hộp thư<br><b style="color:#38bdf8">{st.session_state.admin_email}</b></div>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            with st.form("admin_otp_form"):
+                otp_input = st.text_input("💬 Nhập mã OTP 6 số", placeholder="123456")
+                verify = st.form_submit_button("Xác nhận đăng nhập")
+                
+                if verify:
+                    if otp_input.strip() == st.session_state.admin_otp:
+                        st.session_state.admin_logged_in = True
+                        st.rerun()
+                    else:
+                        st.error("Mã OTP không chính xác!")
+            
+            if st.button("⬅️ Quay lại đăng nhập", use_container_width=True):
+                st.session_state.admin_otp_sent = False
+                st.rerun()
+                
+        st.stop()
+
+    # Nhúng CSS ẩn header của admin
     st.markdown("""
     <style>
         #MainMenu, footer, header, [data-testid="stToolbar"], [data-testid="stDecoration"], [data-testid="stStatusWidget"], [data-testid="stHeader"] { display: none !important; }
@@ -56,7 +290,7 @@ if page == "admin":
         }
     </style>
     """, unsafe_allow_html=True)
-    
+
     parent_dir = os.path.dirname(os.path.abspath(__file__))
     frontend_admin_dir = os.path.join(parent_dir, "frontend_admin")
     _admin_component = components.declare_component("admin_ui", path=frontend_admin_dir)
@@ -233,7 +467,14 @@ if page == "admin":
             st.session_state.admin_last_ts = ts
             action = admin_action.get("action", "")
             
-            if action == "delete_consult":
+            if action == "admin_logout":
+                st.session_state.admin_logged_in = False
+                st.session_state.admin_otp_sent = False
+                st.session_state.admin_otp = ""
+                st.session_state.admin_email = ""
+                st.rerun()
+                
+            elif action == "delete_consult":
                 idx = admin_action.get("index")
                 if idx is not None and 0 <= idx < len(consult_list):
                     consult_list.pop(idx)
