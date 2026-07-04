@@ -151,7 +151,8 @@
                         "Id: 17\nTen nganh: Hàn (Công nghệ cao)\nMa nganh: 6520123\nChuyen nganh: \nMuc tieu dao tao: Sinh viên sau khi tốt nghiệp ra trường làm việc từ 2 đến 3 năm có khả năng: \n- Tiếp nhận và ứng dụng công n...",
                         "Id: 14\nTen nganh: Kế toán tin học (Kế toán doanh nghiệp)\nMa nganh: 6340302\nChuyen nganh: \nMuc tieu dao tao: Sinh viên sau khi tốt nghiệp ra trường làm việc từ 2 đến 3 năm có khả năng:\n1. Trưởng, p...",
                         "Id: 3\nTen nganh: Công nghệ Kỹ thuật Điện tử - Viễn thông (Điện tử, Truyền thông)\nMa nganh: 6510312\nChuyen nganh: \nMuc tieu dao tao: Sau khi tốt nghiệp chương trình đào tạo CNKT Điện tử - Viễn thông từ..."
-                    ]
+                    ],
+                    "rating": "down"
                 }
             ]
         },
@@ -180,6 +181,27 @@
                         "Id: 13\nTen nganh: Công nghệ Kỹ thuật Cơ điện tử (đạt chuẩn KOSEN-Nhật Bản)\nMa nganh: 6510304\nChuyen nganh: \nMuc tieu dao tao: - Làm trưởng nhóm bảo trì, lắp đặt, vận hành về cơ điện tử tại các doanh n...",
                         "Chuyen muc: Chế độ chính sách\nTieu de: Chính sách cho Nữ sinh kỹ thuật\nNoi dung: - Giảm 50% kinh phí đào tạo: Cao đẳng các ngành CNKT Cơ khí, Ô tô, Cơ điện tử, Nhiệt lạnh, Điện-Điện tử, Điều khiển & T..."
                     ]
+                }
+            ]
+        },
+        "5c845bf5-fe20-4ff0-98dc-14601fffe597": {
+            "title": "Chat: Chuẩn đầu ra ngoại n...",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "Chuẩn đầu ra ngoại ngữ là gì?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Chào bạn, chuẩn đầu ra Tiếng Anh tại trường như sau:\n\n- **Hình thức:** Đánh giá 4 kỹ năng (Nghe, Nói, Đọc, Viết) qua chứng nhận nội bộ do Trung tâm Ngoại ngữ tổ chức.\n- **Điều kiện đạt:** Tổng điểm từ 20 trở lên, không có kỹ năng nào dưới 3 điểm (thang điểm 10/kỹ năng).\n- **Thời hạn:** Kết quả được bảo lưu trong 24 tháng.\n\nBạn có cần thêm thông tin về các chứng chỉ ngoại ngữ khác được chấp nhận không?",
+                    "sources": [
+                        "Chuyen muc: Quy định học phần\nTieu de: Chuẩn đầu ra Tiếng Anh Bậc 2/6\nNoi dung: - Đánh giá 4 kỹ năng (Nghe, Nói, Đọc, Viết) do TT Ngoại ngữ tổ chức (Chứng nhận nội bộ).\n- Điều kiện đạt: Tổng điểm >= 2...",
+                        "Id: 18\nTen nganh: Kỹ thuật máy lạnh và điều hòa không khí\nMa nganh: 6520205\nChuyen nganh: \nMuc tieu dao tao: Sau 2 đến 3 năm, người tốt nghiệp có khả năng:\n1. Trưởng nhóm phụ trách các vấn đề thi công...",
+                        "Id: 21\nTen nganh: Điện tử công nghiệp\nMa nganh: 6520225\nChuyen nganh: \nMuc tieu dao tao: Sau khi tốt nghiệp làm việc từ 2 đến 3 năm, sinh viên có khả năng:\n- Là thành viên chính phụ trách các vấn đề v...",
+                        "Id: 12\nTen nganh: Công nghệ Kỹ thuật Tự động hóa trong nông nghiệp (Nông nghiệp công nghệ cao)\nMa nganh: \nChuyen nganh: \nMuc tieu dao tao: Sau khi ra trường làm việc từ 2-3 năm người học có thể đảm nh...",
+                        "Chuyen muc: Quy ước mã đào tạo\nTieu de: Mã bậc và Mã ngành/nghề\nNoi dung: - Bậc Cao đẳng (Ngành): Mã 03. Bậc Cao đẳng (Nghề): Mã 04.\n- Một số mã ngành tiêu biểu: Cơ khí (01), Ô tô (02), Điện-Điện tử (..."
+                    ],
+                    "rating": "up"
                 }
             ]
         }

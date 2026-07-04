@@ -33,5 +33,10 @@
         "enabled": true,
         "description": "File dữ liệu mới",
         "uploaded_at": "2026-06-27T09:27:31.727845"
+    },
+    "admin_session.json": {
+        "enabled": true,
+        "description": "File dữ liệu mới",
+        "uploaded_at": "2026-07-03T17:43:00.580898"
     }
 }

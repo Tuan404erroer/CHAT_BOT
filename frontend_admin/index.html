@@ -936,11 +936,12 @@
         .loading-overlay {
             position: fixed;
             inset: 0;
-            background: var(--bg-page);
+            background: rgba(240, 242, 248, 0.45);
+            backdrop-filter: blur(2px);
             display: grid;
             place-items: center;
             z-index: 2000;
-            transition: opacity 0.5s;
+            transition: opacity 0.2s ease;
         }
 
         .loading-overlay.hidden {
@@ -967,6 +968,15 @@
             margin-top: 14px;
             color: var(--text-muted);
             font-size: 0.88rem;
+        }
+
+        .loading-overlay > div {
+            min-width: 220px;
+            padding: 18px 22px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.86);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
         }
 
         /* ============================================= */
@@ -1671,6 +1681,38 @@
         /* ========================================================= */
         StreamlitApi.setComponentReady();
         StreamlitApi.setFrameHeight(window.innerHeight);
+
+        /* ========================================================= */
+        /*  SIMPLE POLLING (light ping without action)              */
+        /* Sends a lightweight timestamp to trigger a Streamlit rerun
+           The backend keeps `st.session_state` so admin login is preserved. */
+        let _realtimeIntervalId = null;
+        function startRealtimePolling(intervalMs = 3000) {
+            if (_realtimeIntervalId) return;
+            _realtimeIntervalId = setInterval(() => {
+                if (!componentReady) return;
+                // Send only a timestamp (no action) to request a rerun
+                StreamlitApi.setComponentValue({ timestamp: Date.now() });
+            }, intervalMs);
+        }
+
+        function stopRealtimePolling() {
+            if (_realtimeIntervalId) {
+                clearInterval(_realtimeIntervalId);
+                _realtimeIntervalId = null;
+            }
+        }
+
+        // Start polling after first render
+        window.addEventListener('message', function onFirstRender(ev) {
+            if (ev.data && ev.data.type === 'streamlit:render') {
+                startRealtimePolling(3000);
+                window.removeEventListener('message', onFirstRender);
+            }
+        });
+
+        // Cleanup
+        window.addEventListener('beforeunload', () => stopRealtimePolling());
 
         /* ========================================================= */
         /*  RENDER DASHBOARD                                         */

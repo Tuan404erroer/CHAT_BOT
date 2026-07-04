@@ -1278,11 +1278,12 @@
         .loading-overlay {
             position: fixed;
             inset: 0;
-            background: var(--bg-primary);
+            background: rgba(13, 18, 28, 0.28);
+            backdrop-filter: blur(2px);
             display: grid;
             place-items: center;
             z-index: 1000;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.2s ease;
         }
 
         .loading-overlay.hidden {
@@ -1303,6 +1304,15 @@
             margin-top: 16px;
             color: var(--text-muted);
             font-size: 0.88rem;
+        }
+
+        .loading-overlay > div {
+            min-width: 220px;
+            padding: 18px 22px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.14);
         }
 
         /* ============================================= */
