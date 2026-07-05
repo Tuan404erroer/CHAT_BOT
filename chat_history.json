@@ -73,7 +73,7 @@
                         "Id: 15\nTen nganh: Cơ khí chế tạo (Cắt gọt kim loại)\nMa nganh: 6520121\nChuyen nganh: \nMuc tieu dao tao: - Lập được quy trình công nghệ gia công các chi tiết cơ khí.\n- Thực hiện gia công, lắp ráp các ...",
                         "Id: 5\nTen nganh: Công nghệ Kỹ thuật Cơ khí (đạt chuẩn ABET)\nMa nganh: 6510201\nChuyen nganh: \nMuc tieu dao tao: Sinh viên sau khi tốt nghiệp ra trường làm việc từ 2 đến 3 năm có khả năng:\n- Thiết ..."
                     ],
-                    "rating": "down"
+                    "rating": "up"
                 },
                 {
                     "role": "user",
@@ -152,7 +152,7 @@
                         "Id: 14\nTen nganh: Kế toán tin học (Kế toán doanh nghiệp)\nMa nganh: 6340302\nChuyen nganh: \nMuc tieu dao tao: Sinh viên sau khi tốt nghiệp ra trường làm việc từ 2 đến 3 năm có khả năng:\n1. Trưởng, p...",
                         "Id: 3\nTen nganh: Công nghệ Kỹ thuật Điện tử - Viễn thông (Điện tử, Truyền thông)\nMa nganh: 6510312\nChuyen nganh: \nMuc tieu dao tao: Sau khi tốt nghiệp chương trình đào tạo CNKT Điện tử - Viễn thông từ..."
                     ],
-                    "rating": "down"
+                    "rating": "up"
                 }
             ]
         },
@@ -180,7 +180,8 @@
                         "Chuyen muc: Quy chế đào tạo\nTieu de: Điều kiện học tiếp, ngừng học và thôi học\nNoi dung: - Điều kiện học tiếp: Điểm TB năm >= 5.0 VÀ nợ không quá 25 ĐVHT (tính từ đầu khóa).\n- Ngừng học 1 năm: Dành ch...",
                         "Id: 13\nTen nganh: Công nghệ Kỹ thuật Cơ điện tử (đạt chuẩn KOSEN-Nhật Bản)\nMa nganh: 6510304\nChuyen nganh: \nMuc tieu dao tao: - Làm trưởng nhóm bảo trì, lắp đặt, vận hành về cơ điện tử tại các doanh n...",
                         "Chuyen muc: Chế độ chính sách\nTieu de: Chính sách cho Nữ sinh kỹ thuật\nNoi dung: - Giảm 50% kinh phí đào tạo: Cao đẳng các ngành CNKT Cơ khí, Ô tô, Cơ điện tử, Nhiệt lạnh, Điện-Điện tử, Điều khiển & T..."
-                    ]
+                    ],
+                    "rating": "up"
                 }
             ]
         },

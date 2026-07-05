@@ -1566,7 +1566,8 @@
         let statsData = null;
         let ratingChart = null;
         let currentRatingFilter = "all";
-        let componentReady = false;
+        const loadingStateKey = "admin_ui_loaded_once";
+        let componentReady = sessionStorage.getItem(loadingStateKey) === "1";
 
         /* ========================================================= */
         /*  DOM REFS                                                 */
@@ -1578,6 +1579,11 @@
         const modalTitle = document.getElementById("modalTitle");
         const headerTitle = document.getElementById("headerTitle");
         const globalSearch = document.getElementById("globalSearch");
+
+        if (componentReady && loadingOverlay) {
+            loadingOverlay.classList.add("hidden");
+            loadingOverlay.style.display = "none";
+        }
 
         /* ========================================================= */
         /*  NAVIGATION                                               */
@@ -1659,6 +1665,7 @@
 
                 if (!componentReady) {
                     componentReady = true;
+                    sessionStorage.setItem(loadingStateKey, "1");
                     loadingOverlay.classList.add("hidden");
                     setTimeout(() => loadingOverlay.remove(), 600);
                 }

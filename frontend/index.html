@@ -1862,7 +1862,8 @@
             let messages = [];
             let isProcessing = false;
             let isDarkMode = true;
-            let componentReady = false;
+            const loadingStateKey = "chat_ui_loaded_once";
+            let componentReady = sessionStorage.getItem(loadingStateKey) === "1";
 
             const loginModal = document.getElementById("loginModal");
             const loginBtn = document.getElementById("loginBtn");
@@ -2045,6 +2046,11 @@
             const sidebar = document.querySelector(".sidebar");
             const sidebarToggleBtn = document.getElementById("sidebarToggleBtn");
 
+            if (componentReady && loadingOverlay) {
+                loadingOverlay.classList.add("hidden");
+                loadingOverlay.style.display = "none";
+            }
+
             /* ========================================================= */
             /*  SIDEBAR TOGGLE LOGIC                                     */
             /* ========================================================= */
@@ -2075,6 +2081,7 @@
                     // Hide loading overlay on first render
                     if (!componentReady) {
                         componentReady = true;
+                        sessionStorage.setItem(loadingStateKey, "1");
                         loadingOverlay.classList.add("hidden");
                         setTimeout(() => loadingOverlay.remove(), 600);
                     }

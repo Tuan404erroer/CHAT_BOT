@@ -15,7 +15,6 @@ from langchain_community.retrievers import BM25Retriever
 from typing import Any, List
 from langchain_core.retrievers import BaseRetriever
 
-st.set_page_config(layout="wide")
 class CustomHybridRetriever(BaseRetriever):
     vector_retriever: Any
     bm25_retriever: Any
@@ -938,12 +937,25 @@ def get_rag_hash():
     import hashlib
     return hashlib.md5(hash_str.encode()).hexdigest()
 
-rag_hash = get_rag_hash()
-chips = setup_rag_system(rag_hash)
-if chips is None:
-    st.error("❌ Không tìm thấy file dữ liệu hợp lệ. Vui lòng kiểm tra lại!")
-    st.stop()
-qa_chain_all, qa_chain_diem_chuan, llm = chips
+# LAZY LOADING: Chỉ khởi tạo RAG system khi cần thiết (không load mỗi lần rerun)
+if "rag_initialized" not in st.session_state:
+    st.session_state.rag_initialized = False
+    st.session_state.qa_chain_all = None
+    st.session_state.qa_chain_diem_chuan = None
+    st.session_state.llm = None
+
+def ensure_rag_system():
+    """Đảm bảo RAG system đã được khởi tạo (chỉ load 1 lần)"""
+    if not st.session_state.rag_initialized:
+        with st.spinner("🔄 Đang khởi tạo hệ thống AI..."):
+            rag_hash = get_rag_hash()
+            chips = setup_rag_system(rag_hash)
+            if chips is None:
+                st.error("❌ Không tìm thấy file dữ liệu hợp lệ. Vui lòng kiểm tra lại!")
+                st.stop()
+            st.session_state.qa_chain_all, st.session_state.qa_chain_diem_chuan, st.session_state.llm = chips
+            st.session_state.rag_initialized = True
+    return st.session_state.qa_chain_all, st.session_state.qa_chain_diem_chuan, st.session_state.llm
 
 HISTORY_FILE = "chat_history.json"
 
@@ -1040,8 +1052,7 @@ if user_input is not None:
                 if st.session_state.current_session_id in user_history:
                     user_history[st.session_state.current_session_id]["messages"] = st.session_state.messages
                     save_history(st.session_state.history_data)
-                    
-            st.rerun()
+            # KHÔNG RERUN - chỉ lưu vào file, giao diện frontend tự cập nhật
             
         elif action == "consult_register":
             # Save consultation registration to a separate JSON file
