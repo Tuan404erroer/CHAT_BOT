@@ -996,6 +996,9 @@ if st.session_state.current_session_id is None:
 
 user_history = st.session_state.history_data.get(user_key, {}) if st.session_state.logged_in else {}
 
+# Khởi tạo RAG system trước khi xử lý chat để tránh NameError khi dùng qa_chain_*.
+qa_chain_all, qa_chain_diem_chuan, llm = ensure_rag_system()
+
 # --- RENDER COMPONENT & XỬ LÝ ---
 user_input = _chat_component(
     messages=json.dumps(st.session_state.messages, ensure_ascii=False),
