@@ -763,14 +763,18 @@ def setup_rag_system(config_hash=None):
                         content = f"Nganh: {item['nganh']}\nDiem chuan:\n" + "\n".join(diem_chuan_lines)
                         metadata = {
                             "nganh": item["nganh"],
-                            "source_file": filename
+                            "source_file": filename,
+                            "original_json": json.dumps(item, ensure_ascii=False, indent=2)
                         }
                         docs.append(Document(page_content=content, metadata=metadata))
                 continue
             
             for item in load_json_items(path):
                 content = flatten_json_to_text(item)
-                metadata = {"source_file": filename}
+                metadata = {
+                    "source_file": filename,
+                    "original_json": json.dumps(item, ensure_ascii=False, indent=2) if isinstance(item, (dict, list)) else str(item)
+                }
                 if isinstance(item, dict):
                     if "id" in item: metadata["id"] = item["id"]
                     if "nganh" in item: metadata["nganh"] = item.get("nganh", "")
@@ -910,11 +914,27 @@ def process_query(prompt, qa_chain_all, qa_chain_diem_chuan, llm):
 
     # Bước 4: Chuẩn bị nguồn tài liệu
     sources = []
-    seen_docs = set()
-    for doc in all_source_documents:
-        if doc.page_content not in seen_docs:
-            sources.append(doc.page_content[:200] + "...")
-            seen_docs.add(doc.page_content)
+    if all_source_documents:
+        import re
+        best_doc = None
+        max_overlap = -1
+        # Lọc ra các từ khóa trong câu trả lời (bỏ qua dấu câu)
+        answer_words = set(re.findall(r'\w+', answer.lower()))
+        
+        # Tìm tài liệu có độ trùng lặp từ vựng cao nhất với câu trả lời
+        for doc in all_source_documents:
+            doc_words = set(re.findall(r'\w+', doc.page_content.lower()))
+            overlap = len(answer_words.intersection(doc_words))
+            if overlap > max_overlap:
+                max_overlap = overlap
+                best_doc = doc
+                
+        if best_doc:
+            original_json = best_doc.metadata.get("original_json")
+            if original_json:
+                sources.append(original_json)
+            else:
+                sources.append(best_doc.page_content)
 
     return answer, sources
 

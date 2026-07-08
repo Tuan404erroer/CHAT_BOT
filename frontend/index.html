@@ -2226,7 +2226,9 @@
 
                 sources.forEach((src) => {
                     const li = document.createElement("li");
-                    li.textContent = typeof src === "string" ? src : (src.content || JSON.stringify(src));
+                    li.style.whiteSpace = "pre-wrap";
+                    li.style.fontFamily = "monospace";
+                    li.textContent = typeof src === "string" ? src : (src.content || JSON.stringify(src, null, 2));
                     list.appendChild(li);
                 });
 

@@ -15,7 +15,7 @@
         "uploaded_at": "2026-06-27T09:27:31.727845"
     },
     "hoc-phi.json": {
-        "enabled": false,
+        "enabled": true,
         "description": "File dữ liệu mới",
         "uploaded_at": "2026-06-27T09:27:31.727845"
     },
