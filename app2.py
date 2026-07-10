@@ -505,7 +505,7 @@ if page == "admin":
 
         knowledge_files = []
         for entry in os.listdir("."):
-            if entry.lower().endswith((".json", ".txt")) and os.path.isfile(entry) and entry not in ["chat_history.json", "consult_registrations.json", "knowledge_config.json"]:
+            if entry.lower().endswith((".json", ".txt")) and os.path.isfile(entry) and entry not in ["chat_history.json", "consult_registrations.json", "knowledge_config.json", "prompts.json"]:
                 file_size = os.path.getsize(entry)
                 
                 # Default config if not exists
