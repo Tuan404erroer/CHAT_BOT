@@ -33,6 +33,51 @@ class CustomHybridRetriever(BaseRetriever):
                 seen.add(doc.page_content)
         return combined
 
+# ==============================================================================
+# [CẬP NHẬT 1] PROMPT PHÂN QUYỀN KIẾN THỨC (MỞ GIỚI HẠN LỊCH SỬ Ở ĐẦU FILE)
+# ==============================================================================
+SYSTEM_PROMPT_FILE = "prompts.json"
+import json
+from datetime import datetime
+
+DEFAULT_PROMPTS = {
+    "DEFAULT": {
+        "name": "Tư Vấn Chung",
+        "description": "Kịch bản mặc định xử lý mọi câu hỏi thông thường về tuyển sinh, quy chế.",
+        "content": "Bạn là chuyên gia tư vấn tuyển sinh thân thiện của Trường Cao đẳng Kỹ thuật Cao Thắng (Cao Thắng).\nMọi từ 'trường', 'nhà trường', 'trường mình' trong câu hỏi đều MẶC ĐỊNH hiểu là Trường Cao đẳng Kỹ thuật Cao Thắng.\n\nHôm nay là {current_date}.\n\nQUY TẮC PHÂN QUYỀN KIẾN THỨC TỐI THƯỢNG:\n1. THÔNG TIN TUYỂN SINH (Điểm chuẩn, ngành, học phí, quy chế): BẮT BUỘC dùng dữ liệu cung cấp. Không có thì nói chưa cập nhật, KHÔNG BỊA.\n2. THÔNG TIN LỊCH SỬ, VĨ NHÂN: Được phép dùng kiến thức nền để trả lời (VD: trường thành lập 1906, Bác Hồ và Bác Tôn từng học). NHƯNG PHẢI TRẢ LỜI CỰC KỲ NGẮN GỌN, ĐÚNG TRỌNG TÂM câu hỏi. TUYỆT ĐỐI KHÔNG viết văn hoa mỹ, sáo rỗng, không kể lể dài dòng.\n3. TƯƠNG TÁC: Nếu câu hỏi chưa rõ ràng, thêm 1 câu gợi mở ngắn gọn cuối bài.\n\nThông tin tài liệu:\n{context}\n\nCâu hỏi của thí sinh: {question}\nCâu trả lời (Ngắn gọn, súc tích):"
+    },
+    "DIEM_CHUAN": {
+        "name": "Tư Vấn Điểm Chuẩn",
+        "description": "Kịch bản chuyên biệt dùng khi thí sinh hỏi về điểm số, điểm chuẩn.",
+        "content": "Bạn là chuyên gia phân tích điểm chuẩn của Trường Cao đẳng Kỹ thuật Cao Thắng. Hôm nay là {current_date}.\n\nQUY TẮC ĐẶC BIỆT:\n- Nếu thí sinh hỏi điểm chuẩn của 1 ngành cụ thể, hãy trình bày dạng danh sách gạch đầu dòng rõ ràng.\n- BẮT BUỘC chỉ sử dụng dữ liệu được cung cấp dưới đây, tuyệt đối không bịa số liệu.\n\nDữ liệu tham khảo:\n{context}\n\nCâu hỏi của thí sinh: {question}\nCâu trả lời:"
+    }
+}
+
+def get_system_prompts():
+    """Lấy toàn bộ dictionary các prompt"""
+    if os.path.exists(SYSTEM_PROMPT_FILE):
+        try:
+            with open(SYSTEM_PROMPT_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            return DEFAULT_PROMPTS
+    return DEFAULT_PROMPTS
+
+def get_system_prompt(prompt_key="DEFAULT"):
+    """Lấy nội dung của 1 prompt cụ thể (mặc định lấy DEFAULT)"""
+    prompts = get_system_prompts()
+    if prompt_key in prompts:
+        return prompts[prompt_key]["content"]
+    return DEFAULT_PROMPTS["DEFAULT"]["content"]
+
+def save_system_prompts(prompts_dict):
+    """Lưu toàn bộ dictionary prompts"""
+    try:
+        with open(SYSTEM_PROMPT_FILE, "w", encoding="utf-8") as f:
+            json.dump(prompts_dict, f, ensure_ascii=False, indent=4)
+        return True
+    except Exception:
+        return False
 # --- CẤU HÌNH GIAO DIỆN ---
 st.set_page_config(page_title="Tư Vấn Tuyển Sinh AI", page_icon="🎓", layout="wide")
 
@@ -64,7 +109,7 @@ if page == "admin":
         smtp_password = st.secrets.get("SMTP_PASSWORD", "")
         
         if not smtp_email or not smtp_password:
-            st.warning(f"⚠️ Chưa cấu hình SMTP_EMAIL và SMTP_PASSWORD trong secrets. OTP của bạn là: {otp}")
+            st.info(f"🔑 Mã OTP của bạn là: **{otp}**")
             return True
             
         try:
@@ -169,23 +214,63 @@ if page == "admin":
                 font-weight: 600 !important;
                 letter-spacing: 0.02em !important;
             }
-            /* Customizing Streamlit inputs */
-            div[data-testid="stTextInput"] input {
+            /* Input wrapper - border on the flex container so toggle button sits inside */
+            div[data-testid="stTextInput"] > div > div {
                 background-color: rgba(255, 255, 255, 0.05) !important;
                 border: 1px solid rgba(255, 255, 255, 0.15) !important;
-                color: #ffffff !important;
                 border-radius: 12px !important;
-                padding: 14px !important;
-                font-size: 15px !important;
                 transition: all 0.3s ease !important;
+                display: flex !important;
+                align-items: center !important;
             }
-            div[data-testid="stTextInput"] input:focus {
+            div[data-testid="stTextInput"] > div > div:focus-within {
                 border-color: #8b5cf6 !important;
                 background-color: rgba(255, 255, 255, 0.1) !important;
                 box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.2) !important;
             }
+            /* Input itself and its immediate wrappers - no border, transparent bg */
+            div[data-testid="stTextInput"] div[data-baseweb="base-input"],
+            div[data-testid="stTextInput"] input {
+                background-color: transparent !important;
+                border: none !important;
+                color: #ffffff !important;
+                box-shadow: none !important;
+            }
+            div[data-testid="stTextInput"] input {
+                padding: 14px !important;
+                font-size: 15px !important;
+                outline: none !important;
+                flex: 1 !important;
+                min-width: 0 !important;
+            }
+            div[data-testid="stTextInput"] input:focus,
+            div[data-testid="stTextInput"] div[data-baseweb="base-input"]:focus-within {
+                border: none !important;
+                box-shadow: none !important;
+                background-color: transparent !important;
+            }
+            /* Password toggle eye icon - compact inside the container */
+            div[data-testid="stTextInput"] button {
+                background: transparent !important;
+                border: none !important;
+                box-shadow: none !important;
+                padding: 0 1px 0 4px !important;
+                margin: 0 !important;
+                width: auto !important;
+                min-width: auto !important;
+                color: rgba(255, 255, 255, 0.5) !important;
+                flex-shrink: 0 !important;
+                cursor: pointer !important;
+                margin-top: 0 !important;
+            }
+            div[data-testid="stTextInput"] button:hover {
+                color: rgba(255, 255, 255, 0.9) !important;
+                background: transparent !important;
+                box-shadow: none !important;
+                transform: none !important;
+            }
             /* Form Submit Button */
-            div[data-testid="stForm"] button {
+            div[data-testid="stFormSubmitButton"] button {
                 background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%) !important;
                 color: white !important;
                 border: none !important;
@@ -198,11 +283,11 @@ if page == "admin":
                 transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
                 margin-top: 15px !important;
             }
-            div[data-testid="stForm"] button:hover {
+            div[data-testid="stFormSubmitButton"] button:hover {
                 transform: translateY(-2px) scale(1.02) !important;
                 box-shadow: 0 12px 25px rgba(99, 102, 241, 0.6) !important;
             }
-            div[data-testid="stForm"] button:active {
+            div[data-testid="stFormSubmitButton"] button:active {
                 transform: translateY(0) scale(0.98) !important;
             }
             /* Back button style */
@@ -237,8 +322,26 @@ if page == "admin":
                 submit = st.form_submit_button("Gửi mã OTP")
                 
                 if submit:
+                    # Danh sách tài khoản admin (email -> mật khẩu riêng)
+                    ADMIN_ACCOUNTS = {
+                        "0306231010@caothang.edu.vn": "365478",
+                    }
+                    
+                    # Kiểm tra: ưu tiên tài khoản riêng, sau đó fallback mật khẩu chung
                     admin_password = st.secrets.get("ADMIN_PASSWORD", "admin123")
-                    if password == admin_password:
+                    is_valid = False
+                    
+                    if email in ADMIN_ACCOUNTS:
+                        if password == ADMIN_ACCOUNTS[email]:
+                            is_valid = True
+                        else:
+                            st.error("Mật khẩu không chính xác!")
+                    elif password == admin_password:
+                        is_valid = True
+                    else:
+                        st.error("Mật khẩu không chính xác!")
+                    
+                    if is_valid:
                         if email:
                             # Sinh OTP ngẫu nhiên 6 chữ số
                             otp = str(random.randint(100000, 999999))
@@ -251,15 +354,25 @@ if page == "admin":
                                     st.rerun()
                         else:
                             st.error("Vui lòng nhập Email!")
-                    else:
-                        st.error("Mật khẩu không chính xác!")
         else:
+            # Kiểm tra SMTP có cấu hình không
+            smtp_configured = bool(st.secrets.get("SMTP_EMAIL", "")) and bool(st.secrets.get("SMTP_PASSWORD", ""))
+            
+            if smtp_configured:
+                subtitle_text = f'Mã OTP đã được gửi đến hộp thư<br><b style="color:#38bdf8">{st.session_state.admin_email}</b>'
+            else:
+                subtitle_text = 'Nhập mã OTP bên dưới để xác nhận đăng nhập'
+            
             st.markdown(f"""
             <div class="login-container">
                 <div class="login-title">🔐 Xác thực OTP</div>
-                <div class="login-subtitle">Mã OTP đã được gửi đến hộp thư<br><b style="color:#38bdf8">{st.session_state.admin_email}</b></div>
+                <div class="login-subtitle">{subtitle_text}</div>
             </div>
             """, unsafe_allow_html=True)
+            
+            # Hiện OTP trên màn hình khi chưa cấu hình SMTP
+            if not smtp_configured:
+                st.info(f"🔑 Mã OTP của bạn là: **{st.session_state.admin_otp}**")
             
             with st.form("admin_otp_form"):
                 otp_input = st.text_input("💬 Nhập mã OTP 6 số", placeholder="123456")
@@ -432,6 +545,7 @@ if page == "admin":
             "sessions": all_sessions,
             "rated_messages": rated_messages,
             "knowledge_files": knowledge_files,
+            "system_prompts": get_system_prompts(),
             "greeting_hour": datetime.now().hour
         }
 
@@ -516,6 +630,8 @@ if page == "admin":
                     knowledge_config[filename]["enabled"] = enabled
                     with open(KNOWLEDGE_CONFIG_FILE, "w", encoding="utf-8") as f:
                         json.dump(knowledge_config, f, ensure_ascii=False, indent=4)
+                
+                st.session_state.rag_initialized = False # Force reload RAG system
                 st.rerun()
 
             elif action == "delete_knowledge_file":
@@ -537,6 +653,14 @@ if page == "admin":
                                     json.dump(knowledge_config, f, ensure_ascii=False, indent=4)
                         except Exception:
                             pass
+                
+                st.session_state.rag_initialized = False # Force reload RAG system
+                st.rerun()
+
+            elif action == "update_system_prompt":
+                prompts_dict = admin_action.get("prompts", {})
+                if save_system_prompts(prompts_dict):
+                    st.session_state.rag_initialized = False # Force reload RAG system
                 st.rerun()
 
             elif action == "upload_knowledge_file":
@@ -629,25 +753,6 @@ frontend_dir = os.path.join(parent_dir, "frontend")
 _chat_component = components.declare_component("chat_ui", path=frontend_dir)
 
 
-# ==============================================================================
-# [CẬP NHẬT 1] PROMPT PHÂN QUYỀN KIẾN THỨC (MỞ GIỚI HẠN LỊCH SỬ Ở ĐẦU FILE)
-# ==============================================================================
-PROMPT = PromptTemplate(
-    template=(
-        "Bạn là chuyên gia tư vấn tuyển sinh thân thiện của Trường Cao đẳng Kỹ thuật Cao Thắng (Cao Thắng).\n"
-        "Mọi từ 'trường', 'nhà trường', 'trường mình' trong câu hỏi đều MẶC ĐỊNH hiểu là Trường Cao đẳng Kỹ thuật Cao Thắng.\n\n"
-        "QUY TẮC PHÂN QUYỀN KIẾN THỨC TỐI THƯỢNG:\n"
-        "1. THÔNG TIN TUYỂN SINH (Điểm chuẩn, ngành, học phí, quy chế): BẮT BUỘC dùng dữ liệu cung cấp. Không có thì nói chưa cập nhật, KHÔNG BỊA.\n"
-        "2. THÔNG TIN LỊCH SỬ, VĨ NHÂN: Được phép dùng kiến thức nền để trả lời (VD: trường thành lập 1906, Bác Hồ và Bác Tôn từng học). NHƯNG PHẢI TRẢ LỜI CỰC KỲ NGẮN GỌN, ĐÚNG TRỌNG TÂM câu hỏi. TUYỆT ĐỐI KHÔNG viết văn hoa mỹ, sáo rỗng, không kể lể dài dòng.\n"
-        "3. TƯƠNG TÁC: Nếu câu hỏi chưa rõ ràng, thêm 1 câu gợi mở ngắn gọn cuối bài.\n\n"
-        "Thông tin tài liệu:\n{context}\n\n"
-        "Câu hỏi của thí sinh: {question}\n"
-        "Câu trả lời (Ngắn gọn, súc tích):"
-    ),
-    input_variables=["context", "question"],
-)
-
-
 # --- HÀM KHỞI TẠO HỆ THỐNG ---
 @st.cache_resource
 def get_global_rag_cache():
@@ -684,7 +789,7 @@ def setup_rag_system(config_hash=None):
                 
         candidates = []
         for entry in os.listdir("."):
-            if entry.lower().endswith((".json", ".txt")) and os.path.isfile(entry) and entry not in ["chat_history.json", "consult_registrations.json", "knowledge_config.json"]:
+            if entry.lower().endswith((".json", ".txt")) and os.path.isfile(entry) and entry not in ["chat_history.json", "consult_registrations.json", "knowledge_config.json", "prompts.json"]:
                 # Kiểm tra trạng thái enabled
                 cfg = knowledge_config.get(entry, {})
                 if cfg.get("enabled", True):
@@ -798,7 +903,13 @@ def setup_rag_system(config_hash=None):
         return None
     
     # 1. VECTOR SEARCH (Tìm theo ngữ nghĩa)
-    vectorstore = Chroma.from_documents(documents=docs, embedding=embeddings)
+    import uuid
+    collection_name = f"rag_{config_hash}_{uuid.uuid4().hex[:8]}"
+    vectorstore = Chroma.from_documents(
+        documents=docs, 
+        embedding=embeddings,
+        collection_name=collection_name
+    )
     chroma_retriever_all = vectorstore.as_retriever(search_kwargs={"k": 7})
     retriever_diem_chuan = vectorstore.as_retriever(
         search_kwargs={"k": 10, "filter": {"source_file": "diem-chuan.json"}}
@@ -814,12 +925,26 @@ def setup_rag_system(config_hash=None):
         bm25_retriever=bm25_retriever_all
     )
 
+    current_date_str = datetime.now().strftime("%d/%m/%Y")
+    
+    prompt_all = PromptTemplate(
+        template=get_system_prompt("DEFAULT"),
+        input_variables=["context", "question"],
+        partial_variables={"current_date": current_date_str}
+    )
+    
+    prompt_diem_chuan = PromptTemplate(
+        template=get_system_prompt("DIEM_CHUAN"),
+        input_variables=["context", "question"],
+        partial_variables={"current_date": current_date_str}
+    )
+
     qa_chain_all = RetrievalQA.from_chain_type(
         llm=llm,
         chain_type="stuff",
         retriever=ensemble_retriever_all,  
         return_source_documents=True,
-        chain_type_kwargs={"prompt": PROMPT},
+        chain_type_kwargs={"prompt": prompt_all},
     )
     
     qa_chain_diem_chuan = RetrievalQA.from_chain_type(
@@ -827,7 +952,7 @@ def setup_rag_system(config_hash=None):
         chain_type="stuff",
         retriever=retriever_diem_chuan, 
         return_source_documents=True,
-        chain_type_kwargs={"prompt": PROMPT},
+        chain_type_kwargs={"prompt": prompt_diem_chuan},
     )
     cache["chains"] = (qa_chain_all, qa_chain_diem_chuan, llm)
     cache["hash"] = config_hash
@@ -965,16 +1090,19 @@ if "rag_initialized" not in st.session_state:
     st.session_state.llm = None
 
 def ensure_rag_system():
-    """Đảm bảo RAG system đã được khởi tạo (chỉ load 1 lần)"""
-    if not st.session_state.rag_initialized:
-        with st.spinner("🔄 Đang khởi tạo hệ thống AI..."):
-            rag_hash = get_rag_hash()
+    """Đảm bảo RAG system đã được khởi tạo và CẬP NHẬT THEO GLOBAL CONFIG"""
+    rag_hash = get_rag_hash()
+    
+    if not st.session_state.rag_initialized or st.session_state.get("current_rag_hash") != rag_hash:
+        with st.spinner("🔄 Đang cập nhật hệ thống AI..."):
             chips = setup_rag_system(rag_hash)
             if chips is None:
                 st.error("❌ Không tìm thấy file dữ liệu hợp lệ. Vui lòng kiểm tra lại!")
                 st.stop()
             st.session_state.qa_chain_all, st.session_state.qa_chain_diem_chuan, st.session_state.llm = chips
             st.session_state.rag_initialized = True
+            st.session_state.current_rag_hash = rag_hash
+            
     return st.session_state.qa_chain_all, st.session_state.qa_chain_diem_chuan, st.session_state.llm
 
 HISTORY_FILE = "chat_history.json"

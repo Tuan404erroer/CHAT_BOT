@@ -1277,6 +1277,9 @@
                     <span class="nav-icon">📋</span> Yêu cầu tư vấn
                     <span class="nav-badge" id="consultNavBadge" style="display:none">0</span>
                 </button>
+                <button class="nav-item" data-page="prompt">
+                    <span class="nav-icon">🤖</span> Quản lý Prompt
+                </button>
             </nav>
 
             <div class="sidebar-footer">
@@ -1522,6 +1525,34 @@
                     </div>
                 </div>
 
+                <!-- ========== PROMPT MANAGEMENT ========== -->
+                <div class="page-section" id="page-prompt">
+                    <div class="greeting">
+                        <h1>🤖 Quản lý Context</h1>
+                        <p>Tùy chỉnh tính cách và chỉ thị (System Prompt) cho AI Agent theo từng tình huống.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                            <h3>Danh sách System Prompts</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="data-table" id="promptTable" style="table-layout: fixed; width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 15%; text-align: center;">Key</th>
+                                            <th style="width: 25%; text-align: center;">Tên kịch bản</th>
+                                            <th style="width: 45%; text-align: center;">Mô tả</th>
+                                            <th style="width: 15%; text-align: center;">Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="promptTableBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <!-- Footer -->
@@ -1596,7 +1627,8 @@
             history: "Lịch sử Chat",
             ratings: "Đánh giá câu trả lời",
             knowledge: "Dữ liệu Tuyển sinh",
-            consult: "Yêu cầu tư vấn"
+            consult: "Yêu cầu tư vấn",
+            prompt: "Quản lý Prompt"
         };
 
         navItems.forEach(item => {
@@ -1735,6 +1767,7 @@
             renderRatingsTable();
             renderKnowledgeTable();
             renderConsultSection();
+            renderPromptSection();
         }
 
         /* ========================================================= */
@@ -2345,6 +2378,71 @@
                 note: note,
                 timestamp: Date.now()
             });
+        }
+
+        /* ========================================================= */
+        /*  PROMPT MANAGEMENT                                        */
+        /* ========================================================= */
+        let localPrompts = {};
+
+        function renderPromptSection() {
+            const tbody = document.getElementById("promptTableBody");
+            if (!tbody || !statsData.system_prompts) return;
+            
+            localPrompts = JSON.parse(JSON.stringify(statsData.system_prompts)); // clone
+            tbody.innerHTML = "";
+            
+            for (const [key, promptObj] of Object.entries(localPrompts)) {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td style="text-align: center;"><strong>${escapeHtml(key)}</strong></td>
+                    <td style="text-align: center;">${escapeHtml(promptObj.name)}</td>
+                    <td style="text-align: center;">${escapeHtml(promptObj.description)}</td>
+                    <td style="text-align: center;">
+                        <button class="action-btn btn-view" onclick="openPromptEdit('${key}')" title="Sửa kịch bản">✏️ Sửa</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            }
+        }
+
+        function openPromptEdit(key) {
+            const promptObj = localPrompts[key];
+            if (!promptObj) return;
+
+            modalTitle.textContent = "Sửa Prompt: " + promptObj.name;
+            modalBody.innerHTML = `
+                <div class="consult-detail">
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Lưu ý: Không thay đổi các biến <code>{context}</code>, <code>{question}</code>, <code>{current_date}</code> vì hệ thống cần chúng để điền dữ liệu động.</p>
+                    <div class="consult-detail-row" style="display:flex; flex-direction:column; align-items:flex-start;">
+                        <div class="consult-detail-label" style="margin-bottom:8px;">Nội dung kịch bản</div>
+                        <div class="consult-detail-value" style="width:100%;">
+                            <textarea id="modalPromptContent" style="width: 100%; height: 350px; padding: 12px; border: 1px solid var(--border); border-radius: 8px; font-family: monospace; font-size: 14px; line-height: 1.5; resize: vertical;">${escapeHtml(promptObj.content)}</textarea>
+                        </div>
+                    </div>
+                    <div class="consult-detail-actions">
+                        <button class="action-btn" style="background: #000080; color: white;" onclick="savePromptFromModal('${key}')">💾 Lưu thay đổi</button>
+                    </div>
+                </div>
+            `;
+            modalOverlay.classList.add("open");
+        }
+
+        function savePromptFromModal(key) {
+            const newContent = document.getElementById("modalPromptContent").value;
+            if (!newContent.trim()) {
+                alert("Nội dung prompt không được để trống!");
+                return;
+            }
+            
+            localPrompts[key].content = newContent;
+            
+            StreamlitApi.setComponentValue({
+                action: "update_system_prompt",
+                prompts: localPrompts,
+                timestamp: Date.now()
+            });
+            modalOverlay.classList.remove("open");
         }
 
         /* ========================================================= */

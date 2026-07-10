@@ -38,5 +38,10 @@
         "enabled": true,
         "description": "File dữ liệu mới",
         "uploaded_at": "2026-07-03T17:43:00.580898"
+    },
+    "prompts.json": {
+        "enabled": true,
+        "description": "File dữ liệu mới",
+        "uploaded_at": "2026-07-10T00:55:34.241225"
     }
 }

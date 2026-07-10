@@ -366,6 +366,36 @@
                     ]
                 }
             ]
+        },
+        "61ec7cd0-2068-48cc-af17-69c920cf5ed8": {
+            "title": "Chat: Học phí các ngành ba...",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "Học phí các ngành bao nhiêu?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Chào bạn, học phí dự kiến năm học 2026 - 2027 tại trường như sau:\n\n*   **Nhóm ngành Kỹ thuật công nghệ:** Khoảng 8.000.000 - 9.000.000 VNĐ/học kỳ.\n*   **Nhóm ngành Kế toán kinh tế:** Khoảng 7.000.000 - 8.000.000 VNĐ/học kỳ.\n*   **Tổng học phí trung bình năm:** Khoảng 16.000.000 - 18.000.000 VNĐ/năm.\n\nLưu ý: Học phí thu theo niên khóa, không thu theo số tín chỉ. Ngoài ra, trường có các chính sách giảm học phí cho thí sinh có điểm đầu vào cao, nữ sinh theo học ngành kỹ thuật và sinh viên thuộc diện chính sách.\n\nBạn có muốn mình tư vấn thêm về các chính sách miễn giảm học phí cụ thể không?",
+                    "sources": [
+                        "{\n  \"chuyen_muc\": \"Thông tin học phí\",\n  \"tieu_de\": \"Học phí dự kiến năm học 2026 - 2027 và lịch sử học phí (Dành cho Tân sinh viên)\",\n  \"muc_hoc_phi_du_kien_2026_2027\": {\n    \"nhom_nganh_ky_thuat_cong_nghe\": \"Khoảng 8.000.000 - 9.000.000 VNĐ / học kỳ\",\n    \"nhom_nganh_ke_toan_kinh_te\": \"Khoảng 7.000.000 - 8.000.000 VNĐ / học kỳ\",\n    \"tong_hoc_phi_trung_binh_nam\": \"Khoảng 16.000.000 - 18.000.000 VNĐ / năm\"\n  },\n  \"cac_khoan_chi_phi_phat_sinh_khac\": [\n    \"Bảo hiểm y tế\",\n    \"Đồng phục\",\n    \"Giáo trình\",\n    \"Phí học thể dục\",\n    \"Phí học giáo dục quốc phòng\",\n    \"Đóng quỹ lớp\",\n    \"Lệ phí đăng kí thi tiếng anh đầu vào\"\n  ],\n  \"chinh_sach_ho_tro_tai_chinh\": [\n    \"Giảm 25% – 50% học phí cho thí sinh có điểm đầu vào cao.\",\n    \"Giảm học phí cho nữ sinh theo học ngành kỹ thuật.\",\n    \"Hỗ trợ sinh viên thuộc diện chính sách hoặc hoàn cảnh khó khăn.\"\n  ],\n  \"lich_su_hoc_phi_tan_sinh_vien_qua_cac_nam\": [\n    {\n      \"nam_hoc\": \"2020 - 2021\",\n      \"khoi_ky_thuat\": \"~ 5.700.000 - 5.800.000 VNĐ / học kỳ\",\n      \"nganh_ke_toan\": \"~ 4.000.000 VNĐ / học kỳ\"\n    },\n    {\n      \"nam_hoc\": \"2021 - 2022\",\n      \"khoi_ky_thuat\": \"~ 5.700.000 - 5.800.000 VNĐ / học kỳ\",\n      \"nganh_ke_toan\": \"~ 4.000.000 VNĐ / học kỳ\"\n    },\n    {\n      \"nam_hoc\": \"2022 - 2023\",\n      \"khoi_ky_thuat\": \"~ 6.720.000 VNĐ / học kỳ\",\n      \"nganh_ke_toan\": \"~ 5.800.000 VNĐ / học kỳ\"\n    },\n    {\n      \"nam_hoc\": \"2023 - 2024\",\n      \"khoi_ky_thuat\": \"~ 7.200.000 VNĐ / học kỳ\",\n      \"nganh_ke_toan\": \"~ 6.200.000 VNĐ / học kỳ\"\n    },\n    {\n      \"nam_hoc\": \"2024 - 2025\",\n      \"khoi_ky_thuat\": \"~ 7.700.000 VNĐ / học kỳ\",\n      \"nganh_ke_toan\": \"~ 6.700.000 VNĐ / học kỳ\"\n    },\n    {\n      \"nam_hoc\": \"2025 - 2026\",\n      \"khoi_ky_thuat\": \"~ 7.700.000 VNĐ / học kỳ\",\n      \"nganh_ke_toan\": \"~ 6.700.000 VNĐ / học kỳ\"\n    }\n  ],\n  \"nguyen_tac_thu_hoc_phi\": \"Thu theo niên khóa (từng học kỳ/năm học), không thu theo số tín chỉ đăng ký.\",\n  \"luu_y_chinh_sach_ho_tro\": \"Tất cả các năm đều có chính sách hỗ trợ tương tự như năm 2026, trừ khi có thông báo mới.\",\n  \"luu_y_chi_phi_phat_sinh\": \"Tất cả các năm đều có các khoản chi phí phát sinh khác ngoài kinh phí đào tạo khi nhập học mà tân sinh viên phải đóng.\"\n}"
+                    ]
+                }
+            ]
+        },
+        "c1552e05-5d67-426a-9d4a-6b2950449a3b": {
+            "title": "Chat: Điểm chuẩn các ngành...",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "Điểm chuẩn các ngành năm nay là bao nhiêu?"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Chào bạn, với tư cách là chuyên gia phân tích điểm chuẩn của Trường Cao đẳng Kỹ thuật Cao Thắng, tôi xin cung cấp thông tin điểm chuẩn năm 2026 (dựa trên dữ liệu được cung cấp) như sau:\n\n*   **Công nghệ kỹ thuật ô tô:** 24.5 điểm\n*   **Công nghệ kỹ thuật cơ khí:** 22.0 điểm\n*   **Công nghệ kỹ thuật điện, điện tử:** 23.5 điểm\n*   **Công nghệ thông tin:** 25.0 điểm\n*   **Công nghệ kỹ thuật điều khiển và tự động hóa:** 24.0 điểm\n*   **Kế toán:** 21.5 điểm\n*   **Quản trị kinh doanh:** 22.5 điểm\n\nHy vọng thông tin này giúp ích cho quá trình xét tuyển của bạn. Chúc bạn có lựa chọn sáng suốt!",
+                    "sources": []
+                }
+            ]
         }
     }
 }
