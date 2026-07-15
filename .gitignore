@@ -1,1 +1,22 @@
 .streamlit/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+*.egg-info/
+dist/
+build/
+
+# Runtime storage (lịch sử chat, đăng ký tư vấn)
+data/storage/
+
+# ChromaDB temporary data
+chroma_data/
+
+# IDE
+.vscode/
+.idea/
