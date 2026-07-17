@@ -1,0 +1,283 @@
+/* ============================================= */
+/*  KNOWLEDGE FILES                              */
+/* ============================================= */
+.file-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+.file-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.25s;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.file-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.file-card .file-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    font-size: 1.3rem;
+    background: var(--accent-light);
+}
+
+.file-card .file-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    word-break: break-all;
+}
+
+.file-card .file-size {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+/* ============================================= */
+/*  CONSULT MANAGEMENT                           */
+/* ============================================= */
+.consult-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.consult-status-badge.status-new {
+    background: var(--info-light);
+    color: var(--info);
+}
+
+.consult-status-badge.status-contacted {
+    background: var(--warning-light);
+    color: var(--warning);
+}
+
+.consult-status-badge.status-done {
+    background: var(--success-light);
+    color: var(--success);
+}
+
+.action-btn-group {
+    display: flex;
+    gap: 6px;
+    flex-wrap: nowrap;
+}
+
+.action-btn {
+    padding: 5px 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    white-space: nowrap;
+}
+
+.action-btn:hover {
+    border-color: var(--accent-border);
+    color: var(--accent);
+    background: var(--accent-light);
+}
+
+.action-btn.btn-view {
+    color: var(--info);
+}
+
+.action-btn.btn-view:hover {
+    background: var(--info-light);
+    border-color: var(--info);
+}
+
+.action-btn.btn-status {
+    color: var(--warning);
+}
+
+.action-btn.btn-status:hover {
+    background: var(--warning-light);
+    border-color: var(--warning);
+}
+
+.action-btn.btn-delete {
+    color: var(--danger);
+}
+
+.action-btn.btn-delete:hover {
+    background: var(--danger-light);
+    border-color: var(--danger);
+}
+
+/* Consult Detail Modal Content */
+.consult-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.consult-detail-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 8px;
+    align-items: start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.consult-detail-row:last-child {
+    border-bottom: none;
+}
+
+.consult-detail-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.consult-detail-value {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+.consult-detail-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+}
+
+.consult-detail-actions .action-btn {
+    padding: 8px 16px;
+    font-size: 0.82rem;
+}
+
+/* Status select dropdown */
+.status-select {
+    padding: 5px 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.status-select:hover,
+.status-select:focus {
+    border-color: var(--accent-border);
+}
+
+/* Nav badge count */
+.nav-badge {
+    margin-left: auto;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+    font-size: 0.7rem;
+    font-weight: 700;
+    min-width: 20px;
+    text-align: center;
+}
+
+/* Admin note textarea in modal */
+.admin-note-area {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg-page);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.85rem;
+    resize: vertical;
+    min-height: 60px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.admin-note-area:focus {
+    border-color: var(--accent-border);
+}
+
+.save-note-btn {
+    padding: 6px 16px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+    margin-top: 6px;
+}
+
+.save-note-btn:hover {
+    opacity: 0.9;
+}
+
+/* ============================================= */
+/*  RESPONSIVE                                   */
+/* ============================================= */
+@media (max-width: 900px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .sidebar {
+        display: none;
+    }
+
+    .page-content {
+        padding: 20px 16px;
+    }
+
+    .top-header {
+        padding: 12px 16px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .search-box {
+        display: none;
+    }
+}

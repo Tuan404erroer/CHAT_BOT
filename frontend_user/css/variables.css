@@ -1,0 +1,131 @@
+/* ============================================= */
+/*  CSS CUSTOM PROPERTIES (THEME TOKENS)         */
+/* ============================================= */
+:root {
+    --bg-primary: #0b0d17;
+    --bg-secondary: #111427;
+    --bg-surface: rgba(255, 255, 255, 0.04);
+    --bg-surface-hover: rgba(255, 255, 255, 0.07);
+    --text-primary: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent: #22d3ee;
+    --accent-dim: rgba(34, 211, 238, 0.12);
+    --accent-border: rgba(34, 211, 238, 0.25);
+    --user-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    --user-text: #ffffff;
+    --assistant-bg: rgba(255, 255, 255, 0.04);
+    --assistant-border: rgba(255, 255, 255, 0.08);
+    --input-bg: rgba(255, 255, 255, 0.06);
+    --input-border: rgba(255, 255, 255, 0.10);
+    --input-focus-border: rgba(99, 102, 241, 0.5);
+    --header-bg: rgba(11, 13, 23, 0.82);
+    --info-bg: rgba(34, 211, 238, 0.07);
+    --info-border: rgba(34, 211, 238, 0.20);
+    --info-text: #67e8f9;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.35);
+    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.4);
+    --divider: rgba(255, 255, 255, 0.06);
+    --code-bg: rgba(0, 0, 0, 0.35);
+    --scrollbar-thumb: rgba(255, 255, 255, 0.10);
+    --scrollbar-hover: rgba(255, 255, 255, 0.18);
+    --chip-bg: rgba(255, 255, 255, 0.06);
+    --chip-border: rgba(255, 255, 255, 0.10);
+    --chip-hover: rgba(255, 255, 255, 0.12);
+    --sources-bg: rgba(255, 255, 255, 0.03);
+    --sources-border: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="light"] {
+    --bg-primary: #f8fafc;
+    --bg-secondary: #ffffff;
+    --bg-surface: rgba(0, 0, 0, 0.02);
+    --bg-surface-hover: rgba(0, 0, 0, 0.04);
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0891b2;
+    --accent-dim: rgba(8, 145, 178, 0.08);
+    --accent-border: rgba(8, 145, 178, 0.20);
+    --user-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    --user-text: #ffffff;
+    --assistant-bg: #ffffff;
+    --assistant-border: rgba(0, 0, 0, 0.07);
+    --input-bg: #ffffff;
+    --input-border: rgba(0, 0, 0, 0.12);
+    --input-focus-border: rgba(99, 102, 241, 0.45);
+    --header-bg: rgba(248, 250, 252, 0.82);
+    --info-bg: rgba(8, 145, 178, 0.06);
+    --info-border: rgba(8, 145, 178, 0.18);
+    --info-text: #0e7490;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.10);
+    --divider: rgba(0, 0, 0, 0.06);
+    --code-bg: rgba(0, 0, 0, 0.04);
+    --scrollbar-thumb: rgba(0, 0, 0, 0.12);
+    --scrollbar-hover: rgba(0, 0, 0, 0.22);
+    --chip-bg: rgba(0, 0, 0, 0.04);
+    --chip-border: rgba(0, 0, 0, 0.08);
+    --chip-hover: rgba(0, 0, 0, 0.08);
+    --sources-bg: rgba(0, 0, 0, 0.02);
+    --sources-border: rgba(0, 0, 0, 0.06);
+}
+
+/*  RESET & BASE                                 */
+/* ============================================= */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background 0.35s ease, color 0.35s ease;
+}
+
+/* Ambient glow (dark only) */
+[data-theme="dark"] body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 60% 50% at 15% 80%, rgba(99, 102, 241, 0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 60% at 85% 15%, rgba(139, 92, 246, 0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 70% 40% at 50% 50%, rgba(34, 211, 238, 0.04) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ============================================= */
+/*  SCROLLBAR                                    */
+/* ============================================= */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-hover);
+}
