@@ -1,0 +1,515 @@
+/* ============================================= */
+/*  LOGIN MODAL (popup, not full overlay)        */
+/* ============================================= */
+.login-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.login-modal-backdrop.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.login-box {
+    background: var(--bg-secondary);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid var(--divider);
+    box-shadow: var(--shadow-lg), 0 0 60px rgba(99, 102, 241, 0.15);
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    transform: translateY(0) scale(1);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.login-modal-backdrop.hidden .login-box {
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+}
+
+.login-box h2 {
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.login-box p {
+    margin-bottom: 24px;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 16px;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-family: inherit;
+}
+
+.login-box input:focus {
+    outline: none;
+    border-color: var(--input-focus-border);
+}
+
+.login-box .login-submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.login-box .login-submit-btn:hover {
+    opacity: 0.9;
+}
+
+.login-box .login-close-btn {
+    margin-top: 12px;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid var(--divider);
+    border-radius: 10px;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 0.85rem;
+    width: 100%;
+    transition: all 0.2s;
+}
+
+.login-box .login-close-btn:hover {
+    background: var(--bg-surface-hover);
+    color: var(--text-secondary);
+}
+
+/* ============================================= */
+/*  HEADER LOGIN BUTTON & BADGE                  */
+/* ============================================= */
+.header-login-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+}
+
+.header-login-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.45);
+}
+
+.header-user-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: var(--accent-dim);
+    border: 1px solid var(--accent-border);
+    border-radius: 10px;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.header-logout-btn {
+    padding: 8px 12px;
+    background: transparent;
+    border: 1px solid var(--divider);
+    border-radius: 10px;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.header-logout-btn:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+/* ============================================= */
+/*  AUTH DROPDOWN                                */
+/* ============================================= */
+.auth-dropdown-wrap {
+    position: relative;
+}
+
+.auth-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 220px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--divider);
+    border-radius: 14px;
+    box-shadow: var(--shadow-lg), 0 0 40px rgba(0, 0, 0, 0.2);
+    padding: 6px;
+    z-index: 100;
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.auth-dropdown.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.auth-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px 14px;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    font-family: inherit;
+}
+
+.auth-dropdown-item:hover {
+    background: var(--bg-surface-hover);
+}
+
+.auth-dropdown-item .item-icon {
+    font-size: 1.1rem;
+    width: 24px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.auth-dropdown-item .item-label {
+    flex: 1;
+    text-align: left;
+}
+
+.auth-dropdown-item .item-desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: left;
+}
+
+.auth-dropdown-item.danger:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.auth-dropdown-divider {
+    height: 1px;
+    background: var(--divider);
+    margin: 4px 8px;
+}
+
+/* ============================================= */
+/*  SIDEBAR GUEST STATE                          */
+/* ============================================= */
+.sidebar-guest-prompt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    padding: 30px 20px;
+    text-align: center;
+    gap: 16px;
+}
+
+.sidebar-guest-prompt .guest-icon {
+    font-size: 2.5rem;
+    filter: drop-shadow(0 0 12px rgba(99, 102, 241, 0.3));
+}
+
+.sidebar-guest-prompt p {
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+
+.sidebar-login-btn {
+    padding: 10px 24px;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+}
+
+.sidebar-login-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.45);
+}
+
+.logout-btn {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+/* ============================================= */
+/*  CONSULTATION FORM MODAL                      */
+/* ============================================= */
+.consult-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.consult-modal-backdrop.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.consult-box {
+    background: var(--bg-secondary);
+    padding: 36px 32px;
+    border-radius: 20px;
+    border: 1px solid var(--divider);
+    box-shadow: var(--shadow-lg), 0 0 80px rgba(34, 211, 238, 0.08);
+    width: 100%;
+    max-width: 480px;
+    transform: translateY(0) scale(1);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.consult-modal-backdrop.hidden .consult-box {
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+}
+
+.consult-box .consult-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.consult-box .consult-header .consult-header-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    display: block;
+    filter: drop-shadow(0 0 12px rgba(34, 211, 238, 0.3));
+}
+
+.consult-box .consult-header h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+}
+
+.consult-box .consult-header p {
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+
+.consult-form-group {
+    margin-bottom: 16px;
+}
+
+.consult-form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    letter-spacing: 0.01em;
+}
+
+.consult-form-group label .required {
+    color: #ef4444;
+    margin-left: 2px;
+}
+
+.consult-form-group input,
+.consult-form-group select,
+.consult-form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.consult-form-group input:focus,
+.consult-form-group select:focus,
+.consult-form-group textarea:focus {
+    border-color: var(--input-focus-border);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.consult-form-group input::placeholder,
+.consult-form-group textarea::placeholder {
+    color: var(--text-muted);
+}
+
+.consult-form-group select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+}
+
+.consult-form-group select option {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.consult-form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+    line-height: 1.5;
+}
+
+.consult-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.consult-submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #22d3ee 0%, #6366f1 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-family: inherit;
+    letter-spacing: 0.01em;
+    margin-top: 8px;
+}
+
+.consult-submit-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(34, 211, 238, 0.25);
+}
+
+.consult-submit-btn:active {
+    transform: translateY(0);
+}
+
+.consult-close-btn {
+    margin-top: 10px;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid var(--divider);
+    border-radius: 10px;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 0.85rem;
+    width: 100%;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.consult-close-btn:hover {
+    background: var(--bg-surface-hover);
+    color: var(--text-secondary);
+}
+
+/* Success state for consultation form */
+.consult-success {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.consult-success .success-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+    display: block;
+    animation: float 2s ease-in-out infinite;
+}
+
+.consult-success h3 {
+    color: var(--accent);
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.consult-success p {
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+
+/* Responsive for consult form */
+@media (max-width: 640px) {
+    .consult-box {
+        padding: 24px 18px;
+    }
+
+    .consult-form-row {
+        grid-template-columns: 1fr;
+    }
+}
