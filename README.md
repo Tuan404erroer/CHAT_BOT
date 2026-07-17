@@ -56,7 +56,7 @@
 ## 🚀 Getting Started (Hướng dẫn cài đặt)
 
 ### 1. Cài đặt môi trường
-- Yêu cầu Python 3.9+
+- Yêu cầu Python 3.11 trở xuống
 - Cài đặt các thư viện cần thiết:
 ```bash
 pip install -r requirements.txt
