@@ -75,7 +75,7 @@ APP_PASSWORD = "your_app_password"
 
 ### 3. Khởi chạy Ứng dụng
 ```bash
-streamlit run backend/main.py
+python -m streamlit run backend/main.py
 ```
 Ứng dụng sẽ tự động mở trên trình duyệt tại địa chỉ mặc định `http://localhost:8501`.
 
