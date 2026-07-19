@@ -43,16 +43,51 @@
                     <label>Ngành quan tâm</label>
                     <select id="consultMajor">
                         <option value="">-- Chọn ngành --</option>
-                        <option value="Công nghệ kỹ thuật cơ khí">Công nghệ kỹ thuật cơ khí</option>
-                        <option value="Công nghệ kỹ thuật điện - điện tử">Công nghệ kỹ thuật điện - điện tử</option>
-                        <option value="Công nghệ kỹ thuật ô tô">Công nghệ kỹ thuật ô tô</option>
-                        <option value="Công nghệ thông tin">Công nghệ thông tin</option>
-                        <option value="Kế toán">Kế toán</option>
-                        <option value="Quản trị kinh doanh">Quản trị kinh doanh</option>
-                        <option value="Công nghệ kỹ thuật nhiệt">Công nghệ kỹ thuật nhiệt</option>
-                        <option value="Điện công nghiệp">Điện công nghiệp</option>
-                        <option value="Cắt gọt kim loại">Cắt gọt kim loại</option>
-                        <option value="Khác">Khác</option>
+                        <optgroup label="⚡ Nhóm ngành Điện - Điện tử">
+                            <option value="Công nghệ Kỹ thuật Điện, Điện tử">Công nghệ KT Điện, Điện tử (ABET)</option>
+                            <option value="Công nghệ Kỹ thuật Điện và Năng lượng tái tạo">Công nghệ KT Điện và Năng
+                                lượng tái tạo</option>
+                            <option value="Công nghệ Kỹ thuật Điện tử - Viễn thông">Công nghệ KT Điện tử - Viễn thông
+                            </option>
+                            <option value="Công nghệ Kỹ thuật Bán dẫn và Vi mạch">Công nghệ KT Bán dẫn và Vi mạch
+                            </option>
+                            <option value="Điện công nghiệp">Điện công nghiệp</option>
+                            <option value="Điện tử công nghiệp">Điện tử công nghiệp</option>
+                        </optgroup>
+                        <optgroup label="🔧 Nhóm ngành Cơ khí - Ô tô">
+                            <option value="Công nghệ Kỹ thuật Cơ khí">Công nghệ KT Cơ khí (ABET)</option>
+                            <option value="Công nghệ Kỹ thuật Bảo trì thiết bị công nghiệp">Công nghệ KT Bảo trì thiết
+                                bị công nghiệp</option>
+                            <option value="Công nghệ Kỹ thuật Ô tô">Công nghệ KT Ô tô (ABET)</option>
+                            <option value="Công nghệ Kỹ thuật Nhiệt (Cơ điện lạnh)">Công nghệ KT Nhiệt - Cơ điện lạnh
+                                (ABET)</option>
+                            <option value="Bảo trì, sửa chữa Ô tô">Bảo trì, sửa chữa Ô tô (Công nghệ Ô tô)</option>
+                            <option value="Cơ khí chế tạo (Cắt gọt kim loại)">Cơ khí chế tạo (Cắt gọt kim loại)</option>
+                            <option value="Sửa chữa cơ khí (Nguội sửa chữa máy công cụ)">Sửa chữa cơ khí (Nguội sửa chữa
+                                máy công cụ)</option>
+                            <option value="Hàn (Công nghệ cao)">Hàn (Công nghệ cao)</option>
+                            <option value="Kỹ thuật máy lạnh và điều hòa không khí">KT máy lạnh và điều hòa không khí
+                            </option>
+                        </optgroup>
+                        <optgroup label="💻 Nhóm ngành Công nghệ thông tin">
+                            <option value="Công nghệ Thông tin">Công nghệ Thông tin</option>
+                            <option value="Quản trị mạng máy tính">Quản trị mạng máy tính</option>
+                            <option value="Kỹ thuật sửa chữa, lắp ráp máy tính">KT sửa chữa, lắp ráp máy tính</option>
+                        </optgroup>
+                        <optgroup label="🤖 Nhóm ngành Tự động hóa - Cơ điện tử">
+                            <option value="Công nghệ Kỹ thuật Điều khiển và Tự động hóa">Công nghệ KT Điều khiển và Tự
+                                động hóa</option>
+                            <option value="Công nghệ Kỹ thuật Tự động hóa trong nông nghiệp">Công nghệ KT Tự động hóa
+                                trong nông nghiệp</option>
+                            <option value="Công nghệ Kỹ thuật Cơ điện tử">Công nghệ KT Cơ điện tử (KOSEN-Nhật Bản)
+                            </option>
+                        </optgroup>
+                        <optgroup label="📊 Nhóm ngành Kinh tế - Tài chính">
+                            <option value="Kế toán tin học (Kế toán doanh nghiệp)">Kế toán tin học (Kế toán doanh
+                                nghiệp)</option>
+                            <option value="Công nghệ Tài chính và Kinh doanh số">Công nghệ Tài chính và Kinh doanh số
+                            </option>
+                        </optgroup>
                     </select>
                 </div>
                 <div class="consult-form-group">
@@ -208,10 +243,10 @@
         <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
 
         <script src="js/streamlit_api.js"></script>
-    <script src="js/state.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/chat_ui.js"></script>
-    <script src="js/main.js"></script>
+        <script src="js/state.js"></script>
+        <script src="js/auth.js"></script>
+        <script src="js/chat_ui.js"></script>
+        <script src="js/main.js"></script>
 
     </div>
 </body>
