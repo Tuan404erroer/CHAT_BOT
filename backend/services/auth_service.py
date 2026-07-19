@@ -27,7 +27,8 @@ def validate_admin_login(email, password):
 
     # Fallback mật khẩu chung từ secrets
     admin_password = st.secrets.get("ADMIN_PASSWORD", "admin123")
-    return password == admin_password
+    admin_account = st.secrets.get("SMTP_EMAIL", "admin123")
+    return password == admin_password and email == admin_account
 
 
 def generate_otp():
@@ -46,9 +47,6 @@ def send_otp_email(receiver_email, otp):
     smtp_email = st.secrets.get("SMTP_EMAIL", "")
     smtp_password = st.secrets.get("SMTP_PASSWORD", "")
 
-    if not smtp_email or not smtp_password:
-        st.info(f"🔑 Mã OTP của bạn là: **{otp}**")
-        return True
 
     try:
         msg = MIMEMultipart()

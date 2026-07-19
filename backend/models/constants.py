@@ -16,7 +16,7 @@ KNOWLEDGE_DIR = DATA_DIR / "knowledge"
 CONFIG_DIR = DATA_DIR / "config"
 STORAGE_DIR = DATA_DIR / "storage"
 
-# Thư mục frontend
+# Thư mục frontendz
 FRONTEND_DIR = PROJECT_ROOT / "frontend_user"
 FRONTEND_ADMIN_DIR = PROJECT_ROOT / "frontend_admin"
 
