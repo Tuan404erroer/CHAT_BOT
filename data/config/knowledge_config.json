@@ -20,7 +20,7 @@
         "uploaded_at": "2026-06-27T09:27:31.727845"
     },
     "so-tay-sinh-vien.json": {
-        "enabled": true,
+        "enabled": false,
         "description": "Sổ tay sinh viên - thông tin chung về trường",
         "uploaded_at": "2026-06-27T09:27:31.727845"
     }

@@ -58,7 +58,7 @@ def load_models():
 # ==============================================================================
 
 def get_rag_hash():
-    """Tính hash MD5 từ cấu hình knowledge để phát hiện thay đổi."""
+    """Tính hash MD5 từ cấu hình knowledge và prompt để phát hiện thay đổi."""
     hash_str = ""
 
     if KNOWLEDGE_CONFIG_FILE.exists():
@@ -74,6 +74,15 @@ def get_rag_hash():
             full_path = KNOWLEDGE_DIR / entry
             if entry.lower().endswith((".json", ".txt")) and full_path.is_file():
                 hash_str += f"{entry}_{os.path.getmtime(full_path)}"
+
+    # Bao gồm cả file prompts.json để update khi đổi prompt
+    from models.constants import SYSTEM_PROMPT_FILE
+    if SYSTEM_PROMPT_FILE.exists():
+        try:
+            with open(SYSTEM_PROMPT_FILE, "r", encoding="utf-8") as f:
+                hash_str += f.read()
+        except Exception:
+            pass
 
     return hashlib.md5(hash_str.encode()).hexdigest()
 
