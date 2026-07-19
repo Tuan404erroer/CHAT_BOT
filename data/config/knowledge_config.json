@@ -1,6 +1,6 @@
 {
     "cau-hoi-thuong-gap.json": {
-        "enabled": true,
+        "enabled": false,
         "description": "File dữ liệu mới",
         "uploaded_at": "2026-06-27T09:27:31.726845"
     },
@@ -10,17 +10,17 @@
         "uploaded_at": "2026-06-27T09:27:31.727845"
     },
     "diem-chuan.json": {
-        "enabled": true,
+        "enabled": false,
         "description": "File dữ liệu mới",
         "uploaded_at": "2026-06-27T09:27:31.727845"
     },
     "hoc-phi.json": {
-        "enabled": true,
+        "enabled": false,
         "description": "File dữ liệu mới",
         "uploaded_at": "2026-06-27T09:27:31.727845"
     },
     "nganh-nghe-dao-tao.json": {
-        "enabled": true,
+        "enabled": false,
         "description": "File dữ liệu mới",
         "uploaded_at": "2026-06-27T09:27:31.727845"
     },
@@ -30,7 +30,7 @@
         "uploaded_at": "2026-06-27T09:27:31.727845"
     },
     "so-tay-sinh-vien.json": {
-        "enabled": true,
+        "enabled": false,
         "description": "File dữ liệu mới",
         "uploaded_at": "2026-06-27T09:27:31.727845"
     },
