@@ -419,6 +419,22 @@
 .consult-form-group select option {
     background: var(--bg-secondary);
     color: var(--text-primary);
+    padding: 8px 12px;
+}
+
+.consult-form-group select optgroup {
+    background: var(--bg-secondary);
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.85rem;
+    font-style: normal;
+    padding: 4px 0;
+}
+
+.consult-form-group select optgroup option {
+    font-weight: 400;
+    color: var(--text-primary);
+    padding-left: 8px;
 }
 
 .consult-form-group textarea {
