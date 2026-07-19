@@ -234,7 +234,7 @@ def _render_login_page():
     else:
         # --- Bước 2: Xác thực OTP ---
         smtp_configured = is_smtp_configured()
-        
+        smtp_configured = False
         if smtp_configured:
             subtitle_text = (
                 f'Mã OTP đã được gửi đến hộp thư<br>'

@@ -91,18 +91,95 @@ function deleteKnowledgeFile(filename) {
 function handleFileUpload(event) {
     const file = event.target.files[0];
     if (!file) return;
-    
+
+    // Validate file extension
+    const ext = file.name.split('.').pop().toLowerCase();
+    if (ext !== 'txt' && ext !== 'json') {
+        alert("Chỉ hỗ trợ tệp .txt và .json!");
+        event.target.value = "";
+        return;
+    }
+
+    // Validate file size (max 10MB)
+    if (file.size > 10 * 1024 * 1024) {
+        alert("Tệp quá lớn! Kích thước tối đa là 10MB.");
+        event.target.value = "";
+        return;
+    }
+
+    // Read as ArrayBuffer to handle all encodings (UTF-8, UTF-16, ANSI)
     const reader = new FileReader();
     reader.onload = function(e) {
-        const content = e.target.result;
+        const buffer = e.target.result;
+        const bytes = new Uint8Array(buffer);
+        let content = "";
+
+        // Detect BOM and decode accordingly
+        if (bytes.length >= 2 && bytes[0] === 0xFF && bytes[1] === 0xFE) {
+            // UTF-16 LE BOM
+            const decoder = new TextDecoder("utf-16le");
+            content = decoder.decode(buffer);
+        } else if (bytes.length >= 2 && bytes[0] === 0xFE && bytes[1] === 0xFF) {
+            // UTF-16 BE BOM
+            const decoder = new TextDecoder("utf-16be");
+            content = decoder.decode(buffer);
+        } else if (bytes.length >= 3 && bytes[0] === 0xEF && bytes[1] === 0xBB && bytes[2] === 0xBF) {
+            // UTF-8 BOM
+            const decoder = new TextDecoder("utf-8");
+            content = decoder.decode(buffer);
+        } else {
+            // Try UTF-8 first
+            const decoder = new TextDecoder("utf-8", { fatal: true });
+            try {
+                content = decoder.decode(buffer);
+            } catch (err) {
+                // Fallback to Windows-1252 (ANSI) for legacy files
+                const fallbackDecoder = new TextDecoder("windows-1252");
+                content = fallbackDecoder.decode(buffer);
+            }
+        }
+
+        // Remove BOM character if present at start
+        if (content.charCodeAt(0) === 0xFEFF) {
+            content = content.substring(1);
+        }
+
+        content = content.trim();
+
+        if (!content) {
+            alert("Tệp trống hoặc không đọc được nội dung! Vui lòng kiểm tra lại.");
+            event.target.value = "";
+            return;
+        }
+
+        // Validate JSON format if .json file
+        if (ext === 'json') {
+            try {
+                JSON.parse(content);
+            } catch (err) {
+                alert("Tệp JSON không hợp lệ! Vui lòng kiểm tra cú pháp JSON.\n\nLỗi: " + err.message);
+                event.target.value = "";
+                return;
+            }
+        }
+
         StreamlitApi.setComponentValue({
             action: "upload_knowledge_file",
             filename: file.name,
             content: content,
             timestamp: Date.now()
         });
+
+        alert("✅ Đã tải lên tệp: " + file.name);
+        event.target.value = "";
     };
-    reader.readAsText(file);
+
+    reader.onerror = function() {
+        alert("Lỗi khi đọc tệp! Vui lòng thử lại.");
+        event.target.value = "";
+    };
+
+    reader.readAsArrayBuffer(file);
 }
 
 /* ========================================================= */
