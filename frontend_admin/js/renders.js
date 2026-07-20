@@ -336,8 +336,8 @@ function renderConsultStats() {
 
     const cards = [
         { icon: "📋", label: "Tổng yêu cầu", value: totalCount },
-        { icon: "🆕", label: "Chờ xử lý", value: newCount },
-        { icon: "📞", label: "Đã liên hệ", value: contactedCount },
+        { icon: "🆕", label: "Yêu cầu mới", value: newCount },
+        { icon: "📞", label: "Đã tiếp nhận", value: contactedCount },
         { icon: "✅", label: "Đã trả lời", value: doneCount }
     ];
 
@@ -381,8 +381,8 @@ function renderConsultTable() {
         const tr = document.createElement("tr");
         const status = r.status || "new";
         const statusLabels = {
-            new: { label: "🆕 Mới", cls: "status-new" },
-            contacted: { label: "📞 Đã liên hệ", cls: "status-contacted" },
+            new: { label: "🆕 Yêu cầu mới", cls: "status-new" },
+            contacted: { label: "📞 Đã tiếp nhận", cls: "status-contacted" },
             done: { label: "✅ Đã trả lời", cls: "status-done" }
         };
         const statusInfo = statusLabels[status] || statusLabels.new;

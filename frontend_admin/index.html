@@ -41,7 +41,7 @@
         <aside class="sidebar">
             <div class="sidebar-brand">
                 <h2>
-                    <span class="brand-icon">🎓</span>
+                    <img src="assets/LogoTrường.png" alt="Logo" class="brand-logo" style="width: 40px; height: 40px; object-fit: contain;">
                     <span>Tuyển Sinh<br>Admin</span>
                 </h2>
                 <p>Hệ thống quản trị</p>
@@ -71,7 +71,8 @@
             </nav>
 
             <div class="sidebar-footer">
-                <button class="nav-item" onclick="StreamlitApi.setComponentValue({ action: 'admin_logout', timestamp: Date.now() })">
+                <button class="nav-item"
+                    onclick="StreamlitApi.setComponentValue({ action: 'admin_logout', timestamp: Date.now() })">
                     <span class="nav-icon">🚪</span> Đăng xuất
                 </button>
             </div>
@@ -219,33 +220,51 @@
                     <!-- Layout top: Upload & Info cards -->
                     <div class="dashboard-grid" style="grid-template-columns: 2fr 1fr; margin-bottom: 20px;">
                         <!-- Upload Card -->
-                        <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; border: 2px dashed var(--border); background: transparent; text-align: center;">
-                            <div style="width: 50px; height: 50px; background: #e0e7ff; color: var(--accent); border-radius: 12px; display: grid; place-items: center; font-size: 1.5rem; margin-bottom: 16px;">📄</div>
+                        <div class="card"
+                            style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; border: 2px dashed var(--border); background: transparent; text-align: center;">
+                            <div
+                                style="width: 50px; height: 50px; background: #e0e7ff; color: var(--accent); border-radius: 12px; display: grid; place-items: center; font-size: 1.5rem; margin-bottom: 16px;">
+                                📄</div>
                             <h3 style="margin-bottom: 8px;">Tải lên dữ liệu mới</h3>
-                            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px;">Kéo và thả các tệp dữ liệu vào đây. Hỗ trợ định dạng .TXT và .JSON để huấn luyện chatbot.</p>
-                            
+                            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px;">Kéo và thả các
+                                tệp dữ liệu vào đây. Hỗ trợ định dạng .TXT và .JSON để huấn luyện chatbot.</p>
+
                             <div style="display: flex; gap: 10px;">
-                                <label for="fileUploadInput" class="action-btn" style="background: #000080; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 8px; font-weight: 600;">+ Chọn tệp</label>
-                                <input type="file" id="fileUploadInput" accept=".txt,.json" style="display: none;" onchange="handleFileUpload(event)">
+                                <label for="fileUploadInput" class="action-btn"
+                                    style="background: #000080; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 8px; font-weight: 600;">+
+                                    Chọn tệp</label>
+                                <input type="file" id="fileUploadInput" accept=".txt,.json" style="display: none;"
+                                    onchange="handleFileUpload(event)">
                             </div>
                         </div>
 
                         <!-- Info Cards -->
                         <div style="display: flex; flex-direction: column; gap: 20px;">
-                            <div class="card" style="background: #000080; color: white; padding: 20px; flex: 1; border-radius: 12px; position: relative; overflow: hidden;">
-                                <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; margin-bottom: 10px; color: rgba(255,255,255,0.8);">TỔNG DUNG LƯỢNG</div>
-                                <div style="font-size: 2.2rem; font-weight: 800; margin-bottom: 20px;" id="totalStorageDisplay">0 MB</div>
-                                <div style="height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; width: 100%; margin-bottom: 10px;">
+                            <div class="card"
+                                style="background: #000080; color: white; padding: 20px; flex: 1; border-radius: 12px; position: relative; overflow: hidden;">
+                                <div
+                                    style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; margin-bottom: 10px; color: rgba(255,255,255,0.8);">
+                                    TỔNG DUNG LƯỢNG</div>
+                                <div style="font-size: 2.2rem; font-weight: 800; margin-bottom: 20px;"
+                                    id="totalStorageDisplay">0 MB</div>
+                                <div
+                                    style="height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; width: 100%; margin-bottom: 10px;">
                                     <div style="height: 100%; background: white; border-radius: 2px; width: 71%;"></div>
                                 </div>
-                                <div style="font-size: 0.75rem; color: rgba(255,255,255,0.8);">Đã sử dụng 71% tài nguyên Vector DB</div>
+                                <div style="font-size: 0.75rem; color: rgba(255,255,255,0.8);">Đã sử dụng 71% tài nguyên
+                                    Vector DB</div>
                             </div>
 
-                            <div class="card" style="padding: 20px; display: flex; align-items: center; gap: 16px; border-radius: 12px;">
-                                <div style="width: 48px; height: 48px; background: #dcfce7; color: #16a34a; border-radius: 12px; display: grid; place-items: center; font-size: 1.5rem;">✅</div>
+                            <div class="card"
+                                style="padding: 20px; display: flex; align-items: center; gap: 16px; border-radius: 12px;">
+                                <div
+                                    style="width: 48px; height: 48px; background: #dcfce7; color: #16a34a; border-radius: 12px; display: grid; place-items: center; font-size: 1.5rem;">
+                                    ✅</div>
                                 <div>
-                                    <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 4px;">Hoạt động</div>
-                                    <div style="font-size: 0.8rem; color: var(--text-muted);">Hệ thống đang đồng bộ</div>
+                                    <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 4px;">Hoạt động
+                                    </div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted);">Hệ thống đang đồng bộ
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -253,7 +272,8 @@
 
                     <!-- Table -->
                     <div class="card">
-                        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                        <div class="card-header"
+                            style="display: flex; justify-content: space-between; align-items: center;">
                             <h3>Danh sách tệp dữ liệu</h3>
                         </div>
                         <div class="card-body" style="padding:0">
@@ -287,8 +307,8 @@
 
                     <div class="filter-tabs" id="consultFilter">
                         <button class="filter-tab active" data-filter="all">Tất cả</button>
-                        <button class="filter-tab" data-filter="new">🆕 Mới</button>
-                        <button class="filter-tab" data-filter="contacted">📞 Đã liên hệ</button>
+                        <button class="filter-tab" data-filter="new">🆕 Yêu cầu mới</button>
+                        <button class="filter-tab" data-filter="contacted">📞 Đã tiếp nhận</button>
                         <button class="filter-tab" data-filter="done">✅ Đã trả lời</button>
                     </div>
 
@@ -320,7 +340,8 @@
                         <p>Tùy chỉnh tính cách và chỉ thị (System Prompt) cho AI Agent theo từng tình huống.</p>
                     </div>
                     <div class="card">
-                        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                        <div class="card-header"
+                            style="display: flex; justify-content: space-between; align-items: center;">
                             <h3>Danh sách System Prompts</h3>
                         </div>
                         <div class="card-body">
@@ -345,7 +366,7 @@
 
             <!-- Footer -->
             <div class="admin-footer">
-                © Cao Thắng College. Bảo lưu mọi quyền. &nbsp;|&nbsp; Chatbot Tư Vấn Tuyển Sinh AI
+                © Trường Cao đẳng Kỹ thuật Cao Thắng. Bảo lưu mọi quyền. &nbsp;|&nbsp; Chatbot Tư Vấn Tuyển Sinh
             </div>
         </div>
     </div>

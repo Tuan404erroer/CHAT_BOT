@@ -133,7 +133,7 @@ function renderEmptyState() {
     messagesArea.innerHTML = `
 <div class="empty-state">
     <div class="empty-icon">🎓</div>
-    <h2>Chào mừng đến với AI Tư Vấn Tuyển Sinh</h2>
+    <h2>Chào mừng đến với Chatbot Tư Vấn Tuyển Sinh Cao Thắng</h2>
     <p>Hãy đặt câu hỏi về tuyển sinh, ngành đào tạo, điểm chuẩn, học phí và nhiều hơn nữa.</p>
     <div class="suggestion-chips">
         <button class="chip" onclick="askSuggestion('Điểm chuẩn các ngành năm nay là bao nhiêu?')">📊 Điểm chuẩn các ngành</button>
