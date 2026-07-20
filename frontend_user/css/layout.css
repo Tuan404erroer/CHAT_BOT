@@ -197,9 +197,10 @@
     transform: scale(0.95);
 }
 
-.logo-emoji {
-    font-size: 1.6rem;
-    filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.4));
+.header-logo {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
 }
 
 .app-header h1 {
