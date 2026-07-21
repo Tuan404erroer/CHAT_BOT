@@ -11,6 +11,7 @@ from models.constants import FRONTEND_ADMIN_DIR, CONSULT_FILE
 from middleware.session_manager import init_admin_session
 from services.auth_service import (
     validate_admin_login, generate_otp, send_otp_email, is_smtp_configured,
+    send_consult_reply_email,
 )
 from services.history_service import load_history, compute_stats
 from services.knowledge_service import (
@@ -345,6 +346,14 @@ def _dispatch_admin_action(action, admin_action, consult_list):
         if idx is not None and 0 <= idx < len(consult_list):
             consult_list[idx]["admin_note"] = note
             safe_write_json(CONSULT_FILE, consult_list)
+            
+            # Gửi email phản hồi
+            if note.strip():
+                email = consult_list[idx].get("email")
+                name = consult_list[idx].get("name", "Bạn")
+                if email:
+                    send_consult_reply_email(email, name, note)
+                    
             st.rerun()
 
     elif action == "update_knowledge_status":

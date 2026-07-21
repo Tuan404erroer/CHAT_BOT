@@ -55,7 +55,20 @@ window.addEventListener("message", (event) => {
             updateAuthUI(false, "");
         }
 
-
+        // Show Auth alerts from backend
+        if (args.auth_error) {
+            if(typeof showAlert === "function") showAlert(args.auth_error, false);
+            else alert(args.auth_error);
+        }
+        if (args.auth_success) {
+            if(typeof showAlert === "function") showAlert(args.auth_success, true);
+            else alert(args.auth_success);
+            
+            // If OTP was sent successfully, transition to step 2 automatically
+            if (args.auth_success.includes("OTP")) {
+                if(typeof showPanel === "function") showPanel("forgot_step2");
+            }
+        }
         // Hide loading overlay on first render
         if (!componentReady) {
             componentReady = true;
@@ -63,15 +76,6 @@ window.addEventListener("message", (event) => {
             if (loadingOverlay) {
                 loadingOverlay.classList.add("hidden");
                 setTimeout(() => loadingOverlay.remove(), 600);
-            }
-            
-            // Auto-login from localStorage if not logged in
-            if (args.logged_in === false) {
-                const savedMssv = localStorage.getItem("user_mssv");
-                const savedDob = localStorage.getItem("user_dob");
-                if (savedMssv && savedDob) {
-                    StreamlitApi.setComponentValue({ action: "login", mssv: savedMssv, dob: savedDob, timestamp: Date.now() });
-                }
             }
         }
 

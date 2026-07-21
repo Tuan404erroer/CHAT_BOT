@@ -56,7 +56,7 @@ def get_user_key():
         str: "{mssv}_{dob}" nếu đã đăng nhập, "_guest_" nếu chưa
     """
     if st.session_state.logged_in:
-        return f"{st.session_state.mssv}_{st.session_state.dob}"
+        return st.session_state.mssv.strip()
     return "_guest_"
 
 
