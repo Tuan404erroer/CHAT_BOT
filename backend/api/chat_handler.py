@@ -15,12 +15,22 @@ from middleware.session_manager import (
 from services.rag_service import ensure_rag_system
 from services.chat_service import process_query
 from services.history_service import save_history
-from services.user_service import save_user
+from services.user_service import register_user, verify_login, update_password
+from services.auth_service import send_user_forgot_password_email, generate_otp
 from utils.file_helpers import safe_read_json, safe_write_json
 
 
 def render_chat_page():
     """Render và xử lý toàn bộ trang Chatbot."""
+    
+    if "auth_error" not in st.session_state:
+        st.session_state.auth_error = ""
+    if "auth_success" not in st.session_state:
+        st.session_state.auth_success = ""
+    if "forgot_otp" not in st.session_state:
+        st.session_state.forgot_otp = ""
+    if "forgot_email" not in st.session_state:
+        st.session_state.forgot_email = ""
 
     # --- CSS ẨN STREAMLIT HEADER ---
     st.markdown("""
@@ -99,9 +109,16 @@ def render_chat_page():
         mssv=st.session_state.mssv,
         history=json.dumps(user_history, ensure_ascii=False),
         current_session_id=st.session_state.current_session_id,
+        auth_error=st.session_state.auth_error,
+        auth_success=st.session_state.auth_success,
         key="chat",
         default=None,
     )
+    
+    # Clear alert states so they only trigger once
+    if st.session_state.auth_error or st.session_state.auth_success:
+        st.session_state.auth_error = ""
+        st.session_state.auth_success = ""
 
     # --- XỬ LÝ ACTION TỪ FRONTEND ---
     if user_input is not None:
@@ -113,6 +130,12 @@ def render_chat_page():
 
             if action == "login":
                 _handle_login(user_input)
+            elif action == "register":
+                _handle_register(user_input)
+            elif action == "request_otp":
+                _handle_request_otp(user_input)
+            elif action == "reset_password":
+                _handle_reset_password(user_input)
             elif action == "logout":
                 _handle_logout()
             elif action == "new_session":
@@ -133,17 +156,73 @@ def render_chat_page():
 
 def _handle_login(user_input):
     mssv = user_input.get("mssv", "")
-    dob = user_input.get("dob", "")
+    password = user_input.get("password", "")
 
-    st.session_state.logged_in = True
-    st.session_state.mssv = mssv
-    st.session_state.dob = dob
-    st.session_state.messages = []
-    st.session_state.current_session_id = str(uuid.uuid4())
+    success, msg = verify_login(mssv, password)
+    
+    if success:
+        st.session_state.logged_in = True
+        st.session_state.mssv = mssv
+        st.session_state.messages = []
+        st.session_state.current_session_id = str(uuid.uuid4())
+        st.session_state.auth_success = "Đăng nhập thành công!"
+    else:
+        st.session_state.auth_error = msg
 
-    # Lưu tài khoản vào file users.json (tạo mới hoặc cập nhật last_login)
-    save_user(mssv, dob)
+    st.rerun()
 
+def _handle_register(user_input):
+    mssv = user_input.get("mssv", "")
+    name = user_input.get("name", "")
+    email = user_input.get("email", "")
+    password = user_input.get("password", "")
+    
+    success, msg = register_user(mssv, name, email, password)
+    if success:
+        st.session_state.auth_success = msg
+    else:
+        st.session_state.auth_error = msg
+        
+    st.rerun()
+
+def _handle_request_otp(user_input):
+    email = user_input.get("email", "")
+    # Check if email is valid by looking for the user
+    from services.user_service import get_user_by_email
+    user_mssv = get_user_by_email(email)
+    
+    if not user_mssv:
+        st.session_state.auth_error = "Email này chưa được đăng ký trong hệ thống!"
+        st.rerun()
+        
+    otp = generate_otp()
+    if send_user_forgot_password_email(email, otp):
+        st.session_state.forgot_otp = otp
+        st.session_state.forgot_email = email
+        st.session_state.forgot_mssv = user_mssv
+        st.session_state.auth_success = "Mã OTP đã được gửi đến email của bạn!"
+    else:
+        st.session_state.auth_error = "Gửi email thất bại. Vui lòng thử lại sau."
+        
+    st.rerun()
+
+def _handle_reset_password(user_input):
+    otp = user_input.get("otp", "")
+    new_password = user_input.get("new_password", "")
+    
+    if not st.session_state.forgot_otp or otp != st.session_state.forgot_otp:
+        st.session_state.auth_error = "Mã OTP không hợp lệ hoặc đã hết hạn!"
+        st.rerun()
+        
+    mssv = st.session_state.forgot_mssv
+    update_password(mssv, new_password)
+    
+    # Clear state
+    st.session_state.forgot_otp = ""
+    st.session_state.forgot_email = ""
+    st.session_state.forgot_mssv = ""
+    
+    st.session_state.auth_success = "Đặt lại mật khẩu thành công! Bạn có thể đăng nhập ngay."
     st.rerun()
 
 
