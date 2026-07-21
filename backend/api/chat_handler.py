@@ -15,6 +15,7 @@ from middleware.session_manager import (
 from services.rag_service import ensure_rag_system
 from services.chat_service import process_query
 from services.history_service import save_history
+from services.user_service import save_user
 from utils.file_helpers import safe_read_json, safe_write_json
 
 
@@ -131,11 +132,18 @@ def render_chat_page():
 # ==============================================================================
 
 def _handle_login(user_input):
+    mssv = user_input.get("mssv", "")
+    dob = user_input.get("dob", "")
+
     st.session_state.logged_in = True
-    st.session_state.mssv = user_input.get("mssv", "")
-    st.session_state.dob = user_input.get("dob", "")
+    st.session_state.mssv = mssv
+    st.session_state.dob = dob
     st.session_state.messages = []
     st.session_state.current_session_id = str(uuid.uuid4())
+
+    # Lưu tài khoản vào file users.json (tạo mới hoặc cập nhật last_login)
+    save_user(mssv, dob)
+
     st.rerun()
 
 
@@ -216,26 +224,25 @@ def _handle_chat(user_input, qa_chain_all, qa_chain_diem_chuan, llm):
         "sources": sources,
     })
 
-    # --- LƯU LỊCH SỬ NGẦM (CHỈ KHI ĐÃ ĐĂNG NHẬP) ---
-    if st.session_state.logged_in:
-        user_key = get_user_key()
-        if user_key not in st.session_state.history_data:
-            st.session_state.history_data[user_key] = {}
-        user_history = st.session_state.history_data[user_key]
+    # --- LƯU LỊCH SỬ NGẦM (CẢ KHI CHƯA ĐĂNG NHẬP) ---
+    user_key = get_user_key()
+    if user_key not in st.session_state.history_data:
+        st.session_state.history_data[user_key] = {}
+    user_history = st.session_state.history_data[user_key]
 
-        if st.session_state.current_session_id not in user_history:
-            title_text = query[:20] + "..." if len(query) > 20 else query
-            title = f"Chat: {title_text}"
-            user_history[st.session_state.current_session_id] = {
-                "title": title,
-                "messages": st.session_state.messages,
-            }
-        else:
-            user_history[st.session_state.current_session_id]["messages"] = (
-                st.session_state.messages
-            )
+    if st.session_state.current_session_id not in user_history:
+        title_text = query[:20] + "..." if len(query) > 20 else query
+        title = f"Chat: {title_text}"
+        user_history[st.session_state.current_session_id] = {
+            "title": title,
+            "messages": st.session_state.messages,
+        }
+    else:
+        user_history[st.session_state.current_session_id]["messages"] = (
+            st.session_state.messages
+        )
 
-        save_history(st.session_state.history_data)
+    save_history(st.session_state.history_data)
 
     # Rerun để gửi kết quả xuống frontend
     st.rerun()

@@ -26,6 +26,9 @@ if (loginBtn) {
         const mssv = loginMssv.value.trim();
         const dob = loginDob.value.trim();
         if (mssv && dob) {
+            // Lưu vào localStorage để không bị mất khi F5
+            localStorage.setItem("user_mssv", mssv);
+            localStorage.setItem("user_dob", dob);
             StreamlitApi.setComponentValue({ action: "login", mssv, dob, timestamp: Date.now() });
             closeLoginModal();
         } else {
@@ -36,6 +39,8 @@ if (loginBtn) {
 
 if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("user_mssv");
+        localStorage.removeItem("user_dob");
         StreamlitApi.setComponentValue({ action: "logout", timestamp: Date.now() });
     });
 }
@@ -96,6 +101,8 @@ function updateAuthUI(loggedIn, mssv) {
             newDropdown.classList.toggle("open", dropdownOpen);
         });
         document.getElementById("ddLogout").addEventListener("click", () => {
+            localStorage.removeItem("user_mssv");
+            localStorage.removeItem("user_dob");
             StreamlitApi.setComponentValue({ action: "logout", timestamp: Date.now() });
         });
         // Sidebar: show logged-in content

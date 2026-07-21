@@ -25,6 +25,7 @@ FRONTEND_ADMIN_DIR = PROJECT_ROOT / "frontend_admin"
 # ==============================================================================
 HISTORY_FILE = STORAGE_DIR / "chat_history.json"
 CONSULT_FILE = STORAGE_DIR / "consult_registrations.json"
+USERS_FILE = STORAGE_DIR / "users.json"
 KNOWLEDGE_CONFIG_FILE = CONFIG_DIR / "knowledge_config.json"
 SYSTEM_PROMPT_FILE = CONFIG_DIR / "prompts.json"
 

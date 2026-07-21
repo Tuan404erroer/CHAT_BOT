@@ -64,6 +64,15 @@ window.addEventListener("message", (event) => {
                 loadingOverlay.classList.add("hidden");
                 setTimeout(() => loadingOverlay.remove(), 600);
             }
+            
+            // Auto-login from localStorage if not logged in
+            if (args.logged_in === false) {
+                const savedMssv = localStorage.getItem("user_mssv");
+                const savedDob = localStorage.getItem("user_dob");
+                if (savedMssv && savedDob) {
+                    StreamlitApi.setComponentValue({ action: "login", mssv: savedMssv, dob: savedDob, timestamp: Date.now() });
+                }
+            }
         }
 
         // Update messages from backend
