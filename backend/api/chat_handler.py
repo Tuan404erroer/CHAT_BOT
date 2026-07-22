@@ -241,8 +241,9 @@ def _handle_chat(user_input, qa_chain_all, qa_chain_diem_chuan, llm):
     # Lưu tin nhắn user
     st.session_state.messages.append({"role": "user", "content": query})
 
-    # Xử lý qua RAG pipeline
-    answer, sources = process_query(query, qa_chain_all, qa_chain_diem_chuan, llm)
+    # Xử lý qua RAG pipeline với lịch sử chat (trừ câu hỏi hiện tại vừa append)
+    history_to_pass = st.session_state.messages[:-1]
+    answer, sources = process_query(query, qa_chain_all, qa_chain_diem_chuan, llm, chat_history=history_to_pass)
 
     # Lưu tin nhắn assistant
     st.session_state.messages.append({
