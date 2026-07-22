@@ -243,7 +243,7 @@ function openConsultDetail(idx) {
                 <div class="consult-detail-label">Ghi chú Admin</div>
                 <div class="consult-detail-value">
                     <textarea class="admin-note-area" id="adminNoteArea" placeholder="Thêm ghi chú cho yêu cầu này...">${escapeHtml(r.admin_note || "")}</textarea>
-                    <button class="save-note-btn" onclick="saveAdminNote(${idx})">💾 Lưu ghi chú</button>
+                    <button class="save-note-btn" onclick="saveAdminNote(${idx})">💾 Lưu ghi chú & Trả lời</button>
                 </div>
             </div>
             <div class="consult-detail-actions">
@@ -252,6 +252,13 @@ function openConsultDetail(idx) {
         </div>
     `;
     modalOverlay.classList.add("open");
+    
+    // Tự động chuyển trạng thái "Đã tiếp nhận" nếu đang là "Mới" khi vừa click xem
+    if (status === "new") {
+        changeStatusFromModal(idx, "contacted");
+        document.getElementById("modalStatusSelect").value = "contacted";
+        r.status = "contacted"; // update local temporarily
+    }
 }
 
 function cycleConsultStatus(idx) {
@@ -292,6 +299,16 @@ function deleteConsult(idx) {
 
 function saveAdminNote(idx) {
     const note = document.getElementById("adminNoteArea").value.trim();
+    
+    // Đóng modal tạm để thấy nó update
+    modalOverlay.classList.remove("open");
+    
+    if (note) {
+        alert("✅ Đã lưu ghi chú và tự động gửi email phản hồi (nếu có email)!\nTrạng thái chuyển thành: Đã trả lời.");
+    } else {
+        alert("✅ Đã xóa/lưu ghi chú trống!\nTrạng thái chuyển thành: Đã trả lời.");
+    }
+    
     StreamlitApi.setComponentValue({
         action: "update_consult_note",
         index: idx,

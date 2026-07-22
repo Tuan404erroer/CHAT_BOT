@@ -98,6 +98,7 @@ def compute_stats(history_data):
                 "thumbs_down": session_down,
                 "no_rating": session_no_rate,
                 "messages": messages,
+                "last_updated": session_info.get("last_updated", 0),
             })
 
         users_list.append({
@@ -143,6 +144,9 @@ def compute_stats(history_data):
 
     # Lưu lại config đã cập nhật
     safe_write_json(KNOWLEDGE_CONFIG_FILE, knowledge_config)
+
+    # Sắp xếp các phiên chat từ cũ đến mới để frontend có thể hiển thị chính xác (mới nhất nổi lên đầu)
+    all_sessions.sort(key=lambda x: x.get("last_updated", 0))
 
     return {
         "total_sessions": total_sessions,
