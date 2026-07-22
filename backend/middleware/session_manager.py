@@ -14,8 +14,9 @@ def init_chat_session():
         st.session_state.history_data = load_history()
     if "logged_in" not in st.session_state:
         st.session_state.logged_in = False
-        st.session_state.mssv = ""
-        st.session_state.dob = ""
+        st.session_state.email = ""
+        st.session_state.name = ""
+        st.session_state.picture = ""
     if "current_session_id" not in st.session_state:
         st.session_state.current_session_id = None
     if "messages" not in st.session_state:
@@ -53,10 +54,10 @@ def get_user_key():
     """Lấy user_key từ session state (dùng để tra cứu lịch sử).
     
     Returns:
-        str: "{mssv}_{dob}" nếu đã đăng nhập, "_guest_" nếu chưa
+        str: email nếu đã đăng nhập, "_guest_" nếu chưa
     """
-    if st.session_state.logged_in:
-        return st.session_state.mssv.strip()
+    if st.session_state.logged_in and hasattr(st.session_state, "email") and st.session_state.email:
+        return st.session_state.email.strip()
     return "_guest_"
 
 
