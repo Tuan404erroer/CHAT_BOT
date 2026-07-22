@@ -252,6 +252,17 @@ def _handle_chat(user_input, qa_chain_all, qa_chain_diem_chuan, llm):
 
     # --- LƯU LỊCH SỬ NGẦM (CẢ KHI CHƯA ĐĂNG NHẬP) ---
     user_key = get_user_key()
+    if user_key not in st.session_state.history_data:
+        st.session_state.history_data[user_key] = {}
+    user_history = st.session_state.history_data[user_key]
+
+    if st.session_state.current_session_id not in user_history:
+        title_text = query[:20] + "..." if len(query) > 20 else query
+        title = f"Chat: {title_text}"
+        user_history[st.session_state.current_session_id] = {
+            "title": title,
+            "messages": st.session_state.messages,
+        }
     else:
         user_history[st.session_state.current_session_id]["messages"] = (
             st.session_state.messages
