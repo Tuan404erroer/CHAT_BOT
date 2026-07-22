@@ -1,200 +1,410 @@
 [
   {
-    "nganh": "Công nghệ Kỹ thuật Điện, Điện tử",
+    "nganh": "Bảo trì, sửa chữa Ô tô (Công nghệ Ô tô)",
     "diem_chuan": {
-      "2020": { "xet_hoc_ba": 23.00, "thi_thpt_quoc_gia": 25.50, "thi_danh_gia_nang_luc": 550 },
-      "2021": { "xet_hoc_ba": 23.00, "thi_thpt_quoc_gia": 24.00, "thi_danh_gia_nang_luc": 600 },
-      "2022": { "xet_hoc_ba": 23.00, "thi_thpt_quoc_gia": 23.00, "thi_danh_gia_nang_luc": null },
-      "2023": { "xet_hoc_ba": 24.00, "thi_thpt_quoc_gia": 22.00, "thi_danh_gia_nang_luc": null },
-      "2024": { "xet_hoc_ba": 21.50, "thi_thpt_quoc_gia": 21.00, "thi_danh_gia_nang_luc": null },
-      "2025": { "xet_hoc_ba": 22.50, "thi_thpt_quoc_gia": 24.50, "thi_danh_gia_nang_luc": null }
+      "2025": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 26.5,
+        "quy_doi_thang_30": 19.88,
+        "diem_thi_thptqg": 28.0,
+        "diem_thi_dgnl": 650
+      },
+      "2026": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 29.5,
+        "quy_doi_thang_30": 22.13,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": 700
+      }
     }
   },
   {
-    "nganh": "Công nghệ Kỹ thuật Điện tử - Viễn thông",
+    "nganh": "Công nghệ Kỹ thuật Bán dẫn và Vi mạch",
     "diem_chuan": {
-      "2020": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 23.50, "thi_danh_gia_nang_luc": 500 },
-      "2021": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 23.00, "thi_danh_gia_nang_luc": 500 },
-      "2022": { "xet_hoc_ba": 21.00, "thi_thpt_quoc_gia": 21.00, "thi_danh_gia_nang_luc": null },
-      "2023": { "xet_hoc_ba": 20.50, "thi_thpt_quoc_gia": 21.00, "thi_danh_gia_nang_luc": null },
-      "2024": { "xet_hoc_ba": 20.50, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
-      "2025": { "xet_hoc_ba": 20.50, "thi_thpt_quoc_gia": 22.00, "thi_danh_gia_nang_luc": null }
+      "2025": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": null,
+        "quy_doi_thang_30": null,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": null
+      },
+      "2026": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 30.0,
+        "quy_doi_thang_30": 22.5,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": 780
+      }
+    }
+  },
+  {
+    "nganh": "Công nghệ Kỹ thuật Bảo trì thiết bị công nghiệp",
+    "diem_chuan": {
+      "2025": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": null,
+        "quy_doi_thang_30": null,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": null
+      },
+      "2026": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 26.0,
+        "quy_doi_thang_30": 19.5,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": 700
+      }
     }
   },
   {
     "nganh": "Công nghệ Kỹ thuật Cơ khí",
     "diem_chuan": {
-      "2020": { "xet_hoc_ba": 26.50, "thi_thpt_quoc_gia": 29.00, "thi_danh_gia_nang_luc": 600 },
-      "2021": { "xet_hoc_ba": 26.50, "thi_thpt_quoc_gia": 29.00, "thi_danh_gia_nang_luc": 600 },
-      "2022": { "xet_hoc_ba": 27.00, "thi_thpt_quoc_gia": 26.50, "thi_danh_gia_nang_luc": null },
-      "2023": { "xet_hoc_ba": 27.50, "thi_thpt_quoc_gia": 24.00, "thi_danh_gia_nang_luc": null },
-      "2024": { "xet_hoc_ba": 24.00, "thi_thpt_quoc_gia": 24.00, "thi_danh_gia_nang_luc": null },
-      "2025": { "xet_hoc_ba": 25.00, "thi_thpt_quoc_gia": 29.00, "thi_danh_gia_nang_luc": null }
+      "2025": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 25.0,
+        "quy_doi_thang_30": 18.75,
+        "diem_thi_thptqg": 29.0,
+        "diem_thi_dgnl": 650
+      },
+      "2026": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 31.5,
+        "quy_doi_thang_30": 23.63,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": 750
+      }
     }
   },
   {
-    "nganh": "Công nghệ Kỹ thuật Ô tô",
+    "nganh": "Công nghệ Kỹ thuật Cơ điện lạnh (Nhiệt)",
     "diem_chuan": {
-      "2020": { "xet_hoc_ba": 30.00, "thi_thpt_quoc_gia": 31.00, "thi_danh_gia_nang_luc": 700 },
-      "2021": { "xet_hoc_ba": 30.50, "thi_thpt_quoc_gia": 32.00, "thi_danh_gia_nang_luc": 750 },
-      "2022": { "xet_hoc_ba": 31.00, "thi_thpt_quoc_gia": 31.00, "thi_danh_gia_nang_luc": null },
-      "2023": { "xet_hoc_ba": 31.50, "thi_thpt_quoc_gia": 27.00, "thi_danh_gia_nang_luc": null },
-      "2024": { "xet_hoc_ba": 28.00, "thi_thpt_quoc_gia": 28.00, "thi_danh_gia_nang_luc": null },
-      "2025": { "xet_hoc_ba": 30.50, "thi_thpt_quoc_gia": 29.00, "thi_danh_gia_nang_luc": null }
-    }
-  },
-  {
-    "nganh": "Công nghệ Thông tin",
-    "diem_chuan": {
-      "2020": { "xet_hoc_ba": 24.50, "thi_thpt_quoc_gia": 25.00, "thi_danh_gia_nang_luc": 550 },
-      "2021": { "xet_hoc_ba": 24.00, "thi_thpt_quoc_gia": 25.50, "thi_danh_gia_nang_luc": 600 },
-      "2022": { "xet_hoc_ba": 26.00, "thi_thpt_quoc_gia": 26.50, "thi_danh_gia_nang_luc": null },
-      "2023": { "xet_hoc_ba": 25.50, "thi_thpt_quoc_gia": 25.50, "thi_danh_gia_nang_luc": null },
-      "2024": { "xet_hoc_ba": 22.50, "thi_thpt_quoc_gia": 21.50, "thi_danh_gia_nang_luc": null },
-      "2025": { "xet_hoc_ba": 24.00, "thi_thpt_quoc_gia": 23.00, "thi_danh_gia_nang_luc": null }
-    }
-  },
-  {
-    "nganh": "Công nghệ Kỹ thuật Nhiệt (Cơ điện lạnh)",
-    "diem_chuan": {
-      "2020": { "xet_hoc_ba": 24.50, "thi_thpt_quoc_gia": 27.00, "thi_danh_gia_nang_luc": 550 },
-      "2021": { "xet_hoc_ba": 24.00, "thi_thpt_quoc_gia": 25.00, "thi_danh_gia_nang_luc": 600 },
-      "2022": { "xet_hoc_ba": 23.00, "thi_thpt_quoc_gia": 23.00, "thi_danh_gia_nang_luc": null },
-      "2023": { "xet_hoc_ba": 22.00, "thi_thpt_quoc_gia": 23.00, "thi_danh_gia_nang_luc": null },
-      "2024": { "xet_hoc_ba": 21.00, "thi_thpt_quoc_gia": 21.00, "thi_danh_gia_nang_luc": null },
-      "2025": { "xet_hoc_ba": 22.00, "thi_thpt_quoc_gia": 21.50, "thi_danh_gia_nang_luc": null }
+      "2025": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 22.0,
+        "quy_doi_thang_30": 16.5,
+        "diem_thi_thptqg": 21.5,
+        "diem_thi_dgnl": 500
+      },
+      "2026": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 26.0,
+        "quy_doi_thang_30": 19.5,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": 700
+      }
     }
   },
   {
     "nganh": "Công nghệ Kỹ thuật Cơ điện tử",
     "diem_chuan": {
-      "2020": { "xet_hoc_ba": 23.50, "thi_thpt_quoc_gia": 28.50, "thi_danh_gia_nang_luc": 550 },
-      "2021": { "xet_hoc_ba": 23.00, "thi_thpt_quoc_gia": 26.00, "thi_danh_gia_nang_luc": 550 },
-      "2022": { "xet_hoc_ba": 23.00, "thi_thpt_quoc_gia": 23.00, "thi_danh_gia_nang_luc": null },
-      "2023": { "xet_hoc_ba": 23.00, "thi_thpt_quoc_gia": 23.00, "thi_danh_gia_nang_luc": null },
-      "2024": { "xet_hoc_ba": 22.50, "thi_thpt_quoc_gia": 22.50, "thi_danh_gia_nang_luc": null },
-      "2025": { "xet_hoc_ba": 23.00, "thi_thpt_quoc_gia": 27.00, "thi_danh_gia_nang_luc": null }
+      "2025": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 23.0,
+        "quy_doi_thang_30": 17.25,
+        "diem_thi_thptqg": 27.0,
+        "diem_thi_dgnl": 500
+      },
+      "2026": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 31.0,
+        "quy_doi_thang_30": 23.25,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": 780
+      }
+    }
+  },
+  {
+    "nganh": "Công nghệ Kỹ thuật Tự động hóa trong nông nghiệp (Nông nghiệp công nghệ cao)",
+    "diem_chuan": {
+      "2025": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": null,
+        "quy_doi_thang_30": null,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": null
+      },
+      "2026": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 29.0,
+        "quy_doi_thang_30": 21.75,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": 650
+      }
+    }
+  },
+  {
+    "nganh": "Công nghệ Kỹ thuật Ô tô",
+    "diem_chuan": {
+      "2025": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 30.5,
+        "quy_doi_thang_30": 22.88,
+        "diem_thi_thptqg": 29.0,
+        "diem_thi_dgnl": 680
+      },
+      "2026": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 32.0,
+        "quy_doi_thang_30": 24.0,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": 760
+      }
     }
   },
   {
     "nganh": "Công nghệ Kỹ thuật Điều khiển và Tự động hóa",
     "diem_chuan": {
-      "2020": { "xet_hoc_ba": 24.50, "thi_thpt_quoc_gia": 28.50, "thi_danh_gia_nang_luc": 550 },
-      "2021": { "xet_hoc_ba": 24.00, "thi_thpt_quoc_gia": 29.00, "thi_danh_gia_nang_luc": 600 },
-      "2022": { "xet_hoc_ba": 25.00, "thi_thpt_quoc_gia": 25.00, "thi_danh_gia_nang_luc": null },
-      "2023": { "xet_hoc_ba": 25.00, "thi_thpt_quoc_gia": 23.50, "thi_danh_gia_nang_luc": null },
-      "2024": { "xet_hoc_ba": 22.50, "thi_thpt_quoc_gia": 22.50, "thi_danh_gia_nang_luc": null },
-      "2025": { "xet_hoc_ba": 24.50, "thi_thpt_quoc_gia": 27.00, "thi_danh_gia_nang_luc": null }
+      "2025": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 24.5,
+        "quy_doi_thang_30": 18.38,
+        "diem_thi_thptqg": 27.0,
+        "diem_thi_dgnl": 500
+      },
+      "2026": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 33.0,
+        "quy_doi_thang_30": 24.75,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": 850
+      }
     }
   },
   {
-    "nganh": "Kế toán tin học (Kế toán doanh nghiệp)",
+    "nganh": "Công nghệ Kỹ thuật Điện tử - Viễn thông",
     "diem_chuan": {
-      "2020": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 22.00, "thi_danh_gia_nang_luc": 450 },
-      "2021": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": 450 },
-      "2022": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
-      "2023": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
-      "2024": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 16.00, "thi_danh_gia_nang_luc": null },
-      "2025": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 16.00, "thi_danh_gia_nang_luc": null }
+      "2025": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 20.5,
+        "quy_doi_thang_30": 15.38,
+        "diem_thi_thptqg": 22.0,
+        "diem_thi_dgnl": 500
+      },
+      "2026": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 23.0,
+        "quy_doi_thang_30": 17.25,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": 650
+      }
+    }
+  },
+  {
+    "nganh": "Công nghệ Kỹ thuật Điện và Năng lượng tái tạo",
+    "diem_chuan": {
+      "2025": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": null,
+        "quy_doi_thang_30": null,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": null
+      },
+      "2026": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 26.0,
+        "quy_doi_thang_30": 19.5,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": 650
+      }
+    }
+  },
+  {
+    "nganh": "Công nghệ Kỹ thuật Điện, Điện từ",
+    "diem_chuan": {
+      "2025": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": null,
+        "quy_doi_thang_30": null,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": null
+      },
+      "2026": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 28.5,
+        "quy_doi_thang_30": 21.38,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": null
+      }
+    }
+  },
+  {
+    "nganh": "Công nghệ Kỹ thuật Điện, Điện tử",
+    "diem_chuan": {
+      "2025": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 22.5,
+        "quy_doi_thang_30": 16.88,
+        "diem_thi_thptqg": 24.5,
+        "diem_thi_dgnl": 500
+      },
+      "2026": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": null,
+        "quy_doi_thang_30": null,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": 780
+      }
+    }
+  },
+  {
+    "nganh": "Công nghệ Thông tin",
+    "diem_chuan": {
+      "2025": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 24.0,
+        "quy_doi_thang_30": 18.0,
+        "diem_thi_thptqg": 23.0,
+        "diem_thi_dgnl": 500
+      },
+      "2026": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 25.5,
+        "quy_doi_thang_30": 19.13,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": 600
+      }
+    }
+  },
+  {
+    "nganh": "Công nghệ Tài chính và Kinh doanh số",
+    "diem_chuan": {
+      "2025": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": null,
+        "quy_doi_thang_30": null,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": null
+      },
+      "2026": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 24.0,
+        "quy_doi_thang_30": 18.0,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": 600
+      }
     }
   },
   {
     "nganh": "Cơ khí chế tạo (Cắt gọt kim loại)",
     "diem_chuan": {
-      "2020": { "xet_hoc_ba": null, "thi_thpt_quoc_gia": null, "thi_danh_gia_nang_luc": null },
-      "2021": { "xet_hoc_ba": 22.00, "thi_thpt_quoc_gia": 21.00, "thi_danh_gia_nang_luc": 500 },
-      "2022": { "xet_hoc_ba": 22.00, "thi_thpt_quoc_gia": 22.00, "thi_danh_gia_nang_luc": null },
-      "2023": { "xet_hoc_ba": 22.00, "thi_thpt_quoc_gia": 21.00, "thi_danh_gia_nang_luc": null },
-      "2024": { "xet_hoc_ba": 20.50, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
-      "2025": { "xet_hoc_ba": 21.00, "thi_thpt_quoc_gia": 21.50, "thi_danh_gia_nang_luc": null }
-    }
-  },
-  {
-    "nganh": "Sửa chữa cơ khí (Nguội sửa chữa máy công cụ)",
-    "diem_chuan": {
-      "2020": { "xet_hoc_ba": null, "thi_thpt_quoc_gia": null, "thi_danh_gia_nang_luc": null },
-      "2021": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": 450 },
-      "2022": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
-      "2023": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.50, "thi_danh_gia_nang_luc": null },
-      "2024": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
-      "2025": { "xet_hoc_ba": 21.00, "thi_thpt_quoc_gia": 21.50, "thi_danh_gia_nang_luc": null }
+      "2025": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 21.0,
+        "quy_doi_thang_30": 15.75,
+        "diem_thi_thptqg": 21.5,
+        "diem_thi_dgnl": 500
+      },
+      "2026": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 26.0,
+        "quy_doi_thang_30": 19.5,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": 700
+      }
     }
   },
   {
     "nganh": "Hàn (Công nghệ cao)",
     "diem_chuan": {
-      "2020": { "xet_hoc_ba": null, "thi_thpt_quoc_gia": null, "thi_danh_gia_nang_luc": null },
-      "2021": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": 450 },
-      "2022": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
-      "2023": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
-      "2024": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 16.00, "thi_danh_gia_nang_luc": null },
-      "2025": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.50, "thi_danh_gia_nang_luc": null }
+      "2025": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 20.0,
+        "quy_doi_thang_30": 15.0,
+        "diem_thi_thptqg": 20.5,
+        "diem_thi_dgnl": 500
+      },
+      "2026": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 26.0,
+        "quy_doi_thang_30": 19.5,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": 600
+      }
+    }
+  },
+  {
+    "nganh": "Kế toán tin học (Kế toán doanh nghiệp)",
+    "diem_chuan": {
+      "2025": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 20.0,
+        "quy_doi_thang_30": 15.0,
+        "diem_thi_thptqg": 16.0,
+        "diem_thi_dgnl": 500
+      },
+      "2026": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 21.5,
+        "quy_doi_thang_30": 16.13,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": 500
+      }
     }
   },
   {
     "nganh": "Kỹ thuật máy lạnh và điều hòa không khí",
     "diem_chuan": {
-      "2020": { "xet_hoc_ba": null, "thi_thpt_quoc_gia": null, "thi_danh_gia_nang_luc": null },
-      "2021": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": 500 },
-      "2022": { "xet_hoc_ba": 20.50, "thi_thpt_quoc_gia": 20.50, "thi_danh_gia_nang_luc": null },
-      "2023": { "xet_hoc_ba": 20.50, "thi_thpt_quoc_gia": 20.50, "thi_danh_gia_nang_luc": null },
-      "2024": { "xet_hoc_ba": 20.50, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
-      "2025": { "xet_hoc_ba": 21.00, "thi_thpt_quoc_gia": 21.50, "thi_danh_gia_nang_luc": null }
-    }
-  },
-  {
-    "nganh": "Bảo trì, sửa chữa Ô tô (Công nghệ Ô tô)",
-    "diem_chuan": {
-      "2020": { "xet_hoc_ba": null, "thi_thpt_quoc_gia": null, "thi_danh_gia_nang_luc": null },
-      "2021": { "xet_hoc_ba": 25.50, "thi_thpt_quoc_gia": 29.00, "thi_danh_gia_nang_luc": 650 },
-      "2022": { "xet_hoc_ba": 26.00, "thi_thpt_quoc_gia": 29.00, "thi_danh_gia_nang_luc": null },
-      "2023": { "xet_hoc_ba": 29.00, "thi_thpt_quoc_gia": 25.50, "thi_danh_gia_nang_luc": null },
-      "2024": { "xet_hoc_ba": 25.00, "thi_thpt_quoc_gia": 25.00, "thi_danh_gia_nang_luc": null },
-      "2025": { "xet_hoc_ba": 26.50, "thi_thpt_quoc_gia": 28.00, "thi_danh_gia_nang_luc": null }
-    }
-  },
-  {
-    "nganh": "Điện công nghiệp",
-    "diem_chuan": {
-      "2020": { "xet_hoc_ba": null, "thi_thpt_quoc_gia": null, "thi_danh_gia_nang_luc": null },
-      "2021": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": 450 },
-      "2022": { "xet_hoc_ba": 20.50, "thi_thpt_quoc_gia": 20.50, "thi_danh_gia_nang_luc": null },
-      "2023": { "xet_hoc_ba": 20.50, "thi_thpt_quoc_gia": 20.50, "thi_danh_gia_nang_luc": null },
-      "2024": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
-      "2025": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 21.50, "thi_danh_gia_nang_luc": null }
-    }
-  },
-  {
-    "nganh": "Điện tử công nghiệp",
-    "diem_chuan": {
-      "2020": { "xet_hoc_ba": null, "thi_thpt_quoc_gia": null, "thi_danh_gia_nang_luc": null },
-      "2021": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": 450 },
-      "2022": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
-      "2023": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
-      "2024": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
-      "2025": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 21.00, "thi_danh_gia_nang_luc": null }
-    }
-  },
-  {
-    "nganh": "Quản trị mạng máy tính",
-    "diem_chuan": {
-      "2020": { "xet_hoc_ba": null, "thi_thpt_quoc_gia": null, "thi_danh_gia_nang_luc": null },
-      "2021": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": 450 },
-      "2022": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
-      "2023": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
-      "2024": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
-      "2025": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null }
+      "2025": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 21.0,
+        "quy_doi_thang_30": 15.75,
+        "diem_thi_thptqg": 21.5,
+        "diem_thi_dgnl": 500
+      },
+      "2026": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 24.0,
+        "quy_doi_thang_30": 18.0,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": 600
+      }
     }
   },
   {
     "nganh": "Kỹ thuật sửa chữa, lắp ráp máy tính",
     "diem_chuan": {
-      "2020": { "xet_hoc_ba": null, "thi_thpt_quoc_gia": null, "thi_danh_gia_nang_luc": null },
-      "2021": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": 450 },
-      "2022": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 24.00, "thi_danh_gia_nang_luc": null },
-      "2023": { "xet_hoc_ba": 21.00, "thi_thpt_quoc_gia": 24.00, "thi_danh_gia_nang_luc": null },
-      "2024": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 20.00, "thi_danh_gia_nang_luc": null },
-      "2025": { "xet_hoc_ba": 20.00, "thi_thpt_quoc_gia": 21.00, "thi_danh_gia_nang_luc": null }
+      "2025": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 20.0,
+        "quy_doi_thang_30": 15.0,
+        "diem_thi_thptqg": 21.0,
+        "diem_thi_dgnl": 500
+      },
+      "2026": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 23.5,
+        "quy_doi_thang_30": 17.63,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": 700
+      }
+    }
+  },
+  {
+    "nganh": "Quản trị mạng máy tính (An ninh mạng)",
+    "diem_chuan": {
+      "2025": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 20.0,
+        "quy_doi_thang_30": 15.0,
+        "diem_thi_thptqg": 20.0,
+        "diem_thi_dgnl": 500
+      },
+      "2026": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 23.0,
+        "quy_doi_thang_30": 17.25,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": 600
+      }
+    }
+  },
+  {
+    "nganh": "Sửa chữa cơ khí (Nguội sửa chữa máy công cụ)",
+    "diem_chuan": {
+      "2025": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 21.0,
+        "quy_doi_thang_30": 15.75,
+        "diem_thi_thptqg": 21.5,
+        "diem_thi_dgnl": 500
+      },
+      "2026": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 24.0,
+        "quy_doi_thang_30": 18.0,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": 650
+      }
+    }
+  },
+  {
+    "nganh": "Điện công nghiệp",
+    "diem_chuan": {
+      "2025": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 20.0,
+        "quy_doi_thang_30": 15.0,
+        "diem_thi_thptqg": 21.5,
+        "diem_thi_dgnl": 500
+      },
+      "2026": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 28.0,
+        "quy_doi_thang_30": 21.0,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": 700
+      }
+    }
+  },
+  {
+    "nganh": "Điện tử công nghiệp",
+    "diem_chuan": {
+      "2025": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 20.0,
+        "quy_doi_thang_30": 15.0,
+        "diem_thi_thptqg": 21.0,
+        "diem_thi_dgnl": 500
+      },
+      "2026": {
+        "diem_chuan_trung_tuyen_toan_nhan_2": 23.0,
+        "quy_doi_thang_30": 17.25,
+        "diem_thi_thptqg": null,
+        "diem_thi_dgnl": 700
+      }
     }
   }
 ]

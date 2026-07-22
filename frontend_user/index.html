@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/auth.css">
     <link rel="stylesheet" href="css/chat.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 
 <body>
@@ -110,47 +111,12 @@
             <!-- ALERT MESSAGES -->
             <div id="authAlert" style="display:none; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-size: 13px; text-align: center;"></div>
 
-            <!-- LOGIN PANEL -->
-            <div id="panelLogin">
-                <input type="text" id="loginMssv" placeholder="SĐT hoặc Mã số sinh viên">
-                <input type="password" id="loginPassword" placeholder="Mật khẩu">
-                <button class="login-submit-btn" id="btnLoginSubmit">Đăng nhập</button>
-                <div style="margin-top: 15px; font-size: 14px; text-align: center;">
-                    <a href="#" id="linkToForgot" style="color: var(--primary); text-decoration: none;">Quên mật khẩu?</a>
-                </div>
-                <div style="margin-top: 10px; font-size: 14px; text-align: center;">
-                    Chưa có tài khoản? <a href="#" id="linkToRegister" style="color: var(--primary); text-decoration: none; font-weight: 500;">Đăng ký ngay</a>
-                </div>
-            </div>
-
-            <!-- REGISTER PANEL -->
-            <div id="panelRegister" style="display: none;">
-                <input type="text" id="regName" placeholder="Họ và Tên">
-                <input type="text" id="regMssv" placeholder="SĐT hoặc Mã số sinh viên">
-                <input type="email" id="regEmail" placeholder="Email cá nhân">
-                <input type="password" id="regPassword" placeholder="Mật khẩu">
-                <input type="password" id="regConfirmPassword" placeholder="Xác nhận mật khẩu">
-                <button class="login-submit-btn" id="btnRegisterSubmit">Đăng ký tài khoản</button>
-                <div style="margin-top: 15px; font-size: 14px; text-align: center;">
-                    Đã có tài khoản? <a href="#" id="linkToLoginFromReg" style="color: var(--primary); text-decoration: none; font-weight: 500;">Đăng nhập</a>
-                </div>
-            </div>
-
-            <!-- FORGOT PASSWORD PANEL -->
-            <div id="panelForgot" style="display: none;">
-                <div id="forgotStep1">
-                    <input type="email" id="forgotEmail" placeholder="Nhập Email đã đăng ký">
-                    <button class="login-submit-btn" id="btnForgotSubmit">Gửi mã OTP</button>
-                </div>
-                <div id="forgotStep2" style="display: none;">
-                    <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 15px; text-align: center; line-height: 1.4;">Vui lòng kiểm tra hộp thư đến (hoặc Spam) để lấy mã OTP.</p>
-                    <input type="text" id="forgotOtp" placeholder="Nhập mã OTP 6 số">
-                    <input type="password" id="forgotNewPassword" placeholder="Mật khẩu mới">
-                    <button class="login-submit-btn" id="btnResetSubmit">Đặt lại mật khẩu</button>
-                </div>
-                <div style="margin-top: 15px; font-size: 14px; text-align: center;">
-                    Quay lại <a href="#" id="linkToLoginFromForgot" style="color: var(--primary); text-decoration: none; font-weight: 500;">Đăng nhập</a>
-                </div>
+            <!-- GOOGLE LOGIN PANEL -->
+            <div id="panelLogin" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 150px;">
+                <div id="googleBtnContainer"></div>
+                <p style="font-size: 13px; color: var(--text-secondary); margin-top: 20px; text-align: center;">
+                    Bằng cách đăng nhập, bạn đồng ý với các điều khoản dịch vụ của chúng tôi.
+                </p>
             </div>
 
         </div>

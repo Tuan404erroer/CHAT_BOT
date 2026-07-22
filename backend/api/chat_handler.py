@@ -12,25 +12,26 @@ from models.constants import FRONTEND_DIR, CONSULT_FILE
 from middleware.session_manager import (
     init_chat_session, get_user_key, ensure_user_history,
 )
-from services.rag_service import ensure_rag_system
-from services.chat_service import process_query
-from services.history_service import save_history
-from services.user_service import register_user, verify_login, update_password
+from services.user_service import google_login_or_register
 from services.auth_service import send_user_forgot_password_email, generate_otp
+from services.rag_service import ensure_rag_system, process_query
+from services.history_service import load_history, save_history
 from utils.file_helpers import safe_read_json, safe_write_json
 
 
 def render_chat_page():
     """Render và xử lý toàn bộ trang Chatbot."""
     
+    if "email" not in st.session_state:
+        st.session_state.email = ""
+    if "name" not in st.session_state:
+        st.session_state.name = ""
+    if "picture" not in st.session_state:
+        st.session_state.picture = ""
     if "auth_error" not in st.session_state:
         st.session_state.auth_error = ""
     if "auth_success" not in st.session_state:
         st.session_state.auth_success = ""
-    if "forgot_otp" not in st.session_state:
-        st.session_state.forgot_otp = ""
-    if "forgot_email" not in st.session_state:
-        st.session_state.forgot_email = ""
 
     # --- CSS ẨN STREAMLIT HEADER ---
     st.markdown("""
@@ -106,7 +107,9 @@ def render_chat_page():
     user_input = _chat_component(
         messages=json.dumps(st.session_state.messages, ensure_ascii=False),
         logged_in=st.session_state.logged_in,
-        mssv=st.session_state.mssv,
+        email=st.session_state.email,
+        name=st.session_state.name,
+        picture=st.session_state.picture,
         history=json.dumps(user_history, ensure_ascii=False),
         current_session_id=st.session_state.current_session_id,
         auth_error=st.session_state.auth_error,
@@ -128,14 +131,8 @@ def render_chat_page():
             st.session_state.last_ts = ts
             action = user_input.get("action", "chat")
 
-            if action == "login":
-                _handle_login(user_input)
-            elif action == "register":
-                _handle_register(user_input)
-            elif action == "request_otp":
-                _handle_request_otp(user_input)
-            elif action == "reset_password":
-                _handle_reset_password(user_input)
+            if action == "google_login":
+                _handle_google_login(user_input)
             elif action == "logout":
                 _handle_logout()
             elif action == "new_session":
@@ -151,86 +148,36 @@ def render_chat_page():
 
 
 # ==============================================================================
-# CÁC HÀM XỬ LÝ ACTION (PRIVATE)
+# HÀM XỬ LÝ SỰ KIỆN (EVENTS)
 # ==============================================================================
 
-def _handle_login(user_input):
-    mssv = user_input.get("mssv", "")
-    password = user_input.get("password", "")
+def _handle_google_login(user_input):
+    email = user_input.get("email", "")
+    name = user_input.get("name", "")
+    picture = user_input.get("picture", "")
 
-    success, msg = verify_login(mssv, password)
-    
-    if success:
+    if email:
+        user_data = google_login_or_register(email, name, picture)
         st.session_state.logged_in = True
-        st.session_state.mssv = mssv
+        st.session_state.email = user_data["email"]
+        st.session_state.name = user_data["name"]
+        st.session_state.picture = user_data["picture"]
         st.session_state.messages = []
         st.session_state.current_session_id = str(uuid.uuid4())
         st.session_state.auth_success = "Đăng nhập thành công!"
     else:
-        st.session_state.auth_error = msg
+        st.session_state.auth_error = "Lỗi xác thực từ Google!"
 
-    st.rerun()
-
-def _handle_register(user_input):
-    mssv = user_input.get("mssv", "")
-    name = user_input.get("name", "")
-    email = user_input.get("email", "")
-    password = user_input.get("password", "")
-    
-    success, msg = register_user(mssv, name, email, password)
-    if success:
-        st.session_state.auth_success = msg
-    else:
-        st.session_state.auth_error = msg
-        
-    st.rerun()
-
-def _handle_request_otp(user_input):
-    email = user_input.get("email", "")
-    # Check if email is valid by looking for the user
-    from services.user_service import get_user_by_email
-    user_mssv = get_user_by_email(email)
-    
-    if not user_mssv:
-        st.session_state.auth_error = "Email này chưa được đăng ký trong hệ thống!"
-        st.rerun()
-        
-    otp = generate_otp()
-    if send_user_forgot_password_email(email, otp):
-        st.session_state.forgot_otp = otp
-        st.session_state.forgot_email = email
-        st.session_state.forgot_mssv = user_mssv
-        st.session_state.auth_success = "Mã OTP đã được gửi đến email của bạn!"
-    else:
-        st.session_state.auth_error = "Gửi email thất bại. Vui lòng thử lại sau."
-        
-    st.rerun()
-
-def _handle_reset_password(user_input):
-    otp = user_input.get("otp", "")
-    new_password = user_input.get("new_password", "")
-    
-    if not st.session_state.forgot_otp or otp != st.session_state.forgot_otp:
-        st.session_state.auth_error = "Mã OTP không hợp lệ hoặc đã hết hạn!"
-        st.rerun()
-        
-    mssv = st.session_state.forgot_mssv
-    update_password(mssv, new_password)
-    
-    # Clear state
-    st.session_state.forgot_otp = ""
-    st.session_state.forgot_email = ""
-    st.session_state.forgot_mssv = ""
-    
-    st.session_state.auth_success = "Đặt lại mật khẩu thành công! Bạn có thể đăng nhập ngay."
     st.rerun()
 
 
 def _handle_logout():
     st.session_state.logged_in = False
-    st.session_state.mssv = ""
-    st.session_state.dob = ""
+    st.session_state.email = ""
+    st.session_state.name = ""
+    st.session_state.picture = ""
     st.session_state.messages = []
+    st.session_state.current_session_id = str(uuid.uuid4())
     st.rerun()
 
 
@@ -305,17 +252,6 @@ def _handle_chat(user_input, qa_chain_all, qa_chain_diem_chuan, llm):
 
     # --- LƯU LỊCH SỬ NGẦM (CẢ KHI CHƯA ĐĂNG NHẬP) ---
     user_key = get_user_key()
-    if user_key not in st.session_state.history_data:
-        st.session_state.history_data[user_key] = {}
-    user_history = st.session_state.history_data[user_key]
-
-    if st.session_state.current_session_id not in user_history:
-        title_text = query[:20] + "..." if len(query) > 20 else query
-        title = f"Chat: {title_text}"
-        user_history[st.session_state.current_session_id] = {
-            "title": title,
-            "messages": st.session_state.messages,
-        }
     else:
         user_history[st.session_state.current_session_id]["messages"] = (
             st.session_state.messages

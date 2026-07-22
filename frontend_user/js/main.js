@@ -44,7 +44,7 @@ window.addEventListener("message", (event) => {
         const args = event.data.args || {};
 
         if (args.logged_in === true) {
-            updateAuthUI(true, args.mssv);
+            updateAuthUI(true, args.name, args.picture);
             currentSessionId = args.current_session_id;
             if (args.history) {
                 try {
