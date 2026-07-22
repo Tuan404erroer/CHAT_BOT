@@ -353,6 +353,7 @@ def _dispatch_admin_action(action, admin_action, consult_list):
         note = admin_action.get("note", "")
         if idx is not None and 0 <= idx < len(consult_list):
             consult_list[idx]["admin_note"] = note
+            consult_list[idx]["status"] = "done"  # Tự động cập nhật thành "Đã trả lời"
             safe_write_json(CONSULT_FILE, consult_list)
             
             # Gửi email phản hồi

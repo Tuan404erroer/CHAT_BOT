@@ -109,23 +109,23 @@ def process_query(prompt, qa_chain_all, qa_chain_diem_chuan, llm, chat_history=N
     # Bước 3: Tổng hợp kết quả
     # ==================================================================
     sub_answers_text = "\n\n".join(sub_answers)
-    synthesis_prompt = (
-        "Bạn là một chuyên gia tư vấn tuyển sinh chuyên nghiệp của "
-        "Trường Cao đẳng Kỹ thuật Cao Thắng.\n"
-        "Nhiệm vụ: Dựa vào 'Dữ liệu gốc' (được trích xuất từ CSDL), hãy trả lời 'Câu hỏi của người dùng'.\n"
-        "QUY TẮC CỐT LÕI (NGHIÊM NGẶT):\n"
-        "1. KHÔNG BỊA ĐẶT & BÁM SÁT NGỮ CẢNH: Nếu câu hỏi của người dùng là vô nghĩa (như '1', 'abc', các icon), "
-        "nằm ngoài lề (hỏi tâm sự, ăn cơm chưa), hoặc Dữ liệu gốc KHÔNG HỀ có thông tin trả lời cho câu hỏi đó, "
-        "BẠN BẮT BUỘC PHẢI từ chối lịch sự và mời họ hỏi về thông tin tuyển sinh Cao Thắng.\n"
-        "2. GIỮ NGUYÊN CHI TIẾT: Nếu Dữ liệu gốc trả lời được câu hỏi, có bao nhiêu thông tin, con số, phương thức xét tuyển "
-        "ở dữ liệu gốc phải giữ lại trọn vẹn.\n"
-        "3. NGẮN GỌN & TRỰC DIỆN: Đi thẳng vào vấn đề. TUYỆT ĐỐI KHÔNG thêm thắt "
-        "các câu chào hỏi dài dòng, văn mẫu PR, sáo rỗng hay tự ca ngợi trường quá mức.\n"
-        "4. CẤU TRÚC: Trình bày dễ đọc (gạch đầu dòng, số thứ tự).\n\n"
-        f"Câu hỏi của người dùng:\n{prompt}\n\n"
-        f"Dữ liệu gốc (Chỉ dùng nếu nó thực sự liên quan đến câu hỏi):\n{sub_answers_text}\n\n"
-        "Câu trả lời tư vấn (Chuyên nghiệp, súc tích, không lan man):"
+    from services.prompt_service import get_system_prompt
+    from datetime import datetime
+    
+    base_prompt = get_system_prompt("DEFAULT")
+    current_date_str = datetime.now().strftime("%d/%m/%Y")
+    
+    anti_hallucination = (
+        "\n\n--- QUY TẮC BẢO MẬT HỆ THỐNG (BẮT BUỘC TUÂN THỦ) ---\n"
+        "1. KHÔNG BỊA ĐẶT: Nếu câu hỏi vô nghĩa (như '1', 'abc', icon), ngoài lề (tâm sự, ăn cơm chưa), "
+        "hoặc 'Thông tin tài liệu' KHÔNG HỀ có câu trả lời, BẠN PHẢI từ chối lịch sự (bằng đúng giọng điệu của bạn) và mời họ hỏi về tuyển sinh.\n"
+        "2. BÁM SÁT DỮ LIỆU: Chỉ lấy thông tin từ 'Thông tin tài liệu' bên trên. Giữ nguyên chính xác các con số và phương thức xét tuyển."
     )
+    
+    # Kết hợp context (sub_answers_text) và luật bảo mật
+    combined_context = sub_answers_text + anti_hallucination
+    
+    synthesis_prompt = base_prompt.replace("{context}", combined_context).replace("{question}", prompt).replace("{current_date}", current_date_str)
 
     try:
         msg2 = llm.invoke(synthesis_prompt)

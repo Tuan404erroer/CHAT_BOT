@@ -258,17 +258,22 @@ def _handle_chat(user_input, qa_chain_all, qa_chain_diem_chuan, llm):
         st.session_state.history_data[user_key] = {}
     user_history = st.session_state.history_data[user_key]
 
+    import time
+    now_ts = int(time.time())
+
     if st.session_state.current_session_id not in user_history:
         title_text = query[:20] + "..." if len(query) > 20 else query
         title = f"Chat: {title_text}"
         user_history[st.session_state.current_session_id] = {
             "title": title,
             "messages": st.session_state.messages,
+            "last_updated": now_ts,
         }
     else:
         user_history[st.session_state.current_session_id]["messages"] = (
             st.session_state.messages
         )
+        user_history[st.session_state.current_session_id]["last_updated"] = now_ts
 
     save_history(st.session_state.history_data)
 

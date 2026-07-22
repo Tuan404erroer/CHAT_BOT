@@ -170,7 +170,10 @@ function renderUsersTable() {
         return;
     }
 
-    users.forEach(u => {
+    // Đảo ngược để người dùng mới xuất hiện trước
+    const reversedUsers = [...users].reverse();
+
+    reversedUsers.forEach(u => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
             <td><strong>${escapeHtml(u.user_key)}</strong></td>
@@ -194,7 +197,9 @@ function renderHistoryTable() {
         return;
     }
 
-    sessions.forEach((s, idx) => {
+    // Lặp ngược để lấy phiên chat mới nhất lên đầu, giữ nguyên original idx
+    for (let idx = sessions.length - 1; idx >= 0; idx--) {
+        const s = sessions[idx];
         const tr = document.createElement("tr");
         tr.innerHTML = `
             <td><strong>${escapeHtml(s.user)}</strong></td>
@@ -205,7 +210,7 @@ function renderHistoryTable() {
             <td><button class="filter-tab" style="padding:6px 14px" onclick="openChatModalByIndex(${idx})">Xem</button></td>
         `;
         tbody.appendChild(tr);
-    });
+    }
 }
 
 /* ========================================================= */
@@ -216,17 +221,20 @@ function renderRatingsTable() {
     tbody.innerHTML = "";
 
     let rated = statsData.rated_messages || [];
+    
+    // Đảo ngược mảng để xem đánh giá mới nhất trước
+    let filteredRated = [...rated].reverse();
 
     if (currentRatingFilter !== "all") {
-        rated = rated.filter(r => r.rating === currentRatingFilter);
+        filteredRated = filteredRated.filter(r => r.rating === currentRatingFilter);
     }
 
-    if (rated.length === 0) {
+    if (filteredRated.length === 0) {
         tbody.innerHTML = '<tr><td colspan="4" class="empty-table"><div class="empty-icon">⭐</div>Chưa có đánh giá nào</td></tr>';
         return;
     }
 
-    rated.forEach(r => {
+    filteredRated.forEach(r => {
         const tr = document.createElement("tr");
         const badgeClass = r.rating === "up" ? "badge-success" : "badge-danger";
         const badgeText = r.rating === "up" ? "👍 Tốt" : "👎 Chưa tốt";
@@ -270,7 +278,12 @@ function renderKnowledgeTable() {
         return;
     }
 
-    files.forEach((f, idx) => {
+    // Sắp xếp file theo thời gian upload mới nhất lên đầu
+    const sortedFiles = [...files].sort((a, b) => {
+        return new Date(b.uploaded_at || 0) - new Date(a.uploaded_at || 0);
+    });
+
+    sortedFiles.forEach((f, idx) => {
         const tr = document.createElement("tr");
         const isEnabled = f.enabled !== false;
         
@@ -375,8 +388,11 @@ function renderConsultTable() {
 
     // We need original indexes for actions
     const allRegs = statsData.consult_registrations || [];
+    
+    // Đảo ngược mảng để yêu cầu mới nhất lên đầu
+    let reversedRegs = [...regs].reverse();
 
-    regs.forEach(r => {
+    reversedRegs.forEach(r => {
         const originalIdx = allRegs.indexOf(r);
         const tr = document.createElement("tr");
         const status = r.status || "new";
