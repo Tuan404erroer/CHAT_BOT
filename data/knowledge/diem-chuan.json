@@ -187,23 +187,6 @@
     }
   },
   {
-    "nganh": "Công nghệ Kỹ thuật Điện, Điện từ",
-    "diem_chuan": {
-      "2025": {
-        "diem_chuan_trung_tuyen_toan_nhan_2": null,
-        "quy_doi_thang_30": null,
-        "diem_thi_thptqg": null,
-        "diem_thi_dgnl": null
-      },
-      "2026": {
-        "diem_chuan_trung_tuyen_toan_nhan_2": 28.5,
-        "quy_doi_thang_30": 21.38,
-        "diem_thi_thptqg": null,
-        "diem_thi_dgnl": null
-      }
-    }
-  },
-  {
     "nganh": "Công nghệ Kỹ thuật Điện, Điện tử",
     "diem_chuan": {
       "2025": {
@@ -213,8 +196,8 @@
         "diem_thi_dgnl": 500
       },
       "2026": {
-        "diem_chuan_trung_tuyen_toan_nhan_2": null,
-        "quy_doi_thang_30": null,
+        "diem_chuan_trung_tuyen_toan_nhan_2": 28.5,
+        "quy_doi_thang_30": 21.38,
         "diem_thi_thptqg": null,
         "diem_thi_dgnl": 780
       }
