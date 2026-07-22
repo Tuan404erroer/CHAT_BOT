@@ -109,7 +109,7 @@ function handleFileUpload(event) {
 
     // Read as ArrayBuffer to handle all encodings (UTF-8, UTF-16, ANSI)
     const reader = new FileReader();
-    reader.onload = function(e) {
+    reader.onload = function (e) {
         const buffer = e.target.result;
         const bytes = new Uint8Array(buffer);
         let content = "";
@@ -174,7 +174,7 @@ function handleFileUpload(event) {
         event.target.value = "";
     };
 
-    reader.onerror = function() {
+    reader.onerror = function () {
         alert("Lỗi khi đọc tệp! Vui lòng thử lại.");
         event.target.value = "";
     };
@@ -331,9 +331,9 @@ function savePromptFromModal(key) {
         alert("Nội dung prompt không được để trống!");
         return;
     }
-    
+
     localPrompts[key].content = newContent;
-    
+
     StreamlitApi.setComponentValue({
         action: "update_system_prompt",
         prompts: localPrompts,
