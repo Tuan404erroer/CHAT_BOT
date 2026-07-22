@@ -27,7 +27,7 @@ def validate_admin_login(email, password):
 
     # Fallback mật khẩu chung từ secrets
     admin_password = st.secrets.get("ADMIN_PASSWORD", "admin123")
-    admin_account = st.secrets.get("SMTP_EMAIL", "admin123")
+    admin_account = st.secrets.get("SMTP_EMAIL")
     return password == admin_password and email == admin_account
 
 

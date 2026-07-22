@@ -205,7 +205,7 @@ def _handle_rate(user_input):
     rating = user_input.get("rating")
     user_key = get_user_key()
 
-    if msg_index is not None and msg_index < len(st.session_state.messages):
+    if msg_index is not None and msg_index <= len(st.session_state.messages):
         st.session_state.messages[msg_index]["rating"] = rating
 
         user_history = st.session_state.history_data.get(user_key, {})
