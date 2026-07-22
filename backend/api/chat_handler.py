@@ -14,7 +14,8 @@ from middleware.session_manager import (
 )
 from services.user_service import google_login_or_register
 from services.auth_service import send_user_forgot_password_email, generate_otp
-from services.rag_service import ensure_rag_system, process_query
+from services.rag_service import ensure_rag_system
+from services.chat_service import process_query
 from services.history_service import load_history, save_history
 from utils.file_helpers import safe_read_json, safe_write_json
 

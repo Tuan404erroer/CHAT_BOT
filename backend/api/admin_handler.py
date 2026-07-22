@@ -285,6 +285,14 @@ def _render_dashboard():
         [data-testid="stCustomComponentV1"], [data-testid="stCustomComponentV1"] > div, [data-testid="stCustomComponentV1"] iframe {
             position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; border: none !important; z-index: 999;
         }
+        /* Ẩn overlay xám khi Streamlit tự động rerun (auto-refresh) */
+        [data-stale="true"], .stale-container, [data-testid="stCustomComponentV1"] [data-stale] {
+            opacity: 1 !important;
+        }
+        [data-testid="stCustomComponentV1"]::before,
+        [data-testid="stCustomComponentV1"]::after {
+            display: none !important;
+        }
     </style>
     """, unsafe_allow_html=True)
 

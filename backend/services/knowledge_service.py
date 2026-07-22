@@ -56,11 +56,8 @@ def build_documents(source_files):
                 if isinstance(item, dict) and "nganh" in item and "diem_chuan" in item:
                     diem_chuan_lines = []
                     for year, values in item["diem_chuan"].items():
-                        diem_chuan_lines.append(
-                            f"  {year}: xet_hoc_ba={values.get('xet_hoc_ba')}, "
-                            f"thi_thpt_quoc_gia={values.get('thi_thpt_quoc_gia')}, "
-                            f"thi_danh_gia_nang_luc={values.get('thi_danh_gia_nang_luc')}"
-                        )
+                        parts = [f"{k}={v}" for k, v in values.items()]
+                        diem_chuan_lines.append(f"  {year}: " + ", ".join(parts))
                     content = f"Nganh: {item['nganh']}\nDiem chuan:\n" + "\n".join(diem_chuan_lines)
                     metadata = {
                         "nganh": item["nganh"],

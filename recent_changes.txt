@@ -1,0 +1,200 @@
+﻿commit 8eb92d97fda1231880e9103dc8c51bbed187f7be
+Author: Tuan404erroer <nmt67129034@gmail.com>
+Date:   Tue Jul 21 09:24:55 2026 +0700
+
+    Debugc_Admin_login_data
+
+diff --git a/backend/api/chat_handler.py b/backend/api/chat_handler.py
+index c429bf7..a49b7e0 100644
+--- a/backend/api/chat_handler.py
++++ b/backend/api/chat_handler.py
+@@ -15,6 +15,7 @@ from middleware.session_manager import (
+ from services.rag_service import ensure_rag_system
+ from services.chat_service import process_query
+ from services.history_service import save_history
++from services.user_service import save_user
+ from utils.file_helpers import safe_read_json, safe_write_json
+ 
+ 
+@@ -131,11 +132,18 @@ def render_chat_page():
+ # ==============================================================================
+ 
+ def _handle_login(user_input):
++    mssv = user_input.get("mssv", "")
++    dob = user_input.get("dob", "")
++
+     st.session_state.logged_in = True
+-    st.session_state.mssv = user_input.get("mssv", "")
+-    st.session_state.dob = user_input.get("dob", "")
++    st.session_state.mssv = mssv
++    st.session_state.dob = dob
+     st.session_state.messages = []
+     st.session_state.current_session_id = str(uuid.uuid4())
++
++    # L╞░u t├ái khoß║ún v├áo file users.json (tß║ío mß╗¢i hoß║╖c cß║¡p nhß║¡t last_login)
++    save_user(mssv, dob)
++
+     st.rerun()
+ 
+ 
+@@ -216,26 +224,25 @@ def _handle_chat(user_input, qa_chain_all, qa_chain_diem_chuan, llm):
+         "sources": sources,
+     })
+ 
+-    # --- L╞»U Lß╗èCH Sß╗¼ NGß║ªM (CHß╗ê KHI ─É├â ─É─éNG NHß║¼P) ---
+-    if st.session_state.logged_in:
+-        user_key = get_user_key()
+-        if user_key not in st.session_state.history_data:
+-            st.session_state.history_data[user_key] = {}
+-        user_history = st.session_state.history_data[user_key]
+-
+-        if st.session_state.current_session_id not in user_history:
+-            title_text = query[:20] + "..." if len(query) > 20 else query
+-            title = f"Chat: {title_text}"
+-            user_history[st.session_state.current_session_id] = {
+-                "title": title,
+-                "messages": st.session_state.messages,
+-            }
+-        else:
+-            user_history[st.session_state.current_session_id]["messages"] = (
+-                st.session_state.messages
+-            )
++    # --- L╞»U Lß╗èCH Sß╗¼ NGß║ªM (Cß║ó KHI CH╞»A ─É─éNG NHß║¼P) ---
++    user_key = get_user_key()
++    if user_key not in st.session_state.history_data:
++        st.session_state.history_data[user_key] = {}
++    user_history = st.session_state.history_data[user_key]
++
++    if st.session_state.current_session_id not in user_history:
++        title_text = query[:20] + "..." if len(query) > 20 else query
++        title = f"Chat: {title_text}"
++        user_history[st.session_state.current_session_id] = {
++            "title": title,
++            "messages": st.session_state.messages,
++        }
++    else:
++        user_history[st.session_state.current_session_id]["messages"] = (
++            st.session_state.messages
++        )
+ 
+-        save_history(st.session_state.history_data)
++    save_history(st.session_state.history_data)
+ 
+     # Rerun ─æß╗â gß╗¡i kß║┐t quß║ú xuß╗æng frontend
+     st.rerun()
+diff --git a/backend/models/constants.py b/backend/models/constants.py
+index 2fcd191..4db200d 100644
+--- a/backend/models/constants.py
++++ b/backend/models/constants.py
+@@ -25,6 +25,7 @@ FRONTEND_ADMIN_DIR = PROJECT_ROOT / "frontend_admin"
+ # ==============================================================================
+ HISTORY_FILE = STORAGE_DIR / "chat_history.json"
+ CONSULT_FILE = STORAGE_DIR / "consult_registrations.json"
++USERS_FILE = STORAGE_DIR / "users.json"
+ KNOWLEDGE_CONFIG_FILE = CONFIG_DIR / "knowledge_config.json"
+ SYSTEM_PROMPT_FILE = CONFIG_DIR / "prompts.json"
+ 
+diff --git a/backend/services/user_service.py b/backend/services/user_service.py
+new file mode 100644
+index 0000000..4ddb7ff
+--- /dev/null
++++ b/backend/services/user_service.py
+@@ -0,0 +1,46 @@
++"""
++Service quß║ún l├╜ t├ái khoß║ún ng╞░ß╗¥i d├╣ng.
++L╞░u/─æß╗ìc danh s├ích user tß╗½ file users.json ─æß╗â duy tr├¼ ─æ─âng nhß║¡p qua F5.
++"""
++from datetime import datetime
++
++from models.constants import USERS_FILE
++from utils.file_helpers import safe_read_json, safe_write_json
++
++
++def save_user(mssv, dob):
++    """L╞░u t├ái khoß║ún ng╞░ß╗¥i d├╣ng v├áo file users.json.
++    
++    Nß║┐u user ─æ├ú tß╗ôn tß║íi th├¼ cß║¡p nhß║¡t last_login.
++    Nß║┐u ch╞░a th├¼ tß║ío mß╗¢i.
++    """
++    users = safe_read_json(USERS_FILE, default={})
++    user_key = f"{mssv}_{dob}"
++
++    if user_key in users:
++        users[user_key]["last_login"] = datetime.now().isoformat()
++    else:
++        users[user_key] = {
++            "mssv": mssv,
++            "dob": dob,
++            "created_at": datetime.now().isoformat(),
++            "last_login": datetime.now().isoformat(),
++        }
++
++    safe_write_json(USERS_FILE, users)
++
++
++def user_exists(mssv, dob):
++    """Kiß╗âm tra t├ái khoß║ún ng╞░ß╗¥i d├╣ng c├│ tß╗ôn tß║íi trong file kh├┤ng.
++    
++    Returns:
++        bool: True nß║┐u user ─æ├ú tß╗½ng ─æ─âng nhß║¡p
++    """
++    users = safe_read_json(USERS_FILE, default={})
++    user_key = f"{mssv}_{dob}"
++    return user_key in users
++
++
++def get_all_users():
++    """Lß║Ñy danh s├ích tß║Ñt cß║ú user ─æ├ú ─æ─âng k├╜."""
++    return safe_read_json(USERS_FILE, default={})
+diff --git a/frontend_user/js/auth.js b/frontend_user/js/auth.js
+index 7993ce9..60e10aa 100644
+--- a/frontend_user/js/auth.js
++++ b/frontend_user/js/auth.js
+@@ -26,6 +26,9 @@ if (loginBtn) {
+         const mssv = loginMssv.value.trim();
+         const dob = loginDob.value.trim();
+         if (mssv && dob) {
++            // L╞░u v├áo localStorage ─æß╗â kh├┤ng bß╗ï mß║Ñt khi F5
++            localStorage.setItem("user_mssv", mssv);
++            localStorage.setItem("user_dob", dob);
+             StreamlitApi.setComponentValue({ action: "login", mssv, dob, timestamp: Date.now() });
+             closeLoginModal();
+         } else {
+@@ -36,6 +39,8 @@ if (loginBtn) {
+ 
+ if (logoutBtn) {
+     logoutBtn.addEventListener("click", () => {
++        localStorage.removeItem("user_mssv");
++        localStorage.removeItem("user_dob");
+         StreamlitApi.setComponentValue({ action: "logout", timestamp: Date.now() });
+     });
+ }
+@@ -96,6 +101,8 @@ function updateAuthUI(loggedIn, mssv) {
+             newDropdown.classList.toggle("open", dropdownOpen);
+         });
+         document.getElementById("ddLogout").addEventListener("click", () => {
++            localStorage.removeItem("user_mssv");
++            localStorage.removeItem("user_dob");
+             StreamlitApi.setComponentValue({ action: "logout", timestamp: Date.now() });
+         });
+         // Sidebar: show logged-in content
+diff --git a/frontend_user/js/main.js b/frontend_user/js/main.js
+index 73a74a3..d66978d 100644
+--- a/frontend_user/js/main.js
++++ b/frontend_user/js/main.js
+@@ -64,6 +64,15 @@ window.addEventListener("message", (event) => {
+                 loadingOverlay.classList.add("hidden");
+                 setTimeout(() => loadingOverlay.remove(), 600);
+             }
++            
++            // Auto-login from localStorage if not logged in
++            if (args.logged_in === false) {
++                const savedMssv = localStorage.getItem("user_mssv");
++                const savedDob = localStorage.getItem("user_dob");
++                if (savedMssv && savedDob) {
++                    StreamlitApi.setComponentValue({ action: "login", mssv: savedMssv, dob: savedDob, timestamp: Date.now() });
++                }
++            }
+         }
+ 
+         // Update messages from backend
