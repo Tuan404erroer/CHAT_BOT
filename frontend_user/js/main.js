@@ -261,12 +261,12 @@ function resetConsultForm() {
                 <input type="text" id="consultName" placeholder="Nguyễn Văn A">
             </div>
             <div class="consult-form-group">
-                <label>Số điện thoại <span class="required">*</span></label>
+                <label>Số điện thoại</label>
                 <input type="tel" id="consultPhone" placeholder="0901 234 567">
             </div>
         </div>
         <div class="consult-form-group">
-            <label>Email</label>
+            <label>Email <span class="required">*</span></label>
             <input type="email" id="consultEmail" placeholder="email@example.com">
         </div>
         <div class="consult-form-group">
@@ -336,18 +336,28 @@ function submitConsultForm() {
         document.getElementById("consultName").focus();
         return;
     }
-    if (!phone) {
-        alert("Vui lòng nhập số điện thoại!");
-        document.getElementById("consultPhone").focus();
+    if (!email) {
+        alert("Vui lòng nhập email!");
+        document.getElementById("consultEmail").focus();
         return;
     }
 
-    // Phone validation
-    const phoneRegex = /^[0-9\s\-\+]{8,15}$/;
-    if (!phoneRegex.test(phone)) {
-        alert("Số điện thoại không hợp lệ!");
-        document.getElementById("consultPhone").focus();
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert("Email không hợp lệ!");
+        document.getElementById("consultEmail").focus();
         return;
+    }
+
+    // Phone validation (optional but if provided, must be valid)
+    if (phone) {
+        const phoneRegex = /^[0-9\s\-\+]{8,15}$/;
+        if (!phoneRegex.test(phone)) {
+            alert("Số điện thoại không hợp lệ!");
+            document.getElementById("consultPhone").focus();
+            return;
+        }
     }
 
     // Send to backend via Streamlit
