@@ -112,8 +112,8 @@ def _render_login_page():
         }
         /* Input wrapper */
         div[data-testid="stTextInput"] > div > div {
-            background-color: rgba(255, 255, 255, 0.05) !important;
-            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            background-color: #ffffff !important;
+            border: 1px solid #d1d5db !important;
             border-radius: 12px !important;
             transition: all 0.3s ease !important;
             display: flex !important;
@@ -121,15 +121,30 @@ def _render_login_page():
         }
         div[data-testid="stTextInput"] > div > div:focus-within {
             border-color: #8b5cf6 !important;
-            background-color: rgba(255, 255, 255, 0.1) !important;
+            background-color: #ffffff !important;
             box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.2) !important;
         }
         div[data-testid="stTextInput"] div[data-baseweb="base-input"],
         div[data-testid="stTextInput"] input {
             background-color: transparent !important;
             border: none !important;
-            color: #ffffff !important;
+            color: #1f2937 !important;
             box-shadow: none !important;
+        }
+        div[data-testid="stTextInput"] input[type="password"],
+        div[data-testid="stTextInput"] input[type="text"],
+        div[data-testid="stTextInput"] input[aria-label],
+        div[data-testid="stTextInput"] div[data-baseweb="input"] input,
+        div[data-testid="stTextInput"] div[data-baseweb="base-input"] input {
+            color: #1f2937 !important;
+            -webkit-text-fill-color: #1f2937 !important;
+            caret-color: #1f2937 !important;
+            background-color: transparent !important;
+        }
+        /* Placeholder text */
+        div[data-testid="stTextInput"] input::placeholder {
+            color: #9ca3af !important;
+            -webkit-text-fill-color: #9ca3af !important;
         }
         div[data-testid="stTextInput"] input {
             padding: 14px !important;
@@ -235,7 +250,6 @@ def _render_login_page():
     else:
         # --- Bước 2: Xác thực OTP ---
         smtp_configured = is_smtp_configured()
-        smtp_configured = False
         if smtp_configured:
             subtitle_text = (
                 f'Mã OTP đã được gửi đến hộp thư<br>'
